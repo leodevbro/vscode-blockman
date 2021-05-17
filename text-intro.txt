@@ -1,0 +1,45 @@
+
+
+Block Marking Visual Helper Feature for Code Editor Software
+
+
+Visual helper for beginner and professional programmers
+
+
+Visual helper to perceive programming code structure faster
+
+
+
+This is a demo of dynamic visual helper for everyone who reads and writes software code, for all ages, because I think it will help not only "zero beginner" learners to understand code logic structure faster, but also professionals in their real working environment.
+
+
+
+Software coding is very important part of technology. To aid programmers write and understand written code faster, code editor creators try their best to integrate advanced visual helpers, such as syntax highlighting, indentation marking and etc. . but I think there is one important thing that non of the code editor software has. it's block highlighting, it would help us perceive the code structure more quickly, understand the code logic faster, find mistakes/errors faster, scroll and navigate faster. it would be a great helper for beginner learners as well as for professionals. I searched for Visual Studio Code extensions with such functionality, nothing found, I searched in the entire internet, the only software I could find with this kind of feature is BlueJ, but I think its way of scope highlighting is not very helpful, and I think its frame-highlight-layouting design is poorly planned. I have already done my DEMO in react.js and you can watch the video explanation, the YouTube link is provided, and you can see the Codesandbox link in the video description.
+
+
+
+I think the code block marking feature will help people of all ages who learn programming from zero and also professionals who work on huge software coding projects. It will help them navigate in code file faster, find mistakes/errors faster, understand and perceive functionality of written code faster.
+
+
+
+I think this solution will make programming more fun and more easy to understand, so more people will have enthusiasm to learn software coding. It will also give professionals more fun and faster performance to work on their coding projects.
+
+
+Let's make coding even more fun and easier with block marking visual helper
+
+
+I searched for Visual Studio Code extensions with such functionality, nothing found, I searched in the entire internet, the only software I could find with this kind of feature is BlueJ, but I think its way of scope-frame highlighting is not very helpful, and I think its frame-highlight-layouting design is poorly planned.
+
+
+
+
+Block marking can be used in all programming languages, we can make it more customizable for colors and shapes and etc. We can also give each block/frame some more functional responsibilities, such as highlighting in red if the block contains error, and etc. But firstly, the main purpose is visual aid to quickly navigate in the code and understand the logic structure more quickly and with more fun.
+
+
+Firstly, I see this project as an extension for Visual Studio Code software. For now, I have made just a working demo with react.js and also made an explanatory video. After that, I think all code editor software should integrate this feature. The biggest problem I see here is optimization, because it needs a lot of real-time calculations, but I think several weeks is enough to solve the optimization issue.
+
+
+I think teamwork is very important in this project, because code optimization needs many creative ideas to make it decent and fast enough. Also I think a good team would brainstorm more ideas of what other use cases can be applied to the idea.
+
+
+

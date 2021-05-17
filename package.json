@@ -1,0 +1,302 @@
+{
+    "name": "blockman",
+    "displayName": "blockman",
+    "publisher": "leodevbro",
+    "description": "Mark/Highlight code blocks",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.56.1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/leodevbro/vscode-blockman.git"
+    },
+    "categories": [
+        "Other"
+    ],
+    "extensionKind": [
+        "ui",
+        "workspace"
+    ],
+    "activationEvents": [
+        "onStartupFinished"
+    ],
+    "keywords": [
+        "block",
+        "blocks",
+        "nest",
+        "nested",
+        "mark",
+        "highlight",
+        "highlighter",
+        "marker",
+        "bracket",
+        "brackets",
+        "pair",
+        "color",
+        "colour",
+        "multi-root ready"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "blockman.helloWorld",
+                "title": "blockmanHello"
+            },
+            {
+                "command": "blockman.printLeak",
+                "title": "blockmanLeakage"
+            }
+        ],
+        "configuration": {
+            "title": "Blockman",
+            "properties": {
+                "blockman.n01LineHeight": {
+                    "type": "number",
+                    "default": 24,
+                    "scope": "window"
+                },
+                "blockman.n02EachCharFrameWidth": {
+                    "type": "number",
+                    "default": 10.8035,
+                    "scope": "window"
+                },
+                "blockman.n03MaxDepth": {
+                    "type": "number",
+                    "default": 4,
+                    "enum": [
+                        -1,
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10
+                    ],
+                    "description": "-1 is no blocks, 0 is entire file block, 1 is first depth blocks",
+                    "scope": "window"
+                },
+                "blockman.n04ColorComboPreset": {
+                    "type": "string",
+                    "default": "Classic Dark 1 (Gradients)",
+                    "enum": [
+                        "Classic Dark 1 (Gradients)",
+                        "Classic Dark 1 (Solid colors)",
+                        "Classic Dark 2 (Gradients)",
+                        "Classic Dark 2 (Solid colors)",
+                        "Classic Dark 3 (Gradients)",
+                        "Classic Dark 3 (Solid colors)",
+                        "Classic Dark Oppo (Gradients)",
+                        "Classic Dark Oppo (Solid colors)",
+                        "Classic Light (Gradients)",
+                        "Classic Light (Solid colors)",
+                        "Oxygen Dark (Gradients)",
+                        "Oxygen Dark (Solid colors)",
+                        "Argon Dark (Gradients)",
+                        "Argon Dark (Solid colors)",
+                        "Sapphire (Gradients)",
+                        "Sapphire (Solid colors)",
+                        "Satura (Gradients)",
+                        "Satura (Solid colors)",
+                        "Lobelia (Gradients)",
+                        "Lobelia (Solid colors)",
+                        "Small Galaxy (Gradients)",
+                        "Small Galaxy (Solid colors)",
+                        "Pale Pink (Gradients)",
+                        "Pale Pink (Solid colors)"
+                    ],
+                    "description": "Choose preset combo of colors. Corresponding colors are overridden by custom colors (if not empty string)",
+                    "scope": "window"
+                },
+                "blockman.n05CustomColorOfDepth0": {
+                    "type": "string",
+                    "default": "",
+                    "scope": "window"
+                },
+                "blockman.n06CustomColorOfDepth1": {
+                    "type": "string",
+                    "default": "",
+                    "scope": "window"
+                },
+                "blockman.n07CustomColorOfDepth2": {
+                    "type": "string",
+                    "default": "",
+                    "scope": "window"
+                },
+                "blockman.n08CustomColorOfDepth3": {
+                    "type": "string",
+                    "default": "",
+                    "scope": "window"
+                },
+                "blockman.n09CustomColorOfDepth4": {
+                    "type": "string",
+                    "default": "",
+                    "scope": "window"
+                },
+                "blockman.n10CustomColorOfDepth5": {
+                    "type": "string",
+                    "default": "",
+                    "scope": "window"
+                },
+                "blockman.n11CustomColorOfDepth6": {
+                    "type": "string",
+                    "default": "",
+                    "scope": "window"
+                },
+                "blockman.n12CustomColorOfDepth7": {
+                    "type": "string",
+                    "default": "",
+                    "scope": "window"
+                },
+                "blockman.n13CustomColorOfDepth8": {
+                    "type": "string",
+                    "default": "",
+                    "scope": "window"
+                },
+                "blockman.n14CustomColorOfDepth9": {
+                    "type": "string",
+                    "default": "",
+                    "scope": "window"
+                },
+                "blockman.n15CustomColorOfDepth10": {
+                    "type": "string",
+                    "default": "",
+                    "scope": "window"
+                },
+                "blockman.n16EnableFocus": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Highlight block differently if caret is inside it",
+                    "scope": "window"
+                },
+                "blockman.n17CustomColorOfFocusedBlock": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Requires 'Enable Focus' to be true/enabled. Type 'same' if you want it to be same color as if not focused.",
+                    "scope": "window"
+                },
+                "blockman.n18CustomColorOfFocusedBlockBorder": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Requires 'Enable Focus' to be true/enabled. Type 'same' if you want it to be same color as if not focused",
+                    "scope": "window"
+                },
+                "blockman.n19CustomColorOfBlockBorder": {
+                    "type": "string",
+                    "default": "",
+                    "scope": "window"
+                },
+                "blockman.n20CustomColorOfDepth0Border": {
+                    "type": "string",
+                    "default": "",
+                    "scope": "window"
+                },
+                "blockman.n21BorderRadius": {
+                    "type": "number",
+                    "default": 4,
+                    "description": "Border radius of each block",
+                    "scope": "window"
+                },
+                "blockman.n22AnalyzeCurlyBrackets": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Render blocks inside curly brackets {}, keep in mind: the parser/tokenizer will ignore brackets inside comments, inside strings and inside some other areas",
+                    "scope": "window"
+                },
+                "blockman.n23AnalyzeSquareBrackets": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Render blocks inside square brackets [], keep in mind: the parser/tokenizer will ignore brackets inside comments, inside strings and inside some other areas",
+                    "scope": "window"
+                },
+                "blockman.n24AnalyzeRoundBrackets": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Render blocks inside Round brackets (), keep in mind: the parser/tokenizer will ignore brackets inside comments, inside strings and inside some other areas",
+                    "scope": "window"
+                },
+                "blockman.n25AnalyzeTags": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Render blocks inside HTML/XML/JSX/TSX tags <tag></tag>, keep in mind: the parser/tokenizer will ignore tags inside comments, inside strings and inside some other areas",
+                    "scope": "window"
+                },
+                "blockman.n26AnalyzeIndentDedentTokens": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "This option affects only files of indentation based languages like Python. Currently only Python is supported for indentation analysis. Keep in mind: the parser/tokenizer will ignore indentations inside comments, inside strings and inside some other areas",
+                    "scope": "window"
+                },
+                "blockman.n27AlsoRenderBlocksInsideSingleLineAreas": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "{I am a single line area} <p>Me too</p>",
+                    "scope": "window"
+                },
+                "blockman.n28TimeToWaitBeforeRerenderAfterLastChangeEvent": {
+                    "type": "number",
+                    "default": 1.2,
+                    "description": "(Seconds). For optimization: enter more time for slow computers. Less than 0.05 is NOT recomended even for fast computers.",
+                    "scope": "window"
+                },
+                "blockman.n29TimeToWaitBeforeRerenderAfterLastFocusEvent": {
+                    "type": "number",
+                    "default": 0.2,
+                    "description": "(Seconds). For optimization: enter more time for slow computers. Less than 0.2 is NOT recomended because double-clicking may become problematic.",
+                    "scope": "window"
+                },
+                "blockman.n30TimeToWaitBeforeRerenderAfterLastScrollEvent": {
+                    "type": "number",
+                    "default": 0.1,
+                    "description": "(Seconds). For optimization: enter more time for slow computers. Less than 0.05 is NOT recomended even for fast computers.",
+                    "scope": "window"
+                },
+                "blockman.n31RenderIncrementBeforeAndAfterVisibleRange": {
+                    "type": "number",
+                    "default": 22,
+                    "description": "Less is faster because less blocks will be rendered but scrolling may become uncomfortable. If less than 1 (e.g. -5), the blocks will render in limited area.",
+                    "scope": "window"
+                }
+            }
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "pretest": "npm run compile && npm run lint",
+        "lint": "eslint src --ext ts",
+        "test": "node ./out/test/runTest.js"
+    },
+    "devDependencies": {
+        "@types/babel__traverse": "^7.11.1",
+        "@types/glob": "^7.1.3",
+        "@types/mocha": "^8.2.2",
+        "@types/moo": "^0.5.4",
+        "@types/node": "^15.0.3",
+        "@types/vscode": "^1.56.0",
+        "@typescript-eslint/eslint-plugin": "^4.23.0",
+        "@typescript-eslint/parser": "^4.23.0",
+        "eslint": "^7.26.0",
+        "glob": "^7.1.7",
+        "mocha": "^8.4.0",
+        "typescript": "^4.2.4",
+        "vscode-test": "^1.5.2"
+    },
+    "dependencies": {
+        "@babel/parser": "^7.14.2",
+        "@babel/plugin-transform-typescript": "^7.13.0",
+        "@babel/traverse": "^7.14.2",
+        "@types/json5": "^2.2.0",
+        "dt-python-parser": "^0.9.2-beta",
+        "json5": "^2.2.0",
+        "moo": "^0.5.1",
+        "vscode-uri": "^3.0.2"
+    }
+}
