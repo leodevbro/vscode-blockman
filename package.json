@@ -54,12 +54,12 @@
             "properties": {
                 "blockman.n01LineHeight": {
                     "type": "number",
-                    "default": 24,
+                    "default": 12,
                     "scope": "window"
                 },
                 "blockman.n02EachCharFrameWidth": {
                     "type": "number",
-                    "default": 10.8035,
+                    "default": 4.321,
                     "scope": "window"
                 },
                 "blockman.n03MaxDepth": {
