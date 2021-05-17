@@ -7,7 +7,7 @@ export interface IColorCombo {
     borderOfDepth0: string;
     borderOfFocusedBlock: string;
 
-    focusedBlock: string;
+    focusedBlock: string; // ----
 }
 
 export const colorCombos: IColorCombo[] = [
