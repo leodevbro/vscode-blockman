@@ -9,3 +9,7 @@ vsc-extension-quickstart.md
 **/.eslintrc.json
 **/*.map
 **/*.ts
+
+demo-media/animated-png-aka-apng/**
+demo-media/still-image/icon-dev/**
+demo-media/still-image/infograph/**
