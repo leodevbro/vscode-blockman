@@ -1,9 +1,9 @@
 {
     "name": "blockman",
-    "displayName": "blockman",
+    "displayName": "Blockman - Highlight Nested Code Blocks",
     "publisher": "leodevbro",
     "description": "Mark/Highlight code blocks",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "engines": {
         "vscode": "^1.56.1"
     },
