@@ -11,6 +11,7 @@
         "type": "git",
         "url": "https://github.com/leodevbro/vscode-blockman.git"
     },
+    "icon": "demo-media/still-image/icon-prod/blockman-icon-128---png.png",
     "categories": [
         "Other"
     ],
