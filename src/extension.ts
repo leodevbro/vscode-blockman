@@ -29,7 +29,7 @@ export const glo = {
     eachCharFrameHeight: 12.0, // px
     eachCharFrameWidth: 4.321, // px,
 
-    maxDepth: 4, // -2 -> no blocks, -1 -> entire file block, 0 -> first depth blocks, and so on...
+    maxDepth: 10, // -2 -> no blocks, -1 -> entire file block, 0 -> first depth blocks, and so on...
 
     enableFocus: true,
 

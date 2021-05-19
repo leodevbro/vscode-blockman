@@ -65,7 +65,7 @@
                 },
                 "blockman.n03MaxDepth": {
                     "type": "number",
-                    "default": 4,
+                    "default": 10,
                     "enum": [
                         -1,
                         0,
