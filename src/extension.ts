@@ -840,14 +840,14 @@ const setColorDecoratorsBool = () => {
 };
 
 const adjustVscodeUserConfig = () => {
-    let vvv: any = vscode.workspace
+    let vscodeColorConfig: any = vscode.workspace
         .getConfiguration("workbench")
         .get("colorCustomizations");
 
     vscode.workspace.getConfiguration("workbench").update(
         "colorCustomizations",
         {
-            ...vvv,
+            ...vscodeColorConfig,
             "editor.lineHighlightBackground": "#1073cf2d",
             "editor.lineHighlightBorder": "#9fced11f",
         },
@@ -856,6 +856,21 @@ const adjustVscodeUserConfig = () => {
 
     vscode.workspace.getConfiguration().update("editor.wordWrap", "off", 1);
     vscode.workspace.getConfiguration().update("diffEditor.wordWrap", "off", 1);
+
+    let vscodeMarkdownConfig: any = vscode.workspace
+        .getConfiguration()
+        .get("[markdown]");
+
+    // console.log("markdownConfig", markdownConfig);
+
+    vscode.workspace.getConfiguration().update(
+        "[markdown]",
+        {
+            ...vscodeMarkdownConfig,
+            "editor.wordWrap": "off",
+        },
+        1,
+    );
 
     vscode.workspace
         .getConfiguration()
