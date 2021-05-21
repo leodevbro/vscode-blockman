@@ -19,7 +19,7 @@
 <h3 align="center" style="color: red;">Blockman</h3>
 <p align="center">VSCode Extension For Nested Block Highlighting<p/>
 
-<p>Repository: https://github.com/leodevbro/vscode-blockman</p>
+<p>Repository: <a href="https://github.com/leodevbro/vscode-blockman">https://github.com/leodevbro/vscode-blockman</a></p>
   
 <p align="center"><img
   src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/still-image/infograph/intro-before-after---png.png"
@@ -210,7 +210,7 @@ then, open and edit **settings.json** file:
   
 <br />
 
-<p>8) Inline decorators such as VSCode Color Decorators of styles causes wider text line, some situations are handled, some situations are not handled yet, for example when linear-gradient has three or more colors.</p>
+<p>8) Inline decorators such as VSCode Color Decorators of styles causes wider text line, some situations are handled, some situations are not handled yet, for example when linear-gradient has more than three colors.</p>
 <p align="center"><img
   src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/animated-png-aka-apng/color-decorators---c2-apng.png"
   alt="alt text testing"
