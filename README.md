@@ -17,24 +17,24 @@
   width="128px"
 /></p>
 <h3 align="center" style="color: red;">Blockman</h3>
-<h6 align="center">(VSCode Extension For Nested Block Highlighting)<h6/>
+<p align="center">VSCode Extension For Nested Block Highlighting<p/>
 
-Repository: https://github.com/leodevbro/vscode-blockman
+<p>Repository: https://github.com/leodevbro/vscode-blockman</p>
   
 <p align="center"><img
   src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/still-image/infograph/intro-before-after---png.png"
   alt="alt text testing"
 /></p>
   
-`Animated PNG:`
+<p>Animated PNG:</p>
 <p align="center"><img
   src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/animated-png-aka-apng/main-demo---c2-apng.png"
   alt="alt text testing"
 /></p>
   
-Supported programming langauges:<br />
-Non-indentation based languages: JavaScript, JSX, TypeScript, TSX, C, C#, C++, Java, HTML, XML, CSS, LESS, SCSS, JSON, JSONC and more...<br />
-Indentation based language(s): currently Python only.<br />
+<p>Supported programming langauges:</p>
+<p>Non-indentation based languages: JavaScript, JSX, TypeScript, TSX, C, C#, C++, Java, HTML, CSS, LESS, SCSS and more...</p>
+<p>Indentation based language(s): currently Python only.</p>
 
 <br />
 <br />
@@ -127,9 +127,9 @@ Each line of code must have less than 500 characters, otherwise blocks will not 
 
 <h1 align="center">Things to consider</h1>
   
-1) Each line of code must have less than 500 characters, otherwise blocks will not be rendered in entire file.<br />
+<p>1) Each line of code must have less than 500 characters, otherwise blocks will not be rendered in entire file.</p>
 
-2) Please don't use non-monospace font. Use only monospace font like 'Oxygen Mono', '<a href="https://bpgfonts.wordpress.com/2017/12/21/bpg-2017-dejavu-sansmono/">BPG 2017 DejaVu Sans Mono</a>' or other. Block-rendering is based on equal character-frame-widths, because pixel locations of characters <a href="https://github.com/microsoft/vscode/issues/118994">is not accessible</a> through VSCode API.
+<p>2) Please don't use non-monospace font. Use only monospace font like 'Oxygen Mono', '<a href="https://bpgfonts.wordpress.com/2017/12/21/bpg-2017-dejavu-sansmono/">BPG 2017 DejaVu Sans Mono</a>' or other. Block-rendering is based on equal character-frame-widths, because pixel locations of characters <a href="https://github.com/microsoft/vscode/issues/118994">is not accessible</a> through VSCode API.</p>
 <p align="center"><img
   src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/still-image/infograph/monospace-font---png.png"
   alt="alt text testing"
@@ -140,7 +140,7 @@ Just for the information, the letter "ლ" is Georgian alphabet character,
 like: ა, ბ, გ, დ, ე, ვ, ზ, თ, ი, კ, ლ, მ, ნ, ო, პ, ჟ, რ, ს, ტ, უ, ფ, ქ, ღ, ყ, შ, ჩ, ც, ძ, წ, ჭ, ხ, ჯ, ჰ.
 ```
 
-3) If you want to use mix of multiple fonts (like in the image above), Please don't use any non-monospace font. Use monospace fonts which have at least almost same width of character. For example: 'Oxygen Mono' and '<a href="https://bpgfonts.wordpress.com/2017/12/21/bpg-2017-dejavu-sansmono/">BPG 2017 DejaVu Sans Mono</a>' have not only equal char frame width by themselves alone, but also almost equal char frame width to each other.<br />
+<p>3) If you want to use mix of multiple fonts (like in the image above), Please don't use any non-monospace font. Use monospace fonts which have at least almost same width of character. For example: 'Oxygen Mono' and '<a href="https://bpgfonts.wordpress.com/2017/12/21/bpg-2017-dejavu-sansmono/">BPG 2017 DejaVu Sans Mono</a>' have not only equal char frame width by themselves alone, but also almost equal char frame width to each other.</p>
   
 **For Geogian (ქართული) language oriented developers:** without multiple font mixing, just <a href="https://bpgfonts.wordpress.com/2017/12/21/bpg-2017-dejavu-sansmono/">BPG 2017 DejaVu Sans Mono</a> as a single font seems fine for me, and maybe you can use it too. I think it is the one and only monospace font which has English and Georgian lowercase letters, as well as <a href="https://www.unicode.org/charts/script/chart_Georgian.html">Georgian CAPITAL (uppercase) letters</a>.
 
@@ -148,11 +148,11 @@ like: ა, ბ, გ, დ, ე, ვ, ზ, თ, ი, კ, ლ, მ, ნ, ო, პ,
 
 <br />
 
-4) If you want to use ligatured monospace font like "Fira Code" (Typographic ligatures are when multiple characters appear to combine into a single character), please make sure that the font maintains the text width on every line with ligatures like there were no ligatures. "Fira Code" seems fine, and maybe most of ligatured monospace fonts are fine.<br />
+<p>4) If you want to use ligatured monospace font like "Fira Code" (Typographic ligatures are when multiple characters appear to combine into a single character), please make sure that the font maintains the text width on every line with ligatures like there were no ligatures. "Fira Code" seems fine, and maybe most of ligatured monospace fonts are fine.<br />
 
-<br />
+</p>
   
-5) Recommended to turn off word wrap. Blocks will not render properly if there is any word wrapping.
+<p>5) Recommended to turn off word wrap. Blocks will not render properly if there is any word wrapping.</p>
 <p align="center"><img
   src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/animated-png-aka-apng/word-wrap---c2-apng.png"
   alt="alt text testing"
@@ -160,7 +160,7 @@ like: ა, ბ, გ, დ, ე, ვ, ზ, თ, ი, კ, ლ, მ, ნ, ო, პ,
   
 <br />
 
-6) Recommended to turn off "Editor: Highlight Active Indent Guide" and "Editor: Render Indent Guides".
+<p>6) Recommended to turn off "Editor: Highlight Active Indent Guide" and "Editor: Render Indent Guides".</p>
 <p align="center"><img
   src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/animated-png-aka-apng/indent-guide---c2-apng.png"
   alt="alt text testing"
@@ -168,7 +168,7 @@ like: ა, ბ, გ, დ, ე, ვ, ზ, თ, ი, კ, ლ, მ, ნ, ო, პ,
   
 <br />
 
-6) Recommended to set pale color (e.g. pale blue) to lineHighlightBorder and lineHighlightBackground like this:
+<p>6) Recommended to set pale color (e.g. pale blue) to lineHighlightBorder and lineHighlightBackground like this:</p>
 <p align="center"><img
   src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/animated-png-aka-apng/line-hl---c2-apng.png"
   alt="alt text testing"
@@ -209,7 +209,7 @@ then, open and edit **settings.json** file:
   
 <br />
 
-7) Inline decorators such as VSCode Color Decorators of styles causes wider text line, some situations are handled, some situations are not handled yet, for example when linear-gradient has three or more colors.
+<p>7) Inline decorators such as VSCode Color Decorators of styles causes wider text line, some situations are handled, some situations are not handled yet, for example when linear-gradient has three or more colors.</p>
 <p align="center"><img
   src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/animated-png-aka-apng/color-decorators---c2-apng.png"
   alt="alt text testing"
@@ -218,9 +218,6 @@ then, open and edit **settings.json** file:
 <br />
 
 <h1>Optimization Notes</h1>
-Optimization is taken very seriously, half of the work is dedicated just for the optimization. The source code is full of logic which prevents many unnecessary block re-renderings.
-
-<br />
-<br />
+<p>Optimization is taken very seriously, half of the work is dedicated just for the optimization. The source code is full of logic which prevents many unnecessary block re-renderings.</p>
   
-File analisis needs super short time, so it's not a big problem. The main problem is that the vscode block rendering functions (`vscode.window.createTextEditorDecorationType` and `setDecorations`) are very slow, and I cannot touch its internal code, because it's just an API of VSCode. So, almost all optimization algorithms are trying to prevent as many unnececary block renderings as possible. For example, when scrolling, blocks are rendered into only newlly visible code, and the blocks which are already visible, stay there and does not rerender.
+<p>File analisis needs super short time, so it's not a big problem. The main problem is that the vscode block rendering functions (`vscode.window.createTextEditorDecorationType` and `setDecorations`) are very slow, and I cannot touch its internal code, because it's just an API of VSCode. So, almost all optimization algorithms are trying to prevent as many unnececary block renderings as possible. For example, when scrolling, blocks are rendered into only newlly visible code, and the blocks which are already visible, stay there and does not rerender.</p>
