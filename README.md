@@ -225,7 +225,7 @@ then, open and edit **settings.json** file:
 
 <br />
 
-<p><strong>Big thanks to these source codes:</strong></p>
+<h1>Big thanks to these source codes</h1>
 <p><a href="https://github.com/CoenraadS/Bracket-Pair-Colorizer-2">Bracket Pair Colorizer 2</a> (by CoenraadS)</p>
 <p><a href="https://github.com/vincaslt/vscode-highlight-matching-tag">Highlight Matching Tag</a> (by vincaslt)</p>
 <p><a href="https://github.com/DTStack/dt-python-parser">dt-python-parser</a> (by DTStack)</p>
