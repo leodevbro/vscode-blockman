@@ -114,6 +114,7 @@ Each line of code must have less than 500 characters, otherwise blocks will not 
   src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/animated-png-aka-apng/settings/indent-tokens---c2-apng.png"
   alt="alt text testing"
 /></p>
+<p>You can provide other tokenizer algorithms and we can add them into this extension, so Blockman will be able to highlight blocks based on different or more advanced logic, or add support for other indentation based languages.</p>
   
 <br />
   
