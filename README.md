@@ -18,6 +18,8 @@
 /></p>
 <h3 align="center" style="color: red;">Blockman</h3>
 <h6 align="center">(VSCode Extension For Nested Block Highlighting)<h6/>
+
+Repository: https://github.com/leodevbro/vscode-blockman
   
 <p align="center"><img
   src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/still-image/infograph/intro-before-after---png.png"
