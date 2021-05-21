@@ -222,3 +222,10 @@ then, open and edit **settings.json** file:
 <p>Optimization is taken very seriously, half of the work is dedicated just for the optimization. The source code is full of logic which prevents many unnecessary block re-renderings.</p>
   
 <p>File analisis needs super short time, so it's not a big problem. The main problem is that the vscode block rendering functions (`vscode.window.createTextEditorDecorationType` and `setDecorations`) are very slow, and I cannot touch its internal code, because it's just an API of VSCode. So, almost all optimization algorithms are trying to prevent as many unnececary block renderings as possible. For example, when scrolling, blocks are rendered into only newlly visible code, and the blocks which are already visible, stay there and does not rerender.</p>
+
+<br />
+
+<p><strong>Big thanks to these source codes:</strong></p>
+<p><a href="https://github.com/CoenraadS/Bracket-Pair-Colorizer-2">Bracket Pair Colorizer 2</a> (by CoenraadS)</p>
+<p><a href="https://github.com/vincaslt/vscode-highlight-matching-tag">Highlight Matching Tag</a> (by vincaslt)</p>
+<p><a href="https://github.com/DTStack/dt-python-parser">dt-python-parser</a> (by DTStack)</p>
