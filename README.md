@@ -1,14 +1,3 @@
-befff
-<video src="https://user-images.githubusercontent.com/54504880/119257853-3fa46300-bbd8-11eb-86a0-6c6681736641.mp4" data-canonical-src="https://user-images.githubusercontent.com/58986949/115314310-805b2780-a1a7-11eb-8558-648a367ea231.mp4" controls="controls" muted="muted" class="d-block rounded-bottom-2 width-fit" style="max-height:640px;">
-
-  </video>
- afterr
-
-https://user-images.githubusercontent.com/54504880/119257853-3fa46300-bbd8-11eb-86a0-6c6681736641.mp4
-
-
-
-
 <p><strong>Donation</strong> is really appreciated. This VSCode extension is a work of many months. My name is Levan Katsadze (ლევან კაცაძე), 1995-03-03, I'm a student in Tbilisi, Georgia (country). I learn Frontend development (JavaScript, TypeScript, React).</p>
 
 **PayPal**: https://paypal.me/leodevbro
@@ -54,6 +43,7 @@ https://user-images.githubusercontent.com/54504880/119257853-3fa46300-bbd8-11eb-
 
 <p align="center">First, adjust line height and character frame width manually</p>
 <p align="center">(Because currently VSCode API <a href="https://github.com/microsoft/vscode/issues/118994">does not provide</a> them)</p>
+<p align="center">This is animate PNG, you can also watch it as a <a href="https://user-images.githubusercontent.com/54504880/119259839-35d32d80-bbe1-11eb-82a3-b8f75743231c.mp4">pausable video (mp4).</a></p>
 
 <p align="center"><img
   src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/animated-png-aka-apng/height-width---c2-apng.png"
@@ -62,18 +52,12 @@ https://user-images.githubusercontent.com/54504880/119257853-3fa46300-bbd8-11eb-
 Each line of code must have less than 500 characters, otherwise blocks will not be rendered in entire file.
 
 
-
-https://user-images.githubusercontent.com/54504880/119256358-5a270e00-bbd1-11eb-80e3-151b2b7832f0.mp4
-
-meorec<br />
-[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/vt5fpE0bzSY)
-
-mesame<br />
+<!-- mesame<br />
 <p align="center"><a align="center" target="_blank" href="https://www.youtube.com/watch?v=IzRHx6x3EbM"><img
   align="center"
   src="https://i.stack.imgur.com/Nf3Lc.png"
   alt="alt text testing"
-/></a></p>
+/></a></p> -->
 
 
 
