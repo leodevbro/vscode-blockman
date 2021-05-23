@@ -46,19 +46,10 @@
 <p align="center">This is animated PNG, you can also watch it as a <a href="https://user-images.githubusercontent.com/54504880/119259839-35d32d80-bbe1-11eb-82a3-b8f75743231c.mp4">pausable video (mp4)</a>.</p>
 
 <p align="center"><img
-  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/animated-png-aka-apng/height-width---c2-apng.png"
+  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/height-width---c2-apng.png"
   alt="alt text testing"
 /></p>
 Each line of code must have less than 500 characters, otherwise blocks will not be rendered in entire file.
-
-
-<!-- mesame<br />
-<p align="center"><a align="center" target="_blank" href="https://www.youtube.com/watch?v=IzRHx6x3EbM"><img
-  align="center"
-  src="https://i.stack.imgur.com/Nf3Lc.png"
-  alt="alt text testing"
-/></a></p> -->
-
 
 
 <br />
@@ -69,7 +60,7 @@ Each line of code must have less than 500 characters, otherwise blocks will not 
 <p align="center">Python code:</p>
 
 <p align="center"><img
-  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/animated-png-aka-apng/python-demo---c2-apng.png"
+  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/python-demo---c2-apng.png"
   alt="alt text testing"
 /></p>
 
@@ -77,7 +68,7 @@ Each line of code must have less than 500 characters, otherwise blocks will not 
   
 <p align="center">You can change nesting depth</p>
 <p align="center"><img
-  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/animated-png-aka-apng/settings/depth---c2-apng.png"
+  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/settings/depth---c2-apng.png"
   alt="alt text testing"
 /></p>
   
@@ -85,7 +76,7 @@ Each line of code must have less than 500 characters, otherwise blocks will not 
   
 <p align="center">You can choose color combos</p>
 <p align="center"><img
-  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/animated-png-aka-apng/settings/color-combos---c2-apng.png"
+  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/settings/color-combos---c2-apng.png"
   alt="alt text testing"
 /></p>
 <p align="center"><img
@@ -97,7 +88,7 @@ Each line of code must have less than 500 characters, otherwise blocks will not 
   
 <p align="center">You can change color of each depth</p>
 <p align="center"><img
-  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/animated-png-aka-apng/settings/custom-depth-colors---c2-apng.png"
+  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/settings/custom-depth-colors---c2-apng.png"
   alt="alt text testing"
 /></p>
   
@@ -105,7 +96,7 @@ Each line of code must have less than 500 characters, otherwise blocks will not 
   
 <p align="center">You can change focused block colors and general border color</p>
 <p align="center"><img
-  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/animated-png-aka-apng/settings/focus-colors-and-general-border-color---c2-apng.png"
+  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/settings/focus-colors-and-general-border-color---c2-apng.png"
   alt="alt text testing"
 /></p>
 
@@ -114,7 +105,7 @@ Each line of code must have less than 500 characters, otherwise blocks will not 
 <p align="center">You can change basis of block analysis</p>
 <p align="center">(Curly brackets, square brackets, round brackets, tags, indentaion)</p>
 <p align="center"><img
-  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/animated-png-aka-apng/settings/based-on-bracket-types---c2-apng.png"
+  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/settings/based-on-bracket-types---c2-apng.png"
   alt="alt text testing"
 /></p>
   
@@ -122,7 +113,7 @@ Each line of code must have less than 500 characters, otherwise blocks will not 
   
 <p align="center">Currently only Python is supported from indentation based languages</p>
 <p align="center"><img
-  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/animated-png-aka-apng/settings/indent-tokens---c2-apng.png"
+  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/settings/indent-tokens---c2-apng.png"
   alt="alt text testing"
 /></p>
 <p>You can provide other tokenizer algorithms and we can add them into this extension, so Blockman will be able to highlight blocks based on different or more advanced logic, or add support for other indentation based languages.</p>
@@ -131,7 +122,7 @@ Each line of code must have less than 500 characters, otherwise blocks will not 
   
 <p align="center">You can disable rendering single line blocks</p>
 <p align="center"><img
-  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/animated-png-aka-apng/settings/single-line-block---c2-apng.png"
+  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/settings/single-line-block---c2-apng.png"
   alt="alt text testing"
 /></p>
 
@@ -166,7 +157,7 @@ like: ა, ბ, გ, დ, ე, ვ, ზ, თ, ი, კ, ლ, მ, ნ, ო, პ,
   
 <p>5) Recommended to turn off word wrap. Blocks will not render properly if there is any word wrapping.</p>
 <p align="center"><img
-  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/animated-png-aka-apng/word-wrap---c2-apng.png"
+  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/word-wrap---c2-apng.png"
   alt="alt text testing"
 /></p>
   
@@ -174,7 +165,7 @@ like: ა, ბ, გ, დ, ე, ვ, ზ, თ, ი, კ, ლ, მ, ნ, ო, პ,
 
 <p>6) Recommended to turn off "Editor: Highlight Active Indent Guide" and "Editor: Render Indent Guides".</p>
 <p align="center"><img
-  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/animated-png-aka-apng/indent-guide---c2-apng.png"
+  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/indent-guide---c2-apng.png"
   alt="alt text testing"
 /></p>
   
@@ -182,7 +173,7 @@ like: ა, ბ, გ, დ, ე, ვ, ზ, თ, ი, კ, ლ, მ, ნ, ო, პ,
 
 <p>7) Recommended to set pale color (e.g. pale blue) to lineHighlightBorder and lineHighlightBackground like this:</p>
 <p align="center"><img
-  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/animated-png-aka-apng/line-hl---c2-apng.png"
+  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/line-hl---c2-apng.png"
   alt="alt text testing"
 /></p>
 <p align="center"><img
@@ -223,7 +214,7 @@ then, open and edit **settings.json** file:
 
 <p>8) Inline decorators such as VSCode Color Decorators of styles causes wider text line, some situations are handled, some situations are not handled yet, for example when linear-gradient has more than three colors.</p>
 <p align="center"><img
-  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/animated-png-aka-apng/color-decorators---c2-apng.png"
+  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/color-decorators---c2-apng.png"
   alt="alt text testing"
 /></p>
 
