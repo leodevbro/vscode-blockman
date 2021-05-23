@@ -28,7 +28,7 @@
   
 <p>Animated PNG:</p>
 <p align="center"><img
-  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/animated-png-aka-apng/main-demo---c2-apng.png"
+  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/main-demo---c2-apng.png"
   alt="alt text testing"
 /></p>
   
