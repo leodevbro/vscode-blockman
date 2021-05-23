@@ -58,9 +58,8 @@ meorec<br />
 [![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/vt5fpE0bzSY)
 
 mesame<br />
-<p align="center"><a align="center" href="https://www.youtube.com/watch?v=IzRHx6x3EbM"><img
+<p align="center"><a align="center" target="_blank" href="https://www.youtube.com/watch?v=IzRHx6x3EbM"><img
   align="center"
-  target="_blank"
   src="https://i.stack.imgur.com/Nf3Lc.png"
   alt="alt text testing"
 /></a></p>
