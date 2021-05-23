@@ -43,7 +43,7 @@
 
 <p align="center">First, adjust line height and character frame width manually</p>
 <p align="center">(Because currently VSCode API <a href="https://github.com/microsoft/vscode/issues/118994">does not provide</a> them)</p>
-<p align="center">This is animate PNG, you can also watch it as a <a href="https://user-images.githubusercontent.com/54504880/119259839-35d32d80-bbe1-11eb-82a3-b8f75743231c.mp4">pausable video (mp4)</a>.</p>
+<p align="center">This is animated PNG, you can also watch it as a <a href="https://user-images.githubusercontent.com/54504880/119259839-35d32d80-bbe1-11eb-82a3-b8f75743231c.mp4">pausable video (mp4)</a>.</p>
 
 <p align="center"><img
   src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/animated-png-aka-apng/height-width---c2-apng.png"
