@@ -10,6 +10,6 @@ vsc-extension-quickstart.md
 **/*.map
 **/*.ts
 
-demo-media/animated-png-aka-apng/**
+demo-media/video/**
 demo-media/still-image/icon-dev/**
 demo-media/still-image/infograph/**
