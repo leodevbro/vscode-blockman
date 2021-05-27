@@ -1,3 +1,17 @@
+<h1 align="center">!!! IMPORTANT !!!</h1>
+
+<p align="center">First, adjust line height and character frame width manually</p>
+<p align="center">(Because currently VSCode API <a href="https://github.com/microsoft/vscode/issues/118994">does not provide</a> them)</p>
+<p align="center">This is animated PNG, you can also watch it as a <a href="https://user-images.githubusercontent.com/54504880/119259839-35d32d80-bbe1-11eb-82a3-b8f75743231c.mp4">pausable video (mp4)</a>.</p>
+
+<p align="center"><img
+  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/height-width---c2-apng.png"
+  alt="alt text testing"
+/></p>
+<p>Each line of code must have less than 500 characters, otherwise blocks will not be rendered in entire file.</p>
+
+<br />
+
 <p><strong>Donation</strong> is really appreciated. This VSCode extension is a work of many months. My name is <a href="https://leodevbro.github.io">Levan Katsadze (ლევან კაცაძე)</a>, 1995-03-03, I'm a student in Tbilisi, Georgia (country). I learn Frontend development (JavaScript, TypeScript, React).</p>
 
 **PayPal**: https://paypal.me/leodevbro
@@ -38,18 +52,6 @@
 
 <br />
 <br />
-
-<h1 align="center">!!! IMPORTANT !!!</h1>
-
-<p align="center">First, adjust line height and character frame width manually</p>
-<p align="center">(Because currently VSCode API <a href="https://github.com/microsoft/vscode/issues/118994">does not provide</a> them)</p>
-<p align="center">This is animated PNG, you can also watch it as a <a href="https://user-images.githubusercontent.com/54504880/119259839-35d32d80-bbe1-11eb-82a3-b8f75743231c.mp4">pausable video (mp4)</a>.</p>
-
-<p align="center"><img
-  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/height-width---c2-apng.png"
-  alt="alt text testing"
-/></p>
-Each line of code must have less than 500 characters, otherwise blocks will not be rendered in entire file.
 
 
 <br />
