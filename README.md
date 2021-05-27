@@ -1,4 +1,4 @@
-<p><strong>Donation</strong> is really appreciated. This VSCode extension is a work of many months. My name is Levan Katsadze (ლევან კაცაძე), 1995-03-03, I'm a student in Tbilisi, Georgia (country). I learn Frontend development (JavaScript, TypeScript, React).</p>
+<p><strong>Donation</strong> is really appreciated. This VSCode extension is a work of many months. My name is <a href="https://leodevbro.github.io">Levan Katsadze (ლევან კაცაძე)</a>, 1995-03-03, I'm a student in Tbilisi, Georgia (country). I learn Frontend development (JavaScript, TypeScript, React).</p>
 
 **PayPal**: https://paypal.me/leodevbro
 
