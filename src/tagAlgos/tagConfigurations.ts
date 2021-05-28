@@ -3,6 +3,7 @@ import * as vscode from "vscode";
 
 const extensionId = "highlight-matching-tag";
 const defaultEmptyElements = [
+    // "div",
     "area",
     "base",
     "br",
@@ -39,11 +40,13 @@ class Configuration {
     }
 
     get highlightSelfClosing() {
-        return !!this.config.get("highlightSelfClosing");
+        // return !!this.config.get("highlightSelfClosing");
+        return false;
     }
 
     get highlightFromContent() {
         return !!this.config.get("highlightFromContent");
+        // return false;
     }
 
     get highlightFromName() {

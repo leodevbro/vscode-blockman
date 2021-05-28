@@ -3,7 +3,7 @@
     "displayName": "Blockman - Highlight Nested Code Blocks",
     "publisher": "leodevbro",
     "description": "Mark/Highlight code blocks",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "engines": {
         "vscode": "^1.56.1"
     },
@@ -112,7 +112,7 @@
                         "Pale Pink (Gradients)",
                         "Pale Pink (Solid colors)"
                     ],
-                    "description": "Choose preset combo of colors. Corresponding colors are overridden by custom colors (if not empty string)",
+                    "description": "This does not change VSCode theme. Choose preset combo of colors. Corresponding colors are overridden by custom colors (if not empty string)",
                     "scope": "window"
                 },
                 "blockman.n05CustomColorOfDepth0": {

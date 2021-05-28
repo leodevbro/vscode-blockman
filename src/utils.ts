@@ -81,10 +81,9 @@ export const findInnerStartersEndersOfTags = ({
     let legitTagsList: IPositionEachZero[] = [];
 
     for (let i = 0; i < tagsList.length; i += 1) {
-        if (tagsList[i].closing?.start !== undefined && tagsList[i].opening) {
+        if (tagsList[i].opening) {
             // console.log("i aris", i, "da is:", tagsList[i].opening?.end);
             const openEnd = tagsList[i].opening!.end! - 1;
-            const closeStart = tagsList[i].closing!.start!;
 
             // console.log("oc:", openEnd, closeStart);
 
@@ -92,71 +91,107 @@ export const findInnerStartersEndersOfTags = ({
                 globalIndexZero: openEnd,
                 editorInfo,
             });
+
+            legitTagsList.push({
+                globalIndexZero: openEnd,
+                lineZero: lineAndInlineOfOpenEnd.lineZero,
+                inLineIndexZero: lineAndInlineOfOpenEnd.inLineIndexZero,
+                type: "s", // "s" or "e" or other);
+            });
+        }
+
+        if (tagsList[i].closing?.start !== undefined) {
+            // console.log("i aris", i, "da is:", tagsList[i].opening?.end);
+
+            const closeStart = tagsList[i].closing!.start!;
+
+            // console.log("oc:", openEnd, closeStart);
+
             const lineAndInlineOfcloseStart = findLineZeroAndInLineIndexZero({
                 globalIndexZero: closeStart,
                 editorInfo,
             });
 
-            legitTagsList.push(
-                {
-                    globalIndexZero: openEnd,
-                    lineZero: lineAndInlineOfOpenEnd.lineZero,
-                    inLineIndexZero: lineAndInlineOfOpenEnd.inLineIndexZero,
-                    type: "s", // "s" or "e" or other);
-                },
-                {
-                    globalIndexZero: closeStart,
-                    lineZero: lineAndInlineOfcloseStart.lineZero,
-                    inLineIndexZero: lineAndInlineOfcloseStart.inLineIndexZero,
-                    type: "e", // "s" or "e" or other);
-                },
-            );
+            legitTagsList.push({
+                globalIndexZero: closeStart,
+                lineZero: lineAndInlineOfcloseStart.lineZero,
+                inLineIndexZero: lineAndInlineOfcloseStart.inLineIndexZero,
+                type: "e", // "s" or "e" or other);
+            });
         }
     }
     // console.log("legitTagsList:", legitTagsList);
 
-    // let starters: IPositionEachZero[] = [];
-    // let enders: IPositionEachZero[] = [];
+    const findSelfDivs = () => {
+        // let starters: IPositionEachZero[] = [];
+        // let enders: IPositionEachZero[] = [];
 
-    // const re_start = /(<[^/][^><]*[^/=]>)|(<[ a-zA-Z]*>)/gimu;
-    // const re_end = /<[/][^><]*>/gimu;
+        let mySelfClosingsLastI: IPositionEachZero[] = [];
 
-    // // myString = "foob<asD></asd>arfoobar";
-    // let match: any;
+        // const re_start = /(<[^/][^><]*[^/=]>)|(<[ a-zA-Z]*>)/gimu;
+        // const re_end = /<[/][^><]*>/gimu;
 
-    // /*eslint-disable */
-    // while ((match = re_start.exec(myString)) != null) {
-    //     const first_i = match.index;
-    //     const last_i = first_i + match[0].length - 1;
-    //     // console.log(last_i);
-    //     const lineZeroAndInLineZero = findLineZeroAndInLineIndexZero(last_i);
-    //     starters.push({
-    //         globalIndexZero: last_i,
-    //         lineZero: lineZeroAndInLineZero.lineZero,
-    //         inLineIndexZero: lineZeroAndInLineZero.inLineIndexZero,
-    //         type: "s",
-    //     });
-    // }
+        // const selfRegEx = /<([^\/>]+)\/>/gimu;
+        // const selfRegEx =
+        //     /(<([^\/>]+)\/>)|(<([^\/>]*)([{(]+)([\s\S]*?)\/>)/gimu;
+        const selfRegEx = /([^<\s])([\s]*)(\/>)/gimu;
 
-    // /*eslint-disable */
-    // while ((match = re_end.exec(myString)) != null) {
-    //     const first_i = match.index;
-    //     // console.log(first_i);
-    //     const lineZeroAndInLineZero = findLineZeroAndInLineIndexZero(first_i);
-    //     enders.push({
-    //         globalIndexZero: first_i,
-    //         lineZero: lineZeroAndInLineZero.lineZero,
-    //         inLineIndexZero: lineZeroAndInLineZero.inLineIndexZero,
-    //         type: "e",
-    //     });
-    // }
+        // myString = "foob<asD></asd>arfoobar";
+        let match: any;
 
-    // let finalArr = [...starters, ...enders].sort(
-    //     (a, b) => a.globalIndexZero - b.globalIndexZero,
-    // );
-    // console.log("finalArr:", finalArr);
-    // return finalArr;
-    return legitTagsList;
+        /*eslint-disable */
+        while ((match = selfRegEx.exec(myString)) != null) {
+            const first_i = match.index;
+            const last_i = first_i + match[0].length - 1;
+            // console.log(last_i);
+            const lineZeroAndInLineZero = findLineZeroAndInLineIndexZero({
+                globalIndexZero: last_i,
+                editorInfo,
+            });
+            mySelfClosingsLastI.push({
+                globalIndexZero: last_i,
+                lineZero: lineZeroAndInLineZero.lineZero,
+                inLineIndexZero: lineZeroAndInLineZero.inLineIndexZero,
+                type: "s",
+            });
+        }
+
+        /*eslint-disable */
+        // while ((match = re_end.exec(myString)) != null) {
+        //     const first_i = match.index;
+        //     // console.log(first_i);
+        //     const lineZeroAndInLineZero =
+        //         findLineZeroAndInLineIndexZero(first_i);
+        //     enders.push({
+        //         globalIndexZero: first_i,
+        //         lineZero: lineZeroAndInLineZero.lineZero,
+        //         inLineIndexZero: lineZeroAndInLineZero.inLineIndexZero,
+        //         type: "e",
+        //     });
+        // }
+
+        let finalArr = [...mySelfClosingsLastI].sort(
+            (a, b) => a.globalIndexZero - b.globalIndexZero,
+        );
+        console.log("finalArr:", finalArr);
+        return finalArr;
+    };
+
+    const selfs = findSelfDivs();
+
+    const superTagList = legitTagsList.filter((pos) => {
+        const globalsOfSelfs = selfs.map((pos) => pos.globalIndexZero);
+        if (globalsOfSelfs.includes(pos.globalIndexZero)) {
+            return false;
+        } else {
+            return true;
+        }
+    });
+
+    // console.log("superTagList:", superTagList);
+
+    return superTagList;
+    // return legitTagsList;
 };
 
 export const parseTags = (
