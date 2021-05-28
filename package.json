@@ -3,7 +3,7 @@
     "displayName": "Blockman - Highlight Nested Code Blocks",
     "publisher": "leodevbro",
     "description": "Mark/Highlight code blocks",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "engines": {
         "vscode": "^1.56.1"
     },
@@ -243,19 +243,19 @@
                 "blockman.n28TimeToWaitBeforeRerenderAfterLastChangeEvent": {
                     "type": "number",
                     "default": 1.2,
-                    "description": "(Seconds). For optimization: enter more time for slow computers. Less than 0.05 is NOT recomended even for fast computers.",
+                    "description": "(Seconds). For optimization: enter more time for slow computers. Less than 0.05 is NOT recommended even for fast computers.",
                     "scope": "window"
                 },
                 "blockman.n29TimeToWaitBeforeRerenderAfterLastFocusEvent": {
                     "type": "number",
                     "default": 0.2,
-                    "description": "(Seconds). For optimization: enter more time for slow computers. Less than 0.2 is NOT recomended because double-clicking may become problematic.",
+                    "description": "(Seconds). For optimization: enter more time for slow computers. Less than 0.2 is NOT recommended because double-clicking may become problematic.",
                     "scope": "window"
                 },
                 "blockman.n30TimeToWaitBeforeRerenderAfterLastScrollEvent": {
                     "type": "number",
                     "default": 0.1,
-                    "description": "(Seconds). For optimization: enter more time for slow computers. Less than 0.05 is NOT recomended even for fast computers.",
+                    "description": "(Seconds). For optimization: enter more time for slow computers. Less than 0.05 is NOT recommended even for fast computers.",
                     "scope": "window"
                 },
                 "blockman.n31RenderIncrementBeforeAndAfterVisibleRange": {

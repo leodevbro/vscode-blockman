@@ -74,6 +74,7 @@ export const findInnerStartersEndersOfTags = ({
     editorInfo: IEditorInfo;
     myString: string;
 }) => {
+    // console.log(config.emptyElements);
     const tagsList: PartialMatch[] = parseTags(myString, config.emptyElements);
 
     // console.log("tagsList:", tagsList);
@@ -81,7 +82,11 @@ export const findInnerStartersEndersOfTags = ({
     let legitTagsList: IPositionEachZero[] = [];
 
     for (let i = 0; i < tagsList.length; i += 1) {
-        if (tagsList[i].opening?.end && tagsList[i].closing?.start) {
+        if (
+            tagsList[i].opening?.end &&
+            tagsList[i].closing?.start &&
+            tagsList[i].opening?.end !== tagsList[i].closing?.end
+        ) {
             // console.log("i aris", i, "da is:", tagsList[i].opening?.end);
             const openEnd = tagsList[i].opening!.end! - 1;
 
@@ -117,13 +122,10 @@ export const findInnerStartersEndersOfTags = ({
                 type: "e", // "s" or "e" or other);
             });
         }
-
-        // if (tagsList[i].closing?.start !== undefined) {
-
-        // }
     }
     // console.log("legitTagsList:", legitTagsList);
 
+    /*
     const findSelfDivs = () => {
         // let starters: IPositionEachZero[] = [];
         // let enders: IPositionEachZero[] = [];
@@ -141,7 +143,7 @@ export const findInnerStartersEndersOfTags = ({
         // myString = "foob<asD></asd>arfoobar";
         let match: any;
 
-        /*eslint-disable */
+        // eslint-disable
         while ((match = selfRegEx.exec(myString)) != null) {
             const first_i = match.index;
             const last_i = first_i + match[0].length - 1;
@@ -158,7 +160,7 @@ export const findInnerStartersEndersOfTags = ({
             });
         }
 
-        /*eslint-disable */
+        // eslint-disable
         // while ((match = re_end.exec(myString)) != null) {
         //     const first_i = match.index;
         //     // console.log(first_i);
@@ -177,26 +179,30 @@ export const findInnerStartersEndersOfTags = ({
         );
         // console.log("finalArr:", finalArr);
         return finalArr;
-    };
+    };*/
 
-    const selfs = findSelfDivs();
-    const globalsOfSelfs = selfs.map((pos) => pos.globalIndexZero);
+    // const selfs = findSelfDivs();
+    // const globalsOfSelfs = selfs.map((pos) => pos.globalIndexZero);
 
-    const superTagList = legitTagsList.filter((pos) => {
-        if (globalsOfSelfs.includes(pos.globalIndexZero)) {
-            return false;
-        } else {
-            return true;
-        }
-    });
+    // const superTagList = legitTagsList.filter((pos) => {
+    //     if (globalsOfSelfs.includes(pos.globalIndexZero)) {
+    //         return false;
+    //     } else {
+    //         return true;
+    //     }
+    // });
 
-    const superTagListSorted = superTagList.sort(
+    // const superTagListSorted = superTagList.sort(
+    //     (a, b) => a.globalIndexZero - b.globalIndexZero,
+    // );
+
+    // return superTagList;
+
+    const sortedTagList = legitTagsList.sort(
         (a, b) => a.globalIndexZero - b.globalIndexZero,
     );
 
-    return superTagList;
-
-    // return legitTagsList;
+    return sortedTagList;
 };
 
 export const parseTags = (
@@ -278,7 +284,7 @@ export const parseTags = (
             case "tagSelfClose":
                 lastOpening = closeLastOpening(match.offset + 2) as Tag;
                 attributeNestingLevel -= 1;
-                // closeMatchingOpeningTag(lastOpening, attributeNestingLevel); // comm007
+                closeMatchingOpeningTag(lastOpening, attributeNestingLevel); // comm007
                 break;
             case "tagClosing":
                 closeMatchingOpeningTag(
