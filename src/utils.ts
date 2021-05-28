@@ -81,7 +81,7 @@ export const findInnerStartersEndersOfTags = ({
     let legitTagsList: IPositionEachZero[] = [];
 
     for (let i = 0; i < tagsList.length; i += 1) {
-        if (tagsList[i].opening) {
+        if (tagsList[i].opening?.end && tagsList[i].closing?.start) {
             // console.log("i aris", i, "da is:", tagsList[i].opening?.end);
             const openEnd = tagsList[i].opening!.end! - 1;
 
@@ -98,9 +98,7 @@ export const findInnerStartersEndersOfTags = ({
                 inLineIndexZero: lineAndInlineOfOpenEnd.inLineIndexZero,
                 type: "s", // "s" or "e" or other);
             });
-        }
 
-        if (tagsList[i].closing?.start !== undefined) {
             // console.log("i aris", i, "da is:", tagsList[i].opening?.end);
 
             const closeStart = tagsList[i].closing!.start!;
@@ -119,6 +117,10 @@ export const findInnerStartersEndersOfTags = ({
                 type: "e", // "s" or "e" or other);
             });
         }
+
+        // if (tagsList[i].closing?.start !== undefined) {
+
+        // }
     }
     // console.log("legitTagsList:", legitTagsList);
 
@@ -173,14 +175,14 @@ export const findInnerStartersEndersOfTags = ({
         let finalArr = [...mySelfClosingsLastI].sort(
             (a, b) => a.globalIndexZero - b.globalIndexZero,
         );
-        console.log("finalArr:", finalArr);
+        // console.log("finalArr:", finalArr);
         return finalArr;
     };
 
     const selfs = findSelfDivs();
+    const globalsOfSelfs = selfs.map((pos) => pos.globalIndexZero);
 
     const superTagList = legitTagsList.filter((pos) => {
-        const globalsOfSelfs = selfs.map((pos) => pos.globalIndexZero);
         if (globalsOfSelfs.includes(pos.globalIndexZero)) {
             return false;
         } else {
@@ -188,9 +190,12 @@ export const findInnerStartersEndersOfTags = ({
         }
     });
 
-    // console.log("superTagList:", superTagList);
+    const superTagListSorted = superTagList.sort(
+        (a, b) => a.globalIndexZero - b.globalIndexZero,
+    );
 
     return superTagList;
+
     // return legitTagsList;
 };
 
@@ -991,7 +996,12 @@ export const getFullFileStats = ({
         document.languageId !== "plaintext"
     ) {
         /*
-        if (babelParser) {
+        if (
+            babelParser &&
+            ["typescript", "typescriptreact", "tsx"].includes(
+                document.languageId,
+            )
+        ) {
             // if (false) {
             // console.log("shemovediiitttttt");
 
@@ -1004,7 +1014,15 @@ export const getFullFileStats = ({
                 myParsed = babelParser.parse(txt, {
                     // plugins: ["flow", "jsx", "typesript"],
                     plugins: ["flow", "jsx"],
+                    sourceType: "module",
+                    strictMode: false,
+                    tokens: true,
+                    errorRecovery: true,
+
+                    // allowImportExportEverywhere: true,
                 });
+
+                // myParsed = undefined;
             } catch (err) {
                 console.log(err);
             }
@@ -1020,6 +1038,8 @@ export const getFullFileStats = ({
                         } else {
                             // console.log("aqadaaaa");
                             vmap[(path.scope as any).uid] = 1;
+                            console.log("path.node:", path.node);
+                            
                             if (
                                 (path.node as any).body &&
                                 typeof (path.node as any).body.start ===
@@ -1062,16 +1082,19 @@ export const getFullFileStats = ({
                                     },
                                 );
                             }
+                            
                         }
                     },
                 });
             }
 
             // brackets = [...brackets, ...rez];
-            brackets = rez;
+            // brackets = rez;
             // console.log("mivanicheeee");
-            console.log("rez:", rez);
+            // console.log("rez:", rez);
             // console.log(rez);
+
+            
         }
         */
 
