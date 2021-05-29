@@ -91,6 +91,7 @@
 <br />
   
 <p align="center">You can change color of each depth</p>
+<p align="center">Colors can be any CSS color value: red, green... rgb(), hsl(), linear-gradient()...</p>
 <p align="center"><img
   src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/settings/custom-depth-colors---c2-apng.png"
   alt="alt text testing"
