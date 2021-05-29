@@ -33,7 +33,7 @@
 <h3 align="center" style="color: red;">Blockman</h3>
 <p align="center">VSCode Extension For Nested Block Highlighting<p/>
 
-<p>Repository: <a href="https://github.com/leodevbro/vscode-blockman">https://github.com/leodevbro/vscode-blockman</a></p>
+<p>Github repository: <a href="https://github.com/leodevbro/vscode-blockman">https://github.com/leodevbro/vscode-blockman</a></p>
 
 <p>Marketplace: <a href="https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman">https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman</a></p>
   
