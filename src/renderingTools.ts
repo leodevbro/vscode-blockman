@@ -71,7 +71,11 @@ export const renderSingleLineBox = ({
 
     // console.log("ai laiiiinnn:::", lineZero, upEdge, lowEdge);
 
-    if (lineBlockType === "onlyLine" && !glo.renderInSingleLineAreas) {
+    if (
+        lineBlockType === "onlyLine" &&
+        !glo.renderInSingleLineAreas &&
+        !isFocusedBlock
+    ) {
         return;
     }
 
@@ -356,8 +360,8 @@ export const renderSingleLineBox = ({
         const width = boxLeftEdge - optimalLeftOfRangePx + 0;
 
         if (width >= 3) {
-            const leftLineOfOpening = vscode.window.createTextEditorDecorationType(
-                {
+            const leftLineOfOpening =
+                vscode.window.createTextEditorDecorationType({
                     before: {
                         // rangeBehavior: 1,
                         // contentText,
@@ -388,8 +392,7 @@ export const renderSingleLineBox = ({
                                       `,
                         // padding: 100px;
                     },
-                } as vscode.DecorationRenderOptions,
-            );
+                } as vscode.DecorationRenderOptions);
 
             // thisLineDepthObjectAfter.decorsRefs.leftLineOfOpening = leftLineOfOpening;
 
@@ -421,8 +424,8 @@ export const renderSingleLineBox = ({
         const width = optimalRightOfRangePx - boxRightEdge + borderSize;
 
         if (width >= 3) {
-            const rightLineOfClosing = vscode.window.createTextEditorDecorationType(
-                {
+            const rightLineOfClosing =
+                vscode.window.createTextEditorDecorationType({
                     before: {
                         // rangeBehavior: 1,
                         // contentText,
@@ -449,8 +452,7 @@ export const renderSingleLineBox = ({
                                       `,
                         // padding: 100px;
                     },
-                } as vscode.DecorationRenderOptions,
-            );
+                } as vscode.DecorationRenderOptions);
 
             thisLineDepthObjectAfter[
                 thisLineDepthObjectAfter.length - 1
