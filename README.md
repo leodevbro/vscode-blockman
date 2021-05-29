@@ -107,7 +107,7 @@
 <br />
   
 <p align="center">You can change basis of block analysis</p>
-<p align="center">(Curly brackets, square brackets, round brackets, tags, indentaion)</p>
+<p align="center">(Curly brackets, square brackets, round brackets, tags, indentation)</p>
 <p align="center"><img
   src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/settings/based-on-bracket-types---c2-apng.png"
   alt="alt text testing"
