@@ -3,7 +3,7 @@
     "displayName": "Blockman - Highlight Nested Code Blocks",
     "publisher": "leodevbro",
     "description": "Mark/Highlight code blocks",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "engines": {
         "vscode": "^1.56.1"
     },
@@ -25,8 +25,10 @@
     "keywords": [
         "block",
         "blocks",
+        "scope",
         "nest",
         "nested",
+        "nesting",
         "mark",
         "highlight",
         "highlighter",
@@ -36,7 +38,9 @@
         "pair",
         "color",
         "colour",
-        "multi-root ready"
+        "multi-root ready",
+        "vscode",
+        "man"
     ],
     "main": "./out/extension.js",
     "contributes": {
