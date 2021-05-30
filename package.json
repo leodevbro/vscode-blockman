@@ -3,7 +3,7 @@
     "displayName": "Blockman - Highlight Nested Code Blocks",
     "publisher": "leodevbro",
     "description": "Mark/Highlight code blocks",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "engines": {
         "vscode": "^1.56.1"
     },
@@ -60,6 +60,7 @@
                 "blockman.n01LineHeight": {
                     "type": "number",
                     "default": 12,
+                    "description": "Please don't enter more than enough height, not even one pixel more.",
                     "scope": "window"
                 },
                 "blockman.n02EachCharFrameWidth": {
@@ -240,7 +241,7 @@
                 },
                 "blockman.n27AlsoRenderBlocksInsideSingleLineAreas": {
                     "type": "boolean",
-                    "default": true,
+                    "default": false,
                     "description": "{I am a single line area} <p>Me too</p>. Focused single line block still will be rendered.",
                     "scope": "window"
                 },

@@ -44,7 +44,7 @@ export const glo = {
     analyzeTags: true,
     analyzeIndentDedentTokens: true,
 
-    renderInSingleLineAreas: true,
+    renderInSingleLineAreas: false,
 
     borderSize: 1,
     borderRadius: 4,
@@ -881,6 +881,12 @@ const adjustVscodeUserConfig = () => {
 };
 
 export function activate(context: ExtensionContext) {
+    window.showInformationMessage(
+        `Blockman message: If blocks are crazily weird/strange looking, it's not error, it's fine. Please see the "IMPORTANT" section in the description.`,
+        {modal: true}
+    );
+
+    
     adjustVscodeUserConfig();
     setColorDecoratorsBool();
     applyAllBlockmanSettings();
