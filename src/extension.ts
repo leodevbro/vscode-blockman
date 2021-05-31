@@ -880,13 +880,14 @@ const adjustVscodeUserConfig = () => {
         .update("editor.highlightActiveIndentGuide", false, 1);
 };
 
-export function activate(context: ExtensionContext) {
+const importantMessage = () => {
     window.showInformationMessage(
         `Blockman message: If blocks are crazily weird/strange looking, it's not error, it's fine. Please see the "IMPORTANT" section in the description.`,
-        {modal: true}
+        { modal: true },
     );
+};
 
-    
+export function activate(context: ExtensionContext) {
     adjustVscodeUserConfig();
     setColorDecoratorsBool();
     applyAllBlockmanSettings();
@@ -895,6 +896,21 @@ export function activate(context: ExtensionContext) {
     vscode.extensions.onDidChange(() => restart());
 
     // console.log("all Config:", vscode.workspace.getConfiguration()); // lineHighlightBorder
+
+    // let bbqq = context.globalStorageUri;
+    const iicounter = context.globalState.get("iicounter");
+    // console.log(iicounter);
+    if (iicounter === "1" || iicounter === "2") {
+        if (iicounter === "1") {
+            importantMessage();
+            context.globalState.update("iicounter", "2");
+        } else if (iicounter === "2") {
+            // do nothing
+        }
+    } else {
+        importantMessage();
+        context.globalState.update("iicounter", "1");
+    }
 
     context.subscriptions.push(
         // vscode.commands.registerCommand(

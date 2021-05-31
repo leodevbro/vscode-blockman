@@ -1201,10 +1201,15 @@ export const getFullFileStats = ({
         glo.maxDepth >= 0 &&
         document.languageId !== "plaintext"
     ) {
-        tagsIt = findInnerStartersEndersOfTags({
-            editorInfo,
-            myString: txt,
-        });
+        try {
+            tagsIt = findInnerStartersEndersOfTags({
+                editorInfo,
+                myString: txt,
+            });
+        } catch (err) {
+            console.log(err);
+            vscode.window.showErrorMessage(String(err), { modal: false });
+        }
     }
 
     // console.log("tagsIt:", tagsIt);
