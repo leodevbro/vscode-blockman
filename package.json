@@ -3,7 +3,7 @@
     "displayName": "Blockman - Highlight Nested Code Blocks",
     "publisher": "leodevbro",
     "description": "Mark/Highlight code blocks",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "engines": {
         "vscode": "^1.56.1"
     },
@@ -13,7 +13,8 @@
     },
     "icon": "demo-media/still-image/icon-prod/blockman-icon-128---png.png",
     "categories": [
-        "Other"
+        "Other",
+        "Visualization"
     ],
     "extensionKind": [
         "ui",

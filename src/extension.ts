@@ -882,7 +882,7 @@ const adjustVscodeUserConfig = () => {
 
 const importantMessage = () => {
     window.showInformationMessage(
-        `Blockman message: If blocks are crazily weird/strange looking, it's not error, it's fine. Please see the "IMPORTANT" section in the description.`,
+        `!!!!! PLEASE READ !!!!! Blockman message: If blocks are weird/strange looking, it's not error, it's fine. The solution is to adjust line height and character width in Blockman settings, so please see the "IMPORTANT" section in the description, there is GIF which shows you how to adjust them.`,
         { modal: true },
     );
 };
@@ -911,6 +911,9 @@ export function activate(context: ExtensionContext) {
         importantMessage();
         context.globalState.update("iicounter", "1");
     }
+    // importantMessage();
+    // importantMessage();
+    // importantMessage();
 
     context.subscriptions.push(
         // vscode.commands.registerCommand(
