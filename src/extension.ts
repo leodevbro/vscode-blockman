@@ -888,7 +888,7 @@ const importantMessage = () => {
 };
 
 export function activate(context: ExtensionContext) {
-    adjustVscodeUserConfig();
+    // adjustVscodeUserConfig();
     setColorDecoratorsBool();
     applyAllBlockmanSettings();
 
@@ -908,6 +908,7 @@ export function activate(context: ExtensionContext) {
             // do nothing
         }
     } else {
+        adjustVscodeUserConfig();
         importantMessage();
         context.globalState.update("iicounter", "1");
     }
