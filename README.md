@@ -15,9 +15,7 @@
 
 <p><strong>Donation</strong> is really appreciated. This VSCode extension is a work of many months. My name is <a href="https://leodevbro.github.io">Levan Katsadze (ლევან კაცაძე)</a>, 1995-03-03, I'm a student in Tbilisi, Georgia (country). I learn Frontend development (JavaScript, TypeScript, React).</p>
 
-**PayPal**: https://paypal.me/leodevbro
-
-**Buy Me A Coffee**: https://www.buymeacoffee.com/leodevbro
+**Buy Me A Coffee (With PayPal)**: https://www.buymeacoffee.com/leodevbro
 
 **Bank account (USD)**: GE08TB7774936615100013 (TBCBGE22)
 
