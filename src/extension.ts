@@ -29,7 +29,7 @@ export const glo = {
     eachCharFrameHeight: 12.0, // px
     eachCharFrameWidth: 4.321, // px,
 
-    maxDepth: 10, // -2 -> no blocks, -1 -> entire file block, 0 -> first depth blocks, and so on...
+    maxDepth: 9, // (as minus one) -2 -> no blocks, -1 -> ground block, 0 -> first depth blocks, and so on...
 
     enableFocus: true,
 
@@ -882,7 +882,7 @@ const adjustVscodeUserConfig = () => {
 
 const importantMessage = () => {
     window.showInformationMessage(
-        `!!!!! PLEASE READ !!!!! Blockman message: If blocks are weird/strange looking, it's not error, it's fine. The solution is to adjust line height and character width in Blockman settings, so please see the "IMPORTANT" section in the description, there is GIF which shows you how to adjust them.`,
+        `!!!!! PLEASE READ !!!!! Blockman message: If blocks are weird/strange looking, it's not error/bug, it's fine. The solution is to adjust line height and character width in Blockman settings, so please see the "IMPORTANT" section in the description, there is GIF which shows you how to adjust them.`,
         { modal: true },
     );
 };

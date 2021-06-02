@@ -143,7 +143,7 @@ export const renderSingleLineBox = ({
             break;
 
         default:
-            backgroundCSS = "rgba(150, 150, 150, 0)";
+            backgroundCSS = glo.coloring.onEachDepth[10];
     }
 
     if (glo.enableFocus && isFocusedBlock) {

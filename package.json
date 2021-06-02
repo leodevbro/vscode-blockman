@@ -3,7 +3,7 @@
     "displayName": "Blockman - Highlight Nested Code Blocks",
     "publisher": "leodevbro",
     "description": "Mark/Highlight code blocks",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "engines": {
         "vscode": "^1.56.1"
     },
@@ -84,9 +84,19 @@
                         7,
                         8,
                         9,
-                        10
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                        16,
+                        17,
+                        18,
+                        19,
+                        20
                     ],
-                    "description": "-1 is no blocks, 0 is entire file block, 1 is first depth blocks",
+                    "description": "-1 is no blocks, 0 is ground block, 1 is first depth blocks, 2 is second depth blocks",
                     "scope": "window"
                 },
                 "blockman.n04ColorComboPreset": {
