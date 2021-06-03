@@ -1,3 +1,7 @@
+[![](https://vsmarketplacebadge.apphb.com/version-short/leodevbro.blockman.svg)](https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman)
+[![](https://vsmarketplacebadge.apphb.com/downloads-short/leodevbro.blockman.svg)](https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman)
+[![](https://vsmarketplacebadge.apphb.com/rating-short/leodevbro.blockman.svg)](https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman)
+
 <h1 align="center">!!! IMPORTANT !!!</h1>
 
 <p align="center"><strong>First, adjust line height and character frame width manually</strong></p>
