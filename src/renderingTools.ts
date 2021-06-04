@@ -164,7 +164,7 @@ export const renderSingleLineBox = ({
         // zIndex = -3;
     }
 
-    const boxLeftEdgeFixedShift = boxLeftEdge - borderSize;
+    // const boxLeftEdgeFixedShift = boxLeftEdge - borderSize;
 
     if (lineBlockType === "opening") {
         borderCss = `
@@ -302,7 +302,7 @@ export const renderSingleLineBox = ({
     // here the heavy heeeaaaavy job begins:
     // return;
 
-    const isAtVeryLeft = boxLeftEdgeFixedShift < 2;
+    const isAtVeryLeft = boxLeftEdge === 0;
     const leftInc = isAtVeryLeft ? 2 : 0;
     const lineDecoration = vscode.window.createTextEditorDecorationType({
         before: {
@@ -321,12 +321,16 @@ export const renderSingleLineBox = ({
                               
                               border-radius: ${borderRadiusCss};
 
-                              width: ${boxRightEdge - boxLeftEdge - leftInc}px;
+                              width: calc(${
+                                  boxRightEdge - boxLeftEdge
+                              }ch - ${leftInc}px);
                               height: ${specificHeight}px;
                               position: absolute;
                               z-index: ${zIndex};
                               top: ${top}px;
-                              left: ${boxLeftEdgeFixedShift + leftInc}px;
+                              left: calc(${boxLeftEdge}ch + ${
+                leftInc - borderSize
+            }px);
                               background: ${backgroundCSS};
                               `,
             // padding: 100px;
@@ -355,11 +359,11 @@ export const renderSingleLineBox = ({
             b += 2;
         }
 
-        const isAtVeryLeft = optimalLeftOfRangePx - borderSize < 2;
+        const isAtVeryLeft = optimalLeftOfRangePx === 0;
         const leftInc = isAtVeryLeft ? 2 : 0;
-        const width = boxLeftEdge - optimalLeftOfRangePx + 0;
+        const width = boxLeftEdge - optimalLeftOfRangePx;
 
-        if (width >= 3) {
+        if (width > 0) {
             const leftLineOfOpening =
                 vscode.window.createTextEditorDecorationType({
                     before: {
@@ -376,19 +380,16 @@ export const renderSingleLineBox = ({
                         textDecoration: `;box-sizing: content-box !important;
                                       border-bottom: ${borderSize}px solid ${borderColor};
      
-                                      width: ${
-                                          width > 3 ? width - leftInc + 1 : 0
-                                      }px;
+                                      width: calc(${width}ch - ${
+                            leftInc - 1
+                        }px);
                                       bottom: ${b}px;
                                       height: ${5}px;
                                       position: absolute;
                                       z-index: ${zIndex + 300};
                                       
-                                      left: ${
-                                          optimalLeftOfRangePx -
-                                          borderSize +
-                                          leftInc
-                                      }px;
+                                      left: calc(${optimalLeftOfRangePx}ch -
+                                          ${borderSize - leftInc}px);
                                       `,
                         // padding: 100px;
                     },
@@ -419,11 +420,11 @@ export const renderSingleLineBox = ({
             t += 2;
         }
 
-        const isAtVeryLeft = boxRightEdge < 2;
+        const isAtVeryLeft = boxRightEdge === 0;
         const leftInc = isAtVeryLeft ? 2 : 0;
-        const width = optimalRightOfRangePx - boxRightEdge + borderSize;
+        const width = optimalRightOfRangePx - boxRightEdge;
 
-        if (width >= 3) {
+        if (width > 0) {
             const rightLineOfClosing =
                 vscode.window.createTextEditorDecorationType({
                     before: {
@@ -440,15 +441,15 @@ export const renderSingleLineBox = ({
                         textDecoration: `;box-sizing: content-box !important;
                                       border-top: ${borderSize}px solid ${borderColor};
      
-                                      width: ${
-                                          width > 3 ? width - leftInc : 0
-                                      }px;
+                                      width: calc(${
+                                          optimalRightOfRangePx - boxRightEdge
+                                      }ch - ${leftInc - borderSize}px);
                                       top: ${t}px;
                                       height: ${5}px;
                                       position: absolute;
                                       z-index: ${zIndex + 300};
                                       
-                                      left: ${boxRightEdge + leftInc}px;
+                                      left: calc(${boxRightEdge}ch + ${leftInc}px);
                                       `,
                         // padding: 100px;
                     },

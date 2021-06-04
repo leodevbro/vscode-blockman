@@ -9,10 +9,10 @@ export const applyAllBlockmanSettings = () => {
     const candLineHeight: number | undefined = bc.get("n01LineHeight");
     if (
         typeof candLineHeight === "number" &&
-        candLineHeight > 3 &&
-        candLineHeight < 100
+        candLineHeight >= 2 &&
+        candLineHeight < 130
     ) {
-        glo.eachCharFrameHeight = candLineHeight;
+        // glo.eachCharFrameHeight = candLineHeight;
     }
     // =============
     const candEachCharFrameWidth: number | undefined = bc.get(
@@ -20,10 +20,10 @@ export const applyAllBlockmanSettings = () => {
     );
     if (
         typeof candEachCharFrameWidth === "number" &&
-        candEachCharFrameWidth > 3 &&
-        candEachCharFrameWidth < 100
+        candEachCharFrameWidth >= 2 &&
+        candEachCharFrameWidth < 130
     ) {
-        glo.eachCharFrameWidth = candEachCharFrameWidth;
+        // glo.eachCharFrameWidth = candEachCharFrameWidth;
     }
     // =============
     const candMaxDepth: number | undefined = bc.get("n03MaxDepth");

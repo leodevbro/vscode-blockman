@@ -15,6 +15,14 @@ import { glob } from "glob";
 import { applyAllBlockmanSettings } from "./settingsManager";
 import { colorCombos } from "./colors";
 
+const os = require("os"); // Comes with node.js
+const myOS: string = os.type().toLowerCase();
+const isMac = myOS === "darwin";
+
+//  const GOLDEN_LINE_HEIGHT_RATIO = platform.isMacintosh ? 1.5 : 1.35;
+const GOLDEN_LINE_HEIGHT_RATIO = isMac ? 1.5 : 1.35;
+const MINIMUM_LINE_HEIGHT = 8;
+
 export let bracketManager: DocumentDecorationManager | undefined | null;
 
 const classicDark1Combo = colorCombos.find(
@@ -26,8 +34,8 @@ const bigVars = {
 };
 
 export const glo = {
-    eachCharFrameHeight: 12.0, // px
-    eachCharFrameWidth: 4.321, // px,
+    eachCharFrameHeight: 1, // (px) no more needed, so before we remove it, it will be just 1,
+    eachCharFrameWidth: 1, // (px) no more needed, so before we remove it, it will be just 1,
 
     maxDepth: 9, // (as minus one) -2 -> no blocks, -1 -> ground block, 0 -> first depth blocks, and so on...
 
@@ -60,6 +68,29 @@ export const glo = {
     },
 
     colorDecoratorsInStyles: true,
+};
+
+const updateLineHeight = () => {
+    /**
+     * Determined from empirical observations.
+     */
+
+    const editorConfig: any = workspace.getConfiguration("editor");
+    // console.log("editorConfig:", editorConfig);
+
+    let editorLineHeight = editorConfig.get("lineHeight");
+    const editorFontSize = editorConfig.get("fontSize");
+
+    if (editorLineHeight === 0) {
+        // 0 is the default
+        editorLineHeight = Math.round(
+            GOLDEN_LINE_HEIGHT_RATIO * editorFontSize,
+        ); // fontSize is editor.fontSize
+    } else if (editorLineHeight < MINIMUM_LINE_HEIGHT) {
+        editorLineHeight = MINIMUM_LINE_HEIGHT;
+    }
+
+    glo.eachCharFrameHeight = editorLineHeight;
 };
 
 // extention-wide GLOBALS _start_
@@ -888,6 +919,7 @@ const importantMessage = () => {
 };
 
 export function activate(context: ExtensionContext) {
+    updateLineHeight();
     // adjustVscodeUserConfig();
     setColorDecoratorsBool();
     applyAllBlockmanSettings();
@@ -955,7 +987,7 @@ export function activate(context: ExtensionContext) {
             // }
 
             // if (event.affectsConfiguration("blockman")) { // sometimes cannot catch the change from the scope
-
+            updateLineHeight();
             setColorDecoratorsBool();
 
             applyAllBlockmanSettings();
