@@ -911,6 +911,7 @@ const adjustVscodeUserConfig = () => {
         .update("editor.highlightActiveIndentGuide", false, 1);
 };
 
+// maybe not needed anymore
 const importantMessage = () => {
     window.showInformationMessage(
         `!!!!! PLEASE READ !!!!! Blockman message: If blocks are weird/strange looking, it's not error/bug, it's fine. The solution is to adjust line height and character width in Blockman settings, so please see the "IMPORTANT" section in the description, there is GIF which shows you how to adjust them.`,
@@ -934,14 +935,14 @@ export function activate(context: ExtensionContext) {
     // console.log(iicounter);
     if (iicounter === "1" || iicounter === "2") {
         if (iicounter === "1") {
-            importantMessage();
+            // importantMessage();
             context.globalState.update("iicounter", "2");
         } else if (iicounter === "2") {
             // do nothing
         }
     } else {
         adjustVscodeUserConfig();
-        importantMessage();
+        // importantMessage();
         context.globalState.update("iicounter", "1");
     }
     // importantMessage();
