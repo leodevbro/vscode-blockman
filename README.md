@@ -3,18 +3,7 @@
 [![](https://vsmarketplacebadge.apphb.com/downloads-short/leodevbro.blockman.svg)](https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman)
 [![](https://vsmarketplacebadge.apphb.com/rating-short/leodevbro.blockman.svg)](https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman)
 
-<h1 align="center">!!! IMPORTANT !!!</h1>
-
-<p align="center"><strong>First, adjust line height and character frame width manually</strong></p>
-<p align="center">(Because currently VSCode API <a href="https://github.com/microsoft/vscode/issues/118994">does not provide</a> them)</p>
-<p align="center">This is animated PNG, you can also watch it as a <a href="https://user-images.githubusercontent.com/54504880/119259839-35d32d80-bbe1-11eb-82a3-b8f75743231c.mp4">pausable video (mp4)</a>.</p>
-
-<p align="center"><strong>Please don't enter more than enough Line height, not even one pixel more.</strong></p>
-<p align="center"><img
-  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/height-width---c2-apng.png"
-  alt="alt text testing"
-/></p>
-<p>Each line of code must have less than 500 characters, otherwise blocks will not be rendered in entire file.</p>
+<p>Good news: from 1.1.0 version, manual setup of line height and char width is not needed anymore, thanks to <a href="https://github.com/microsoft/vscode/issues/125341">alexdima (Alexandru Dima)</a>.</p>
 
 <br />
 
