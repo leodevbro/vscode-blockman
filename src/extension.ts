@@ -857,6 +857,17 @@ exports.activate = function (context: any) {
 };
 */
 
+const setLightColorComboIfLightTheme = () => {
+    const currVscodeThemeKind = vscode.window.activeColorTheme.kind;
+
+    if (currVscodeThemeKind === vscode.ColorThemeKind.Light) {
+        // glo.coloring.
+        workspace
+            .getConfiguration("blockman")
+            .update("n04ColorComboPreset", "Classic Light (Gradients)");
+    }
+};
+
 const setColorDecoratorsBool = () => {
     const vsConfigOfEditors = vscode.workspace.getConfiguration("editor");
 
@@ -923,7 +934,6 @@ export function activate(context: ExtensionContext) {
     updateLineHeight();
     // adjustVscodeUserConfig();
     setColorDecoratorsBool();
-    applyAllBlockmanSettings();
 
     bracketManager = new DocumentDecorationManager();
     vscode.extensions.onDidChange(() => restart());
@@ -942,12 +952,15 @@ export function activate(context: ExtensionContext) {
         }
     } else {
         adjustVscodeUserConfig();
+        setLightColorComboIfLightTheme();
         // importantMessage();
         context.globalState.update("iicounter", "1");
     }
     // importantMessage();
     // importantMessage();
     // importantMessage();
+    // setLightColorComboIfLightTheme(); // not on every activation
+    applyAllBlockmanSettings();
 
     context.subscriptions.push(
         // vscode.commands.registerCommand(

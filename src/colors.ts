@@ -259,7 +259,7 @@ export const colorCombos: IColorCombo[] = [
         ],
 
         border: `hsl(0, 0%, 80%)`,
-        borderOfDepth0: `hsl(220, 70%, 70%)`,
+        borderOfDepth0: `hsl(220, 70%, 90%)`,
 
         // focusedBlock: `linear-gradient(to right, hsl(235, 52%, 90%), hsl(218, 35%, 86%))`,
         focusedBlock: `linear-gradient(to right, hsl(202, 90%, 96%), hsl(215, 90%, 95%))`,
@@ -287,7 +287,7 @@ export const colorCombos: IColorCombo[] = [
         ],
 
         border: `hsl(0, 0%, 80%)`,
-        borderOfDepth0: `hsl(220, 70%, 70%)`,
+        borderOfDepth0: `hsl(220, 70%, 90%)`,
 
         focusedBlock: `hsl(202, 90%, 96%)`,
 
