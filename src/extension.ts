@@ -70,6 +70,8 @@ export const glo = {
     colorDecoratorsInStyles: true,
 };
 
+const iiGlobal = "iicounter";
+
 const updateLineHeight = () => {
     /**
      * Determined from empirical observations.
@@ -864,7 +866,7 @@ const setLightColorComboIfLightTheme = () => {
         // glo.coloring.
         workspace
             .getConfiguration("blockman")
-            .update("n04ColorComboPreset", "Classic Light (Gradients)");
+            .update("n04ColorComboPreset", "Classic Light (Gradients)", 1);
     }
 };
 
@@ -941,12 +943,12 @@ export function activate(context: ExtensionContext) {
     // console.log("all Config:", vscode.workspace.getConfiguration()); // lineHighlightBorder
 
     // let bbqq = context.globalStorageUri;
-    const iicounter = context.globalState.get("iicounter");
+    const iicounter = context.globalState.get(iiGlobal);
     // console.log(iicounter);
     if (iicounter === "1" || iicounter === "2") {
         if (iicounter === "1") {
             // importantMessage();
-            context.globalState.update("iicounter", "2");
+            context.globalState.update(iiGlobal, "2");
         } else if (iicounter === "2") {
             // do nothing
         }
@@ -954,7 +956,7 @@ export function activate(context: ExtensionContext) {
         adjustVscodeUserConfig();
         setLightColorComboIfLightTheme();
         // importantMessage();
-        context.globalState.update("iicounter", "1");
+        context.globalState.update(iiGlobal, "1");
     }
     // importantMessage();
     // importantMessage();
