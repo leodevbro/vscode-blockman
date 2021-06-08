@@ -15,6 +15,8 @@ import { glob } from "glob";
 import { applyAllBlockmanSettings } from "./settingsManager";
 import { colorCombos } from "./colors";
 
+const iiGlobal = "blockman_data_iicounter";
+
 const os = require("os"); // Comes with node.js
 const myOS: string = os.type().toLowerCase();
 const isMac = myOS === "darwin";
@@ -22,6 +24,14 @@ const isMac = myOS === "darwin";
 //  const GOLDEN_LINE_HEIGHT_RATIO = platform.isMacintosh ? 1.5 : 1.35;
 const GOLDEN_LINE_HEIGHT_RATIO = isMac ? 1.5 : 1.35;
 const MINIMUM_LINE_HEIGHT = 8;
+
+const stateHolder: {
+    myState?: vscode.Memento & {
+        setKeysForSync(keys: string[]): void;
+    };
+} = {
+    myState: undefined,
+};
 
 export let bracketManager: DocumentDecorationManager | undefined | null;
 
@@ -34,6 +44,7 @@ const bigVars = {
 };
 
 export const glo = {
+    isOn: true,
     eachCharFrameHeight: 1, // (px) no more needed, so before we remove it, it will be just 1,
     eachCharFrameWidth: 1, // (px) no more needed, so before we remove it, it will be just 1,
 
@@ -69,8 +80,6 @@ export const glo = {
 
     colorDecoratorsInStyles: true,
 };
-
-const iiGlobal = "iicounter";
 
 const updateLineHeight = () => {
     /**
@@ -280,6 +289,9 @@ export interface IUpdateRender {
 }
 
 export const updateRender = ({ editorInfo, timer, caller }: IUpdateRender) => {
+    if (!glo.isOn) {
+        return;
+    }
     clearTimeout(editorInfo.timerForDo);
     // if (editorInfo.needToAnalyzeFile) {
     //     timer = glo.renderTimerForChange;
@@ -883,7 +895,111 @@ const setColorDecoratorsBool = () => {
     }
 };
 
-const adjustVscodeUserConfig = () => {
+const setUserwideIndentGuides = (myBool: boolean) => {
+    vscode.workspace
+        .getConfiguration()
+        .update("editor.renderIndentGuides", myBool, 1); // 1 means Userwide
+    vscode.workspace
+        .getConfiguration()
+        .update("editor.highlightActiveIndentGuide", myBool, 1); // 1 means Userwide
+};
+
+interface IConfigOfVscode {
+    lineHighlightBackground?: string; // workbench_colorCustomizations_editor_lineHighlightBackground
+    lineHighlightBorder?: string; // workbench_colorCustomizations_editor_lineHighlightBorder
+    editorWordWrap?: string; // editor_wordWrap
+    diffEditorWordWrap?: string; // diffEditor_wordWrap
+    markdownEditorWordWrap?: string; // "[markdown]_editor_wordWrap"
+    renderIndentGuides?: boolean; // editor_renderIndentGuides
+    highlightActiveIndentGuide?: boolean; // editor_highlightActiveIndentGuide
+    [key: string]: string | boolean | undefined;
+}
+
+// for archive
+// const configOfVscodeBeforeBlockman: IConfigOfVscode = {
+//     renderIndentGuides: true,
+//     highlightActiveIndentGuide: true,
+// };
+
+// for blockman
+const configOfVscodeWithBlockman: IConfigOfVscode = {
+    lineHighlightBackground: "#1073cf2d",
+    lineHighlightBorder: "#9fced11f",
+    editorWordWrap: "off",
+    diffEditorWordWrap: "off",
+    markdownEditorWordWrap: "off",
+    renderIndentGuides: false,
+    highlightActiveIndentGuide: false,
+};
+
+// let vvvv = vscode.workspace.getConfiguration().get("editor.wordWrap");
+
+const collectVSCodeConfigArchive = () => {
+    return; // this function maybe not needed
+    /*
+    let vscodeColorConfig: any = vscode.workspace
+        .getConfiguration("workbench")
+        .get("colorCustomizations");
+
+    console.log("vscodeColorConfig");
+    console.log(vscodeColorConfig);
+
+    configOfVscodeBeforeBlockman.lineHighlightBackground = (
+        vscodeColorConfig as any
+    )["editor.lineHighlightBackground"];
+
+    configOfVscodeBeforeBlockman.lineHighlightBorder = (
+        vscodeColorConfig as any
+    )["editor.lineHighlightBorder"];
+
+    configOfVscodeBeforeBlockman.editorWordWrap = vscode.workspace
+        .getConfiguration()
+        .get("editor.wordWrap");
+
+    configOfVscodeBeforeBlockman.diffEditorWordWrap = vscode.workspace
+        .getConfiguration()
+        .get("diffEditor.wordWrap");
+
+    configOfVscodeBeforeBlockman.markdownEditorWordWrap = (
+        vscode.workspace.getConfiguration().get("[markdown]") as any
+    )["editor.wordWrap"];
+
+    configOfVscodeBeforeBlockman.renderIndentGuides = vscode.workspace
+        .getConfiguration()
+        .get("editor.renderIndentGuides");
+
+    configOfVscodeBeforeBlockman.highlightActiveIndentGuide = vscode.workspace
+        .getConfiguration()
+        .get("editor.highlightActiveIndentGuide");
+
+    console.log("configOfVscodeBeforeBlockman");
+    console.log(configOfVscodeBeforeBlockman);
+
+    if (stateHolder.myState) {
+        const st = stateHolder.myState;
+
+        // st.update(iiGlobal, "1");
+
+        for (let key in configOfVscodeBeforeBlockman) {
+            const v = configOfVscodeBeforeBlockman[key];
+            // console.log(typeof key);
+
+            // st.update(`blockman_data_${key}`, v);
+        }
+
+        // for (let key in configOfVscodeBeforeBlockman) {
+        //     const v = configOfVscodeBeforeBlockman[key];
+        //     // console.log(typeof key);
+
+        //     const thisV = st.get(`datablockman${key}`);
+        //     console.log("esaa", thisV, typeof thisV);
+        // }
+    }
+
+    */
+};
+
+const setUserwideConfigOfVscode = (userwideConfig: IConfigOfVscode) => {
     let vscodeColorConfig: any = vscode.workspace
         .getConfiguration("workbench")
         .get("colorCustomizations");
@@ -892,14 +1008,19 @@ const adjustVscodeUserConfig = () => {
         "colorCustomizations",
         {
             ...vscodeColorConfig,
-            "editor.lineHighlightBackground": "#1073cf2d",
-            "editor.lineHighlightBorder": "#9fced11f",
+            "editor.lineHighlightBackground":
+                userwideConfig.lineHighlightBackground,
+            "editor.lineHighlightBorder": userwideConfig.lineHighlightBorder,
         },
         1,
     );
 
-    vscode.workspace.getConfiguration().update("editor.wordWrap", "off", 1);
-    vscode.workspace.getConfiguration().update("diffEditor.wordWrap", "off", 1);
+    vscode.workspace
+        .getConfiguration()
+        .update("editor.wordWrap", userwideConfig.editorWordWrap, 1);
+    vscode.workspace
+        .getConfiguration()
+        .update("diffEditor.wordWrap", userwideConfig.diffEditorWordWrap, 1);
 
     let vscodeMarkdownConfig: any = vscode.workspace
         .getConfiguration()
@@ -911,31 +1032,29 @@ const adjustVscodeUserConfig = () => {
         "[markdown]",
         {
             ...vscodeMarkdownConfig,
-            "editor.wordWrap": "off",
+            "editor.wordWrap": userwideConfig.markdownEditorWordWrap,
         },
         1,
     );
 
-    vscode.workspace
-        .getConfiguration()
-        .update("editor.renderIndentGuides", false, 1);
-    vscode.workspace
-        .getConfiguration()
-        .update("editor.highlightActiveIndentGuide", false, 1);
+    if (userwideConfig.renderIndentGuides !== undefined) {
+        setUserwideIndentGuides(userwideConfig.renderIndentGuides);
+    }
 };
 
 // maybe not needed anymore
 const importantMessage = () => {
-    window.showInformationMessage(
-        `!!!!! PLEASE READ !!!!! Blockman message: If blocks are weird/strange looking, it's not error/bug, it's fine. The solution is to adjust line height and character width in Blockman settings, so please see the "IMPORTANT" section in the description, there is GIF which shows you how to adjust them.`,
-        { modal: true },
-    );
+    window.showInformationMessage(`blaaaa`, { modal: true });
 };
 
 export function activate(context: ExtensionContext) {
+    stateHolder.myState = context.globalState;
     updateLineHeight();
     // adjustVscodeUserConfig();
     setColorDecoratorsBool();
+    if (glo.isOn) {
+        setUserwideIndentGuides(false);
+    }
 
     bracketManager = new DocumentDecorationManager();
     vscode.extensions.onDidChange(() => restart());
@@ -943,24 +1062,29 @@ export function activate(context: ExtensionContext) {
     // console.log("all Config:", vscode.workspace.getConfiguration()); // lineHighlightBorder
 
     // let bbqq = context.globalStorageUri;
-    const iicounter = context.globalState.get(iiGlobal);
-    // console.log(iicounter);
-    if (iicounter === "1" || iicounter === "2") {
-        if (iicounter === "1") {
-            // importantMessage();
-            context.globalState.update(iiGlobal, "2");
+
+    if (stateHolder.myState) {
+        const st = stateHolder.myState;
+        const iicounter = st.get(iiGlobal);
+        // console.log(iicounter);
+
+        if (iicounter === undefined) {
+            console.log("first activation");
+            collectVSCodeConfigArchive();
+            setUserwideConfigOfVscode(configOfVscodeWithBlockman);
+            setLightColorComboIfLightTheme();
+
+            st.update(iiGlobal, "1");
+            // console.log("iyo undefined, gaxda 1:", st.get(iiGlobal));
+        } else if (iicounter === "1") {
+            st.update(iiGlobal, "2");
+            // console.log("iyo 1, gaxda 2:", st.get(iiGlobal));
         } else if (iicounter === "2") {
-            // do nothing
+            // console.log("aris 2:", st.get(iiGlobal));
+            // ----
         }
-    } else {
-        adjustVscodeUserConfig();
-        setLightColorComboIfLightTheme();
-        // importantMessage();
-        context.globalState.update(iiGlobal, "1");
     }
-    // importantMessage();
-    // importantMessage();
-    // importantMessage();
+
     // setLightColorComboIfLightTheme(); // not on every activation
     applyAllBlockmanSettings();
 
@@ -980,6 +1104,32 @@ export function activate(context: ExtensionContext) {
             console.log(
                 "Hello, I'm Blockman, a visual helper for software developers.",
             );
+            window.showInformationMessage(
+                `Hello, I'm Blockman, a visual helper for software developers.`,
+                { modal: false },
+            );
+        }),
+
+        vscode.commands.registerCommand("blockman.toggleEnableDisable", () => {
+            if (glo.isOn) {
+                glo.isOn = false;
+
+                nukeAllDecs();
+                nukeJunkDecorations();
+                infosOfcontrolledEditors = [];
+
+                // setUserwideConfigOfVscode(configOfVscodeBeforeBlockman);
+
+                setUserwideIndentGuides(true);
+            } else {
+                glo.isOn = true;
+
+                // setUserwideConfigOfVscode(configOfVscodeWithBlockman);
+
+                setUserwideIndentGuides(false);
+
+                updateAllControlledEditors({ alsoStillVisible: true });
+            }
         }),
 
         vscode.commands.registerCommand("blockman.printLeak", () => {
@@ -1014,12 +1164,17 @@ export function activate(context: ExtensionContext) {
             // });
             // }
 
-            updateAllControlledEditors({
-                alsoStillVisible: true,
-            });
+            if (glo.isOn) {
+                updateAllControlledEditors({
+                    alsoStillVisible: true,
+                });
+            }
         }),
 
         window.onDidChangeTextEditorOptions((event) => {
+            if (!glo.isOn) {
+                return;
+            }
             infosOfcontrolledEditors.map((editorInfo: IEditorInfo) => {
                 if (event.textEditor === editorInfo.editorRef) {
                     editorInfo.needToAnalyzeFile = true;
@@ -1029,11 +1184,17 @@ export function activate(context: ExtensionContext) {
         }),
 
         window.onDidChangeVisibleTextEditors((event) => {
+            if (!glo.isOn) {
+                return;
+            }
             const visEditors = event;
             updateAllControlledEditors({});
         }),
 
         workspace.onDidChangeTextDocument((event) => {
+            if (!glo.isOn) {
+                return;
+            }
             // console.log("araaaa nulze meti");
             // return;
             if (event.contentChanges.length > 0) {
@@ -1059,12 +1220,18 @@ export function activate(context: ExtensionContext) {
             // }, 2000);
         }),
         window.onDidChangeTextEditorSelection((event) => {
+            if (!glo.isOn) {
+                return;
+            }
             // return;
             // console.log("foc------>>>>>event.selections::-:", event.selections);
             // console.log("changed selection");
             updateFocus();
         }),
         window.onDidChangeTextEditorVisibleRanges((event) => {
+            if (!glo.isOn) {
+                return;
+            }
             // console.log("scrooooooooooooooooooooooooooool");
             // return;
             const thisEditor = event.textEditor;
