@@ -6,7 +6,7 @@
 <p><strong>Good news:</strong> from 1.1.0 version, manual setup of line height and char width is not needed anymore, thanks to <a href="https://github.com/microsoft/vscode/issues/125341">alexdima (Alexandru Dima)</a>.</p>
 
 
-<p><strong>Donation</strong> is really appreciated. This VSCode extension is a work of many months. My name is <a href="https://leodevbro.github.io">Levan Katsadze (ლევან კაცაძე)</a>, 1995-03-03, I'm a student in Tbilisi, Georgia (country). I learn Frontend development (JavaScript, TypeScript, React).</p>
+<p><strong>Donation</strong> is really appreciated. This VSCode extension is a work of many months. My name is <a href="https://leodevbro.github.io">Levan Katsadze (ლევან კაცაძე)</a>, 1995-03-03, I'm a student in Tbilisi, <a href="https://en.wikipedia.org/wiki/Georgia_(country)">Georgia (country)</a>. I learn Frontend development (JavaScript, TypeScript, React).</p>
 
 **Buy Me A Coffee (With PayPal)**: https://www.buymeacoffee.com/leodevbro
 
