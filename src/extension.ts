@@ -7,6 +7,7 @@ import {
     getFullFileStats,
     tabsIntoSpaces,
     findLineZeroAndInLineIndexZero,
+    doubleWidthCharsReg,
 } from "./utils";
 import DocumentDecorationManager from "./bracketAlgos/documentDecorationManager";
 import EventEmitter = require("events");
@@ -79,6 +80,7 @@ export const glo = {
     },
 
     colorDecoratorsInStyles: true,
+    trySupportDoubleWidthChars: false, // for Chinese characters and possibly others too
 };
 
 const updateLineHeight = () => {
@@ -701,10 +703,17 @@ export const updateFocusInfo = (editorInfo: IEditorInfo) => {
         .lineAt(cursorPos)
         .text.slice(0, focusedColumnZeroInDoc + 1);
 
-    const lineMonoTextBeforeColumn = tabsIntoSpaces(
+    let lineMonoTextBeforeColumn = tabsIntoSpaces(
         lineTextInDocBeforeColumn,
         (thisEditor.options.tabSize as number) || 4,
     );
+
+    if (glo.trySupportDoubleWidthChars) {
+        lineMonoTextBeforeColumn = lineMonoTextBeforeColumn.replace(
+            doubleWidthCharsReg,
+            "Z_",
+        );
+    }
 
     globalIndexZero =
         textLinesMap[focusedLineZeroInDoc] +
@@ -1047,8 +1056,24 @@ const importantMessage = () => {
     window.showInformationMessage(`blaaaa`, { modal: true });
 };
 
+const softRestart = () => {
+    nukeAllDecs();
+    nukeJunkDecorations();
+    infosOfcontrolledEditors = [];
+    updateAllControlledEditors({ alsoStillVisible: true });
+};
+
 export function activate(context: ExtensionContext) {
     stateHolder.myState = context.globalState;
+    // const onOff: boolean | undefined =
+    //     context.globalState.get("blockman_data_on");
+    // if (onOff !== undefined) {
+    //     glo.isOn = onOff;
+    // } else {
+    //     context.globalState.update("blockman_data_on", true);
+    //     glo.isOn = true;
+    // }
+
     updateLineHeight();
     // adjustVscodeUserConfig();
     setColorDecoratorsBool();
@@ -1113,6 +1138,7 @@ export function activate(context: ExtensionContext) {
         vscode.commands.registerCommand("blockman.toggleEnableDisable", () => {
             if (glo.isOn) {
                 glo.isOn = false;
+                // context.globalState.update("blockman_data_on", false);
 
                 nukeAllDecs();
                 nukeJunkDecorations();
@@ -1123,6 +1149,7 @@ export function activate(context: ExtensionContext) {
                 setUserwideIndentGuides(true);
             } else {
                 glo.isOn = true;
+                // context.globalState.update("blockman_data_on", true);
 
                 // setUserwideConfigOfVscode(configOfVscodeWithBlockman);
 
@@ -1135,6 +1162,15 @@ export function activate(context: ExtensionContext) {
         vscode.commands.registerCommand("blockman.printLeak", () => {
             console.log(notYetDisposedDecsObject.decs);
         }),
+
+        vscode.commands.registerCommand(
+            "blockman.toggleTrySupportDoubleWidthChars",
+            () => {
+                glo.trySupportDoubleWidthChars =
+                    !glo.trySupportDoubleWidthChars;
+                softRestart();
+            },
+        ),
 
         workspace.onDidChangeConfiguration((event) => {
             console.log("settings changed");
@@ -1168,6 +1204,10 @@ export function activate(context: ExtensionContext) {
                 updateAllControlledEditors({
                     alsoStillVisible: true,
                 });
+            } else {
+                nukeAllDecs();
+                nukeJunkDecorations();
+                infosOfcontrolledEditors = [];
             }
         }),
 
@@ -1268,9 +1308,7 @@ export function activate(context: ExtensionContext) {
         bracketManager?.Dispose();
         bracketManager = new DocumentDecorationManager();
 
-        nukeAllDecs();
-        nukeJunkDecorations();
-        updateAllControlledEditors({ alsoStillVisible: true });
+        softRestart();
     }
 }
 

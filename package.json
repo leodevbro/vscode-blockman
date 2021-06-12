@@ -3,7 +3,7 @@
     "displayName": "Blockman - Highlight Nested Code Blocks",
     "publisher": "leodevbro",
     "description": "Mark/Highlight code blocks",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "engines": {
         "vscode": "^1.56.1"
     },
@@ -57,6 +57,10 @@
             {
                 "command": "blockman.printLeak",
                 "title": "Blockman Leakage (For Dev)"
+            },
+            {
+                "command": "blockman.toggleTrySupportDoubleWidthChars",
+                "title": "Blockman Toggle Try Support Double Width Chars (e.g. Chinese)"
             }
         ],
         "configuration": {

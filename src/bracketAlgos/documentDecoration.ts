@@ -8,8 +8,9 @@ import Settings from "./settings";
 import TextLine from "./textLine";
 import { ignoreBracketsInToken, LineTokens } from "./vscodeFiles";
 import { TextDocumentContentChangeEvent } from "vscode";
-import { tabsIntoSpaces } from "../utils";
+import { doubleWidthCharsReg, tabsIntoSpaces } from "../utils";
 import {
+    glo,
     IEditorInfo,
     junkDecors3dArr,
     nukeAllDecs,
@@ -172,6 +173,12 @@ export default class DocumentDecoration {
         }
 
         preparedLineText = tabsIntoSpaces(preparedLineText, tabsize);
+        if (glo.trySupportDoubleWidthChars) {
+            preparedLineText = preparedLineText.replace(
+                doubleWidthCharsReg,
+                "Z_",
+            );
+        }
 
         const newText = preparedLineText;
         const previousLineRuleStack =
