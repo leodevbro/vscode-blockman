@@ -47,13 +47,10 @@
 <p>Indentation based language(s): currently Python only.</p>
 
 <br />
-<br />
 
+If you use <strong>double width</strong> characters like these Chinese characters: `字符串最大字符串最`, then you may want to run the experimental command to support such characters. Type `F1` and type the command name: `Blockman Toggle Try Support Double Width Chars`.
 
 <br />
-<br />
-  
-<h1 align="center">More Demonstrations</h1>
   
 <p align="center">Python code:</p>
 
@@ -62,7 +59,9 @@
   alt="alt text testing"
 /></p>
 
-<h3 align="center">Blockman settings</h3>
+<br />
+
+<h1 align="center">Blockman settings</h1>
   
 <p align="center">You can change nesting depth</p>
 <p align="center"><img
