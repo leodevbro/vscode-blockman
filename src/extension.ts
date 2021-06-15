@@ -48,6 +48,7 @@ export const glo = {
     isOn: true,
     eachCharFrameHeight: 1, // (px) no more needed, so before we remove it, it will be just 1,
     eachCharFrameWidth: 1, // (px) no more needed, so before we remove it, it will be just 1,
+    letterSpacing: 0, // (px)
 
     maxDepth: 9, // (as minus one) -2 -> no blocks, -1 -> ground block, 0 -> first depth blocks, and so on...
 
@@ -83,7 +84,7 @@ export const glo = {
     trySupportDoubleWidthChars: false, // for Chinese characters and possibly others too
 };
 
-const updateLineHeight = () => {
+const updateBlockmanLineHeightAndLetterSpacing = () => {
     /**
      * Determined from empirical observations.
      */
@@ -91,8 +92,8 @@ const updateLineHeight = () => {
     const editorConfig: any = workspace.getConfiguration("editor");
     // console.log("editorConfig:", editorConfig);
 
-    let editorLineHeight = editorConfig.get("lineHeight");
-    const editorFontSize = editorConfig.get("fontSize");
+    let editorLineHeight: number = editorConfig.get("lineHeight");
+    const editorFontSize: number = editorConfig.get("fontSize");
 
     if (editorLineHeight === 0) {
         // 0 is the default
@@ -104,6 +105,11 @@ const updateLineHeight = () => {
     }
 
     glo.eachCharFrameHeight = editorLineHeight;
+
+    // now letter spacing:
+
+    const editorLetterSpacing: number = editorConfig.get("letterSpacing");
+    glo.letterSpacing = editorLetterSpacing;
 };
 
 // extention-wide GLOBALS _start_
@@ -1074,7 +1080,7 @@ export function activate(context: ExtensionContext) {
     //     glo.isOn = true;
     // }
 
-    updateLineHeight();
+    updateBlockmanLineHeightAndLetterSpacing();
     // adjustVscodeUserConfig();
     setColorDecoratorsBool();
     if (glo.isOn) {
@@ -1189,7 +1195,7 @@ export function activate(context: ExtensionContext) {
             // }
 
             // if (event.affectsConfiguration("blockman")) { // sometimes cannot catch the change from the scope
-            updateLineHeight();
+            updateBlockmanLineHeightAndLetterSpacing();
             setColorDecoratorsBool();
 
             applyAllBlockmanSettings();

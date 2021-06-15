@@ -321,16 +321,18 @@ export const renderSingleLineBox = ({
                               
                               border-radius: ${borderRadiusCss};
 
-                              width: calc(${
+                              width: calc((${
                                   boxRightEdge - boxLeftEdge
-                              }ch - ${leftInc}px);
+                              } * (1ch + ${
+                glo.letterSpacing
+            }px)) - ${leftInc}px);
                               height: ${specificHeight}px;
                               position: absolute;
                               z-index: ${zIndex};
                               top: ${top}px;
-                              left: calc(${boxLeftEdge}ch + ${
-                leftInc - borderSize
-            }px);
+                              left: calc((${boxLeftEdge} * (1ch + ${
+                glo.letterSpacing
+            }px)) + ${leftInc - borderSize}px);
                               background: ${backgroundCSS};
                               `,
             // padding: 100px;
@@ -380,15 +382,17 @@ export const renderSingleLineBox = ({
                         textDecoration: `;box-sizing: content-box !important;
                                       border-bottom: ${borderSize}px solid ${borderColor};
      
-                                      width: calc(${width}ch - ${
-                            leftInc - 1
-                        }px);
+                                      width: calc((${width} * (1ch + ${
+                            glo.letterSpacing
+                        }px)) - ${leftInc - 1}px);
                                       bottom: ${b}px;
                                       height: ${5}px;
                                       position: absolute;
                                       z-index: ${zIndex + 300};
                                       
-                                      left: calc(${optimalLeftOfRangePx}ch -
+                                      left: calc((${optimalLeftOfRangePx} * (1ch + ${
+                            glo.letterSpacing
+                        }px)) -
                                           ${borderSize - leftInc}px);
                                       `,
                         // padding: 100px;
@@ -441,15 +445,19 @@ export const renderSingleLineBox = ({
                         textDecoration: `;box-sizing: content-box !important;
                                       border-top: ${borderSize}px solid ${borderColor};
      
-                                      width: calc(${
+                                      width: calc((${
                                           optimalRightOfRangePx - boxRightEdge
-                                      }ch - ${leftInc - borderSize}px);
+                                      } * (1ch + ${glo.letterSpacing}px)) - ${
+                            leftInc - borderSize
+                        }px);
                                       top: ${t}px;
                                       height: ${5}px;
                                       position: absolute;
                                       z-index: ${zIndex + 300};
                                       
-                                      left: calc(${boxRightEdge}ch + ${leftInc}px);
+                                      left: calc((${boxRightEdge} * (1ch + ${
+                            glo.letterSpacing
+                        }px)) + ${leftInc}px);
                                       `,
                         // padding: 100px;
                     },
