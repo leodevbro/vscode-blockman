@@ -946,13 +946,13 @@ const setUserwideIndentGuides = (myBool: boolean) => {
 };
 
 interface IConfigOfVscode {
-    lineHighlightBackground?: string; // workbench_colorCustomizations_editor_lineHighlightBackground
-    lineHighlightBorder?: string; // workbench_colorCustomizations_editor_lineHighlightBorder
-    editorWordWrap?: string; // editor_wordWrap
-    diffEditorWordWrap?: string; // diffEditor_wordWrap
-    // markdownEditorWordWrap?: string; // "[markdown]_editor_wordWrap"
-    renderIndentGuides?: boolean; // editor_renderIndentGuides
-    // highlightActiveIndentGuide?: boolean; // editor_highlightActiveIndentGuide
+    lineHighlightBackground?: string; // workbench_colorCustomizations_editor.lineHighlightBackground
+    lineHighlightBorder?: string; // workbench_colorCustomizations_editor.lineHighlightBorder
+    editorWordWrap?: string; // editor.wordWrap
+    diffEditorWordWrap?: string; // diffEditor.wordWrap
+    // markdownEditorWordWrap?: string; // "[markdown]_editor.wordWrap"
+    renderIndentGuides?: boolean; // editor.renderIndentGuides
+    // highlightActiveIndentGuide?: boolean; // editor.highlightActiveIndentGuide
     [key: string]: string | boolean | undefined;
 }
 
