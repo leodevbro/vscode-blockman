@@ -288,6 +288,12 @@
                     "default": 22,
                     "description": "Less is faster because less blocks will be rendered but scrolling may become uncomfortable. If less than 1 (e.g. -5), the blocks will render in limited area.",
                     "scope": "window"
+                },
+                "blockman.n32BlackListOfFileFormats": {
+                    "type": "string",
+                    "default": "plaintext, markdown, ",
+                    "description": "Disable blockman for certain file formats, e.g. plaintext, markdown, css, less, scss, html, json, jsonc, typescriptreact, typescript, javascriptreact, javascript, python, go, dart, php, c, csharp, cpp, java.",
+                    "scope": "window"
                 }
             }
         }

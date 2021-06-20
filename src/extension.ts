@@ -83,6 +83,7 @@ export const glo = {
 
     colorDecoratorsInStyles: true,
     trySupportDoubleWidthChars: false, // for Chinese characters and possibly others too
+    blackListOfFileFormats: ["plaintext", "markdown"],
 };
 
 const updateBlockmanLineHeightAndLetterSpacing = () => {
@@ -304,7 +305,22 @@ export interface IUpdateRender {
 }
 
 export const updateRender = ({ editorInfo, timer, caller }: IUpdateRender) => {
-    if (!glo.isOn) {
+    if (
+        !glo.isOn ||
+        glo.blackListOfFileFormats.includes(
+            editorInfo.editorRef.document.languageId,
+        )
+    ) {
+        if (editorInfo.decors.length > 0) {
+            editorInfo.upToDateLines.upEdge = -1;
+            editorInfo.upToDateLines.lowEdge = -1;
+
+            junkDecors3dArr.push(editorInfo.decors);
+            nukeJunkDecorations();
+            editorInfo.decors = [];
+            editorInfo.needToAnalyzeFile = true;
+        }
+
         return;
     }
     clearTimeout(editorInfo.timerForDo);

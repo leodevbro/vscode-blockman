@@ -243,4 +243,23 @@ export const applyAllBlockmanSettings = () => {
         glo.renderIncBeforeAfterVisRange =
             renderIncrementBeforeAndAfterVisibleRange;
     }
+
+    const customBlackListOfFileFormats: string | undefined = bc.get(
+        "n32BlackListOfFileFormats",
+    );
+
+    if (typeof customBlackListOfFileFormats === "string") {
+        const stringWithoutSpaces = customBlackListOfFileFormats.replace(
+            / /g,
+            ``,
+        );
+        const stringWithoutSpacesAndTabs = stringWithoutSpaces.replace(/	/g, ``);
+
+        if (stringWithoutSpacesAndTabs) {
+            const mySplitArr = stringWithoutSpacesAndTabs.split(",");
+            glo.blackListOfFileFormats = mySplitArr;
+        } else {
+            glo.blackListOfFileFormats = [];
+        }
+    }
 };
