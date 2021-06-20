@@ -15,6 +15,7 @@ import { glob } from "glob";
 
 import { applyAllBlockmanSettings } from "./settingsManager";
 import { colorCombos } from "./colors";
+import { getLastColIndexForLineWithColorDecSpaces } from "./utils2";
 
 const iiGlobal = "blockman_data_iicounter";
 
@@ -175,6 +176,12 @@ export interface IEditorInfo {
     renderingInfoForFullFile: IFullRender | undefined;
     // focusedBlock: { depth: number; index: number } | null;
     monoText: string;
+    colorDecoratorsArr: {
+        cDLineZero: number;
+        cDCharZeroInDoc: number;
+        cDCharZeroInMonoText: number;
+        cDGlobalIndexZeroInMonoText: number;
+    }[];
 }
 
 // export const maxNumberOfControlledEditors = 5;
@@ -304,7 +311,7 @@ export const updateRender = ({ editorInfo, timer, caller }: IUpdateRender) => {
     // if (editorInfo.needToAnalyzeFile) {
     //     timer = glo.renderTimerForChange;
     // }
-    editorInfo.timerForDo = setTimeout(() => {
+    editorInfo.timerForDo = setTimeout(async () => {
         // console.log("<new cycle>");
         if (glo.maxDepth <= -2) {
             editorInfo.upToDateLines.upEdge = -1;
@@ -546,7 +553,7 @@ export const updateRender = ({ editorInfo, timer, caller }: IUpdateRender) => {
             junkDecors3dArr.push(editorInfo.decors);
             editorInfo.decors = [];
 
-            editorInfo.renderingInfoForFullFile = getFullFileStats({
+            editorInfo.renderingInfoForFullFile = await getFullFileStats({
                 editorInfo,
             });
 
@@ -609,6 +616,7 @@ export const updateAllControlledEditors = ({
             renderingInfoForFullFile: undefined,
             // focusedBlock: null,
             monoText: "",
+            colorDecoratorsArr: [],
         });
     });
 
@@ -721,10 +729,28 @@ export const updateFocusInfo = (editorInfo: IEditorInfo) => {
         );
     }
 
-    globalIndexZero =
-        textLinesMap[focusedLineZeroInDoc] +
-        lineMonoTextBeforeColumn.length -
-        1;
+    // let tabSize = 4; // default
+    // const fetchedTabSize = editorInfo.editorRef.options.tabSize;
+
+    // if (fetchedTabSize && typeof fetchedTabSize === "number") {
+    //     tabSize = fetchedTabSize;
+    // }
+
+    let lastColIndex = lineMonoTextBeforeColumn.length - 1;
+
+    if (
+        glo.colorDecoratorsInStyles &&
+        editorInfo.colorDecoratorsArr.length >= 1
+    ) {
+        lastColIndex = getLastColIndexForLineWithColorDecSpaces(
+            lineMonoTextBeforeColumn,
+            editorInfo,
+            focusedLineZeroInDoc,
+            lastColIndex,
+        );
+    }
+
+    globalIndexZero = textLinesMap[focusedLineZeroInDoc] + lastColIndex;
     // }
 
     // gvaqvs globalIndexZero
@@ -1175,6 +1201,13 @@ export function activate(context: ExtensionContext) {
                 glo.trySupportDoubleWidthChars =
                     !glo.trySupportDoubleWidthChars;
                 softRestart();
+                const isOn: string = glo.trySupportDoubleWidthChars
+                    ? "ON"
+                    : "OFF";
+                window.showInformationMessage(
+                    `Double-width char support (experimental) is ${isOn}`,
+                    { modal: false },
+                );
             },
         ),
 

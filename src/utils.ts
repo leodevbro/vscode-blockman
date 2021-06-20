@@ -19,6 +19,10 @@ import {
 import { renderSingleBlock } from "./renderingTools";
 import { pyFn } from "./pythonAlgos/python-algo";
 import { resolve } from "path";
+import {
+    calculateColumnFromCharIndex,
+    colorDecorsToSpacesForFile,
+} from "./utils2";
 
 export interface IPositionEachZero {
     char?: string;
@@ -908,11 +912,11 @@ export const stylingLanguages = ["css", "scss", "sass", "less"];
 export const doubleWidthCharsReg =
     /[\u2010\u2012-\u2016\u2020-\u2022\u2025-\u2027\u2030\u2035\u203B\u203C\u2042\u2047-\u2049\u2051\u20DD\u20DE\u2100\u210A\u210F\u2121\u2135\u213B\u2160-\u216B\u2170-\u217B\u2215\u221F\u22DA\u22DB\u22EF\u2305-\u2307\u2312\u2318\u23B0\u23B1\u23BF-\u23CC\u23CE\u23DA\u23DB\u2423\u2460-\u24FF\u2600-\u2603\u2609\u260E\u260F\u2616\u2617\u261C-\u261F\u262F\u2668\u2672-\u267D\u26A0\u26BD\u26BE\u2702\u273D\u273F\u2740\u2756\u2776-\u277F\u2934\u2935\u29BF\u29FA\u29FB\u2B1A\u2E3A\u2E3B\u2E80-\u9FFF\uF900-\uFAFF\uFB00-\uFB04\uFE10-\uFE19\uFE30-\uFE6B\uFF01-\uFF60\uFFE0-\uFFE6\u{1F100}-\u{1F10A}\u{1F110}-\u{1F12E}\u{1F130}-\u{1F16B}\u{1F170}-\u{1F19A}\u{1F200}-\u{1F251}\u{2000B}-\u{2F9F4}]/gu;
 
-export const getFullFileStats = ({
+export const getFullFileStats = async ({
     editorInfo,
 }: {
     editorInfo: IEditorInfo;
-}):
+}): Promise<
     | {
           masterLevels: {
               s: number;
@@ -929,13 +933,13 @@ export const getFullFileStats = ({
           };
           thisEditor: vscode.TextEditor;
           txt: string;
-
           fileLeftMost: number;
           fileRightMost: number;
           fileBottomVisLineZero: number;
           fileTopVisLineZero: number;
       }
-    | undefined => {
+    | undefined
+> => {
     // console.log("aqamde vaaartttttttttttttttttttttttt", glo.maxDepth);
     const document = editorInfo.editorRef.document;
     // console.log("iiiiiiiiiiiiii:", document.languageId);
@@ -954,8 +958,82 @@ export const getFullFileStats = ({
         // console.log(txt);
     }
 
-    // stylingLanguages
+    if (document.eol === 2) {
+        txt = txt.replace(/\r/g, ``); // may be needed, LF, CRLF
+    }
+
+    let tabSize = 4; // default
+    const fetchedTabSize = editorInfo.editorRef.options.tabSize;
+
+    if (fetchedTabSize && typeof fetchedTabSize === "number") {
+        tabSize = fetchedTabSize;
+    }
+
+    txt = tabsIntoSpaces(txt, tabSize);
+
+    txt = txt + ` \n \n `; // important for Python tokenizer
+
     if (glo.colorDecoratorsInStyles) {
+        const dataArr: any[] | undefined = await vscode.commands.executeCommand(
+            "vscode.executeDocumentColorProvider",
+            editorInfo.editorRef.document.uri,
+        );
+
+        generateTextLinesMap(txt, editorInfo);
+
+        // const linesArr = txt.split(`\n`);
+        // console.log(linesArr);
+        // console.log(dataArr);
+
+        if (dataArr && dataArr.length >= 1) {
+            const startingPositions: {
+                cDLineZero: number;
+                cDCharZeroInDoc: number;
+                cDCharZeroInMonoText: number;
+                cDGlobalIndexZeroInMonoText: number;
+            }[] = (dataArr as any[]).map((item) => {
+                return {
+                    cDLineZero: item.range.start.line,
+                    cDCharZeroInDoc: item.range.start.character,
+                    cDCharZeroInMonoText: -1,
+                    cDGlobalIndexZeroInMonoText: -1,
+                };
+            });
+
+            const cDArr = startingPositions;
+            const doc = editorInfo.editorRef.document;
+
+            for (let i = 0; i < cDArr.length; i += 1) {
+                const currSP = cDArr[i];
+                const columnIndex = calculateColumnFromCharIndex(
+                    doc.lineAt(currSP.cDLineZero).text,
+                    currSP.cDCharZeroInDoc,
+                    tabSize,
+                );
+
+                currSP.cDCharZeroInMonoText = columnIndex;
+                currSP.cDGlobalIndexZeroInMonoText =
+                    editorInfo.textLinesMap[currSP.cDLineZero] + columnIndex;
+            }
+
+            editorInfo.colorDecoratorsArr = startingPositions.sort(
+                (a, b) =>
+                    a.cDGlobalIndexZeroInMonoText -
+                    b.cDGlobalIndexZeroInMonoText,
+            );
+
+            txt = colorDecorsToSpacesForFile(txt, editorInfo);
+            generateTextLinesMap(txt, editorInfo);
+
+            // const linesArr = txt.split(`\n`);
+            // console.log(linesArr);
+
+            // console.log(startingPositions);
+        } else {
+            editorInfo.colorDecoratorsArr = [];
+        }
+
+        /*
         if (stylingLanguages.includes(document.languageId)) {
             txt = txt.replace(/color:/g, `color:  `);
             txt = txt.replace(/background:/g, `background:  `);
@@ -982,22 +1060,13 @@ export const getFullFileStats = ({
             txt = txt.replace(/Border":/g, `Border":  `);
             txt = txt.replace(/Color":/g, `Color":  `);
         }
-    }
-
-    if (document.eol === 2) {
-        txt = txt.replace(/\r/g, ``); // may be needed, LF, CRLF
-    }
-
-    const tabSize = editorInfo.editorRef.options.tabSize;
-
-    if (tabSize && typeof tabSize === "number") {
-        txt = tabsIntoSpaces(txt, tabSize);
+        */
     } else {
-        txt = tabsIntoSpaces(txt, 4); // 4 as default tab size
+        generateTextLinesMap(txt, editorInfo);
+        editorInfo.colorDecoratorsArr = [];
     }
 
-    txt = txt + ` \n \n `;
-    generateTextLinesMap(txt, editorInfo);
+    editorInfo.monoText = txt;
 
     let brackets: IPositionEachZero[] = [];
     let generalStarterBrackets = ["{", "(", "["];
@@ -1186,8 +1255,6 @@ export const getFullFileStats = ({
             // txt = txt.replace(/\/\//g, `  `); // cool to ignore "//"
         }
     }
-
-    editorInfo.monoText = txt;
 
     let macroInfoOfFile = getMacroInfoOfFile(editorInfo, txt);
 

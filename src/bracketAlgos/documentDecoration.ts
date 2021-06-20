@@ -159,28 +159,35 @@ export default class DocumentDecoration {
     }
 
     private tokenizeLine(index: number, editorInfo: IEditorInfo) {
-        const originalLine = this.document.lineAt(index).text;
+        // const originalLine = this.document.lineAt(index).text;
+        const originalLine = editorInfo.monoText.slice(
+            editorInfo.textLinesMap[index],
+            editorInfo.textLinesMap[index + 1],
+        );
+        // console.log(`originalLine->${originalLine}`);
         // tabsIntoSpaces
 
-        let tabsize = 4;
-        if (typeof editorInfo.editorRef.options.tabSize === "number") {
-            tabsize = editorInfo.editorRef.options.tabSize;
-        }
+        // let tabsize = 4;
+        // if (typeof editorInfo.editorRef.options.tabSize === "number") {
+        //     tabsize = editorInfo.editorRef.options.tabSize;
+        // }
 
-        let preparedLineText = originalLine;
-        if (this.document.eol === 2) {
-            preparedLineText = preparedLineText.replace(/\r/g, ``); // may be needed, LF, CRLF
-        }
+        // let preparedLineText = originalLine;
 
-        preparedLineText = tabsIntoSpaces(preparedLineText, tabsize);
-        if (glo.trySupportDoubleWidthChars) {
-            preparedLineText = preparedLineText.replace(
-                doubleWidthCharsReg,
-                "Z_",
-            );
-        }
+        // if (this.document.eol === 2) {
+        //     preparedLineText = preparedLineText.replace(/\r/g, ``); // may be needed, LF, CRLF
+        // }
 
-        const newText = preparedLineText;
+        // preparedLineText = tabsIntoSpaces(preparedLineText, tabsize);
+
+        // if (glo.trySupportDoubleWidthChars) {
+        //     preparedLineText = preparedLineText.replace(
+        //         doubleWidthCharsReg,
+        //         "Z_",
+        //     );
+        // }
+
+        const newText = originalLine;
         const previousLineRuleStack =
             index > 0 ? this.lines[index - 1].getRuleStack() : undefined;
 
