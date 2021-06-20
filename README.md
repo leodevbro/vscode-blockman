@@ -3,16 +3,12 @@
 [![](https://vsmarketplacebadge.apphb.com/downloads-short/leodevbro.blockman.svg)](https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman)
 [![](https://vsmarketplacebadge.apphb.com/rating-short/leodevbro.blockman.svg)](https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman)
 
-<p><strong>Good news:</strong> from 1.1.0 version, manual setup of line height and char width is not needed anymore, thanks to <a href="https://github.com/microsoft/vscode/issues/125341">alexdima (Alexandru Dima)</a>.</p>
-
 
 <p><strong>Donation</strong> is really appreciated. This VSCode extension is a work of many months. My name is <a href="https://leodevbro.github.io">Levan Katsadze (ლევან კაცაძე)</a>, 1995-03-03, I'm a student in Tbilisi, <a href="https://en.wikipedia.org/wiki/Georgia_(country)">Georgia (country)</a>. I learn Frontend development (JavaScript, TypeScript, React).</p>
 
-**Buy Me A Coffee (With PayPal)**: https://www.buymeacoffee.com/leodevbro
+**Buy Me A Coffee (With PayPal)**: https://www.buymeacoffee.com/leodevbro<br />
+**See crypto/Bitcoin and other donation options at the bottom.**
 
-**Bank account (USD)**: GE08TB7774936615100013 (TBCBGE22)
-
-**Bank account (GEL/Lari)**: GE18TB7774936515100011 (TBCBGE22)
 
 <br />
 <br />
@@ -229,3 +225,17 @@ then, open and edit **settings.json** file:
 <p><a href="https://github.com/CoenraadS/Bracket-Pair-Colorizer-2">Bracket Pair Colorizer 2</a> (by CoenraadS)</p>
 <p><a href="https://github.com/vincaslt/vscode-highlight-matching-tag">Highlight Matching Tag</a> (by vincaslt)</p>
 <p><a href="https://github.com/DTStack/dt-python-parser">dt-python-parser</a> (by DTStack)</p>
+
+<h1>Also Big thanks</h1>
+<p>From 1.1.0 version, manual setup of line height and char width is not needed anymore, thanks to <a href="https://github.com/microsoft/vscode/issues/125341">alexdima (Alexandru Dima)</a>.</p>
+<p>From 1.2.0 version, the problem of block-rendering widths at the locations of Color Decorators have been fixed for most of monospace fonts. Thanks to <a href="https://stackoverflow.com/questions/68020444/how-to-get-positions-of-all-css-color-decorators-with-vscode-api">rioV8</a> from stackoverflow.</p>
+
+<br />
+
+<h1>Donation</h1>
+<p><strong>Buy Me A Coffee (With PayPal):</strong> <a href="https://www.buymeacoffee.com/leodevbro">https://www.buymeacoffee.com/leodevbro</a></p>
+<p><strong>Bitcoin:</strong> bc1qfc068aq6lhrl58l6cf4wk7nsjy44gnk23uwl2y</p>
+<p><strong>Etherium:</strong> 0xFDE2574549aB7b2d57C7c1beef6d15FB2416E811</p>
+  
+<p><strong>Bank account (USD):</strong> GE08TB7774936615100013 (TBCBGE22)</p>
+<p><strong>Bank account (GEL/Lari):</strong> GE18TB7774936515100011 (TBCBGE22)</p>
