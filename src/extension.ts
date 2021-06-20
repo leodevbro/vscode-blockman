@@ -940,9 +940,9 @@ const setUserwideIndentGuides = (myBool: boolean) => {
     vscode.workspace
         .getConfiguration()
         .update("editor.renderIndentGuides", myBool, 1); // 1 means Userwide
-    vscode.workspace
-        .getConfiguration()
-        .update("editor.highlightActiveIndentGuide", myBool, 1); // 1 means Userwide
+    // vscode.workspace
+    //     .getConfiguration()
+    //     .update("editor.highlightActiveIndentGuide", myBool, 1); // 1 means Userwide
 };
 
 interface IConfigOfVscode {
@@ -950,16 +950,15 @@ interface IConfigOfVscode {
     lineHighlightBorder?: string; // workbench_colorCustomizations_editor_lineHighlightBorder
     editorWordWrap?: string; // editor_wordWrap
     diffEditorWordWrap?: string; // diffEditor_wordWrap
-    markdownEditorWordWrap?: string; // "[markdown]_editor_wordWrap"
+    // markdownEditorWordWrap?: string; // "[markdown]_editor_wordWrap"
     renderIndentGuides?: boolean; // editor_renderIndentGuides
-    highlightActiveIndentGuide?: boolean; // editor_highlightActiveIndentGuide
+    // highlightActiveIndentGuide?: boolean; // editor_highlightActiveIndentGuide
     [key: string]: string | boolean | undefined;
 }
 
 // for archive
 // const configOfVscodeBeforeBlockman: IConfigOfVscode = {
 //     renderIndentGuides: true,
-//     highlightActiveIndentGuide: true,
 // };
 
 // for blockman
@@ -968,9 +967,7 @@ const configOfVscodeWithBlockman: IConfigOfVscode = {
     lineHighlightBorder: "#9fced11f",
     editorWordWrap: "off",
     diffEditorWordWrap: "off",
-    markdownEditorWordWrap: "off",
     renderIndentGuides: false,
-    highlightActiveIndentGuide: false,
 };
 
 // let vvvv = vscode.workspace.getConfiguration().get("editor.wordWrap");
@@ -1063,20 +1060,18 @@ const setUserwideConfigOfVscode = (userwideConfig: IConfigOfVscode) => {
         .getConfiguration()
         .update("diffEditor.wordWrap", userwideConfig.diffEditorWordWrap, 1);
 
-    let vscodeMarkdownConfig: any = vscode.workspace
-        .getConfiguration()
-        .get("[markdown]");
+    // let vscodeMarkdownConfig: any = vscode.workspace
+    //     .getConfiguration()
+    //     .get("[markdown]");
 
-    // console.log("markdownConfig", markdownConfig);
-
-    vscode.workspace.getConfiguration().update(
-        "[markdown]",
-        {
-            ...vscodeMarkdownConfig,
-            "editor.wordWrap": userwideConfig.markdownEditorWordWrap,
-        },
-        1,
-    );
+    // vscode.workspace.getConfiguration().update(
+    //     "[markdown]",
+    //     {
+    //         ...vscodeMarkdownConfig,
+    //         "editor.wordWrap": userwideConfig.markdownEditorWordWrap,
+    //     },
+    //     1,
+    // );
 
     if (userwideConfig.renderIndentGuides !== undefined) {
         setUserwideIndentGuides(userwideConfig.renderIndentGuides);
