@@ -11,8 +11,8 @@ See **crypto/Bitcoin** and other donation options at the bottom.
 
 <p>My name is <a href="https://leodevbro.github.io">Levan Katsadze (ლევან კაცაძე)</a>, 1995-03-03, I'm a student in Tbilisi, <a href="https://en.wikipedia.org/wiki/Georgia_(country)">Georgia (Not US State)</a>. I learn Frontend development (React, JavaScript, TypeScript.).</p>
 
-
-
+<br />
+<br />
 <br />
 
 <p><strong>From version 1.2.0 (2021-06-20), for better experience, Blockman will change (only one-time at the installation event) these 5 items in VSCode settings:</strong></p>
