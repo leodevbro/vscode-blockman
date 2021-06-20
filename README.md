@@ -4,14 +4,19 @@
 [![](https://vsmarketplacebadge.apphb.com/rating-short/leodevbro.blockman.svg)](https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman)
 
 
-<p><strong>Donation</strong> is really appreciated. This VSCode extension is a work of many months. My name is <a href="https://leodevbro.github.io">Levan Katsadze (ლევან კაცაძე)</a>, 1995-03-03, I'm a student in Tbilisi, <a href="https://en.wikipedia.org/wiki/Georgia_(country)">Georgia (country)</a>. I learn Frontend development (JavaScript, TypeScript, React).</p>
+<p><strong>Donation</strong> is really appreciated. This VSCode extension is a work of many months.</p>
 
 **Buy Me A Coffee (With PayPal)**: https://www.buymeacoffee.com/leodevbro<br />
-**See crypto/Bitcoin and other donation options at the bottom.**
+See **crypto/Bitcoin** and other donation options at the bottom.
+
+<p>My name is <a href="https://leodevbro.github.io">Levan Katsadze (ლევან კაცაძე)</a>, 1995-03-03, I'm a student in Tbilisi, <a href="https://en.wikipedia.org/wiki/Georgia_(country)">Georgia (Not US State)</a>. I learn Frontend development (React, JavaScript, TypeScript.).</p>
+
+
 
 <br />
 
 <p><strong>From version 1.2.0 (2021-06-20), for better experience, Blockman will change (only one-time at the installation event) these 5 items in VSCode settings:</strong></p>
+<p><strong>You can change them again when you want. These 5 settings are very non-vital, so maybe you don't even need to backup them first.</strong></p>
 
 ```jsonc
 // settings.json (User/Global config, not Workspace config)
@@ -27,7 +32,7 @@
     }
 }
 ```
-<p><strong>You can change them again when you want. These 5 settings are very non-vital, so maybe you don't even need to backup them first.</strong></p>
+
 
 
 
@@ -41,11 +46,8 @@
 <h3 align="center" style="color: red;">Blockman</h3>
 <p align="center">VSCode Extension For Nested Block Highlighting<p/>
 
-<p>Github repository: <a href="https://github.com/leodevbro/vscode-blockman">https://github.com/leodevbro/vscode-blockman</a></p>
-<p>Marketplace: <a href="https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman">https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman</a></p>
-<p>Open VSX: <a href="https://open-vsx.org/extension/leodevbro/blockman">https://open-vsx.org/extension/leodevbro/blockman</a></p>
-
-<p align="center"><em>You can toggle enable/disable: Press F1 and then type "blockman toggle"</em></p>
+<p align="center"><em>You can toggle enable/disable: Press F1 and then type "blockman toggle".</em></p>
+<p align="center"><em>Also You can go to Blockman settings and set Black List Of File Formats to disable Blockman for certain files.</em></p>
   
 <p align="center"><img
   src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/still-image/infograph/intro-before-after---png.png"
@@ -244,6 +246,11 @@ then, open and edit **settings.json** file:
 <p>From 1.2.0 version, the problem of block-rendering widths at the locations of Color Decorators have been fixed for most of monospace fonts. Thanks to <a href="https://stackoverflow.com/questions/68020444/how-to-get-positions-of-all-css-color-decorators-with-vscode-api">rioV8</a> from stackoverflow.</p>
 
 <br />
+
+<h1>Published In:</h1>
+<p>Github repository: <a href="https://github.com/leodevbro/vscode-blockman">https://github.com/leodevbro/vscode-blockman</a></p>
+<p>Marketplace: <a href="https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman">https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman</a></p>
+<p>Open VSX: <a href="https://open-vsx.org/extension/leodevbro/blockman">https://open-vsx.org/extension/leodevbro/blockman</a></p>
 
 <h1>Donation</h1>
 <p><strong>Buy Me A Coffee (With PayPal):</strong> <a href="https://www.buymeacoffee.com/leodevbro">https://www.buymeacoffee.com/leodevbro</a></p>
