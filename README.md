@@ -9,8 +9,28 @@
 **Buy Me A Coffee (With PayPal)**: https://www.buymeacoffee.com/leodevbro<br />
 **See crypto/Bitcoin and other donation options at the bottom.**
 
-
 <br />
+
+<p><strong>From version 1.2.0 (2021-06-20), for better experience, Blockman will change (only one-time at the installation event) these 5 items in VSCode settings:</strong></p>
+
+```jsonc
+// settings.json (User/Global config, not Workspace config)
+{
+    // ...
+    "editor.renderIndentGuides": false,
+    "editor.wordWrap": "off",
+    "diffEditor.wordWrap": "off",
+    "workbench.colorCustomizations": {
+        // ...
+        "editor.lineHighlightBorder": "#9fced11f",
+        "editor.lineHighlightBackground": "#1073cf2d"
+    }
+}
+```
+<p><strong>You can change them again when you want. These 5 settings are very non-vital, so maybe you don't even need to backup them first.</strong></p>
+
+
+
 <br />
 
 <p align="center"><img
