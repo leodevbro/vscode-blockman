@@ -60,7 +60,7 @@ See **crypto/Bitcoin** and other donation options at the bottom.
   alt="alt text testing"
 /></p>
   
-<p>Supported programming langauges:</p>
+<p>Supported programming languages:</p>
 <p>Non-indentation based languages: JavaScript, JSX, TypeScript, TSX, C, C#, C++, Java, HTML, CSS, LESS, SCSS and more...</p>
 <p>Indentation based language(s): currently Python only.</p>
 
@@ -161,7 +161,7 @@ like: ა, ბ, გ, დ, ე, ვ, ზ, თ, ი, კ, ლ, მ, ნ, ო, პ,
 
 <p>3) If you want to use mix of multiple fonts (like in the image above), Please don't use any non-monospace font. Use monospace fonts which have at least almost same width of character. For example: 'Oxygen Mono' and '<a href="https://bpgfonts.wordpress.com/2017/12/21/bpg-2017-dejavu-sansmono/">BPG 2017 DejaVu Sans Mono</a>' have not only equal char frame width by themselves alone, but also almost equal char frame width to each other.</p>
   
-<p><strong>For Geogian (ქართული) language oriented developers:</strong> without multiple font mixing, just <a href="https://bpgfonts.wordpress.com/2017/12/21/bpg-2017-dejavu-sansmono/">BPG 2017 DejaVu Sans Mono</a> as a single font seems fine for me, and maybe you can use it too. I think it is the one and only monospace font which has English and Georgian lowercase letters, as well as <a href="https://www.unicode.org/charts/script/chart_Georgian.html">Georgian CAPITAL (uppercase) letters</a>.</p>
+<p><strong>For Georgian (ქართული) language oriented developers:</strong> without multiple font mixing, just <a href="https://bpgfonts.wordpress.com/2017/12/21/bpg-2017-dejavu-sansmono/">BPG 2017 DejaVu Sans Mono</a> as a single font seems fine for me, and maybe you can use it too. I think it is the one and only monospace font which has English and Georgian lowercase letters, as well as <a href="https://www.unicode.org/charts/script/chart_Georgian.html">Georgian CAPITAL (uppercase) letters</a>.</p>
 
 <p><strong>For English language oriented developers:</strong> the same statement above goes here.</p>
 
@@ -232,7 +232,7 @@ then, open and edit **settings.json** file:
 <h1>Optimization Notes</h1>
 <p>Optimization is taken very seriously, half of the work is dedicated just for the optimization. The source code is full of logic which prevents many unnecessary block re-renderings.</p>
   
-<p>File analysis needs super short time, so it's not a big problem. The main problem is that the vscode block rendering functions (<strong>vscode.window.createTextEditorDecorationType</strong> and <strong>setDecorations</strong>) are very slow, and I cannot touch its internal code, because it's just an API of VSCode. So, almost all optimization algorithms are trying to prevent as many unnececary block renderings as possible. For example, when scrolling, blocks are rendered into only newly visible code, and the blocks which are already visible, stay there and does not rerender.</p>
+<p>File analysis needs super short time, so it's not a big problem. The main problem is that the vscode block rendering functions (<strong>vscode.window.createTextEditorDecorationType</strong> and <strong>setDecorations</strong>) are very slow, and I cannot touch its internal code, because it's just an API of VSCode. So, almost all optimization algorithms are trying to prevent as many unnecessary block renderings as possible. For example, when scrolling, blocks are rendered into only newly visible code, and the blocks which are already visible, stay there and does not rerender.</p>
 
 <br />
 
