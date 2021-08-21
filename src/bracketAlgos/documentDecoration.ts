@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import Bracket from "./bracket";
+// import Bracket from "./bracket";
 import BracketClose from "./bracketClose";
 import { IStackElement } from "./IExtensionGrammar";
 import LanguageConfig from "./languageConfig";
@@ -7,8 +7,8 @@ import LineState from "./lineState";
 import Settings from "./settings";
 import TextLine from "./textLine";
 import { ignoreBracketsInToken, LineTokens } from "./vscodeFiles";
-import { TextDocumentContentChangeEvent } from "vscode";
-import { doubleWidthCharsReg, tabsIntoSpaces } from "../utils";
+// import { TextDocumentContentChangeEvent } from "vscode";
+
 import {
     glo,
     IEditorInfo,

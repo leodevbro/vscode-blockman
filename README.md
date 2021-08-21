@@ -15,13 +15,14 @@ See **crypto/Bitcoin** and other donation options at the bottom.
 <br />
 <br />
 
-<p><strong>From version 1.2.0 (2021-06-20), for better experience, Blockman will change (only one-time at the installation event) these 5 items in VSCode settings:</strong></p>
-<p><strong>You can change them again when you want. These 5 settings are very non-vital, so maybe you don't even need to backup them first.</strong></p>
+<p><strong>For better experience, Blockman will change (only one-time at the installation event) these 6 items in VSCode settings:</strong></p>
+<p><strong>You can change them again when you want. These 6 settings are very non-vital, so maybe you don't even need to backup them first.</strong></p>
 
 ```jsonc
 // settings.json (User/Global config, not Workspace config)
 {
     // ...
+    "editor.inlayHints.enabled": false,
     "editor.renderIndentGuides": false,
     "editor.wordWrap": "off",
     "diffEditor.wordWrap": "off",
@@ -61,8 +62,8 @@ See **crypto/Bitcoin** and other donation options at the bottom.
 /></p>
   
 <p>Supported programming languages:</p>
-<p>Non-indentation based languages: JavaScript, JSX, TypeScript, TSX, C, C#, C++, Java, HTML, CSS, LESS, SCSS and more...</p>
-<p>Indentation based language(s): currently Python only.</p>
+<p>Non-indentation based languages: JavaScript, JSX, TypeScript, TSX, C, C#, C++, Java, PHP, R, Go (Golang), Dart, Rust, Swift, SQL, HTML, CSS, LESS, SCSS and more...</p>
+<p>Indentation based languages: currently Python and Yaml.</p>
 
 <br />
 
@@ -127,7 +128,7 @@ If you use <strong>double width</strong> characters like these Chinese character
   
 <br />
   
-<p align="center">Currently only Python is supported from indentation based languages</p>
+<p align="center">Currently only Python and Yaml are supported from indentation based languages</p>
 <p align="center"><img
   src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/settings/indent-tokens---c2-apng.png"
   alt="alt text testing"
@@ -146,7 +147,7 @@ If you use <strong>double width</strong> characters like these Chinese character
 
 <h1 align="center">Things to consider</h1>
   
-<p>1) Each line of code must have less than 500 characters, otherwise blocks will not be rendered in entire file.</p>
+<p>1) Each line of code must have less than 3000 characters, otherwise blocks will not be rendered in entire file.</p>
 
 <p>2) Please don't use non-monospace font. Use only monospace font like 'Oxygen Mono', '<a href="https://bpgfonts.wordpress.com/2017/12/21/bpg-2017-dejavu-sansmono/">BPG 2017 DejaVu Sans Mono</a>' or other. Block-rendering is based on equal character-frame-widths, because pixel locations of characters <a href="https://github.com/microsoft/vscode/issues/118994">is not accessible</a> through VSCode API.</p>
 <p align="center"><img

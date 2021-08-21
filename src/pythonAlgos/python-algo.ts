@@ -22,7 +22,7 @@ const classPython3Parser = require("dt-python-parser").Python3Parser;
 
 const pyParser = new classPython3Parser();
 
-const findUpperNonCommentLineZero = (
+export const findUpperNonCommentLineZero = (
     pyText: string,
     currLineZero: number,
     lMap: number[],

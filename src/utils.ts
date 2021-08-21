@@ -23,6 +23,8 @@ import {
     calculateColumnFromCharIndex,
     colorDecorsToSpacesForFile,
 } from "./utils2";
+import { doubleWidthCharsReg } from "./helpers/regex-main";
+import { yamlFn } from "./yamlAlgos/yaml-algo";
 
 export interface IPositionEachZero {
     char?: string;
@@ -765,30 +767,34 @@ export const renderLevels = (
     }
 
     if (renderingInfo.fileRightMost >= 0 && caller !== "focus") {
-        // entire file block
-        renderSingleBlock({
-            firstLineHasVisibleChar: true,
-            lastLineHasVisibleChar: true,
-            firstVisibleChar: {
-                lineZero: renderingInfo.fileTopVisLineZero,
-                inLineIndexZero: renderingInfo.fileLeftMost,
-            },
-            lastVisibleChar: {
-                lineZero: renderingInfo.fileBottomVisLineZero,
-                inLineIndexZero: renderingInfo.fileRightMost,
-            },
-            optimalLeftOfRange: renderingInfo.fileLeftMost,
-            optimalRightOfRange: renderingInfo.fileRightMost,
+        const backgroundCSS = glo.coloring.onEachDepth[0];
+        const borderColor = glo.coloring.borderOfDepth0;
+        if (backgroundCSS !== "none" || borderColor !== "none") {
+            // ground block
+            renderSingleBlock({
+                firstLineHasVisibleChar: true,
+                lastLineHasVisibleChar: true,
+                firstVisibleChar: {
+                    lineZero: renderingInfo.fileTopVisLineZero,
+                    inLineIndexZero: renderingInfo.fileLeftMost,
+                },
+                lastVisibleChar: {
+                    lineZero: renderingInfo.fileBottomVisLineZero,
+                    inLineIndexZero: renderingInfo.fileRightMost,
+                },
+                optimalLeftOfRange: renderingInfo.fileLeftMost,
+                optimalRightOfRange: renderingInfo.fileRightMost,
 
-            firstLineZeroOfRender,
-            lastLineZeroOfRender,
+                firstLineZeroOfRender,
+                lastLineZeroOfRender,
 
-            depth: 0, // level of entire file is 0
-            inDepthBlockIndex: 0, // there is only one block in level/depth 0
-            editorInfo,
-            lang,
-            isFocusedBlock: false,
-        });
+                depth: 0, // level of ground block is 0
+                inDepthBlockIndex: 0, // there is only one block in depth 0 (ground)
+                editorInfo,
+                lang,
+                isFocusedBlock: false,
+            });
+        }
     }
 
     // junkDecors3dArr.push(editorInfo.decors); // dangerous
@@ -909,8 +915,6 @@ export const renderLevels = (
 export const stylingLanguages = ["css", "scss", "sass", "less"];
 
 // For chinese support:
-export const doubleWidthCharsReg =
-    /[\u2010\u2012-\u2016\u2020-\u2022\u2025-\u2027\u2030\u2035\u203B\u203C\u2042\u2047-\u2049\u2051\u20DD\u20DE\u2100\u210A\u210F\u2121\u2135\u213B\u2160-\u216B\u2170-\u217B\u2215\u221F\u22DA\u22DB\u22EF\u2305-\u2307\u2312\u2318\u23B0\u23B1\u23BF-\u23CC\u23CE\u23DA\u23DB\u2423\u2460-\u24FF\u2600-\u2603\u2609\u260E\u260F\u2616\u2617\u261C-\u261F\u262F\u2668\u2672-\u267D\u26A0\u26BD\u26BE\u2702\u273D\u273F\u2740\u2756\u2776-\u277F\u2934\u2935\u29BF\u29FA\u29FB\u2B1A\u2E3A\u2E3B\u2E80-\u9FFF\uF900-\uFAFF\uFB00-\uFB04\uFE10-\uFE19\uFE30-\uFE6B\uFF01-\uFF60\uFFE0-\uFFE6\u{1F100}-\u{1F10A}\u{1F110}-\u{1F12E}\u{1F130}-\u{1F16B}\u{1F170}-\u{1F19A}\u{1F200}-\u{1F251}\u{2000B}-\u{2F9F4}]/gu;
 
 export const getFullFileStats = async ({
     editorInfo,
@@ -948,7 +952,7 @@ export const getFullFileStats = async ({
 
     let txt = document.getText();
 
-    if (getMacroInfoOfFile(editorInfo, txt).entireFileRightMost > 500) {
+    if (getMacroInfoOfFile(editorInfo, txt).entireFileRightMost > 3000) {
         return;
     }
 
@@ -971,7 +975,7 @@ export const getFullFileStats = async ({
 
     txt = tabsIntoSpaces(txt, tabSize);
 
-    txt = txt + ` \n \n `; // important for Python tokenizer
+    txt = txt + `\n\n\n`; // !!! VERY important for tokenizer of Python and other indentation based languages
 
     if (glo.colorDecoratorsInStyles) {
         const dataArr: any[] | undefined = await vscode.commands.executeCommand(
@@ -1241,18 +1245,20 @@ export const getFullFileStats = async ({
     // document.lineAt(cursorPos).range.end.character;
 
     let pythonBlocks: IPositionEachZero[] = [];
+    let yamlBlocks: IPositionEachZero[] = [];
 
     // console.log("document.languageId:::::", document.languageId);
 
-    if (glo.analyzeIndentDedentTokens) {
-        if (glo.maxDepth >= 0 && document.languageId === "python") {
+    if (glo.analyzeIndentDedentTokens && glo.maxDepth >= 0) {
+        if (document.languageId === "python") {
             // console.log("before py blocks");
             pythonBlocks = pyFn(txt, editorInfo);
             // console.log("after py blocks");
 
             // txt = txt.replace(/\#/g, ` `); // cool to ignore "#"
-        } else {
+        } else if (document.languageId === "yaml") {
             // txt = txt.replace(/\/\//g, `  `); // cool to ignore "//"
+            yamlBlocks = yamlFn(txt, editorInfo);
         }
     }
 
@@ -1296,6 +1302,7 @@ export const getFullFileStats = async ({
         ...brackets,
         ...tagsIt,
         ...pythonBlocks,
+        ...yamlBlocks,
     ].sort((a, b) => a.globalIndexZero - b.globalIndexZero);
 
     // console.log("allit:", allit);

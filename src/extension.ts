@@ -7,8 +7,8 @@ import {
     getFullFileStats,
     tabsIntoSpaces,
     findLineZeroAndInLineIndexZero,
-    doubleWidthCharsReg,
 } from "./utils";
+import { doubleWidthCharsReg } from "./helpers/regex-main";
 import DocumentDecorationManager from "./bracketAlgos/documentDecorationManager";
 import EventEmitter = require("events");
 import { glob } from "glob";
@@ -18,6 +18,7 @@ import { colorCombos } from "./colors";
 import { getLastColIndexForLineWithColorDecSpaces } from "./utils2";
 
 const iiGlobal = "blockman_data_iicounter";
+const iiGlobal2 = "blockman_data_iicounter2";
 
 const os = require("os"); // Comes with node.js
 const myOS: string = os.type().toLowerCase();
@@ -962,13 +963,14 @@ const setUserwideIndentGuides = (myBool: boolean) => {
 };
 
 interface IConfigOfVscode {
-    lineHighlightBackground?: string; // workbench_colorCustomizations_editor.lineHighlightBackground
-    lineHighlightBorder?: string; // workbench_colorCustomizations_editor.lineHighlightBorder
-    editorWordWrap?: string; // editor.wordWrap
-    diffEditorWordWrap?: string; // diffEditor.wordWrap
+    inlayHints: boolean; // "editor.inlayHints.enabled"
+    lineHighlightBackground?: string; // "workbench.colorCustomizations" -> "editor.lineHighlightBackground"
+    lineHighlightBorder?: string; // "workbench.colorCustomizations" -> "editor.lineHighlightBorder"
+    editorWordWrap?: "on" | "off"; // "editor.wordWrap"
+    diffEditorWordWrap?: "on" | "off"; // "diffEditor.wordWrap"
     // markdownEditorWordWrap?: string; // "[markdown]_editor.wordWrap"
-    renderIndentGuides?: boolean; // editor.renderIndentGuides
-    // highlightActiveIndentGuide?: boolean; // editor.highlightActiveIndentGuide
+    renderIndentGuides?: boolean; // "editor.renderIndentGuides"
+    // highlightActiveIndentGuide?: boolean; // "editor.highlightActiveIndentGuide"
     [key: string]: string | boolean | undefined;
 }
 
@@ -979,6 +981,7 @@ interface IConfigOfVscode {
 
 // for blockman
 const configOfVscodeWithBlockman: IConfigOfVscode = {
+    inlayHints: false,
     lineHighlightBackground: "#1073cf2d",
     lineHighlightBorder: "#9fced11f",
     editorWordWrap: "off",
@@ -1134,10 +1137,11 @@ export function activate(context: ExtensionContext) {
     if (stateHolder.myState) {
         const st = stateHolder.myState;
         const iicounter = st.get(iiGlobal);
+        const iicounter2 = st.get(iiGlobal2);
         // console.log(iicounter);
 
         if (iicounter === undefined) {
-            console.log("first activation");
+            console.log("first activation 1");
             collectVSCodeConfigArchive();
             setUserwideConfigOfVscode(configOfVscodeWithBlockman);
             setLightColorComboIfLightTheme();
@@ -1150,6 +1154,24 @@ export function activate(context: ExtensionContext) {
         } else if (iicounter === "2") {
             // console.log("aris 2:", st.get(iiGlobal));
             // ----
+        }
+
+        if (iicounter2 === undefined) {
+            console.log("first activation 2");
+            vscode.workspace
+                .getConfiguration()
+                .update(
+                    "editor.inlayHints.enabled",
+                    configOfVscodeWithBlockman.inlayHints,
+                    1,
+                );
+
+            st.update(iiGlobal2, "1");
+        } else if (iicounter2 === "1") {
+            st.update(iiGlobal2, "2");
+            //
+        } else if (iicounter2 === "2") {
+            //
         }
     }
 
