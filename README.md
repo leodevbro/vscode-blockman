@@ -3,29 +3,26 @@
 [![](https://vsmarketplacebadge.apphb.com/downloads-short/leodevbro.blockman.svg)](https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman)
 [![](https://vsmarketplacebadge.apphb.com/rating-short/leodevbro.blockman.svg)](https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman)
 
+<p><strong><a href="#donation">Donation</a></strong> is really appreciated. Blockman is a hard work of many months. My name is <a href="https://leodevbro.github.io">Levan Katsadze (ლევან კაცაძე)</a>, 1995-03-03, from Tbilisi, <a href="https://en.wikipedia.org/wiki/Georgia_(country)">Georgia (Not USA)</a>.</p>
 
-<p><strong>Donation</strong> is really appreciated. This VSCode extension is a work of many months.</p>
-
-**Buy Me A Coffee (With PayPal)**: https://www.buymeacoffee.com/leodevbro<br />
-See **crypto/Bitcoin** and other donation options at the bottom.
-
-<p>My name is <a href="https://leodevbro.github.io">Levan Katsadze (ლევან კაცაძე)</a>, 1995-03-03, I'm a student in Tbilisi, <a href="https://en.wikipedia.org/wiki/Georgia_(country)">Georgia (Not US State)</a>. I learn Frontend development (React, JavaScript, TypeScript.).</p>
+<p><strong>Support (With PayPal):</strong> <a href="https://www.buymeacoffee.com/leodevbro">https://www.buymeacoffee.com/leodevbro</a></p>
 
 <br />
 <br />
 <br />
 
-<p><strong>For better experience, Blockman will change (only one-time at the installation event) these 6 items in VSCode settings:</strong></p>
-<p><strong>You can change them again when you want. These 6 settings are very non-vital, so maybe you don't even need to backup them first.</strong></p>
+<p><strong>For better experience:</strong> Blockman <strong>WILL CHANGE</strong> these 6 items in VSCode settings (only one-time at the installation event). You can change them again when you want. These 6 settings are very non-vital, so maybe you don't even need to backup them first.</p>
 
 ```jsonc
 // settings.json (User/Global config, not Workspace config)
+// To open this file in VSCode, press F1, type 'settings json' and choose 'Preferences: Open Settings (JSON)'
 {
     // ...
     "editor.inlayHints.enabled": false,
     "editor.renderIndentGuides": false,
     "editor.wordWrap": "off",
     "diffEditor.wordWrap": "off",
+
     "workbench.colorCustomizations": {
         // ...
         "editor.lineHighlightBorder": "#9fced11f",
@@ -34,9 +31,6 @@ See **crypto/Bitcoin** and other donation options at the bottom.
 }
 ```
 
-
-
-
 <br />
 
 <p align="center"><img
@@ -44,8 +38,8 @@ See **crypto/Bitcoin** and other donation options at the bottom.
   alt="VSCode Blockman Icon"
   width="128px"
 /></p>
-<h3 align="center" style="color: red;">Blockman</h3>
-<p align="center">VSCode Extension For Nested Block Highlighting<p/>
+<h3 align="center" style="color: hsl(262, 90%, 45%);"><strong>Blockman</strong></h3>
+<p align="center">VSCode Extension For Nested Block Highlighting</p>
 
 <p align="center"><em>You can toggle enable/disable: Press F1 and then type "blockman toggle".</em></p>
 <p align="center"><em>Also You can go to Blockman settings and set Black List Of File Formats to disable Blockman for certain files.</em></p>
@@ -62,12 +56,12 @@ See **crypto/Bitcoin** and other donation options at the bottom.
 /></p>
   
 <p>Supported programming languages:</p>
-<p>Non-indentation based languages: JavaScript, JSX, TypeScript, TSX, C, C#, C++, Java, PHP, R, Go (Golang), Dart, Rust, Swift, SQL, HTML, CSS, LESS, SCSS and more...</p>
-<p>Indentation based languages: currently Python and Yaml.</p>
+<p><strong>Non-indentation based languages:</strong> JavaScript, JSX, TypeScript, TSX, C, C#, C++, Java, PHP, R, Go (Golang), Dart, Rust, Swift, PowerShell, SQL, HTML, CSS, LESS, SCSS and more...</p>
+<p><strong>Indentation based languages:</strong> currently Python and Yaml.</p>
 
 <br />
 
-If you use <strong>double width</strong> characters like these Chinese characters: `字符串最大字符串最`, then you may want to run the experimental command to support such characters. Type `F1` and type the command name: `Blockman Toggle Try Support Double Width Chars`.
+If you use <strong>double width</strong> characters like these Chinese characters: `字符串最大字符串最`, then you may want to run the experimental command to support such characters. Press `F1` and type the command name: `Blockman Toggle Try Support Double Width Chars`.
 
 <br />
   
@@ -145,6 +139,58 @@ If you use <strong>double width</strong> characters like these Chinese character
 
 <br />
 
+<h1 align="center">All Blockman settings</h1>
+
+```jsonc
+// settings.json (User/Global config, not Workspace config)
+// To open this file in VSCode, press F1, type 'settings json' and choose 'Preferences: Open Settings (JSON)'
+
+// Each item is with default value
+{
+    // ...
+    "blockman.n03MaxDepth": 12, // -1 is no blocks, 0 is ground block, 1 is first depth blocks, 2 is second depth blocks
+    "blockman.n04ColorComboPreset": "Classic Dark 1 (Gradients)",
+
+    "blockman.n05CustomColorOfDepth0": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent.
+
+    "blockman.n06CustomColorOfDepth1": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent.
+    "blockman.n07CustomColorOfDepth2": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent.
+    "blockman.n08CustomColorOfDepth3": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent.
+    "blockman.n09CustomColorOfDepth4": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent.
+    "blockman.n10CustomColorOfDepth5": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent.
+
+    "blockman.n11CustomColorOfDepth6": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent.
+    "blockman.n12CustomColorOfDepth7": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent.
+    "blockman.n13CustomColorOfDepth8": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent.
+    "blockman.n14CustomColorOfDepth9": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent.
+    "blockman.n15CustomColorOfDepth10": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent.
+
+    "blockman.n16EnableFocus": true, // Highlight block differently if caret is inside it.
+    "blockman.n17CustomColorOfFocusedBlock": "", // Requires 'Enable Focus' to be true/enabled. Type 'same' if you want it to be same color as if not focused.
+    "blockman.n18CustomColorOfFocusedBlockBorder": "", // Requires 'Enable Focus' to be true/enabled. Type 'same' if you want it to be same color as if not focused.
+    "blockman.n19CustomColorOfBlockBorder": "",
+    "blockman.n20CustomColorOfDepth0Border": "",
+
+    "blockman.n21BorderRadius": 5,
+    "blockman.n22AnalyzeCurlyBrackets": true, // Render blocks inside curly brackets {}, keep in mind: the parser/tokenizer will ignore brackets inside comments, inside strings and inside some other areas.
+    "blockman.n23AnalyzeSquareBrackets": false, // Render blocks inside square brackets [], keep in mind: the parser/tokenizer will ignore brackets inside comments, inside strings and inside some other areas.
+    "blockman.n24AnalyzeRoundBrackets": false, // Render blocks inside Round brackets (), keep in mind: the parser/tokenizer will ignore brackets inside comments, inside strings and inside some other areas.
+    "blockman.n25AnalyzeTags": true, // Render blocks inside HTML/XML/JSX/TSX tags <tag></tag>, keep in mind: the parser/tokenizer will ignore tags inside comments, inside strings and inside some other areas.
+
+    "blockman.n26AnalyzeIndentDedentTokens": true, // This option affects only files of indentation based languages like Python. Currently only Python and Yaml are supported for indentation analysis. Keep in mind: the parser/tokenizer will ignore indentations inside comments, inside strings and inside some other areas.
+    "blockman.n27AlsoRenderBlocksInsideSingleLineAreas": false, // {I am a single line area} <p>Me too</p>. Focused single line block will still be rendered even if this setting is off.
+
+    "blockman.n28TimeToWaitBeforeRerenderAfterLastChangeEvent": 1.2, // (Seconds). For optimization: enter more time for slow computers. Less than 0.05 is NOT recommended even for fast computers.
+    "blockman.n29TimeToWaitBeforeRerenderAfterLastFocusEvent": 0.2, // (Seconds). For optimization: enter more time for slow computers. Less than 0.2 is NOT recommended because double-clicking may become problematic.
+    "blockman.n30TimeToWaitBeforeRerenderAfterLastScrollEvent": 0.1, // (Seconds). For optimization: enter more time for slow computers. Less than 0.05 is NOT recommended even for fast computers.
+    "blockman.n31RenderIncrementBeforeAndAfterVisibleRange": 22, // Less is faster because less blocks will be rendered outside the viewport but scrolling may become less comfortable. If less than 1 (e.g. -5), the blocks will render in limited area.
+
+    "blockman.n32BlackListOfFileFormats": "plaintext, markdown, " // Disable blockman for certain file formats, e.g. plaintext, markdown, css, less, scss, html, json, jsonc, typescriptreact, typescript, javascriptreact, javascript, python, go, dart, php, c, csharp, cpp, java.
+}
+```
+
+<br />
+
 <h1 align="center">Things to consider</h1>
   
 <p>1) Each line of code must have less than 3000 characters, otherwise blocks will not be rendered in entire file.</p>
@@ -197,14 +243,10 @@ like: ა, ბ, გ, დ, ე, ვ, ზ, თ, ი, კ, ლ, მ, ნ, ო, პ,
   src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/still-image/infograph/line-hl---png.png"
   alt="alt text testing"
 /></p>
-  
 
-First, press **F1**
-
-then, type **>settings json**
-
-then, open and edit **settings.json** file:
 ```jsonc
+// settings.json
+// To open this file (as global config) in VSCode, press F1, type 'settings json' and choose 'Preferences: Open Settings (JSON)'
 {
     // ...
     "workbench.colorCustomizations": {
@@ -214,19 +256,18 @@ then, open and edit **settings.json** file:
 
         // Or for specific vscode themes:
         "[Default Dark+]": {
+            // ...
             // "editor.lineHighlightBorder": "#9fced11f"
             // "editor.lineHighlightBackground": "#1073cf2d",
         },
         "[Abyss]": {
-            "editor.lineHighlightBorder": "#9fced11f",
-            "editor.lineHighlightBackground": "#1073cf2d"
+            // ...
+            // "editor.lineHighlightBorder": "#9fced11f",
+            // "editor.lineHighlightBackground": "#1073cf2d"
         }
-        // ...
-    },
-    // ...
+    }
 }
 ```
-
 
 <br />
 
@@ -242,6 +283,8 @@ then, open and edit **settings.json** file:
 <p><a href="https://github.com/vincaslt/vscode-highlight-matching-tag">Highlight Matching Tag</a> (by vincaslt)</p>
 <p><a href="https://github.com/DTStack/dt-python-parser">dt-python-parser</a> (by DTStack)</p>
 
+<br />
+
 <h1>Also Big thanks</h1>
 <p>From 1.1.0 version, manual setup of line height and char width is not needed anymore, thanks to <a href="https://github.com/microsoft/vscode/issues/125341">alexdima (Alexandru Dima)</a>.</p>
 <p>From 1.2.0 version, the problem of block-rendering widths at the locations of Color Decorators have been fixed for most of monospace fonts. Thanks to <a href="https://stackoverflow.com/questions/68020444/how-to-get-positions-of-all-css-color-decorators-with-vscode-api">rioV8</a> from stackoverflow.</p>
@@ -253,7 +296,9 @@ then, open and edit **settings.json** file:
 <p>Marketplace: <a href="https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman">https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman</a></p>
 <p>Open VSX: <a href="https://open-vsx.org/extension/leodevbro/blockman">https://open-vsx.org/extension/leodevbro/blockman</a></p>
 
-<h1>Donation</h1>
+<br />
+
+<h1 id="donation">Donation</h1>
 <p><strong>Buy Me A Coffee (With PayPal):</strong> <a href="https://www.buymeacoffee.com/leodevbro">https://www.buymeacoffee.com/leodevbro</a></p>
 <p><strong>Bitcoin:</strong> bc1qfc068aq6lhrl58l6cf4wk7nsjy44gnk23uwl2y</p>
 <p><strong>Etherium:</strong> 0xFDE2574549aB7b2d57C7c1beef6d15FB2416E811</p>

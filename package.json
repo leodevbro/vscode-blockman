@@ -3,7 +3,7 @@
     "displayName": "Blockman - Highlight Nested Code Blocks",
     "publisher": "leodevbro",
     "description": "Mark/Highlight code blocks",
-    "version": "1.2.5",
+    "version": "1.2.7",
     "engines": {
         "vscode": "^1.56.1"
     },
@@ -143,57 +143,68 @@
                 "blockman.n05CustomColorOfDepth0": {
                     "type": "string",
                     "default": "",
-                    "scope": "window"
+                    "scope": "window",
+                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent."
                 },
                 "blockman.n06CustomColorOfDepth1": {
                     "type": "string",
                     "default": "",
-                    "scope": "window"
+                    "scope": "window",
+                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent."
                 },
                 "blockman.n07CustomColorOfDepth2": {
                     "type": "string",
                     "default": "",
-                    "scope": "window"
+                    "scope": "window",
+                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent."
                 },
                 "blockman.n08CustomColorOfDepth3": {
                     "type": "string",
                     "default": "",
-                    "scope": "window"
+                    "scope": "window",
+                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent."
                 },
                 "blockman.n09CustomColorOfDepth4": {
                     "type": "string",
                     "default": "",
-                    "scope": "window"
+                    "scope": "window",
+                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent."
                 },
                 "blockman.n10CustomColorOfDepth5": {
                     "type": "string",
                     "default": "",
-                    "scope": "window"
+                    "scope": "window",
+                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent."
                 },
                 "blockman.n11CustomColorOfDepth6": {
                     "type": "string",
                     "default": "",
-                    "scope": "window"
+                    "scope": "window",
+                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent."
                 },
                 "blockman.n12CustomColorOfDepth7": {
                     "type": "string",
                     "default": "",
-                    "scope": "window"
+                    "scope": "window",
+                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent."
                 },
                 "blockman.n13CustomColorOfDepth8": {
                     "type": "string",
                     "default": "",
-                    "scope": "window"
+                    "scope": "window",
+                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent."
                 },
                 "blockman.n14CustomColorOfDepth9": {
                     "type": "string",
                     "default": "",
-                    "scope": "window"
+                    "scope": "window",
+                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent."
                 },
                 "blockman.n15CustomColorOfDepth10": {
                     "type": "string",
                     "default": "",
-                    "scope": "window"
+                    "scope": "window",
+                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent."
                 },
                 "blockman.n16EnableFocus": {
                     "type": "boolean",
@@ -210,7 +221,7 @@
                 "blockman.n18CustomColorOfFocusedBlockBorder": {
                     "type": "string",
                     "default": "",
-                    "description": "Requires 'Enable Focus' to be true/enabled. Type 'same' if you want it to be same color as if not focused",
+                    "description": "Requires 'Enable Focus' to be true/enabled. Type 'same' if you want it to be same color as if not focused.",
                     "scope": "window"
                 },
                 "blockman.n19CustomColorOfBlockBorder": {
@@ -225,7 +236,7 @@
                 },
                 "blockman.n21BorderRadius": {
                     "type": "number",
-                    "default": 4,
+                    "default": 5,
                     "description": "Border radius of each block",
                     "scope": "window"
                 },
@@ -256,7 +267,7 @@
                 "blockman.n26AnalyzeIndentDedentTokens": {
                     "type": "boolean",
                     "default": true,
-                    "description": "This option affects only files of indentation based languages like Python. Currently only Python is supported for indentation analysis. Keep in mind: the parser/tokenizer will ignore indentations inside comments, inside strings and inside some other areas",
+                    "description": "This option affects only files of indentation based languages like Python. Currently only Python and Yaml are supported for indentation analysis. Keep in mind: the parser/tokenizer will ignore indentations inside comments, inside strings and inside some other areas",
                     "scope": "window"
                 },
                 "blockman.n27AlsoRenderBlocksInsideSingleLineAreas": {
@@ -286,7 +297,7 @@
                 "blockman.n31RenderIncrementBeforeAndAfterVisibleRange": {
                     "type": "number",
                     "default": 22,
-                    "description": "Less is faster because less blocks will be rendered but scrolling may become uncomfortable. If less than 1 (e.g. -5), the blocks will render in limited area.",
+                    "description": "Less is faster because less blocks will be rendered outside the viewport but scrolling may become less comfortable. If less than 1 (e.g. -5), the blocks will render in limited area.",
                     "scope": "window"
                 },
                 "blockman.n32BlackListOfFileFormats": {

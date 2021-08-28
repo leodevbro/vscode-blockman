@@ -70,7 +70,7 @@ export const glo = {
     renderInSingleLineAreas: false,
 
     borderSize: 1,
-    borderRadius: 4,
+    borderRadius: 5,
 
     coloring: {
         onEachDepth: bigVars.currColorCombo.onEachDepth,

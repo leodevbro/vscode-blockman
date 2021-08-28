@@ -4,6 +4,11 @@ All notable changes to the "blockman" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.2.7] - 2021-08-29
+
+-   Updated README file
+-   Updated descriptions of Blockman settings
+
 ## [1.2.5] - 2021-08-22
 
 -   Yaml language support
