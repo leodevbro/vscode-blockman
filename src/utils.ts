@@ -946,7 +946,8 @@ export const getFullFileStats = async ({
 > => {
     // console.log("aqamde vaaartttttttttttttttttttttttt", glo.maxDepth);
     const document = editorInfo.editorRef.document;
-    // console.log("iiiiiiiiiiiiii:", document.languageId);
+    const lang = document.languageId;
+    // console.log("iiiiiiiiiiiiii:", lang);
 
     // let brackets = await bracketManager!.updateDocument(document);
 
@@ -1038,7 +1039,7 @@ export const getFullFileStats = async ({
         }
 
         /*
-        if (stylingLanguages.includes(document.languageId)) {
+        if (stylingLanguages.includes(lang)) {
             txt = txt.replace(/color:/g, `color:  `);
             txt = txt.replace(/background:/g, `background:  `);
             txt = txt.replace(/fill:/g, `fill:  `);
@@ -1059,7 +1060,7 @@ export const getFullFileStats = async ({
 
             // txt = txt.replace(/hsl\(/g, `  hsl(`);
             // txt = txt.replace(/hsla\(/g, `  hsla(`);
-        } else if (["json", "jsonc"].includes(document.languageId)) {
+        } else if (["json", "jsonc"].includes(lang)) {
             txt = txt.replace(/Background":/g, `Background":  `);
             txt = txt.replace(/Border":/g, `Border":  `);
             txt = txt.replace(/Color":/g, `Color":  `);
@@ -1082,13 +1083,13 @@ export const getFullFileStats = async ({
             glo.analyzeRoundBrackets) &&
         glo.maxDepth >= 0 &&
         bracketManager &&
-        document.languageId !== "plaintext"
+        lang !== "plaintext"
     ) {
         /*
         if (
             babelParser &&
             ["typescript", "typescriptreact", "tsx"].includes(
-                document.languageId,
+                lang,
             )
         ) {
             // if (false) {
@@ -1247,16 +1248,16 @@ export const getFullFileStats = async ({
     let pythonBlocks: IPositionEachZero[] = [];
     let yamlBlocks: IPositionEachZero[] = [];
 
-    // console.log("document.languageId:::::", document.languageId);
+    // console.log("lang:::::", lang);
 
     if (glo.analyzeIndentDedentTokens && glo.maxDepth >= 0) {
-        if (document.languageId === "python") {
+        if (lang === "python") {
             // console.log("before py blocks");
             pythonBlocks = pyFn(txt, editorInfo);
             // console.log("after py blocks");
 
             // txt = txt.replace(/\#/g, ` `); // cool to ignore "#"
-        } else if (document.languageId === "yaml") {
+        } else if (["yaml", "dockercompose"].includes(lang)) {
             // txt = txt.replace(/\/\//g, `  `); // cool to ignore "//"
             yamlBlocks = yamlFn(txt, editorInfo);
         }
@@ -1279,11 +1280,7 @@ export const getFullFileStats = async ({
 
     let tagsIt: IPositionEachZero[] = [];
 
-    if (
-        glo.analyzeTags &&
-        glo.maxDepth >= 0 &&
-        document.languageId !== "plaintext"
-    ) {
+    if (glo.analyzeTags && glo.maxDepth >= 0 && lang !== "plaintext") {
         try {
             tagsIt = findInnerStartersEndersOfTags({
                 editorInfo,
