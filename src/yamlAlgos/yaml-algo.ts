@@ -60,13 +60,23 @@ export const yamlFn = (
             //     );
             //     console.log(node.type, node.range, leftNonSpaceIsNlChar);
             // }
-            if (!!node.range) {
-                const leftNonSpaceIsNlChar = nearestLeftNonSpaceIsNewLineChar(
-                    newText,
-                    node.range[1],
-                );
-                if (leftNonSpaceIsNlChar) {
-                    myTokens.push(node.range);
+            const range: [number, number] = node.range;
+            if (!!range) {
+                const [starter, ender] = range;
+                if (!"{}[]".includes(newText[ender])) {
+                    // excluding bracket blocks by Yaml tokenizer, because has issues,
+                    // but we still get bracket blocks from global bracket tokenizer
+
+                    const starterLeftNonSpaceIsNlChar =
+                        nearestLeftNonSpaceIsNewLineChar(newText, starter);
+                    const enderLeftNonSpaceIsNlChar =
+                        nearestLeftNonSpaceIsNewLineChar(newText, ender);
+                    if (
+                        enderLeftNonSpaceIsNlChar &&
+                        starterLeftNonSpaceIsNlChar
+                    ) {
+                        myTokens.push(range);
+                    }
                 }
             }
         },
@@ -74,7 +84,15 @@ export const yamlFn = (
 
     const blockOpenersClosers: IPositionEachZero[] = [];
 
-    myTokens = myTokens.filter((x) => x[0] !== 0);
+    myTokens = myTokens.filter((x) => {
+        const opener = x[0];
+        const { inLineIndexZero } = findLineZeroAndInLineIndexZero({
+            globalIndexZero: opener,
+            editorInfo,
+        });
+        return inLineIndexZero !== 0;
+    });
+
     // console.log(myTokens);
 
     myTokens.map((x) => {
