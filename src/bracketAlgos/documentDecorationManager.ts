@@ -8,8 +8,9 @@ import {
     TextEditorSelectionChangeEvent,
     window,
 } from "vscode";
-import { glo, IEditorInfo, updateRender } from "../extension";
+import { glo, IEditorInfo } from "../extension";
 import { IPositionEachZero } from "../utils";
+import { updateRender } from "../utils2";
 import DocumentDecoration from "./documentDecoration";
 import Settings from "./settings";
 

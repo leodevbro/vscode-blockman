@@ -4,6 +4,12 @@ All notable changes to the "blockman" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.2.9] - 2021-09-25
+
+-   Fixed line height issue (The issue was caused by VSCode update)
+-   Added command: press F1 and find 'Blockman Select Focused' (selects the text inside focused block)
+-   Added command: press F1 and find 'Blockman Toggle Freeze/Unfreeze Focus'
+
 ## [1.2.8] - 2021-08-29
 
 -   Updated README file

@@ -139,6 +139,17 @@ If you use <strong>double width</strong> characters like these Chinese character
 
 <br />
 
+<h1 align="center">All Blockman quick commands</h1>
+
+```
+Press F1 and find "Blockman Toggle Enable/Disable"
+Press F1 and find "Blockman Select Focused" (Select text inside focused block)
+Press F1 and find "Blockman Toggle Freeze/Unfreeze Focus (Text change will cause unfreeze)"
+Press F1 and find "Blockman Toggle Try Support Double Width Chars (e.g. Chinese)"
+```
+
+<br />
+
 <h1 align="center">All Blockman settings</h1>
 
 ```jsonc

@@ -4,9 +4,9 @@ import {
     IEditorInfo,
     TyInLineInDepthInQueueInfo,
     TyDepthDecInfo,
-    notYetDisposedDecsObject,
 } from "./extension";
 import { IBlockRender } from "./utils";
+import { notYetDisposedDecsObject } from "./utils2";
 
 export interface ISingleLineBox {
     editorInfo: IEditorInfo;
