@@ -154,7 +154,7 @@ export default class DocumentDecoration {
 
     private tokenizeLine(index: number, editorInfo: IEditorInfo) {
         // const originalLine = this.document.lineAt(index).text;
-        const originalLine = editorInfo.monoText.slice(
+        const monoLine = editorInfo.monoText.slice(
             editorInfo.textLinesMap[index],
             editorInfo.textLinesMap[index + 1],
         );
@@ -181,7 +181,7 @@ export default class DocumentDecoration {
         //     );
         // }
 
-        const newText = originalLine;
+        const newText = monoLine;
         const previousLineRuleStack =
             index > 0 ? this.lines[index - 1].getRuleStack() : undefined;
 

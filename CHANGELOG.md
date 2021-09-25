@@ -4,6 +4,10 @@ All notable changes to the "blockman" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.2.10] - 2021-09-25
+
+-   Fixed selecting incorrect range using 'Select Focus' command when line contains tab characters
+
 ## [1.2.9] - 2021-09-25
 
 -   Fixed line height issue (The issue was caused by VSCode update)

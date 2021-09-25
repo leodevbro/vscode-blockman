@@ -214,12 +214,12 @@ export const selectFocusedBlock = () => {
                     const rangeStart = allit[theBlock.s];
                     const rangeEnd = allit[theBlock.e];
 
-                    const originalLineOfStart = thisEditorInfo.monoText.slice(
+                    const monoLineOfStart = thisEditorInfo.monoText.slice(
                         thisEditorInfo.textLinesMap[rangeStart.lineZero],
                         thisEditorInfo.textLinesMap[rangeStart.lineZero + 1],
                     );
 
-                    const originalLineOfEnd = thisEditorInfo.monoText.slice(
+                    const monoLineOfEnd = thisEditorInfo.monoText.slice(
                         thisEditorInfo.textLinesMap[rangeEnd.lineZero],
                         thisEditorInfo.textLinesMap[rangeEnd.lineZero + 1],
                     );
@@ -277,6 +277,40 @@ export const selectFocusedBlock = () => {
                                 }
                             });
 
+                            const monoInLineIndexZeroOfStart =
+                                rangeStart.inLineIndexZero + 1 - 2 * countS;
+                            const monoInLineIndexZeroOfEnd =
+                                rangeEnd.inLineIndexZero - 2 * countE;
+
+                            const currDoc = thisEditorInfo.editorRef.document;
+
+                            const docLineOfStart = currDoc.lineAt(
+                                rangeStart.lineZero,
+                            ).text;
+                            const docLineOfEnd = currDoc.lineAt(
+                                rangeEnd.lineZero,
+                            ).text;
+
+                            let tabSize =
+                                thisEditorInfo.editorRef.options.tabSize;
+                            if (typeof tabSize !== "number") {
+                                tabSize = 4;
+                            }
+
+                            const docInLineCharZeroOfStart =
+                                calculateCharIndexFromColumn(
+                                    docLineOfStart,
+                                    monoInLineIndexZeroOfStart,
+                                    tabSize,
+                                );
+
+                            const docInLineCharZeroOfEnd =
+                                calculateCharIndexFromColumn(
+                                    docLineOfEnd,
+                                    monoInLineIndexZeroOfEnd,
+                                    tabSize,
+                                );
+
                             const rangeAsArray: [
                                 number,
                                 number,
@@ -284,9 +318,9 @@ export const selectFocusedBlock = () => {
                                 number,
                             ] = [
                                 rangeStart.lineZero,
-                                rangeStart.inLineIndexZero + 1 - 2 * countS,
+                                docInLineCharZeroOfStart,
                                 rangeEnd.lineZero,
-                                rangeEnd.inLineIndexZero - 2 * countE,
+                                docInLineCharZeroOfEnd,
                             ];
 
                             thisEditor.selection = new vscode.Selection(
