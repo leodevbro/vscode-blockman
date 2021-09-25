@@ -341,7 +341,7 @@ export const updateControlledEditorsForOneDoc = ({
             (thisDoc as vscode.TextDocument) === editorInfo.editorRef.document
         ) {
             if (caller !== "scroll") {
-                editorInfo.focusDuo.currIsFreezed = false;
+                // editorInfo.focusDuo.currIsFreezed = false;
             }
 
             // editorInfo.needToAnalyzeFile = true;

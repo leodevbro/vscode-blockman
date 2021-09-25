@@ -7,6 +7,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [1.2.10] - 2021-09-25
 
 -   Fixed selecting incorrect range using 'Select Focus' command when line contains tab characters
+-   Focus Freeze is now more resistant: Focus will be in the correct block even if you change something inside or after it.
 
 ## [1.2.9] - 2021-09-25
 

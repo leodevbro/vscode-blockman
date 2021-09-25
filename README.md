@@ -144,7 +144,7 @@ If you use <strong>double width</strong> characters like these Chinese character
 ```
 Press F1 and find "Blockman Toggle Enable/Disable"
 Press F1 and find "Blockman Select Focused" (Select text inside focused block)
-Press F1 and find "Blockman Toggle Freeze/Unfreeze Focus (Text change will cause unfreeze)"
+Press F1 and find "Blockman Toggle Freeze/Unfreeze Focus"
 Press F1 and find "Blockman Toggle Try Support Double Width Chars (e.g. Chinese)"
 ```
 

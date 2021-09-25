@@ -334,6 +334,9 @@ export const selectFocusedBlock = () => {
 };
 
 export const updateFocusInfo = (editorInfo: IEditorInfo) => {
+    if (editorInfo.focusDuo.currIsFreezed) {
+        return;
+    }
     const thisEditorInfo = editorInfo;
     const thisEditor = editorInfo.editorRef;
 
