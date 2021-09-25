@@ -3,7 +3,7 @@
     "displayName": "Blockman - Highlight Nested Code Blocks",
     "publisher": "leodevbro",
     "description": "Mark/Highlight code blocks",
-    "version": "1.2.10",
+    "version": "1.2.11",
     "engines": {
         "vscode": "^1.56.1"
     },
@@ -56,11 +56,11 @@
             },
             {
                 "command": "blockman.toggleFreezeFocus",
-                "title": "Blockman Toggle Freeze/Unfreeze Focus (Text change will cause unfreeze)"
+                "title": "Blockman Toggle Freeze/Unfreeze Focus"
             },
             {
                 "command": "blockman.selectFocused",
-                "title": "Blockman Select Focused"
+                "title": "Blockman Select Focused Text"
             },
             {
                 "command": "blockman.printLeak",
