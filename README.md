@@ -11,7 +11,7 @@
 <br />
 <br />
 
-<p><strong>For better experience:</strong> Blockman <strong>WILL CHANGE</strong> these 6 items in VSCode settings (only one-time at the installation event). You can change them again when you want. These 6 settings are very non-vital, so maybe you don't even need to backup them first.</p>
+<p><strong>For better experience:</strong> Blockman <strong>WILL CHANGE</strong> these 7 items in VSCode settings (only one-time at the installation event). You can change them again when you want. These 7 settings are very non-vital, so maybe you don't even need to backup them first.</p>
 
 ```jsonc
 // settings.json (User/Global config, not Workspace config)
@@ -19,7 +19,8 @@
 {
     // ...
     "editor.inlayHints.enabled": false,
-    "editor.renderIndentGuides": false,
+    "editor.renderIndentGuides": false, // old API for indent guides
+    "editor.guides.indentation": false, // new API for indent guides
     "editor.wordWrap": "off",
     "diffEditor.wordWrap": "off",
 
@@ -237,7 +238,7 @@ like: ა, ბ, გ, დ, ე, ვ, ზ, თ, ი, კ, ლ, მ, ნ, ო, პ,
   
 <br />
 
-<p>6) Recommended to turn off "Editor: Highlight Active Indent Guide" and "Editor: Render Indent Guides".</p>
+<p>6) Recommended to turn off "Editor: Guides: Indentation" (new) / "Editor: Render Indent Guides" (old).</p>
 <p align="center"><img
   src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/indent-guide---c2-apng.png"
   alt="alt text testing"
