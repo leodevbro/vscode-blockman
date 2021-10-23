@@ -27,6 +27,7 @@ import {
 
 const iiGlobal = "blockman_data_iicounter";
 const iiGlobal2 = "blockman_data_iicounter2";
+const iiGlobal3 = "blockman_data_iicounter3";
 
 const os = require("os"); // Comes with node.js
 const myOS: string = os.type().toLowerCase();
@@ -414,6 +415,10 @@ const setUserwideIndentGuides = (myBool: boolean) => {
     vscode.workspace
         .getConfiguration()
         .update("editor.renderIndentGuides", myBool, 1); // 1 means Userwide
+
+    vscode.workspace
+        .getConfiguration()
+        .update("editor.guides.indentation", myBool, 1); // 1 means Userwide
     // vscode.workspace
     //     .getConfiguration()
     //     .update("editor.highlightActiveIndentGuide", myBool, 1); // 1 means Userwide
@@ -426,7 +431,8 @@ interface IConfigOfVscode {
     editorWordWrap?: "on" | "off"; // "editor.wordWrap"
     diffEditorWordWrap?: "on" | "off"; // "diffEditor.wordWrap"
     // markdownEditorWordWrap?: string; // "[markdown]_editor.wordWrap"
-    renderIndentGuides?: boolean; // "editor.renderIndentGuides"
+    renderIndentGuides?: boolean; // "editor.renderIndentGuides" - old API of indent guides
+    guidesIndentation: boolean; // "editor.guides.indentation" - new API of indent guides
     // highlightActiveIndentGuide?: boolean; // "editor.highlightActiveIndentGuide"
     [key: string]: string | boolean | undefined;
 }
@@ -444,6 +450,7 @@ const configOfVscodeWithBlockman: IConfigOfVscode = {
     editorWordWrap: "off",
     diffEditorWordWrap: "off",
     renderIndentGuides: false,
+    guidesIndentation: false,
 };
 
 // let vvvv = vscode.workspace.getConfiguration().get("editor.wordWrap");
@@ -530,6 +537,7 @@ export function activate(context: ExtensionContext) {
         const st = stateHolder.myState;
         const iicounter = st.get(iiGlobal);
         const iicounter2 = st.get(iiGlobal2);
+        const iicounter3 = st.get(iiGlobal3);
         // console.log(iicounter);
 
         if (iicounter === undefined) {
@@ -564,6 +572,24 @@ export function activate(context: ExtensionContext) {
             //
         } else if (iicounter2 === "2") {
             //
+        }
+
+        if (iicounter3 === undefined) {
+            console.log("first activation 3");
+            vscode.workspace
+                .getConfiguration()
+                .update(
+                    "editor.guides.indentation",
+                    configOfVscodeWithBlockman.guidesIndentation,
+                    1,
+                );
+
+            st.update(iiGlobal3, "1");
+        } else if (iicounter3 === "1") {
+            st.update(iiGlobal3, "2");
+            //
+        } else if (iicounter3 === "2") {
+            //-
         }
     }
 
