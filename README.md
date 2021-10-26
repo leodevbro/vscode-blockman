@@ -162,6 +162,9 @@ Press F1 and find "Blockman Toggle Try Support Double Width Chars (e.g. Chinese)
     // ...
     "blockman.n03MaxDepth": 12, // -1 is no blocks, 0 is ground block, 1 is first depth blocks, 2 is second depth blocks
     "blockman.n04ColorComboPreset": "Classic Dark 1 (Gradients)",
+    "blockman.n04PreferredDarkThemeColorComboPreset": "None",
+    "blockman.n04PreferredLightThemeColorComboPreset": "None",
+    "blockman.n04PreferredHighContrastThemeColorComboPreset": "None",
 
     "blockman.n05CustomColorOfDepth0": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent.
 
