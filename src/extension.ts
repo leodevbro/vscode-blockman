@@ -11,7 +11,6 @@ import {
 import { doubleWidthCharsReg } from "./helpers/regex-main";
 import DocumentDecorationManager from "./bracketAlgos/documentDecorationManager";
 import EventEmitter = require("events");
-import { glob } from "glob";
 
 import { applyAllBlockmanSettings } from "./settingsManager";
 import { colorCombos } from "./colors";

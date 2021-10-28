@@ -87,11 +87,13 @@ export class TextMateLoader {
             });
 
             // Load the JavaScript grammar and any other grammars included by it async.
-            return (registry.loadGrammarWithConfiguration(
-                scopeName,
-                this.languageId++,
-                {},
-            ) as Thenable<IGrammar | undefined | null>).then((grammar) => {
+            return (
+                registry.loadGrammarWithConfiguration(
+                    scopeName,
+                    this.languageId++,
+                    {},
+                ) as Thenable<IGrammar | undefined | null>
+            ).then((grammar) => {
                 if (grammar) {
                     if (!this.languageConfigs.has(languageID)) {
                         const mappedBrackets = brackets
