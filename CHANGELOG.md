@@ -4,7 +4,7 @@ All notable changes to the "blockman" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [1.2.16] - 2021-10-29
+## [1.3.0] - 2021-10-29
 
 -   Added ability in Blockman settings to choose preferred color combos for Dark, Light and High Contrast theme kinds.
 
