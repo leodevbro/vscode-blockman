@@ -2,6 +2,46 @@ import { ColorThemeKind, window, workspace } from "vscode";
 import { colorCombos, IColorCombo } from "./colors";
 import { glo } from "./extension";
 
+const chooseColorCombo = (
+    selectedCombo: string | undefined,
+    darkCombo: string | undefined,
+    lightCombo: string | undefined,
+    highContrastCombo: string | undefined,
+): string | undefined => {
+    const currVscodeThemeKind = window.activeColorTheme.kind;
+
+    const isTruthy = (combo?: string) => {
+        if (combo && combo !== "None") {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    let resultCombo = selectedCombo;
+
+    if (isTruthy(darkCombo) && currVscodeThemeKind === ColorThemeKind.Dark) {
+        resultCombo = darkCombo;
+        // console.log("dark kind");
+    } else if (
+        isTruthy(lightCombo) &&
+        currVscodeThemeKind === ColorThemeKind.Light
+    ) {
+        resultCombo = lightCombo;
+        // console.log("light king");
+    } else if (
+        isTruthy(highContrastCombo) &&
+        currVscodeThemeKind === ColorThemeKind.HighContrast
+    ) {
+        resultCombo = highContrastCombo;
+        // console.log("HC king");
+    }
+
+    // console.log("resultCombo:", resultCombo);
+
+    return resultCombo;
+};
+
 export const applyAllBlockmanSettings = () => {
     const blockmanConfig = workspace.getConfiguration("blockman");
     const bc = blockmanConfig;
@@ -35,13 +75,13 @@ export const applyAllBlockmanSettings = () => {
         "n04ColorComboPreset",
     );
     const selectedColorComboNameForDarkTheme: string | undefined = bc.get(
-        "n04ColorComboPresetForDarkTheme",
+        "n04Sub01ColorComboPresetForDarkTheme",
     );
     const selectedColorComboNameForLightTheme: string | undefined = bc.get(
-        "n04ColorComboPresetForLightTheme",
+        "n04Sub02ColorComboPresetForLightTheme",
     );
     const selectedColorComboNameForHighContrastTheme: string | undefined =
-        bc.get("n04ColorComboPresetForHighContrastTheme");
+        bc.get("n04Sub03ColorComboPresetForHighContrastTheme");
     // console.log("selectedColorComboName:", selectedColorComboName);
     let thisColorCombo: IColorCombo | undefined = undefined;
 
@@ -131,7 +171,7 @@ export const applyAllBlockmanSettings = () => {
 
     customColorsOnEachDepth.map((color, i) => {
         if (color) {
-            console.log("this col:", color);
+            // console.log("this col:", color);
             glo.coloring.onEachDepth[i] = color;
         }
     });
@@ -278,29 +318,4 @@ export const applyAllBlockmanSettings = () => {
             glo.blackListOfFileFormats = [];
         }
     }
-};
-
-const chooseColorCombo = (
-    selectedCombo: string | undefined,
-    darkCombo: string | undefined,
-    lightCombo: string | undefined,
-    highContrastCombo: string | undefined,
-): string | undefined => {
-    let resultCombo = selectedCombo;
-
-    const currVscodeThemeKind = window.activeColorTheme.kind;
-
-    if (currVscodeThemeKind === ColorThemeKind.Light) {
-        resultCombo = lightCombo;
-    } else if (currVscodeThemeKind === ColorThemeKind.Dark) {
-        resultCombo = darkCombo;
-    } else {
-        resultCombo = highContrastCombo;
-    }
-
-    if (!resultCombo || resultCombo === "None") {
-        resultCombo = selectedCombo;
-    }
-
-    return resultCombo;
 };

@@ -161,10 +161,10 @@ Press F1 and find "Blockman Toggle Try Support Double Width Chars (e.g. Chinese)
 {
     // ...
     "blockman.n03MaxDepth": 12, // -1 is no blocks, 0 is ground block, 1 is first depth blocks, 2 is second depth blocks
-    "blockman.n04ColorComboPreset": "Classic Dark 1 (Gradients)",
-    "blockman.n04ColorComboPresetForDarkTheme": "None", // Color combo to apply when current theme kind is Dark.
-    "blockman.n04ColorComboPresetForLightTheme": "None", // Color combo to apply when current theme kind is Light.
-    "blockman.n04ColorComboPresetForHighContrastTheme": "None", // Color combo to apply when current theme kind is High Contrast.
+    "blockman.n04ColorComboPreset": "Classic Dark 1 (Gradients)", // This does not change VSCode theme. Choose preset combo of colors. Corresponding colors are overridden by custom colors (if not empty string). Also This setting can be overriden by the next 3 combo settings
+    "blockman.n04Sub01ColorComboPresetForDarkTheme": "None", // Color combo to apply when current theme kind is Dark.
+    "blockman.n04Sub02ColorComboPresetForLightTheme": "None", // Color combo to apply when current theme kind is Light.
+    "blockman.n04Sub03ColorComboPresetForHighContrastTheme": "None", // Color combo to apply when current theme kind is High Contrast.
 
     "blockman.n05CustomColorOfDepth0": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent.
 

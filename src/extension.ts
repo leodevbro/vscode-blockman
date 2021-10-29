@@ -698,7 +698,10 @@ export function activate(context: ExtensionContext) {
             updateBlockmanLineHeightAndLetterSpacing();
             setColorDecoratorsBool();
 
-            applyAllBlockmanSettings();
+            setTimeout(() => {
+                applyAllBlockmanSettings(); // setTimeout is important because VSCode needs certain amount of time to update latest changes of settings.
+            }, 400);
+
             // console.log("scrrr:", glo.renderTimerForScroll);
 
             // updateAllControlledEditors({
