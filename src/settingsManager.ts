@@ -1,4 +1,4 @@
-import { workspace } from "vscode";
+import { ColorThemeKind, window, workspace } from "vscode";
 import { colorCombos, IColorCombo } from "./colors";
 import { glo } from "./extension";
 
@@ -34,11 +34,27 @@ export const applyAllBlockmanSettings = () => {
     const selectedColorComboName: string | undefined = bc.get(
         "n04ColorComboPreset",
     );
+    const selectedColorComboNameForDarkTheme: string | undefined = bc.get(
+        "n04ColorComboPresetForDarkTheme",
+    );
+    const selectedColorComboNameForLightTheme: string | undefined = bc.get(
+        "n04ColorComboPresetForLightTheme",
+    );
+    const selectedColorComboNameForHighContrastTheme: string | undefined =
+        bc.get("n04ColorComboPresetForHighContrastTheme");
     // console.log("selectedColorComboName:", selectedColorComboName);
     let thisColorCombo: IColorCombo | undefined = undefined;
-    if (selectedColorComboName) {
+
+    let chosenColorCombo = chooseColorCombo(
+        selectedColorComboName,
+        selectedColorComboNameForDarkTheme,
+        selectedColorComboNameForLightTheme,
+        selectedColorComboNameForHighContrastTheme,
+    );
+
+    if (chosenColorCombo) {
         thisColorCombo = colorCombos.find(
-            (combo) => combo.name === selectedColorComboName,
+            (combo) => combo.name === chosenColorCombo,
         );
     }
 
@@ -262,4 +278,29 @@ export const applyAllBlockmanSettings = () => {
             glo.blackListOfFileFormats = [];
         }
     }
+};
+
+const chooseColorCombo = (
+    selectedCombo: string | undefined,
+    darkCombo: string | undefined,
+    lightCombo: string | undefined,
+    highContrastCombo: string | undefined,
+): string | undefined => {
+    let resultCombo = selectedCombo;
+
+    const currVscodeThemeKind = window.activeColorTheme.kind;
+
+    if (currVscodeThemeKind === ColorThemeKind.Light) {
+        resultCombo = lightCombo;
+    } else if (currVscodeThemeKind === ColorThemeKind.Dark) {
+        resultCombo = darkCombo;
+    } else {
+        resultCombo = highContrastCombo;
+    }
+
+    if (!resultCombo || resultCombo === "None") {
+        resultCombo = selectedCombo;
+    }
+
+    return resultCombo;
 };
