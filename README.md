@@ -5,7 +5,7 @@
 
 <p><strong><a href="#donation">Donation</a></strong> is really appreciated. Blockman is a hard work of many months. My name is <a href="https://leodevbro.github.io">Levan Katsadze (ლევან კაცაძე)</a>, 1995-03-03, from Tbilisi, <a href="https://en.wikipedia.org/wiki/Georgia_(country)">Georgia (Not USA)</a>.</p>
 
-<p><strong>Support (With PayPal):</strong> <a href="https://www.buymeacoffee.com/leodevbro">https://www.buymeacoffee.com/leodevbro</a></p>
+<a href="https://www.buymeacoffee.com/leodevbro" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
 <br />
 <br />
