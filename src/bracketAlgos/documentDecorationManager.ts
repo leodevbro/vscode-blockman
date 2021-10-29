@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+import * as vscode from "vscode";
 import { rejects } from "assert";
 import { resolve } from "path";
 import {
@@ -6,7 +7,6 @@ import {
     TextDocumentChangeEvent,
     TextEditor,
     TextEditorSelectionChangeEvent,
-    window,
 } from "vscode";
 import { glo, IEditorInfo } from "../extension";
 import { IPositionEachZero } from "../utils";
@@ -62,7 +62,7 @@ export default class DocumentDecorationManager {
     }
 
     public updateAllDocuments() {
-        for (const editor of window.visibleTextEditors) {
+        for (const editor of vscode.window.visibleTextEditors) {
             // this.updateDocument(editor.document);
         }
     }

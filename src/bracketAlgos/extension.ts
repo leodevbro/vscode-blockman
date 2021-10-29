@@ -1,4 +1,5 @@
 // this file is just a sample of the main file of vscode extention.
+import * as vscode from "vscode";
 import {
     commands,
     ExtensionContext,
@@ -34,7 +35,7 @@ export function activate(context: ExtensionContext) {
             }
         }),
 
-        window.onDidChangeVisibleTextEditors(() => {
+        vscode.window.onDidChangeVisibleTextEditors(() => {
             documentDecorationManager.updateAllDocuments();
         }),
         workspace.onDidChangeTextDocument((event) => {
@@ -48,7 +49,7 @@ export function activate(context: ExtensionContext) {
         workspace.onDidOpenTextDocument((event) => {
             // documentDecorationManager.onDidOpenTextDocument(event);
         }),
-        window.onDidChangeTextEditorSelection((event) => {}),
+        vscode.window.onDidChangeTextEditorSelection((event) => {}),
     );
 
     documentDecorationManager.updateAllDocuments();

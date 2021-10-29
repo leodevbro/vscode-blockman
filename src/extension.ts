@@ -1,4 +1,4 @@
-import { ExtensionContext, window, workspace } from "vscode";
+import { ExtensionContext, workspace } from "vscode";
 import * as vscode from "vscode";
 
 import {
@@ -28,9 +28,45 @@ const iiGlobal = "blockman_data_iicounter";
 const iiGlobal2 = "blockman_data_iicounter2";
 const iiGlobal3 = "blockman_data_iicounter3";
 
-const os = require("os"); // Comes with node.js
-const myOS: string = os.type().toLowerCase();
-const isMac = myOS === "darwin";
+let isMac = false;
+let osChecked = false;
+
+if (!osChecked) {
+    try {
+        // console.log("start of node os check");
+        const os = require("os"); // Comes with node.js
+        const myOS: string = os.type().toLowerCase();
+        const macCheck = myOS === "darwin";
+        if (macCheck === true) {
+            isMac = macCheck;
+        }
+        osChecked = true;
+        // console.log("end of node os check");
+    } catch (err) {
+        console.log(`Maybe error of: require("os")`);
+        console.log(err);
+    }
+}
+
+if (!osChecked) {
+    try {
+        // console.log("start of web os check");
+        // @ts-ignore
+        const macCheck =
+            // @ts-ignore
+            window.navigator.userAgent.toLowerCase().indexOf("mac") !== -1;
+        if (macCheck === true) {
+            isMac = macCheck;
+        }
+        osChecked = true;
+        // console.log("end of web os check");
+    } catch (err) {
+        console.log(`Maybe error of: window.navigator.userAgent`);
+        console.log(err);
+    }
+}
+
+console.log("isMac is:", isMac);
 
 //  const GOLDEN_LINE_HEIGHT_RATIO = platform.isMacintosh ? 1.5 : 1.35;
 const GOLDEN_LINE_HEIGHT_RATIO = isMac ? 1.5 : 1.35;
@@ -358,7 +394,8 @@ let focusTimout: any;
 export const updateFocus = (editorInfo?: IEditorInfo) => {
     clearTimeout(focusTimout);
     focusTimout = setTimeout(() => {
-        const thisEditor = editorInfo?.editorRef || window.activeTextEditor;
+        const thisEditor =
+            editorInfo?.editorRef || vscode.window.activeTextEditor;
 
         if (thisEditor) {
             const thisEditorInfo =
@@ -497,7 +534,7 @@ const setUserwideConfigOfVscode = (userwideConfig: IConfigOfVscode) => {
 
 // maybe not needed anymore
 const importantMessage = () => {
-    window.showInformationMessage(`blaaaa`, { modal: true });
+    vscode.window.showInformationMessage(`blaaaa`, { modal: true });
 };
 
 const softRestart = () => {
@@ -611,7 +648,7 @@ export function activate(context: ExtensionContext) {
             console.log(
                 "Hello, I'm Blockman, a visual helper for software developers.",
             );
-            window.showInformationMessage(
+            vscode.window.showInformationMessage(
                 `Hello, I'm Blockman, a visual helper for software developers.`,
                 { modal: false },
             );
@@ -654,7 +691,7 @@ export function activate(context: ExtensionContext) {
                 const isOn: string = glo.trySupportDoubleWidthChars
                     ? "ON"
                     : "OFF";
-                window.showInformationMessage(
+                vscode.window.showInformationMessage(
                     `Double-width char support (experimental) is ${isOn}`,
                     { modal: false },
                 );
@@ -662,7 +699,7 @@ export function activate(context: ExtensionContext) {
         ),
 
         vscode.commands.registerCommand("blockman.toggleFreezeFocus", () => {
-            const thisEditor = window.activeTextEditor;
+            const thisEditor = vscode.window.activeTextEditor;
             if (thisEditor) {
                 const thisEditorInfo = infosOfcontrolledEditors.find(
                     (x) => x.editorRef === thisEditor,
@@ -720,7 +757,7 @@ export function activate(context: ExtensionContext) {
             }
         }),
 
-        window.onDidChangeTextEditorOptions((event) => {
+        vscode.window.onDidChangeTextEditorOptions((event) => {
             if (!glo.isOn) {
                 return;
             }
@@ -732,7 +769,7 @@ export function activate(context: ExtensionContext) {
             updateControlledEditorsForOneDoc({ editor: event.textEditor });
         }),
 
-        window.onDidChangeVisibleTextEditors((event) => {
+        vscode.window.onDidChangeVisibleTextEditors((event) => {
             if (!glo.isOn) {
                 return;
             }
@@ -768,7 +805,7 @@ export function activate(context: ExtensionContext) {
             //     console.log("eds-opennnnnnnn:", eds);
             // }, 2000);
         }),
-        window.onDidChangeTextEditorSelection((event) => {
+        vscode.window.onDidChangeTextEditorSelection((event) => {
             if (!glo.isOn) {
                 return;
             }
@@ -777,7 +814,7 @@ export function activate(context: ExtensionContext) {
             // console.log("changed selection");
             updateFocus();
         }),
-        window.onDidChangeTextEditorVisibleRanges((event) => {
+        vscode.window.onDidChangeTextEditorVisibleRanges((event) => {
             if (!glo.isOn) {
                 return;
             }
@@ -789,7 +826,7 @@ export function activate(context: ExtensionContext) {
                 mode: "scroll",
             });
         }),
-        window.onDidChangeActiveTextEditor((event) => {
+        vscode.window.onDidChangeActiveTextEditor((event) => {
             // needToAnalyzeFile = true;
             // let thisEditor = window.activeTextEditor;
             // if (thisEditor) {

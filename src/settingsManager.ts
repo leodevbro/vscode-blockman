@@ -1,4 +1,5 @@
-import { ColorThemeKind, window, workspace } from "vscode";
+import * as vscode from "vscode";
+import { ColorThemeKind, workspace } from "vscode";
 import { colorCombos, IColorCombo } from "./colors";
 import { glo } from "./extension";
 
@@ -8,7 +9,7 @@ const chooseColorCombo = (
     lightCombo: string | undefined,
     highContrastCombo: string | undefined,
 ): string | undefined => {
-    const currVscodeThemeKind = window.activeColorTheme.kind;
+    const currVscodeThemeKind = vscode.window.activeColorTheme.kind;
 
     const isTruthy = (combo?: string) => {
         if (combo && combo !== "None") {
