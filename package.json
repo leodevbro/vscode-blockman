@@ -148,7 +148,7 @@
                     "description": "This does not change VSCode theme. Choose preset combo of colors. Corresponding colors are overridden by custom colors (if not empty string)",
                     "scope": "window"
                 },
-                "blockman.n04PreferredDarkThemeColorComboPreset": {
+                "blockman.n04ColorComboPresetForDarkTheme": {
                     "type": "string",
                     "default": "None",
                     "enum": [
@@ -178,10 +178,10 @@
                         "Pale Pink (Gradients)",
                         "Pale Pink (Solid colors)"
                     ],
-                    "description": "Color combo to apply when current theme is a dark theme",
+                    "description": "Color combo to apply when current theme kind is Dark.",
                     "scope": "window"
                 },
-                "blockman.n04PreferredLightThemeColorComboPreset": {
+                "blockman.n04ColorComboPresetForLightTheme": {
                     "type": "string",
                     "default": "None",
                     "enum": [
@@ -211,10 +211,10 @@
                         "Pale Pink (Gradients)",
                         "Pale Pink (Solid colors)"
                     ],
-                    "description": "Color combo to apply when current theme is a light theme",
+                    "description": "Color combo to apply when current theme kind is Light.",
                     "scope": "window"
                 },
-                "blockman.n04PreferredHighContrastThemeColorComboPreset": {
+                "blockman.n04ColorComboPresetForHighContrastTheme": {
                     "type": "string",
                     "default": "None",
                     "enum": [
@@ -244,7 +244,7 @@
                         "Pale Pink (Gradients)",
                         "Pale Pink (Solid colors)"
                     ],
-                    "description": "Color combo to apply when current theme is a high contrast theme",
+                    "description": "Color combo to apply when current theme kind is High Contrast.",
                     "scope": "window"
                 },
                 "blockman.n05CustomColorOfDepth0": {

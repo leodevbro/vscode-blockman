@@ -34,23 +34,22 @@ export const applyAllBlockmanSettings = () => {
     const selectedColorComboName: string | undefined = bc.get(
         "n04ColorComboPreset",
     );
-    const selectedDarkThemeColorComboName: string | undefined = bc.get(
-        "n04PreferredDarkThemeColorComboPreset",
+    const selectedColorComboNameForDarkTheme: string | undefined = bc.get(
+        "n04ColorComboPresetForDarkTheme",
     );
-    const selectedLightThemeColorComboName: string | undefined = bc.get(
-        "n04PreferredLightThemeColorComboPreset",
+    const selectedColorComboNameForLightTheme: string | undefined = bc.get(
+        "n04ColorComboPresetForLightTheme",
     );
-    const selectedHighContrastThemeColorComboName: string | undefined = bc.get(
-        "n04PreferredHighContrastThemeColorComboPreset",
-    );
+    const selectedColorComboNameForHighContrastTheme: string | undefined =
+        bc.get("n04ColorComboPresetForHighContrastTheme");
     // console.log("selectedColorComboName:", selectedColorComboName);
     let thisColorCombo: IColorCombo | undefined = undefined;
 
     let chosenColorCombo = chooseColorCombo(
         selectedColorComboName,
-        selectedDarkThemeColorComboName,
-        selectedLightThemeColorComboName,
-        selectedHighContrastThemeColorComboName,
+        selectedColorComboNameForDarkTheme,
+        selectedColorComboNameForLightTheme,
+        selectedColorComboNameForHighContrastTheme,
     );
 
     if (chosenColorCombo) {
@@ -299,7 +298,7 @@ const chooseColorCombo = (
         resultCombo = highContrastCombo;
     }
 
-    if (!resultCombo || (resultCombo && resultCombo === "None")) {
+    if (!resultCombo || resultCombo === "None") {
         resultCombo = selectedCombo;
     }
 
