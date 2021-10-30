@@ -54,7 +54,8 @@ if (!osChecked) {
         // @ts-ignore
         const macCheck =
             // @ts-ignore
-            window.navigator.userAgent.toLowerCase().indexOf("mac") !== -1;
+            navigator.userAgent.toLowerCase().indexOf("mac") !== -1;
+        console.log("macCheck:", macCheck);
         if (macCheck === true) {
             isMac = macCheck;
         }
@@ -67,6 +68,7 @@ if (!osChecked) {
 }
 
 console.log("isMac is:", isMac);
+console.log("osChecked:", osChecked);
 
 //  const GOLDEN_LINE_HEIGHT_RATIO = platform.isMacintosh ? 1.5 : 1.35;
 const GOLDEN_LINE_HEIGHT_RATIO = isMac ? 1.5 : 1.35;
