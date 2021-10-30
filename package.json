@@ -183,7 +183,7 @@
                 },
                 "blockman.n04Sub02ColorComboPresetForLightTheme": {
                     "type": "string",
-                    "default": "None",
+                    "default": "Classic Light (Gradients)",
                     "enum": [
                         "None",
                         "Classic Dark 1 (Gradients)",
