@@ -45,6 +45,34 @@ export const colorCombos: IColorCombo[] = [
     },
 
     {
+        name: "Classic Dark 1 (Super gradients)", // ===============================================
+
+        onEachDepth: [
+            `linear-gradient(to right, hsl(0, 0%, 5.7%), hsl(0, 0%, 6%))`,
+
+            `linear-gradient(to right, hsl(0, 0%, 7.1%), hsl(0, 0%, 6%))`,
+            `linear-gradient(to right, hsl(0, 0%, 9.5%), hsl(0, 0%, 6%))`,
+            `linear-gradient(to right, hsl(0, 0%, 12.8%), hsl(0, 0%, 6%))`,
+            `linear-gradient(to right, hsl(0, 0%, 12.8%), hsl(0, 0%, 6%))`,
+            `linear-gradient(to right, hsl(0, 0%, 12.8%), hsl(0, 0%, 6%))`,
+
+            `linear-gradient(to right, hsl(0, 0%, 12.8%), hsl(0, 0%, 6%))`,
+            `linear-gradient(to right, hsl(0, 0%, 12.8%), hsl(0, 0%, 6%))`,
+            `linear-gradient(to right, hsl(0, 0%, 12.8%), hsl(0, 0%, 6%))`,
+            `linear-gradient(to right, hsl(0, 0%, 12.8%), hsl(0, 0%, 6%))`,
+            `linear-gradient(to right, hsl(0, 0%, 12.8%), hsl(0, 0%, 6%))`,
+        ],
+
+        border: `linear-gradient(to right, hsl(0, 0%, 24%), hsl(0, 0%, 6%))`,
+        borderOfDepth0: `linear-gradient(to right, hsl(0, 0%, 30%), hsl(0, 0%, 6%))`,
+
+        focusedBlock:
+            "linear-gradient(to right, hsl(205, 60%, 8%), hsl(210, 20%, 6%))",
+
+        borderOfFocusedBlock: `linear-gradient(to right, hsl(30, 60%, 50%), hsl(30, 33%, 25%))`,
+    },
+
+    {
         name: "Classic Dark 1 (Solid colors)",
 
         onEachDepth: [
@@ -243,6 +271,33 @@ export const colorCombos: IColorCombo[] = [
         name: "Classic Light (Gradients)", // ===============================================
 
         onEachDepth: [
+            `linear-gradient(to right, hsl(0, 0%, 100%), hsl(0, 0%, 100%))`,
+
+            `linear-gradient(to right, hsl(195, 70%, 98.5%), hsl(195, 70%, 99%))`,
+            `linear-gradient(to right, hsl(205, 60%, 97%), hsl(205, 60%, 98%))`,
+            `linear-gradient(to right, hsl(207, 50%, 95%), hsl(207, 50%, 96.5%))`,
+            `linear-gradient(to right, hsl(207, 50%, 95%), hsl(207, 50%, 96.5%))`,
+            `linear-gradient(to right, hsl(207, 50%, 95%), hsl(207, 50%, 96.5%))`,
+
+            `linear-gradient(to right, hsl(207, 50%, 95%), hsl(207, 50%, 96.5%))`,
+            `linear-gradient(to right, hsl(207, 50%, 95%), hsl(207, 50%, 96.5%))`,
+            `linear-gradient(to right, hsl(207, 50%, 95%), hsl(207, 50%, 96.5%))`,
+            `linear-gradient(to right, hsl(207, 50%, 95%), hsl(207, 50%, 96.5%))`,
+            `linear-gradient(to right, hsl(207, 50%, 95%), hsl(207, 50%, 96.5%))`,
+        ],
+
+        border: `linear-gradient(to right, hsl(205, 55%, 82%), hsl(205, 55%, 90%))`,
+        borderOfDepth0: `linear-gradient(to right, hsl(220, 70%, 90%), hsl(220, 70%, 95%))`,
+
+        focusedBlock: `linear-gradient(to right, hsl(202, 90%, 95%), hsl(202, 92%, 98%))`,
+
+        borderOfFocusedBlock: `linear-gradient(to right, hsl(212, 90%, 74%), hsl(205, 90%, 85%))`,
+    },
+
+    {
+        name: "Classic Light (Gradients) Old", // ===============================================
+
+        onEachDepth: [
             `linear-gradient(to right, hsl(0, 0%, 100%), hsl(0, 0%, 99%))`,
 
             `linear-gradient(to right, hsl(0, 0%, 97%), hsl(0, 0%, 96%))`,
@@ -268,7 +323,60 @@ export const colorCombos: IColorCombo[] = [
     },
 
     {
+        name: "Classic Light (Super gradients)", // ===============================================
+
+        onEachDepth: [
+            `linear-gradient(to right, hsl(0, 0%, 100%), hsl(0, 0%, 100%))`,
+
+            `linear-gradient(to right, hsl(195, 70%, 98.5%), hsl(0, 0%, 100%))`,
+            `linear-gradient(to right, hsl(205, 60%, 97%), hsl(0, 0%, 100%))`,
+            `linear-gradient(to right, hsl(207, 50%, 95%), hsl(0, 0%, 100%))`,
+            `linear-gradient(to right, hsl(207, 50%, 95%), hsl(0, 0%, 100%))`,
+            `linear-gradient(to right, hsl(207, 50%, 95%), hsl(0, 0%, 100%))`,
+
+            `linear-gradient(to right, hsl(207, 50%, 95%), hsl(0, 0%, 100%))`,
+            `linear-gradient(to right, hsl(207, 50%, 95%), hsl(0, 0%, 100%))`,
+            `linear-gradient(to right, hsl(207, 50%, 95%), hsl(0, 0%, 100%))`,
+            `linear-gradient(to right, hsl(207, 50%, 95%), hsl(0, 0%, 100%))`,
+            `linear-gradient(to right, hsl(207, 50%, 95%), hsl(0, 0%, 100%))`,
+        ],
+
+        border: `linear-gradient(to right, hsl(205, 55%, 82%), hsl(0, 0%, 100%))`,
+        borderOfDepth0: `linear-gradient(to right, hsl(220, 70%, 90%), hsl(0, 0%, 100%))`,
+
+        focusedBlock: `linear-gradient(to right, hsl(202, 90%, 95%), hsl(202, 92%, 98%))`,
+
+        borderOfFocusedBlock: `linear-gradient(to right, hsl(212, 90%, 74%), hsl(205, 90%, 85%))`,
+    },
+
+    {
         name: "Classic Light (Solid colors)",
+        onEachDepth: [
+            `hsl(0, 0%, 100%)`,
+
+            `hsl(195, 70%, 98.5%)`,
+            `hsl(205, 60%, 97%)`,
+            `hsl(207, 50%, 95%)`,
+            `hsl(207, 50%, 95%)`,
+            `hsl(207, 50%, 95%)`,
+
+            `hsl(207, 50%, 95%)`,
+            `hsl(207, 50%, 95%)`,
+            `hsl(207, 50%, 95%)`,
+            `hsl(207, 50%, 95%)`,
+            `hsl(207, 50%, 95%)`,
+        ],
+
+        border: `hsl(205, 55%, 82%)`,
+        borderOfDepth0: `hsl(220, 70%, 90%)`,
+
+        focusedBlock: `hsl(202, 90%, 95%)`,
+
+        borderOfFocusedBlock: `hsl(212, 90%, 74%)`,
+    },
+
+    {
+        name: "Classic Light (Solid colors) Old",
 
         onEachDepth: [
             `hsl(0, 0%, 100%)`,
@@ -469,15 +577,15 @@ export const colorCombos: IColorCombo[] = [
 
             `hsl(216, 28%, 7%)`,
             `hsl(216, 16%, 16%)`,
-            `hsl(216, 14%, 14%`,
-            `hsl(216, 14%, 14%`,
-            `hsl(216, 14%, 14%`,
+            `hsl(216, 14%, 14%)`,
+            `hsl(216, 14%, 14%)`,
+            `hsl(216, 14%, 14%)`,
 
-            `hsl(216, 14%, 14%`,
-            `hsl(216, 14%, 14%`,
-            `hsl(216, 14%, 14%`,
-            `hsl(216, 14%, 14%`,
-            `hsl(216, 14%, 14%`,
+            `hsl(216, 14%, 14%)`,
+            `hsl(216, 14%, 14%)`,
+            `hsl(216, 14%, 14%)`,
+            `hsl(216, 14%, 14%)`,
+            `hsl(216, 14%, 14%)`,
         ],
 
         border: `hsl(235, 15%, 30%)`,
@@ -497,15 +605,15 @@ export const colorCombos: IColorCombo[] = [
 
             `hsl(216, 28%, 7%)`,
             `hsl(216, 16%, 16%)`,
-            `hsl(216, 14%, 14%`,
-            `hsl(216, 14%, 14%`,
-            `hsl(216, 14%, 14%`,
+            `hsl(216, 14%, 14%)`,
+            `hsl(216, 14%, 14%)`,
+            `hsl(216, 14%, 14%)`,
 
-            `hsl(216, 14%, 14%`,
-            `hsl(216, 14%, 14%`,
-            `hsl(216, 14%, 14%`,
-            `hsl(216, 14%, 14%`,
-            `hsl(216, 14%, 14%`,
+            `hsl(216, 14%, 14%)`,
+            `hsl(216, 14%, 14%)`,
+            `hsl(216, 14%, 14%)`,
+            `hsl(216, 14%, 14%)`,
+            `hsl(216, 14%, 14%)`,
         ],
 
         border: `hsl(235, 15%, 30%)`,

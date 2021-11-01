@@ -12,7 +12,10 @@ import { doubleWidthCharsReg } from "./helpers/regex-main";
 import DocumentDecorationManager from "./bracketAlgos/documentDecorationManager";
 import EventEmitter = require("events");
 
-import { applyAllBlockmanSettings } from "./settingsManager";
+import {
+    applyAllBlockmanSettings,
+    makeGradientNotation,
+} from "./settingsManager";
 import { colorCombos } from "./colors";
 import {
     getLastColIndexForLineWithColorDecSpaces,
@@ -83,6 +86,13 @@ const stateHolder: {
 };
 
 export let bracketManager: DocumentDecorationManager | undefined | null;
+
+colorCombos.forEach((combo) => {
+    combo.focusedBlock = makeGradientNotation(combo.focusedBlock);
+    combo.onEachDepth = combo.onEachDepth.map((color) =>
+        makeGradientNotation(color),
+    );
+});
 
 const classicDark1Combo = colorCombos.find(
     (x) => x.name === "Classic Dark 1 (Gradients)",
@@ -392,9 +402,11 @@ export const updateControlledEditorsForOneDoc = ({
     });
 };
 
-let focusTimout: any;
+let focusTimout: NodeJS.Timeout | undefined;
 export const updateFocus = (editorInfo?: IEditorInfo) => {
-    clearTimeout(focusTimout);
+    if (focusTimout) {
+        clearTimeout(focusTimout);
+    }
     focusTimout = setTimeout(() => {
         const thisEditor =
             editorInfo?.editorRef || vscode.window.activeTextEditor;
@@ -545,6 +557,8 @@ const softRestart = () => {
     infosOfcontrolledEditors = [];
     updateAllControlledEditors({ alsoStillVisible: true });
 };
+
+let settingsChangeTimout: NodeJS.Timeout | undefined;
 
 export function activate(context: ExtensionContext) {
     stateHolder.myState = context.globalState;
@@ -737,9 +751,12 @@ export function activate(context: ExtensionContext) {
             updateBlockmanLineHeightAndLetterSpacing();
             setColorDecoratorsBool();
 
-            setTimeout(() => {
+            if (settingsChangeTimout) {
+                clearTimeout(settingsChangeTimout);
+            }
+            settingsChangeTimout = setTimeout(() => {
                 applyAllBlockmanSettings(); // setTimeout is important because VSCode needs certain amount of time to update latest changes of settings.
-            }, 400);
+            }, 500);
 
             // console.log("scrrr:", glo.renderTimerForScroll);
 

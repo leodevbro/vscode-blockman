@@ -3,6 +3,40 @@ import { ColorThemeKind, workspace } from "vscode";
 import { colorCombos, IColorCombo } from "./colors";
 import { glo } from "./extension";
 
+export const makeGradientNotation = (possiblySolidColor: string): string => {
+    // !!! IMPORTANT !!!
+    // New rendering function uses background with
+    // content-box and padding-box values.
+
+    // CSS background with content-box and padding-box values
+    // does not work if content-box value is solid color.
+
+    // for example, this works fine for solid red:
+
+    /*
+    background: 
+        linear-gradient(red, red) padding-box,
+        green border-box;
+    */
+
+    // but this does not work:
+
+    /*
+    background: 
+        red padding-box,
+        green border-box;
+    */
+
+    // So, instead of sending solid color, maybe we should always
+    // send it as linear-gradient notiation for padding-box (background) value.
+
+    if (possiblySolidColor.toLowerCase().indexOf("gradient") !== -1) {
+        return possiblySolidColor;
+    } else {
+        return `linear-gradient(to right, ${possiblySolidColor}, ${possiblySolidColor})`;
+    }
+};
+
 const chooseColorCombo = (
     selectedCombo: string | undefined,
     darkCombo: string | undefined,
@@ -161,9 +195,13 @@ export const applyAllBlockmanSettings = () => {
     );
 
     if (thisColorCombo) {
-        glo.coloring.onEachDepth = [...thisColorCombo.onEachDepth]; // important to copy the array
+        glo.coloring.onEachDepth = thisColorCombo.onEachDepth.map((color) =>
+            makeGradientNotation(color),
+        ); // important to copy the array, using map() or using [...array]
 
-        glo.coloring.focusedBlock = thisColorCombo.focusedBlock;
+        glo.coloring.focusedBlock = makeGradientNotation(
+            thisColorCombo.focusedBlock,
+        );
 
         glo.coloring.border = thisColorCombo.border;
         glo.coloring.borderOfDepth0 = thisColorCombo.borderOfDepth0;
@@ -172,13 +210,15 @@ export const applyAllBlockmanSettings = () => {
 
     customColorsOnEachDepth.map((color, i) => {
         if (color) {
-            // console.log("this col:", color);
-            glo.coloring.onEachDepth[i] = color;
+            // glo.coloring.onEachDepth[i] = color;
+            glo.coloring.onEachDepth[i] = makeGradientNotation(color);
         }
     });
 
     if (customColorOfFocusedBlock) {
-        glo.coloring.focusedBlock = customColorOfFocusedBlock;
+        glo.coloring.focusedBlock = makeGradientNotation(
+            customColorOfFocusedBlock,
+        );
     }
     if (customColorOfFocusedBlockBorder) {
         glo.coloring.borderOfFocusedBlock = customColorOfFocusedBlockBorder;
