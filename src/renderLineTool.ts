@@ -3,8 +3,8 @@ import { glo, TyInLineInDepthInQueueInfo, TyDepthDecInfo } from "./extension";
 import { ISingleLineBox } from "./renderingTools";
 import { notYetDisposedDecsObject } from "./utils2";
 
-console.log("ცვლილება 001");
-
+console.log("ცვლილება 002");
+// let kkk = 0;
 // new renderer function
 export const renderSingleLineBox = ({
     editorInfo,
@@ -264,6 +264,10 @@ export const renderSingleLineBox = ({
         " padding-box, " +
         borderColorNewVarToSupportGraient +
         "border-box;";
+
+    // kkk += 1;
+    // console.log(kkk);
+    // return;
 
     const lineDecoration = vscode.window.createTextEditorDecorationType({
         before: {

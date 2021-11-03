@@ -12,7 +12,8 @@ import { ignoreBracketsInToken, LineTokens } from "./vscodeFiles";
 import { glo, IEditorInfo, updateAllControlledEditors } from "../extension";
 import { nukeAllDecs, nukeJunkDecorations } from "../utils2";
 
-let refresherTimeout: NodeJS.Timeout | undefined = undefined;
+// let refresherTimeout: NodeJS.Timeout | undefined = undefined;
+let leakCleanTimeoutStarted = false;
 
 export default class DocumentDecoration {
     public readonly settings: Settings;
@@ -94,16 +95,23 @@ export default class DocumentDecoration {
                     this.document.fileName,
             );
 
-            if (refresherTimeout) {
-                clearTimeout(refresherTimeout);
-            }
+            // if (refresherTimeout) {
+            // clearTimeout(refresherTimeout); // maybe it's better without it
+            // }
 
-            refresherTimeout = setTimeout(() => {
-                // junkDecors3dArr.push(editorInfo.decors);
-                nukeJunkDecorations();
-                nukeAllDecs();
-                updateAllControlledEditors({ alsoStillVisible: true });
-            }, 180000);
+            // refresherTimeout = setTimeout(() => {
+            // console.log("before if");
+            if (!leakCleanTimeoutStarted) {
+                // console.log("after if");
+                leakCleanTimeoutStarted = true;
+                setTimeout(() => {
+                    leakCleanTimeoutStarted = false;
+                    // junkDecors3dArr.push(editorInfo.decors);
+                    nukeJunkDecorations();
+                    nukeAllDecs();
+                    updateAllControlledEditors({ alsoStillVisible: true });
+                }, 120000);
+            }
 
             return [];
         }
