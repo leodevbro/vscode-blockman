@@ -419,7 +419,7 @@
                 },
                 "blockman.n31RenderIncrementBeforeAndAfterVisibleRange": {
                     "type": "number",
-                    "default": 22,
+                    "default": 20,
                     "description": "Less is faster because less blocks will be rendered outside the viewport but scrolling may become less comfortable. If less than 1 (e.g. -5), the blocks will render in limited area.",
                     "scope": "window"
                 },

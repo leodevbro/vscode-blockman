@@ -334,8 +334,8 @@ export const applyAllBlockmanSettings = () => {
     // console.log("iissss:", timeToWaitBeforeRerenderAfterlastScrollEvent);
     if (
         typeof renderIncrementBeforeAndAfterVisibleRange === "number" &&
-        renderIncrementBeforeAndAfterVisibleRange >= -100 &&
-        renderIncrementBeforeAndAfterVisibleRange <= 100
+        renderIncrementBeforeAndAfterVisibleRange >= -200 &&
+        renderIncrementBeforeAndAfterVisibleRange <= 200
     ) {
         glo.renderIncBeforeAfterVisRange =
             renderIncrementBeforeAndAfterVisibleRange;

@@ -3,9 +3,10 @@ import { glo, TyInLineInDepthInQueueInfo, TyDepthDecInfo } from "./extension";
 import { ISingleLineBox } from "./renderingTools";
 import { notYetDisposedDecsObject } from "./utils2";
 
-// old renderer function
-// eslint-disable-next-line @typescript-eslint/naming-convention
-export const renderSingleLineBox_old = ({
+console.log("ცვლილება 002");
+// let kkk = 0;
+// new renderer function
+export const renderSingleLineBoxV3 = ({
     editorInfo,
     depth,
     inDepthBlockIndex,
@@ -42,8 +43,6 @@ export const renderSingleLineBox_old = ({
         return;
     }
 
-    // console.log("ai laiiiinnn:::", lineZero, upEdge, lowEdge);
-
     if (
         lineBlockType === "onlyLine" &&
         !glo.renderInSingleLineAreas &&
@@ -52,21 +51,10 @@ export const renderSingleLineBox_old = ({
         return;
     }
 
-    // console.log(
-    //     "Rendering:",
-    //     "line:",
-    //     lineZero + 1,
-    //     "depthIndex",
-    //     depth,
-    //     "inDepthBlockIndex",
-    //     inDepthBlockIndex,
-    // );
-
     let borderSize = glo.borderSize;
     const borderRadius = glo.borderRadius;
-    // let borderColor: string = `rgba(152, 108, 255, 1)`;
-    // let borderColor: string = `rgba(255, 255, 255, 0.150)`;
-    let borderColor: string = glo.coloring.border;
+
+    let borderColorToBeTransparent: string = glo.coloring.border;
     let zIndex = -1000 + depth * 10;
 
     let borderCss: string;
@@ -79,7 +67,7 @@ export const renderSingleLineBox_old = ({
     switch (depth) {
         case 0:
             backgroundCSS = glo.coloring.onEachDepth[0];
-            borderColor = glo.coloring.borderOfDepth0;
+            borderColorToBeTransparent = glo.coloring.borderOfDepth0;
             // zIndex = -100 + 10;
             break;
 
@@ -130,20 +118,23 @@ export const renderSingleLineBox_old = ({
         }
 
         if (glo.coloring.borderOfFocusedBlock !== "same") {
-            borderColor = glo.coloring.borderOfFocusedBlock;
+            borderColorToBeTransparent = glo.coloring.borderOfFocusedBlock;
         }
 
         borderSize = 2;
         // zIndex = -3;
     }
 
+    const borderColorNewVarToSupportGraient = borderColorToBeTransparent;
+    borderColorToBeTransparent = "transparent";
+
     // const boxLeftEdgeFixedShift = boxLeftEdge - borderSize;
 
     if (lineBlockType === "opening") {
         borderCss = `
-            border-left: ${borderSize}px solid ${borderColor};
-            border-top: ${borderSize}px solid ${borderColor};
-            border-right: ${borderSize}px solid ${borderColor};
+            border-left: ${borderSize}px solid ${borderColorToBeTransparent};
+            border-top: ${borderSize}px solid ${borderColorToBeTransparent};
+            border-right: ${borderSize}px solid ${borderColorToBeTransparent};
 
             
         `;
@@ -166,8 +157,8 @@ export const renderSingleLineBox_old = ({
         //     : undefined;
     } else if (lineBlockType === "middle") {
         borderCss = `
-            border-left: ${borderSize}px solid ${borderColor};
-            border-right: ${borderSize}px solid ${borderColor};
+            border-left: ${borderSize}px solid ${borderColorToBeTransparent};
+            border-right: ${borderSize}px solid ${borderColorToBeTransparent};
 
 
            
@@ -188,9 +179,9 @@ export const renderSingleLineBox_old = ({
     } else if (lineBlockType === "closing") {
         // console.log("isfirstFromTopToDown:", isfirstFromTopToDown);
         borderCss = `
-            border-left: ${borderSize}px solid ${borderColor};
-            border-right: ${borderSize}px solid ${borderColor};
-            border-bottom: ${borderSize}px solid ${borderColor};
+            border-left: ${borderSize}px solid ${borderColorToBeTransparent};
+            border-right: ${borderSize}px solid ${borderColorToBeTransparent};
+            border-bottom: ${borderSize}px solid ${borderColorToBeTransparent};
 
             
         `;
@@ -216,10 +207,10 @@ export const renderSingleLineBox_old = ({
     } else {
         // lineBlockType === "onlyLine"
         borderCss = `
-            border-left: ${borderSize}px solid ${borderColor};
-            border-right: ${borderSize}px solid ${borderColor};
-            border-bottom: ${borderSize}px solid ${borderColor};
-            border-top: ${borderSize}px solid ${borderColor};
+            border-left: ${borderSize}px solid ${borderColorToBeTransparent};
+            border-right: ${borderSize}px solid ${borderColorToBeTransparent};
+            border-bottom: ${borderSize}px solid ${borderColorToBeTransparent};
+            border-top: ${borderSize}px solid ${borderColorToBeTransparent};
         `;
         borderRadiusCss = `${borderRadius}px ${borderRadius}px ${borderRadius}px ${borderRadius}px;`;
         top -= borderSize - 2;
@@ -262,33 +253,27 @@ export const renderSingleLineBox_old = ({
         depth
     ] as TyInLineInDepthInQueueInfo[];
 
-    // thisLineDepthObjectAfter.depth = depth; // maybe no need
-    // thisLineDepthObjectAfter.inDepthBlockIndex = inDepthBlockIndex; // maybe no need
-
-    // console.log("editorInfo.decors:", editorInfo.decors);
-    // ========================
-
-    // const doc = editorInfo.editorRef.document;
-
-    // const thisLineData = doc.lineAt(lineZero);
-
     // here the heavy heeeaaaavy job begins:
     // return;
 
     const isAtVeryLeft = boxLeftEdge === 0;
     const leftInc = isAtVeryLeft ? 2 : 0;
+    const backgroundAndBorder =
+        "background: " +
+        backgroundCSS +
+        " padding-box, " +
+        borderColorNewVarToSupportGraient +
+        "border-box;";
+
+    // kkk += 1;
+    // console.log(kkk);
+    // return;
+
     const lineDecoration = vscode.window.createTextEditorDecorationType({
         before: {
             // rangeBehavior: 1,
-            // contentText,
 
             contentText: ``,
-
-            // margin: "500px",
-            // border: '1px solid yellow',
-            // backgroundColor: backgroundCSS, // -------------
-            // width: "0px",
-            // height: "0px",
             textDecoration: `;box-sizing: content-box !important;
                               ${borderCss}
                               
@@ -306,24 +291,10 @@ export const renderSingleLineBox_old = ({
                               left: calc((${boxLeftEdge} * (1ch + ${
                 glo.letterSpacing
             }px)) + ${leftInc - borderSize}px);
-                              background: ${backgroundCSS};
+                              ${backgroundAndBorder}
                               `,
             // padding: 100px;
         },
-
-        // rangeBehavior: vscode.DecorationRangeBehavior.OpenOpen,
-        // border: "1px solid blue",
-
-        // backgroundColor: `rgba(24, 230, 168, 0)`,
-        // textDecoration: `;border-radius: 10px;
-        // 				  width: 500px;
-        // 				  z-index: -500;
-        // 				  `,
-
-        // border: "5px solid black",
-        // borderRadius: "5px",
-        // isWholeLine : wholeLine
-        // rangeBehavior: 1,
     } as vscode.DecorationRenderOptions);
 
     if (lineBlockType === "opening") {
@@ -343,23 +314,15 @@ export const renderSingleLineBox_old = ({
                 vscode.window.createTextEditorDecorationType({
                     before: {
                         // rangeBehavior: 1,
-                        // contentText,
-
                         contentText: ``,
-
-                        // margin: "500px",
-                        // border: '1px solid yellow',
-                        backgroundColor: "rgba(0, 0, 0, 0)", // transparent
-                        // width: "0px",
-                        // height: "0px",
                         textDecoration: `;box-sizing: content-box !important;
-                                      border-bottom: ${borderSize}px solid ${borderColor};
+                                      border-bottom: ${borderSize}px solid ${borderColorToBeTransparent};
      
                                       width: calc((${width} * (1ch + ${
                             glo.letterSpacing
                         }px)) - ${leftInc - 1}px);
                                       bottom: ${b}px;
-                                      height: ${5}px;
+                                      height: ${0}px;
                                       position: absolute;
                                       z-index: ${zIndex + 300};
                                       
@@ -367,6 +330,7 @@ export const renderSingleLineBox_old = ({
                             glo.letterSpacing
                         }px)) -
                                           ${borderSize - leftInc}px);
+                                          ${backgroundAndBorder}
                                       `,
                         // padding: 100px;
                     },
@@ -406,17 +370,9 @@ export const renderSingleLineBox_old = ({
                 vscode.window.createTextEditorDecorationType({
                     before: {
                         // rangeBehavior: 1,
-                        // contentText,
-
                         contentText: ``,
-
-                        // margin: "500px",
-                        // border: '1px solid yellow',
-                        backgroundColor: "rgba(0, 0, 0, 0)", // transparent
-                        // width: "0px",
-                        // height: "0px",
                         textDecoration: `;box-sizing: content-box !important;
-                                      border-top: ${borderSize}px solid ${borderColor};
+                                      border-top: ${borderSize}px solid ${borderColorToBeTransparent};
      
                                       width: calc((${
                                           optimalRightOfRangePx - boxRightEdge
@@ -424,13 +380,14 @@ export const renderSingleLineBox_old = ({
                             leftInc - borderSize
                         }px);
                                       top: ${t}px;
-                                      height: ${5}px;
+                                      height: ${0}px;
                                       position: absolute;
                                       z-index: ${zIndex + 300};
                                       
                                       left: calc((${boxRightEdge} * (1ch + ${
                             glo.letterSpacing
                         }px)) + ${leftInc}px);
+                        ${backgroundAndBorder}
                                       `,
                         // padding: 100px;
                     },

@@ -6,7 +6,7 @@ import { notYetDisposedDecsObject } from "./utils2";
 console.log("ცვლილება 002");
 // let kkk = 0;
 // new renderer function
-export const renderSingleLineBox = ({
+export const renderSingleLineBoxV2 = ({
     editorInfo,
     depth,
     inDepthBlockIndex,

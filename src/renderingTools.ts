@@ -5,8 +5,9 @@ import {
     TyInLineInDepthInQueueInfo,
     TyDepthDecInfo,
 } from "./extension";
-import { renderSingleLineBox } from "./renderLineTool";
-import { renderSingleLineBox_old } from "./renderLineToolOld";
+import { renderSingleLineBoxV1 } from "./renderLineToolV1";
+import { renderSingleLineBoxV2 } from "./renderLineToolV2";
+import { renderSingleLineBoxV3 } from "./renderLineToolV3";
 import { IBlockRender } from "./utils";
 import { notYetDisposedDecsObject } from "./utils2";
 
@@ -154,8 +155,9 @@ export const renderSingleBlock = ({
             lastLineHasVisibleChar,
         };
 
-        // renderSingleLineBox_old(singleRangeRendArg); // old renderer function
-        renderSingleLineBox(singleRangeRendArg); // new renderer function
+        // renderSingleLineBoxV1(singleRangeRendArg); // old renderer function
+        // renderSingleLineBoxV2(singleRangeRendArg); // new renderer function
+        renderSingleLineBoxV3(singleRangeRendArg); // super new renderer function
 
         // }
     }
