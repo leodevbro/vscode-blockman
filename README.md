@@ -56,6 +56,15 @@
   src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/main-demo---c2-apng.png"
   alt="alt text testing"
 /></p>
+
+<br />
+
+<p align="center"><strong>Added NEW color combos as "Super gradients".</strong></p>
+<p align="center"><strong>Blockman now supports gradients for both: borders and backgrounds.</strong></p>
+<p align="center"><img
+  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/still-image/infograph/super-gradients-demo.png"
+  alt="super gradients color combos in Blockman"
+/></p>
   
 <p>Supported programming languages:</p>
 <p><strong>Non-indentation based languages:</strong> JavaScript, JSX, TypeScript, TSX, C, C#, C++, Java, PHP, R, Go (Golang), Dart, Rust, Swift, PowerShell, SQL, HTML, CSS, LESS, SCSS and more...</p>
