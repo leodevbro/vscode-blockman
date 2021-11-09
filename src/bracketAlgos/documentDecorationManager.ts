@@ -101,6 +101,7 @@ export default class DocumentDecorationManager {
                             // updateFocusInfo(editorInfo);
 
                             editorInfo.needToAnalyzeFile = true;
+                            // console.log("ucnaurshi"); // ::-:
                             updateRender({
                                 editorInfo,
                                 timer: glo.renderTimerForChange,

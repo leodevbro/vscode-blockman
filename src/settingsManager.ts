@@ -103,7 +103,8 @@ export const applyAllBlockmanSettings = () => {
     // =============
     const candMaxDepth: number | undefined = bc.get("n03MaxDepth");
     if (typeof candMaxDepth === "number" && candMaxDepth >= -1) {
-        glo.maxDepth = candMaxDepth - 1;
+        glo.maxDepth = Math.floor(candMaxDepth - 1);
+        // glo.maxDepth = 100;
     }
     // ============= Coloring
     const selectedColorComboName: string | undefined = bc.get(
@@ -337,8 +338,9 @@ export const applyAllBlockmanSettings = () => {
         renderIncrementBeforeAndAfterVisibleRange >= -200 &&
         renderIncrementBeforeAndAfterVisibleRange <= 200
     ) {
-        glo.renderIncBeforeAfterVisRange =
-            renderIncrementBeforeAndAfterVisibleRange;
+        glo.renderIncBeforeAfterVisRange = Math.floor(
+            renderIncrementBeforeAndAfterVisibleRange,
+        );
     }
 
     const customBlackListOfFileFormats: string | undefined = bc.get(

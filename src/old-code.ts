@@ -69,11 +69,11 @@ exports.activate = function (context: any) {
 
 
 
-
+/*
 
 const collectVSCodeConfigArchive = () => {
     return; // this function maybe not needed
-    /*
+    
     let vscodeColorConfig: any = vscode.workspace
         .getConfiguration("workbench")
         .get("colorCustomizations");
@@ -133,5 +133,47 @@ const collectVSCodeConfigArchive = () => {
         // }
     }
 
-    */
 };
+
+*/
+
+
+// DEPRICATED
+/*
+let focusTimout: NodeJS.Timeout | undefined;
+const updateFocus = (editorInfo?: IEditorInfo) => {
+    if (focusTimout) {
+        clearTimeout(focusTimout);
+    }
+    focusTimout = setTimeout(() => {
+        const thisEditor =
+            editorInfo?.editorRef || vscode.window.activeTextEditor;
+
+        if (thisEditor) {
+            const thisEditorInfo =
+                editorInfo ||
+                infosOfcontrolledEditors.find(
+                    (x) => x.editorRef === thisEditor,
+                );
+            if (thisEditorInfo) {
+                if (
+                    thisEditorInfo.needToAnalyzeFile ||
+                    thisEditorInfo.focusDuo.currIsFreezed
+                ) {
+                    return;
+                }
+
+                // updateFocusInfo(thisEditorInfo);
+                console.log("timer0"); // ::-:
+                updateRender({
+                    editorInfo: thisEditorInfo,
+                    timer: 0,
+                });
+            }
+        }
+
+        // boloshi clean junk focusBlocks
+    }, glo.renderTimerForFocus);
+    
+};
+*/

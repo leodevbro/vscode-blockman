@@ -11,7 +11,7 @@
 <br />
 <br />
 
-<p><strong>For better experience:</strong> Blockman <strong>WILL CHANGE</strong> these 7 items in VSCode settings (only one-time at the installation event). You can change them again when you want. These 7 settings are very non-vital, so maybe you don't even need to backup them first.</p>
+<p><strong>For better experience:</strong> Blockman <strong>WILL CHANGE</strong> these 8 items in VSCode settings (only one-time at the installation event). You can change them again when you want. These 8 settings are very non-vital, so maybe you don't even need to backup them first.</p>
 
 ```jsonc
 // settings.json (User/Global config, not Workspace config)
@@ -21,6 +21,7 @@
     "editor.inlayHints.enabled": false,
     "editor.renderIndentGuides": false, // old API for indent guides
     "editor.guides.indentation": false, // new API for indent guides
+    "editor.guides.bracketPairs": false, // new advanced indent guides (This does not turn off editor.bracketPairColorization)
     "editor.wordWrap": "off",
     "diffEditor.wordWrap": "off",
 

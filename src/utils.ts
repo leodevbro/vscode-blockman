@@ -755,18 +755,16 @@ export const renderLevels = (
     editorInfo: IEditorInfo,
     firstLineZeroOfRender: number,
     lastLineZeroOfRender: number,
-    caller?: "scroll" | "focus" | "edit",
 ) => {
-    // console.log("actual rendering fn");
+    // console.log("analiz-render");
     let renderingInfo = editorInfo.renderingInfoForFullFile;
-
     const lang = editorInfo.editorRef.document.languageId;
 
     if (!renderingInfo) {
         return;
     }
 
-    if (renderingInfo.fileRightMost >= 0 && caller !== "focus") {
+    if (renderingInfo.fileRightMost >= 0) {
         const backgroundCSS = glo.coloring.onEachDepth[0];
         const borderColor = glo.coloring.borderOfDepth0;
         if (backgroundCSS !== "none" || borderColor !== "none") {
@@ -825,48 +823,19 @@ export const renderLevels = (
 
                 let isFocusedBlock = false;
 
-                if (caller === "focus") {
-                    let isFPrev = false;
-                    const fPrev = editorInfo.focusDuo.prev;
-                    if (fPrev) {
-                        if (
-                            depthMO + 1 === fPrev.depth &&
-                            blockIndex === fPrev.indexInTheDepth
-                        ) {
-                            isFPrev = true;
-                        }
-                    }
+                // --------------
 
-                    let isFCurr = false;
-                    const fCurr = editorInfo.focusDuo.curr;
-                    if (fCurr) {
-                        if (
-                            depthMO + 1 === fCurr.depth &&
-                            blockIndex === fCurr.indexInTheDepth
-                        ) {
-                            isFCurr = true;
-                        }
-                    }
+                const focusedBlock = editorInfo.focusDuo.curr;
 
-                    if (isFPrev || isFCurr) {
-                        // cool to go
-                        if (isFCurr) {
-                            isFocusedBlock = true;
-                        }
-                    } else {
-                        continue;
-                    }
-                } else {
-                    const focusedBlock = editorInfo.focusDuo.curr;
-
-                    if (
-                        focusedBlock &&
-                        depthMO + 1 === focusedBlock.depth &&
-                        blockIndex === focusedBlock.indexInTheDepth
-                    ) {
-                        isFocusedBlock = true;
-                    }
+                if (
+                    focusedBlock &&
+                    depthMO + 1 === focusedBlock.depth &&
+                    blockIndex === focusedBlock.indexInTheDepth
+                ) {
+                    isFocusedBlock = true;
                 }
+
+                // ------------
 
                 let theR = {
                     s: absRangeStartPos,
@@ -944,6 +913,7 @@ export const getFullFileStats = async ({
       }
     | undefined
 > => {
+    // console.log("analiz started");
     // console.log("aqamde vaaartttttttttttttttttttttttt", glo.maxDepth);
     const document = editorInfo.editorRef.document;
     const lang = document.languageId;

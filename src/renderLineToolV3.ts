@@ -3,7 +3,7 @@ import { glo, TyInLineInDepthInQueueInfo, TyDepthDecInfo } from "./extension";
 import { ISingleLineBox } from "./renderingTools";
 import { notYetDisposedDecsObject } from "./utils2";
 
-console.log("ცვლილება 002");
+console.log("ცვლილება 007");
 // let kkk = 0;
 // new renderer function
 export const renderSingleLineBoxV3 = ({
@@ -28,7 +28,16 @@ export const renderSingleLineBoxV3 = ({
 
     firstLineHasVisibleChar,
     lastLineHasVisibleChar,
+
+    firstVisibleChar,
+    lastVisibleChar,
 }: ISingleLineBox): void => {
+    const firstLineOfMiddles = firstVisibleChar.lineZero + 2;
+    const lastLineOfMiddles = lastVisibleChar.lineZero - 2;
+
+    const isMid =
+        lineZero >= firstLineOfMiddles && lineZero <= lastLineOfMiddles;
+
     // console.log("lineZero:", lineZero);
     const upEdge = editorInfo.upToDateLines.upEdge;
     const lowEdge = editorInfo.upToDateLines.lowEdge;
@@ -217,7 +226,22 @@ export const renderSingleLineBoxV3 = ({
         specificHeight -= 4;
     }
 
-    const currVsRange = new vscode.Range(lineZero, 0, lineZero, 0); // must be ZERO! IMPORTANT! otherwise may be dimmer when text is dimmer
+    const singleRange = new vscode.Range(lineZero, 0, lineZero, 0); // column must be ZERO! IMPORTANT! otherwise may be dimmer when text is dimmer
+    const arrayOfCurrRanges: vscode.Range[] = [singleRange];
+
+    if (isMid) {
+        arrayOfCurrRanges.length = 0;
+        for (
+            // let lz = firstLineOfMiddles;
+            // lz <= lastLineOfMiddles;
+            let lz = Math.max(firstLineOfMiddles, legitFirstLineZero);
+            lz <= Math.min(lastLineOfMiddles, legitLastLineZero);
+            lz += 1
+        ) {
+            const nextLineRange = new vscode.Range(lz, 0, lz, 0); // column must be ZERO! IMPORTANT! otherwise may be dimmer when text is dimmer
+            arrayOfCurrRanges.push(nextLineRange);
+        }
+    }
 
     if (lineZero === 0) {
         top += 1;
@@ -235,21 +259,23 @@ export const renderSingleLineBoxV3 = ({
         },
     };
 
-    const thisLineObjectBefore = editorInfo.decors[lineZero];
+    const thisLineObjectInitial = editorInfo.decors[
+        lineZero
+    ] as TyDepthDecInfo[];
 
-    if (!thisLineObjectBefore) {
+    if (!thisLineObjectInitial) {
         editorInfo.decors[lineZero] = [];
     }
-    const thisLineObjectAfter = editorInfo.decors[lineZero] as TyDepthDecInfo[];
+    const thisLineObjectNew = editorInfo.decors[lineZero] as TyDepthDecInfo[];
 
-    const thisLineDepthObjectBefore = thisLineObjectAfter[depth];
-    if (!thisLineDepthObjectBefore) {
-        thisLineObjectAfter[depth] = [newQueueInfo];
+    const thisLineDepthObjectInitial = thisLineObjectNew[depth];
+    if (!thisLineDepthObjectInitial) {
+        thisLineObjectNew[depth] = [newQueueInfo];
     } else {
-        thisLineObjectAfter[depth]?.push(newQueueInfo);
+        thisLineObjectNew[depth].push(newQueueInfo);
     }
 
-    const thisLineDepthObjectAfter = thisLineObjectAfter[
+    const thisLineDepthObjectNew = thisLineObjectNew[
         depth
     ] as TyInLineInDepthInQueueInfo[];
 
@@ -338,8 +364,8 @@ export const renderSingleLineBoxV3 = ({
 
             // thisLineDepthObjectAfter.decorsRefs.leftLineOfOpening = leftLineOfOpening;
 
-            thisLineDepthObjectAfter[
-                thisLineDepthObjectAfter.length - 1
+            thisLineDepthObjectNew[
+                thisLineDepthObjectNew.length - 1
             ]!.decorsRefs.leftLineOfOpening = leftLineOfOpening;
 
             // if (lineZero === 103) {
@@ -347,9 +373,10 @@ export const renderSingleLineBoxV3 = ({
                 dRef: leftLineOfOpening,
                 lineZero,
             });
-            editorInfo.editorRef.setDecorations(leftLineOfOpening, [
-                currVsRange,
-            ]);
+            editorInfo.editorRef.setDecorations(
+                leftLineOfOpening,
+                arrayOfCurrRanges,
+            );
             // console.log("openingiiiisss - leftLineOfOpening");
             // }
         }
@@ -393,8 +420,8 @@ export const renderSingleLineBoxV3 = ({
                     },
                 } as vscode.DecorationRenderOptions);
 
-            thisLineDepthObjectAfter[
-                thisLineDepthObjectAfter.length - 1
+            thisLineDepthObjectNew[
+                thisLineDepthObjectNew.length - 1
             ]!.decorsRefs.rightLineOfClosing = rightLineOfClosing;
 
             // if (lineZero === 103) {
@@ -402,23 +429,28 @@ export const renderSingleLineBoxV3 = ({
                 dRef: rightLineOfClosing,
                 lineZero,
             });
-            editorInfo.editorRef.setDecorations(rightLineOfClosing, [
-                currVsRange,
-            ]);
+            editorInfo.editorRef.setDecorations(
+                rightLineOfClosing,
+                arrayOfCurrRanges,
+            );
             // console.log("openingiiiisss - rightLineOfClosing");
             // }
         }
     }
 
-    thisLineDepthObjectAfter[
-        thisLineDepthObjectAfter.length - 1
-    ]!.decorsRefs.mainBody = lineDecoration;
+    const ldoLen = thisLineDepthObjectNew.length;
 
-    // if (lineZero === 103) {
+    const lineDepthQueue = thisLineDepthObjectNew[ldoLen - 1]!;
+    lineDepthQueue.decorsRefs.mainBody = lineDecoration;
+    if (isMid) {
+        lineDepthQueue.divType = "m";
+        lineDepthQueue.midStartLine = firstLineOfMiddles;
+        lineDepthQueue.midEndLine = lastLineOfMiddles;
+    }
+
     notYetDisposedDecsObject.decs.push({
         dRef: lineDecoration,
         lineZero,
     });
-    editorInfo.editorRef.setDecorations(lineDecoration, [currVsRange]);
-    // }
+    editorInfo.editorRef.setDecorations(lineDecoration, arrayOfCurrRanges);
 };

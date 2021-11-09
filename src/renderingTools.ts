@@ -33,6 +33,15 @@ export interface ISingleLineBox {
 
     firstLineHasVisibleChar: boolean;
     lastLineHasVisibleChar: boolean;
+
+    firstVisibleChar: {
+        lineZero: number;
+        inLineIndexZero: number;
+    };
+    lastVisibleChar: {
+        lineZero: number;
+        inLineIndexZero: number;
+    };
 }
 
 export const renderSingleBlock = ({
@@ -153,11 +162,26 @@ export const renderSingleBlock = ({
 
             firstLineHasVisibleChar,
             lastLineHasVisibleChar,
+
+            firstVisibleChar,
+            lastVisibleChar,
         };
 
         // renderSingleLineBoxV1(singleRangeRendArg); // old renderer function
         // renderSingleLineBoxV2(singleRangeRendArg); // new renderer function
+
+        // for V3
+        const firstLineOfMiddles = firstVisibleChar.lineZero + 2;
+        const lastLineOfMiddles = lastVisibleChar.lineZero - 2;
+
+        const isMid =
+            currLineZero >= firstLineOfMiddles &&
+            currLineZero <= lastLineOfMiddles;
+
         renderSingleLineBoxV3(singleRangeRendArg); // super new renderer function
+        if (isMid) {
+            currLineZero = lastLineOfMiddles;
+        }
 
         // }
     }

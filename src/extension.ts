@@ -112,7 +112,7 @@ export const glo = {
 
     enableFocus: true,
 
-    renderIncBeforeAfterVisRange: 22, // 2-3 is good
+    renderIncBeforeAfterVisRange: 20, // 2-3 is good
     renderTimerForChange: 1200,
     renderTimerForFocus: 200,
     renderTimerForScroll: 100,
@@ -208,12 +208,15 @@ export type TyInLineInDepthInQueueInfo =
           // sameLineQueueIndex: number;
           inDepthBlockIndex: number;
           decorsRefs: IInLineInDepthDecorsRefs;
+          divType?: "m"; // middle
+          midStartLine?: number;
+          midEndLine?: number;
       }
     | undefined;
 
 export type TyDepthDecInfo = TyInLineInDepthInQueueInfo[];
 
-export type TyLineDecInfo = TyDepthDecInfo[] | undefined;
+export type TyLineDecInfo = TyDepthDecInfo[];
 
 export type TyOneFileEditorDecInfo = TyLineDecInfo[];
 
@@ -280,6 +283,7 @@ export const updateAllControlledEditors = ({
 }: {
     alsoStillVisible?: boolean;
 }) => {
+    const supMode = "init";
     const visibleEditors = vscode.window.visibleTextEditors;
 
     const infosOfStillVisibleEditors = infosOfcontrolledEditors.filter(
@@ -302,7 +306,7 @@ export const updateAllControlledEditors = ({
 
     const infosOfNewEditors: IEditorInfo[] = [];
 
-    newEditors.map((editor) => {
+    newEditors.forEach((editor) => {
         infosOfNewEditors.push({
             editorRef: editor,
             needToAnalyzeFile: true,
@@ -328,7 +332,7 @@ export const updateAllControlledEditors = ({
         (edInfo) => !stillVisibleEditors.includes(edInfo.editorRef),
     );
 
-    infosOfDisposedEditors.map((edInfo) => {
+    infosOfDisposedEditors.forEach((edInfo) => {
         junkDecors3dArr.push(edInfo.decors);
     });
 
@@ -339,20 +343,17 @@ export const updateAllControlledEditors = ({
 
     infosOfcontrolledEditors = finalArrOfInfos;
 
-    infosOfNewEditors.map((editorInfo: IEditorInfo) => {
-        updateRender({ editorInfo, timer: glo.renderTimerForChange });
+    infosOfNewEditors.forEach((editorInfo: IEditorInfo) => {
+        editorInfo.needToAnalyzeFile = true;
+        updateRender({ editorInfo, timer: 200 });
     });
 
     if (alsoStillVisible) {
-        // infosOfStillVisibleEditors.map((edInfo) => {
-        //     junkDecors3dArr.push(edInfo.decors);
-        // });
-
-        infosOfStillVisibleEditors.map((editorInfo: IEditorInfo) => {
+        infosOfStillVisibleEditors.forEach((editorInfo: IEditorInfo) => {
             editorInfo.upToDateLines.upEdge = -1;
             editorInfo.upToDateLines.lowEdge = -1;
             editorInfo.needToAnalyzeFile = true;
-            updateRender({ editorInfo, timer: glo.renderTimerForChange });
+            updateRender({ editorInfo, timer: 200 });
         });
     }
 };
@@ -360,18 +361,18 @@ export const updateAllControlledEditors = ({
 export const updateControlledEditorsForOneDoc = ({
     editor,
     doc,
-    mode,
+    supMode,
 }: {
     editor?: vscode.TextEditor;
     doc?: vscode.TextDocument;
-    mode?: string;
+    supMode: "reparse" | "focus" | "scroll";
 }) => {
     let thisTimer = glo.renderTimerForChange;
 
-    let caller: undefined | "scroll" | "focus" | "edit" = undefined;
-    if (mode === "scroll") {
+    if (supMode === "scroll") {
         thisTimer = glo.renderTimerForScroll;
-        caller = "scroll";
+    } else if (supMode === "focus") {
+        thisTimer = glo.renderTimerForFocus;
     }
 
     let thisDoc: vscode.TextDocument | undefined;
@@ -384,57 +385,22 @@ export const updateControlledEditorsForOneDoc = ({
         return;
     }
 
-    infosOfcontrolledEditors.map((editorInfo: IEditorInfo) => {
+    infosOfcontrolledEditors.forEach((editorInfo: IEditorInfo) => {
         if (
             (thisDoc as vscode.TextDocument) === editorInfo.editorRef.document
         ) {
-            if (caller !== "scroll") {
-                // editorInfo.focusDuo.currIsFreezed = false;
+            if (
+                ["scroll", "focus"].includes(supMode) &&
+                editorInfo.needToAnalyzeFile
+            ) {
+                // !!! VERY IMPORTANT for optimization
+                return; // it's the same as 'continue' for 'for/while' loop.
             }
+            // console.log("kok", supMode);
 
-            // editorInfo.needToAnalyzeFile = true;
-            if (mode === "scroll" && editorInfo.needToAnalyzeFile) {
-                // continue
-            } else {
-                updateRender({ editorInfo, timer: thisTimer, caller });
-            }
+            updateRender({ editorInfo, timer: thisTimer, supMode });
         }
     });
-};
-
-let focusTimout: NodeJS.Timeout | undefined;
-export const updateFocus = (editorInfo?: IEditorInfo) => {
-    if (focusTimout) {
-        clearTimeout(focusTimout);
-    }
-    focusTimout = setTimeout(() => {
-        const thisEditor =
-            editorInfo?.editorRef || vscode.window.activeTextEditor;
-
-        if (thisEditor) {
-            const thisEditorInfo =
-                editorInfo ||
-                infosOfcontrolledEditors.find(
-                    (x) => x.editorRef === thisEditor,
-                );
-            if (thisEditorInfo) {
-                if (
-                    thisEditorInfo.needToAnalyzeFile ||
-                    thisEditorInfo.focusDuo.currIsFreezed
-                ) {
-                    return;
-                }
-
-                // updateFocusInfo(thisEditorInfo);
-                updateRender({
-                    editorInfo: thisEditorInfo,
-                    timer: 0,
-                });
-            }
-        }
-
-        // boloshi clean junk focusBlocks
-    }, glo.renderTimerForFocus);
 };
 
 const setLightColorComboIfLightTheme = () => {
@@ -462,13 +428,41 @@ const setColorDecoratorsBool = () => {
 };
 
 const setUserwideIndentGuides = (myBool: boolean) => {
-    vscode.workspace
-        .getConfiguration()
-        .update("editor.renderIndentGuides", myBool, 1); // 1 means Userwide
+    const indent1 = (boo: boolean) => {
+        try {
+            // old API
+            vscode.workspace
+                .getConfiguration()
+                .update("editor.renderIndentGuides", myBool, 1); // 1 means Userwide
+        } catch (err) {
+            //
+        }
+    };
 
-    vscode.workspace
-        .getConfiguration()
-        .update("editor.guides.indentation", myBool, 1); // 1 means Userwide
+    const indent2 = (boo: boolean) => {
+        try {
+            vscode.workspace
+                .getConfiguration()
+                .update("editor.guides.indentation", myBool, 1); // 1 means Userwide
+        } catch (err) {
+            //
+        }
+    };
+
+    const indent3 = (boo: boolean) => {
+        try {
+            vscode.workspace
+                .getConfiguration()
+                .update("editor.guides.bracketPairs", myBool, 1); // 1 means Userwide
+        } catch (err) {
+            //
+        }
+    };
+
+    indent1(myBool);
+    indent2(myBool);
+    indent3(myBool);
+
     // vscode.workspace
     //     .getConfiguration()
     //     .update("editor.highlightActiveIndentGuide", myBool, 1); // 1 means Userwide
@@ -483,6 +477,7 @@ interface IConfigOfVscode {
     // markdownEditorWordWrap?: string; // "[markdown]_editor.wordWrap"
     renderIndentGuides?: boolean; // "editor.renderIndentGuides" - old API of indent guides
     guidesIndentation: boolean; // "editor.guides.indentation" - new API of indent guides
+    guidesBracketPairs: boolean; // "editor.guides.bracketPairs" - // new advanced indent guides
     // highlightActiveIndentGuide?: boolean; // "editor.highlightActiveIndentGuide"
     [key: string]: string | boolean | undefined;
 }
@@ -501,6 +496,7 @@ const configOfVscodeWithBlockman: IConfigOfVscode = {
     diffEditorWordWrap: "off",
     renderIndentGuides: false,
     guidesIndentation: false,
+    guidesBracketPairs: false,
 };
 
 // let vvvv = vscode.workspace.getConfiguration().get("editor.wordWrap");
@@ -542,7 +538,7 @@ const setUserwideConfigOfVscode = (userwideConfig: IConfigOfVscode) => {
     // );
 
     if (userwideConfig.renderIndentGuides !== undefined) {
-        setUserwideIndentGuides(userwideConfig.renderIndentGuides);
+        setUserwideIndentGuides(userwideConfig.guidesBracketPairs);
     }
 };
 
@@ -751,13 +747,6 @@ export function activate(context: ExtensionContext) {
             updateBlockmanLineHeightAndLetterSpacing();
             setColorDecoratorsBool();
 
-            if (settingsChangeTimout) {
-                clearTimeout(settingsChangeTimout);
-            }
-            settingsChangeTimout = setTimeout(() => {
-                applyAllBlockmanSettings(); // setTimeout is important because VSCode needs certain amount of time to update latest changes of settings.
-            }, 500);
-
             // console.log("scrrr:", glo.renderTimerForScroll);
 
             // updateAllControlledEditors({
@@ -766,9 +755,15 @@ export function activate(context: ExtensionContext) {
             // }
 
             if (glo.isOn) {
-                updateAllControlledEditors({
-                    alsoStillVisible: true,
-                });
+                if (settingsChangeTimout) {
+                    clearTimeout(settingsChangeTimout);
+                }
+                settingsChangeTimout = setTimeout(() => {
+                    applyAllBlockmanSettings(); // setTimeout is important because VSCode needs certain amount of time to update latest changes of settings.
+                    updateAllControlledEditors({
+                        alsoStillVisible: true,
+                    });
+                }, 500);
             } else {
                 nukeAllDecs();
                 nukeJunkDecorations();
@@ -780,12 +775,15 @@ export function activate(context: ExtensionContext) {
             if (!glo.isOn) {
                 return;
             }
-            infosOfcontrolledEditors.map((editorInfo: IEditorInfo) => {
+            infosOfcontrolledEditors.forEach((editorInfo: IEditorInfo) => {
                 if (event.textEditor === editorInfo.editorRef) {
                     editorInfo.needToAnalyzeFile = true;
                 }
             });
-            updateControlledEditorsForOneDoc({ editor: event.textEditor });
+            updateControlledEditorsForOneDoc({
+                editor: event.textEditor,
+                supMode: "reparse",
+            });
         }),
 
         vscode.window.onDidChangeVisibleTextEditors((event) => {
@@ -806,15 +804,17 @@ export function activate(context: ExtensionContext) {
                 // console.log("changed text");
                 const thisDoc = event.document;
 
-                infosOfcontrolledEditors.map((editorInfo: IEditorInfo) => {
+                infosOfcontrolledEditors.forEach((editorInfo: IEditorInfo) => {
                     if (thisDoc === editorInfo.editorRef.document) {
                         editorInfo.needToAnalyzeFile = true;
                     }
                 });
                 // console.log("chhhhhhhhhhhh:", glo.renderTimerForChange);
-                updateControlledEditorsForOneDoc({ doc: thisDoc });
-
-                // updateFocus();
+                // console.log("reparse");
+                updateControlledEditorsForOneDoc({
+                    doc: thisDoc,
+                    supMode: "reparse",
+                });
             }
         }),
         workspace.onDidOpenTextDocument((event) => {
@@ -825,24 +825,29 @@ export function activate(context: ExtensionContext) {
             // }, 2000);
         }),
         vscode.window.onDidChangeTextEditorSelection((event) => {
+            const thisDoc = event.textEditor.document;
+            // console.log("focus");
+            // return;
             if (!glo.isOn) {
                 return;
             }
-            // return;
-            // console.log("foc------>>>>>event.selections::-:", event.selections);
-            // console.log("changed selection");
-            updateFocus();
+
+            updateControlledEditorsForOneDoc({
+                doc: thisDoc,
+                supMode: "focus",
+            });
         }),
         vscode.window.onDidChangeTextEditorVisibleRanges((event) => {
+            // console.log("scroll");
+            // return;
             if (!glo.isOn) {
                 return;
             }
-            // console.log("scrooooooooooooooooooooooooooool");
-            // return;
+
             const thisEditor = event.textEditor;
             updateControlledEditorsForOneDoc({
                 editor: thisEditor,
-                mode: "scroll",
+                supMode: "scroll",
             });
         }),
         vscode.window.onDidChangeActiveTextEditor((event) => {

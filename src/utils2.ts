@@ -72,13 +72,13 @@ export const nukeAllDecs = () => {
 export let junkDecors3dArr: TyOneFileEditorDecInfo[] = []; // structure for optimization, not for decor history
 
 export const nukeJunkDecorations = () => {
-    junkDecors3dArr.map((fileDecors) => {
+    junkDecors3dArr.forEach((fileDecors) => {
         if (fileDecors) {
-            fileDecors.map((lineDecors) => {
+            fileDecors.forEach((lineDecors) => {
                 if (lineDecors) {
-                    lineDecors.map((depthDecors) => {
+                    lineDecors.forEach((depthDecors) => {
                         if (depthDecors) {
-                            depthDecors.map((inLineInDepthInQueueInfo) => {
+                            depthDecors.forEach((inLineInDepthInQueueInfo) => {
                                 if (inLineInDepthInQueueInfo) {
                                     for (const key in inLineInDepthInQueueInfo.decorsRefs) {
                                         const decorRef =
@@ -466,10 +466,10 @@ export const updateFocusInfo = (editorInfo: IEditorInfo) => {
 export interface IUpdateRender {
     editorInfo: IEditorInfo;
     timer: number; // milliseconds
-    caller?: "scroll" | "focus" | "edit";
+    supMode?: "reparse" | "scroll" | "focus";
 }
 
-export const updateRender = ({ editorInfo, timer, caller }: IUpdateRender) => {
+export const updateRender = ({ editorInfo, timer, supMode }: IUpdateRender) => {
     if (
         !glo.isOn ||
         glo.blackListOfFileFormats.includes(
@@ -514,240 +514,37 @@ export const updateRender = ({ editorInfo, timer, caller }: IUpdateRender) => {
         const lastLineZeroOfRender =
             lastVisLine + glo.renderIncBeforeAfterVisRange;
 
-        const doc = editorInfo.editorRef.document;
+        // --------------
 
-        if (
-            !editorInfo.needToAnalyzeFile &&
-            editorInfo.renderingInfoForFullFile
-        ) {
-            if (caller === "scroll") {
-                const junkLines = editorInfo.decors.filter(
-                    (line, lineIndex) =>
-                        lineIndex < firstLineZeroOfRender ||
-                        lineIndex > lastLineZeroOfRender,
-                );
-                junkDecors3dArr.push(junkLines);
+        // console.log("easy");
+        editorInfo.upToDateLines.upEdge = -1;
+        editorInfo.upToDateLines.lowEdge = -1;
 
-                let firstLegitDecorFound = false;
-                let lastLegitDecorIndex = -1;
-                editorInfo.decors = editorInfo.decors.map((line, lineIndex) => {
-                    if (
-                        lineIndex >= firstLineZeroOfRender &&
-                        lineIndex <= lastLineZeroOfRender &&
-                        line
-                    ) {
-                        if (!firstLegitDecorFound) {
-                            firstLegitDecorFound = true;
-                            editorInfo.upToDateLines.upEdge = lineIndex;
-                        }
-                        lastLegitDecorIndex = lineIndex;
-                        return line;
-                    } else {
-                        return undefined;
-                    }
-                });
-                editorInfo.upToDateLines.lowEdge = lastLegitDecorIndex;
-                // console.log(
-                //     "editorInfo.upToDateLines",
-                //     editorInfo.upToDateLines,
-                // );
+        junkDecors3dArr.push(editorInfo.decors);
+        editorInfo.decors = [];
 
-                // updateFocusInfo(editorInfo); // focus remains the same when scrolling
-                renderLevels(
-                    editorInfo,
-                    firstLineZeroOfRender,
-                    lastLineZeroOfRender,
-                );
-            } else {
-                // so if not scroll, then maybe it's focus event, because doc text did not change
-                // console.log("maybe fokusiaaaaaaaaaaaaaa");
-                editorInfo.upToDateLines.upEdge = -1;
-                editorInfo.upToDateLines.lowEdge = -1;
-
-                updateFocusInfo(editorInfo);
-                const fDuo = editorInfo.focusDuo;
-
-                const fPrev = fDuo.prev;
-                const fCurr = fDuo.curr;
-
-                if (fCurr === fPrev) {
-                    return; // don't junk or render any decor
-                } else if (fCurr && fPrev) {
-                    if (
-                        fCurr.depth === fPrev.depth &&
-                        fCurr.indexInTheDepth === fPrev.indexInTheDepth
-                    ) {
-                        return; // don't junk or render any decor
-                    }
-                }
-
-                let junkDecors: TyInLineInDepthInQueueInfo[] = [];
-
-                for (
-                    let lineIndex = 0;
-                    lineIndex < editorInfo.decors.length;
-                    lineIndex += 1
-                ) {
-                    const lineInfo = editorInfo.decors[lineIndex];
-                    if (lineInfo) {
-                        for (
-                            let depthIndex = 0;
-                            depthIndex < lineInfo.length;
-                            depthIndex += 1
-                        ) {
-                            const inLineInDepthInfo = lineInfo[depthIndex];
-
-                            if (inLineInDepthInfo) {
-                                // console.log(
-                                //     "lineIndexOne depthIndex and bi:",
-                                //     lineIndex + 1,
-                                //     inLineInDepthInfo.depthIndex,
-                                //     inLineInDepthInfo.inDepthBlockIndex,
-                                // );
-
-                                for (
-                                    let queueIndex = 0;
-                                    queueIndex < inLineInDepthInfo.length;
-                                    queueIndex += 1
-                                ) {
-                                    const queueInfo =
-                                        inLineInDepthInfo[queueIndex];
-
-                                    if (queueInfo) {
-                                        let isFPrev = false;
-                                        let isFCurr = false;
-                                        let entireFileFocus = false;
-
-                                        if (fPrev) {
-                                            if (
-                                                queueInfo.depthIndex ===
-                                                    fPrev.depth &&
-                                                queueInfo.inDepthBlockIndex ===
-                                                    fPrev.indexInTheDepth
-                                            ) {
-                                                isFPrev = true;
-                                                if (queueInfo.depthIndex > 0) {
-                                                    junkDecors.push(queueInfo);
-                                                    editorInfo.decors[
-                                                        lineIndex
-                                                    ]![depthIndex][queueIndex] =
-                                                        undefined;
-                                                    // editorInfo.decors[
-                                                    //     lineIndex
-                                                    // ]![depthIndex].splice(
-                                                    //     queueIndex,
-                                                    //     1,
-                                                    // );
-                                                } else {
-                                                    entireFileFocus = true;
-                                                }
-                                                // console.log(
-                                                //     "-------junk inLineInDepthInfo prev",
-                                                //     inLineInDepthInfo,
-                                                // );
-                                            }
-                                        }
-                                        if (fCurr) {
-                                            if (
-                                                queueInfo.depthIndex ===
-                                                    fCurr.depth &&
-                                                queueInfo.inDepthBlockIndex ===
-                                                    fCurr.indexInTheDepth
-                                            ) {
-                                                isFCurr = true;
-                                                if (queueInfo.depthIndex > 0) {
-                                                    junkDecors.push(queueInfo);
-                                                    editorInfo.decors[
-                                                        lineIndex
-                                                    ]![depthIndex][queueIndex] =
-                                                        undefined;
-                                                    // editorInfo.decors[
-                                                    //     lineIndex
-                                                    // ]![depthIndex].splice(
-                                                    //     queueIndex,
-                                                    //     1,
-                                                    // );
-                                                } else {
-                                                    entireFileFocus = true;
-                                                }
-
-                                                // console.log(
-                                                //     "-------junk inLineInDepthInfo curr",
-                                                //     inLineInDepthInfo,
-                                                // );
-                                            }
-                                        }
-
-                                        if (
-                                            !entireFileFocus &&
-                                            (isFPrev || isFCurr)
-                                        ) {
-                                            //
-                                        } else {
-                                            //
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                // junkDecors.map((inLineInDepthInfo) => {
-                //     console.log(
-                //         "junk lineOne, depth, bi:",
-                //         inLineInDepthInfo.lineZero + 1,
-                //         inLineInDepthInfo.depthIndex,
-                //         inLineInDepthInfo.inDepthBlockIndex,
-                //     );
-                // });
-
-                if (junkDecors3dArr.length === 0) {
-                    junkDecors3dArr.push([]);
-                }
-                if (junkDecors3dArr[0]) {
-                    if (junkDecors3dArr[0].length === 0) {
-                        junkDecors3dArr[0].push([]);
-                    }
-                } else {
-                    junkDecors3dArr[0] = [[]];
-                }
-
-                junkDecors3dArr[0][0]!.push(junkDecors);
-
-                // junkDecors3dArr.push(editorInfo.decors); //
-                // editorInfo.decors = []; //
-
-                renderLevels(
-                    editorInfo,
-                    firstLineZeroOfRender,
-                    lastLineZeroOfRender,
-                    "focus",
-                );
-            }
-
-            // TODO: check firstLineZeroOfRender and lastLineZeroOfRender // or maybe not
-        } else {
-            editorInfo.upToDateLines.upEdge = -1;
-            editorInfo.upToDateLines.lowEdge = -1;
-
-            junkDecors3dArr.push(editorInfo.decors);
-            editorInfo.decors = [];
-
+        if (editorInfo.needToAnalyzeFile) {
+            // console.time("getFF");
             editorInfo.renderingInfoForFullFile = await getFullFileStats({
                 editorInfo,
             });
-
-            if (editorInfo.renderingInfoForFullFile) {
-                editorInfo.needToAnalyzeFile = false;
-                updateFocusInfo(editorInfo);
-                renderLevels(
-                    editorInfo,
-                    firstLineZeroOfRender,
-                    lastLineZeroOfRender,
-                );
-            }
+            // console.timeEnd("getFF");
         }
+
+        if (editorInfo.renderingInfoForFullFile) {
+            editorInfo.needToAnalyzeFile = false;
+
+            updateFocusInfo(editorInfo);
+
+            // console.time("renderLevelsEasy");
+            renderLevels(
+                editorInfo,
+                firstLineZeroOfRender,
+                lastLineZeroOfRender,
+            );
+            // console.timeEnd("renderLevelsEasy");
+        }
+
         nukeJunkDecorations();
-    }, timer); // ms // 250
+    }, timer); // ms
 };
