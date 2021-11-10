@@ -60,7 +60,9 @@ export const pyFn = (pythonTextInput: string, editorInfo: IEditorInfo) => {
     const typeS = 93; // type 93 is INDENT
     const typeE = 94; // type 94 is DEDENT
 
+    // console.time("py");
     const pyTokens: any[] = pyParser.getAllTokens(pythonText);
+    // console.timeEnd("py");
 
     let indentsAndDedents: {
         type: number;

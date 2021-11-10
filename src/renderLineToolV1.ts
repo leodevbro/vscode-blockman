@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as vscode from "vscode";
 import { glo, TyInLineInDepthInQueueInfo, TyDepthDecInfo } from "./extension";
 import { ISingleLineBox } from "./renderingTools";

@@ -109,8 +109,10 @@ export default class DocumentDecoration {
                     // junkDecors3dArr.push(editorInfo.decors);
                     nukeJunkDecorations();
                     nukeAllDecs();
-                    updateAllControlledEditors({ alsoStillVisible: true });
-                }, 120000);
+                    updateAllControlledEditors({
+                        alsoStillVisibleAndHist: true,
+                    });
+                }, 20000);
             }
 
             return [];

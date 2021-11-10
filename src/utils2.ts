@@ -4,7 +4,7 @@ import {
     glo,
     IEditorInfo,
     IInLineInDepthDecorsRefs,
-    infosOfcontrolledEditors,
+    infosOfControlledEditors,
     TyInLineInDepthInQueueInfo,
     TyOneFileEditorDecInfo,
     updateAllControlledEditors,
@@ -47,11 +47,19 @@ export const calculateCharIndexFromColumn = (
     return spacing;
 };
 
-export const notYetDisposedDecsObject: {
-    decs: { dRef: vscode.TextEditorDecorationType; lineZero: number }[];
+export interface INotYetDisposedDec {
+    dRef: vscode.TextEditorDecorationType;
+    lineZero: number;
+    // doc: vscode.TextDocument;
+}
+
+export interface INotYetDisposed {
+    decs: INotYetDisposedDec[];
     sameFirstElementCounter: number;
     firstDRef: vscode.TextEditorDecorationType | undefined;
-} = {
+}
+
+export const notYetDisposedDecsObject: INotYetDisposed = {
     decs: [],
     sameFirstElementCounter: 0,
     firstDRef: undefined,
@@ -123,7 +131,7 @@ export const nukeJunkDecorations = () => {
 
         if (notYetDisposedDecsObject.sameFirstElementCounter > 100) {
             nukeAllDecs();
-            updateAllControlledEditors({ alsoStillVisible: true });
+            updateAllControlledEditors({ alsoStillVisibleAndHist: true });
         }
     }
 };
@@ -195,7 +203,7 @@ export const getLastColIndexForLineWithColorDecSpaces = (
 export const selectFocusedBlock = () => {
     const thisEditor = window.activeTextEditor;
     if (thisEditor) {
-        const thisEditorInfo = infosOfcontrolledEditors.find(
+        const thisEditorInfo = infosOfControlledEditors.find(
             (x) => x.editorRef === thisEditor,
         );
         if (thisEditorInfo) {

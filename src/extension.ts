@@ -112,10 +112,11 @@ export const glo = {
 
     enableFocus: true,
 
-    renderIncBeforeAfterVisRange: 20, // 2-3 is good
-    renderTimerForChange: 1200,
-    renderTimerForFocus: 200,
-    renderTimerForScroll: 100,
+    renderIncBeforeAfterVisRange: 20, // 2-3 is minimal
+    renderTimerForInit: 50, // ms
+    renderTimerForChange: 1200, // ms
+    renderTimerForFocus: 200, // ms
+    renderTimerForScroll: 100, // ms
 
     analyzeCurlyBrackets: true,
     analyzeSquareBrackets: false,
@@ -141,6 +142,7 @@ export const glo = {
     colorDecoratorsInStyles: true,
     trySupportDoubleWidthChars: false, // for Chinese characters and possibly others too
     blackListOfFileFormats: ["plaintext", "markdown"],
+    // maxHistoryOfParsedTabs: 7,
 };
 
 const updateBlockmanLineHeightAndLetterSpacing = () => {
@@ -247,30 +249,17 @@ export interface IEditorInfo {
 }
 
 // export const maxNumberOfControlledEditors = 5;
-export let infosOfcontrolledEditors: IEditorInfo[] = [];
-
-// export const trimHistoryOfEditors = () => {
-//     const currLength = infosOfcontrolledEditors.length;
-//     const infosOfJunkEditors = infosOfcontrolledEditors.slice(
-//         0,
-//         currLength - maxNumberOfControlledEditors,
-//     );
-//     infosOfcontrolledEditors = infosOfcontrolledEditors.slice(
-//         currLength - maxNumberOfControlledEditors,
-//     );
-
-//     // infosOfJunkEditors.map();
-// };
+export let infosOfControlledEditors: IEditorInfo[] = [];
 
 // extention-wide GLOBALS _end_
 
 export const dropTextLinesMapForEditor = (editor: vscode.TextEditor) => {
     for (
         let edInfoIndex = 0;
-        edInfoIndex < infosOfcontrolledEditors.length;
+        edInfoIndex < infosOfControlledEditors.length;
         edInfoIndex += 1
     ) {
-        const currEdInfo = infosOfcontrolledEditors[edInfoIndex];
+        const currEdInfo = infosOfControlledEditors[edInfoIndex];
         if (currEdInfo.editorRef === editor) {
             currEdInfo.textLinesMap = [];
             break;
@@ -278,15 +267,61 @@ export const dropTextLinesMapForEditor = (editor: vscode.TextEditor) => {
     }
 };
 
+export const haveSameDocs = (
+    ed1: vscode.TextEditor,
+    ed2: vscode.TextEditor,
+) => {
+    if (ed1 === ed2) {
+        return true;
+    }
+
+    if (ed1.document === ed2.document) {
+        return true;
+    }
+
+    if (ed1.document.uri === ed2.document.uri) {
+        return true;
+    }
+
+    if (ed1.document.uri.fsPath === ed2.document.uri.fsPath) {
+        return true;
+    }
+    if (ed1.document.uri.path === ed2.document.uri.path) {
+        return true;
+    }
+    return false;
+};
+
+export const areSameDocs = (
+    d1: vscode.TextDocument,
+    d2: vscode.TextDocument,
+) => {
+    if (d1 === d2) {
+        return true;
+    }
+
+    if (d1.uri === d2.uri) {
+        return true;
+    }
+
+    if (d1.uri.fsPath === d2.uri.fsPath) {
+        return true;
+    }
+    if (d1.uri.path === d2.uri.path) {
+        return true;
+    }
+    return false;
+};
+
 export const updateAllControlledEditors = ({
-    alsoStillVisible,
+    alsoStillVisibleAndHist,
 }: {
-    alsoStillVisible?: boolean;
+    alsoStillVisibleAndHist?: boolean;
 }) => {
     const supMode = "init";
     const visibleEditors = vscode.window.visibleTextEditors;
 
-    const infosOfStillVisibleEditors = infosOfcontrolledEditors.filter(
+    const infosOfStillVisibleEditors = infosOfControlledEditors.filter(
         (edInfo) => visibleEditors.includes(edInfo.editorRef),
     );
 
@@ -322,13 +357,13 @@ export const updateAllControlledEditors = ({
             },
             timerForDo: null,
             renderingInfoForFullFile: undefined,
-            // focusedBlock: null,
+
             monoText: "",
             colorDecoratorsArr: [],
         });
     });
 
-    let infosOfDisposedEditors = infosOfcontrolledEditors.filter(
+    let infosOfDisposedEditors = infosOfControlledEditors.filter(
         (edInfo) => !stillVisibleEditors.includes(edInfo.editorRef),
     );
 
@@ -341,19 +376,19 @@ export const updateAllControlledEditors = ({
         ...infosOfNewEditors,
     ];
 
-    infosOfcontrolledEditors = finalArrOfInfos;
+    infosOfControlledEditors = finalArrOfInfos;
 
     infosOfNewEditors.forEach((editorInfo: IEditorInfo) => {
         editorInfo.needToAnalyzeFile = true;
-        updateRender({ editorInfo, timer: 200 });
+        updateRender({ editorInfo, timer: glo.renderTimerForInit });
     });
 
-    if (alsoStillVisible) {
+    if (alsoStillVisibleAndHist) {
         infosOfStillVisibleEditors.forEach((editorInfo: IEditorInfo) => {
             editorInfo.upToDateLines.upEdge = -1;
             editorInfo.upToDateLines.lowEdge = -1;
             editorInfo.needToAnalyzeFile = true;
-            updateRender({ editorInfo, timer: 200 });
+            updateRender({ editorInfo, timer: glo.renderTimerForInit });
         });
     }
 };
@@ -385,9 +420,10 @@ export const updateControlledEditorsForOneDoc = ({
         return;
     }
 
-    infosOfcontrolledEditors.forEach((editorInfo: IEditorInfo) => {
+    infosOfControlledEditors.forEach((editorInfo: IEditorInfo) => {
         if (
             (thisDoc as vscode.TextDocument) === editorInfo.editorRef.document
+            // areSameDocs(thisDoc!, editorInfo.editorRef.document)
         ) {
             if (
                 ["scroll", "focus"].includes(supMode) &&
@@ -550,8 +586,8 @@ const importantMessage = () => {
 const softRestart = () => {
     nukeAllDecs();
     nukeJunkDecorations();
-    infosOfcontrolledEditors = [];
-    updateAllControlledEditors({ alsoStillVisible: true });
+    infosOfControlledEditors = [];
+    updateAllControlledEditors({ alsoStillVisibleAndHist: true });
 };
 
 let settingsChangeTimout: NodeJS.Timeout | undefined;
@@ -673,7 +709,7 @@ export function activate(context: ExtensionContext) {
 
                 nukeAllDecs();
                 nukeJunkDecorations();
-                infosOfcontrolledEditors = [];
+                infosOfControlledEditors = [];
 
                 // setUserwideConfigOfVscode(configOfVscodeBeforeBlockman);
 
@@ -686,7 +722,7 @@ export function activate(context: ExtensionContext) {
 
                 setUserwideIndentGuides(false);
 
-                updateAllControlledEditors({ alsoStillVisible: true });
+                updateAllControlledEditors({ alsoStillVisibleAndHist: true });
             }
         }),
 
@@ -713,7 +749,7 @@ export function activate(context: ExtensionContext) {
         vscode.commands.registerCommand("blockman.toggleFreezeFocus", () => {
             const thisEditor = vscode.window.activeTextEditor;
             if (thisEditor) {
-                const thisEditorInfo = infosOfcontrolledEditors.find(
+                const thisEditorInfo = infosOfControlledEditors.find(
                     (x) => x.editorRef === thisEditor,
                 );
                 if (thisEditorInfo) {
@@ -761,13 +797,13 @@ export function activate(context: ExtensionContext) {
                 settingsChangeTimout = setTimeout(() => {
                     applyAllBlockmanSettings(); // setTimeout is important because VSCode needs certain amount of time to update latest changes of settings.
                     updateAllControlledEditors({
-                        alsoStillVisible: true,
+                        alsoStillVisibleAndHist: true,
                     });
                 }, 500);
             } else {
                 nukeAllDecs();
                 nukeJunkDecorations();
-                infosOfcontrolledEditors = [];
+                infosOfControlledEditors = [];
             }
         }),
 
@@ -775,7 +811,7 @@ export function activate(context: ExtensionContext) {
             if (!glo.isOn) {
                 return;
             }
-            infosOfcontrolledEditors.forEach((editorInfo: IEditorInfo) => {
+            infosOfControlledEditors.forEach((editorInfo: IEditorInfo) => {
                 if (event.textEditor === editorInfo.editorRef) {
                     editorInfo.needToAnalyzeFile = true;
                 }
@@ -804,7 +840,7 @@ export function activate(context: ExtensionContext) {
                 // console.log("changed text");
                 const thisDoc = event.document;
 
-                infosOfcontrolledEditors.forEach((editorInfo: IEditorInfo) => {
+                infosOfControlledEditors.forEach((editorInfo: IEditorInfo) => {
                     if (thisDoc === editorInfo.editorRef.document) {
                         editorInfo.needToAnalyzeFile = true;
                     }

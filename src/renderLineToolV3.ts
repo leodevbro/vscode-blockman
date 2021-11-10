@@ -32,6 +32,7 @@ export const renderSingleLineBoxV3 = ({
     firstVisibleChar,
     lastVisibleChar,
 }: ISingleLineBox): void => {
+    // const doc = editorInfo.editorRef.document;
     const firstLineOfMiddles = firstVisibleChar.lineZero + 2;
     const lastLineOfMiddles = lastVisibleChar.lineZero - 2;
 
@@ -372,6 +373,7 @@ export const renderSingleLineBoxV3 = ({
             notYetDisposedDecsObject.decs.push({
                 dRef: leftLineOfOpening,
                 lineZero,
+                // doc,
             });
             editorInfo.editorRef.setDecorations(
                 leftLineOfOpening,
@@ -428,6 +430,7 @@ export const renderSingleLineBoxV3 = ({
             notYetDisposedDecsObject.decs.push({
                 dRef: rightLineOfClosing,
                 lineZero,
+                // doc,
             });
             editorInfo.editorRef.setDecorations(
                 rightLineOfClosing,
@@ -451,6 +454,7 @@ export const renderSingleLineBoxV3 = ({
     notYetDisposedDecsObject.decs.push({
         dRef: lineDecoration,
         lineZero,
+        // doc,
     });
     editorInfo.editorRef.setDecorations(lineDecoration, arrayOfCurrRanges);
 };
