@@ -33,21 +33,22 @@ export const makeGradientNotation = (
     // So, instead of sending solid color, maybe we should always
     // send it as linear-gradient notiation for padding-box (background) value.
 
-    const trimmed = possiblySolidColor.trim();
+    const trimmedAndLowed = possiblySolidColor.trim().toLowerCase();
 
-    if (trimmed === "") {
-        return trimmed;
+    if (trimmedAndLowed === "") {
+        return trimmedAndLowed;
     }
 
-    if (["transparent", "none"].includes(trimmed.toLowerCase())) {
+    if (["none"].includes(trimmedAndLowed)) {
         if (tempTransparent === "back") {
-            return `linear-gradient(to right, ${"rgb(30, 30, 30)"}, ${"rgb(30, 30, 30)"})`;
+            const currBack = "var(--vscode-editor-background)";
+            return `linear-gradient(to right, ${currBack}, ${currBack})`;
         } else {
             return `linear-gradient(to right, ${"transparent"}, ${"transparent"})`;
         }
     }
 
-    if (possiblySolidColor.toLowerCase().indexOf("gradient") !== -1) {
+    if (trimmedAndLowed.indexOf("gradient") !== -1) {
         return possiblySolidColor;
     } else {
         return `linear-gradient(to right, ${possiblySolidColor}, ${possiblySolidColor})`;

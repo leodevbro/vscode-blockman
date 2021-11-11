@@ -3,7 +3,7 @@
     "displayName": "Blockman - Highlight Nested Code Blocks",
     "publisher": "leodevbro",
     "description": "Mark/Highlight code blocks",
-    "version": "1.3.1",
+    "version": "1.3.2",
     "engines": {
         "vscode": "^1.56.1"
     },
@@ -267,67 +267,67 @@
                     "type": "string",
                     "default": "",
                     "scope": "window",
-                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent."
+                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background."
                 },
                 "blockman.n06CustomColorOfDepth1": {
                     "type": "string",
                     "default": "",
                     "scope": "window",
-                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent."
+                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background."
                 },
                 "blockman.n07CustomColorOfDepth2": {
                     "type": "string",
                     "default": "",
                     "scope": "window",
-                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent."
+                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background."
                 },
                 "blockman.n08CustomColorOfDepth3": {
                     "type": "string",
                     "default": "",
                     "scope": "window",
-                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent."
+                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background."
                 },
                 "blockman.n09CustomColorOfDepth4": {
                     "type": "string",
                     "default": "",
                     "scope": "window",
-                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent."
+                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background."
                 },
                 "blockman.n10CustomColorOfDepth5": {
                     "type": "string",
                     "default": "",
                     "scope": "window",
-                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent."
+                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background."
                 },
                 "blockman.n11CustomColorOfDepth6": {
                     "type": "string",
                     "default": "",
                     "scope": "window",
-                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent."
+                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background."
                 },
                 "blockman.n12CustomColorOfDepth7": {
                     "type": "string",
                     "default": "",
                     "scope": "window",
-                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent."
+                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background."
                 },
                 "blockman.n13CustomColorOfDepth8": {
                     "type": "string",
                     "default": "",
                     "scope": "window",
-                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent."
+                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background."
                 },
                 "blockman.n14CustomColorOfDepth9": {
                     "type": "string",
                     "default": "",
                     "scope": "window",
-                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent."
+                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background."
                 },
                 "blockman.n15CustomColorOfDepth10": {
                     "type": "string",
                     "default": "",
                     "scope": "window",
-                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent."
+                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background."
                 },
                 "blockman.n16EnableFocus": {
                     "type": "boolean",

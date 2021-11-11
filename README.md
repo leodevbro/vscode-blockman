@@ -176,19 +176,19 @@ Press F1 and find "Blockman Toggle Try Support Double Width Chars (e.g. Chinese)
     "blockman.n04Sub02ColorComboPresetForLightTheme": "None", // Color combo to apply when current theme kind is Light.
     "blockman.n04Sub03ColorComboPresetForHighContrastTheme": "None", // Color combo to apply when current theme kind is High Contrast.
 
-    "blockman.n05CustomColorOfDepth0": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent.
+    "blockman.n05CustomColorOfDepth0": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background.
 
-    "blockman.n06CustomColorOfDepth1": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent.
-    "blockman.n07CustomColorOfDepth2": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent.
-    "blockman.n08CustomColorOfDepth3": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent.
-    "blockman.n09CustomColorOfDepth4": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent.
-    "blockman.n10CustomColorOfDepth5": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent.
+    "blockman.n06CustomColorOfDepth1": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background.
+    "blockman.n07CustomColorOfDepth2": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background.
+    "blockman.n08CustomColorOfDepth3": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background.
+    "blockman.n09CustomColorOfDepth4": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background.
+    "blockman.n10CustomColorOfDepth5": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background.
 
-    "blockman.n11CustomColorOfDepth6": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent.
-    "blockman.n12CustomColorOfDepth7": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent.
-    "blockman.n13CustomColorOfDepth8": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent.
-    "blockman.n14CustomColorOfDepth9": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent.
-    "blockman.n15CustomColorOfDepth10": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for transparent.
+    "blockman.n11CustomColorOfDepth6": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background.
+    "blockman.n12CustomColorOfDepth7": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background.
+    "blockman.n13CustomColorOfDepth8": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background.
+    "blockman.n14CustomColorOfDepth9": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background.
+    "blockman.n15CustomColorOfDepth10": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background.
 
     "blockman.n16EnableFocus": true, // Highlight block differently if caret is inside it.
     "blockman.n17CustomColorOfFocusedBlock": "", // Requires 'Enable Focus' to be true/enabled. Type 'same' if you want it to be same color as if not focused.

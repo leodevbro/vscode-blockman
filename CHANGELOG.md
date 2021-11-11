@@ -4,6 +4,13 @@ All notable changes to the "blockman" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.3.2] - 2021-11-11
+
+-   For now, borders support gradients and also "transparent" value,
+    backgrounds also support gradients but do not support "transparent" value,
+    so if you type "none" in any background field, the color will become
+    the same color as the editor background.
+
 ## [1.3.1] - 2021-11-11
 
 -   Mostly fixed major bug of coloring

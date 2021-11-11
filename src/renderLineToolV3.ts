@@ -122,12 +122,11 @@ export const renderSingleLineBoxV3 = ({
         // backgroundCSS = "rgb(13, 2, 41)";
         // backgroundCSS = "rgb(27, 12, 48)";
 
-        if (glo.coloring.focusedBlock !== "same") {
+        if (!glo.coloring.focusedBlock.includes("same")) {
             backgroundCSS = glo.coloring.focusedBlock;
             // backgroundCSS = "rgba(154, 10, 80, 0)";
         }
-
-        if (glo.coloring.borderOfFocusedBlock !== "same") {
+        if (!glo.coloring.borderOfFocusedBlock.includes("same")) {
             borderColorToBeTransparent = glo.coloring.borderOfFocusedBlock;
         }
 
