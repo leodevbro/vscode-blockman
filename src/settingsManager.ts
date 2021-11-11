@@ -3,7 +3,10 @@ import { ColorThemeKind, workspace } from "vscode";
 import { colorCombos, IColorCombo } from "./colors";
 import { glo } from "./extension";
 
-export const makeGradientNotation = (possiblySolidColor: string): string => {
+export const makeGradientNotation = (
+    possiblySolidColor: string,
+    tempTransparent?: "back",
+): string => {
     // !!! IMPORTANT !!!
     // New rendering function uses background with
     // content-box and padding-box values.
@@ -29,6 +32,20 @@ export const makeGradientNotation = (possiblySolidColor: string): string => {
 
     // So, instead of sending solid color, maybe we should always
     // send it as linear-gradient notiation for padding-box (background) value.
+
+    const trimmed = possiblySolidColor.trim();
+
+    if (trimmed === "") {
+        return trimmed;
+    }
+
+    if (["transparent", "none"].includes(trimmed.toLowerCase())) {
+        if (tempTransparent === "back") {
+            return `linear-gradient(to right, ${"rgb(30, 30, 30)"}, ${"rgb(30, 30, 30)"})`;
+        } else {
+            return `linear-gradient(to right, ${"transparent"}, ${"transparent"})`;
+        }
+    }
 
     if (possiblySolidColor.toLowerCase().indexOf("gradient") !== -1) {
         return possiblySolidColor;
@@ -196,38 +213,38 @@ export const applyAllBlockmanSettings = () => {
     );
 
     if (thisColorCombo) {
-        glo.coloring.onEachDepth = thisColorCombo.onEachDepth.map((color) =>
-            makeGradientNotation(color),
+        glo.coloring.onEachDepth = thisColorCombo.onEachDepth.map(
+            (color) => color,
         ); // important to copy the array, using map() or using [...array]
 
-        glo.coloring.focusedBlock = makeGradientNotation(
-            thisColorCombo.focusedBlock,
-        );
+        glo.coloring.focusedBlock = thisColorCombo.focusedBlock;
 
         glo.coloring.border = thisColorCombo.border;
         glo.coloring.borderOfDepth0 = thisColorCombo.borderOfDepth0;
+
         glo.coloring.borderOfFocusedBlock = thisColorCombo.borderOfFocusedBlock;
     }
 
     customColorsOnEachDepth.map((color, i) => {
-        if (color) {
+        if (color && color.trim()) {
             // glo.coloring.onEachDepth[i] = color;
-            glo.coloring.onEachDepth[i] = makeGradientNotation(color);
+            glo.coloring.onEachDepth[i] = color;
         }
     });
 
-    if (customColorOfFocusedBlock) {
-        glo.coloring.focusedBlock = makeGradientNotation(
-            customColorOfFocusedBlock,
-        );
+    if (customColorOfFocusedBlock && customColorOfFocusedBlock.trim()) {
+        glo.coloring.focusedBlock = customColorOfFocusedBlock;
     }
-    if (customColorOfFocusedBlockBorder) {
+    if (
+        customColorOfFocusedBlockBorder &&
+        customColorOfFocusedBlockBorder.trim()
+    ) {
         glo.coloring.borderOfFocusedBlock = customColorOfFocusedBlockBorder;
     }
-    if (customColorOfBlockBorder) {
+    if (customColorOfBlockBorder && customColorOfBlockBorder.trim()) {
         glo.coloring.border = customColorOfBlockBorder;
     }
-    if (customColorOfDepth0Border) {
+    if (customColorOfDepth0Border && customColorOfDepth0Border.trim()) {
         glo.coloring.borderOfDepth0 = customColorOfDepth0Border;
     }
 
@@ -347,6 +364,8 @@ export const applyAllBlockmanSettings = () => {
         "n32BlackListOfFileFormats",
     );
 
+    // console.log(glo.coloring.border);
+
     if (typeof customBlackListOfFileFormats === "string") {
         const stringWithoutSpaces = customBlackListOfFileFormats.replace(
             / /g,
@@ -361,4 +380,24 @@ export const applyAllBlockmanSettings = () => {
             glo.blackListOfFileFormats = [];
         }
     }
+
+    // ! IMPORTANT
+
+    glo.coloring.border = makeGradientNotation(glo.coloring.border);
+    glo.coloring.borderOfDepth0 = makeGradientNotation(
+        glo.coloring.borderOfDepth0,
+    );
+    glo.coloring.borderOfFocusedBlock = makeGradientNotation(
+        glo.coloring.borderOfFocusedBlock,
+    );
+
+    glo.coloring.focusedBlock = makeGradientNotation(
+        glo.coloring.focusedBlock,
+        "back",
+    );
+    glo.coloring.onEachDepth = glo.coloring.onEachDepth.map((color) =>
+        makeGradientNotation(color, "back"),
+    );
+
+    // console.log(">>>>>>>>>>>>>", glo.coloring.focusedBlock);
 };

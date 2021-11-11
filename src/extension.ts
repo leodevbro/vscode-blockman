@@ -87,12 +87,12 @@ const stateHolder: {
 
 export let bracketManager: DocumentDecorationManager | undefined | null;
 
-colorCombos.forEach((combo) => {
-    combo.focusedBlock = makeGradientNotation(combo.focusedBlock);
-    combo.onEachDepth = combo.onEachDepth.map((color) =>
-        makeGradientNotation(color),
-    );
-});
+// colorCombos.forEach((combo) => {
+//     combo.focusedBlock = makeGradientNotation(combo.focusedBlock);
+//     combo.onEachDepth = combo.onEachDepth.map((color) =>
+//         makeGradientNotation(color),
+//     );
+// });
 
 const classicDark1Combo = colorCombos.find(
     (x) => x.name === "Classic Dark 1 (Gradients)",
