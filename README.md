@@ -297,9 +297,31 @@ like: ა, ბ, გ, დ, ე, ვ, ზ, თ, ი, კ, ლ, მ, ნ, ო, პ,
 <br />
 
 <h1>Optimization Notes</h1>
-<p>Optimization is taken very seriously, half of the work is dedicated just for the optimization. The source code is full of logic which prevents many unnecessary block re-renderings.</p>
+<p>Optimization is taken very seriously, half of the work is dedicated just for the optimization.</p>
   
-<p>File analysis needs super short time, so it's not a big problem. The main problem is that the vscode block rendering functions (<strong>vscode.window.createTextEditorDecorationType</strong> and <strong>setDecorations</strong>) are very slow, and I cannot touch its internal code, because it's just an API of VSCode. So, almost all optimization algorithms are trying to prevent as many unnecessary block renderings as possible. For example, when scrolling, blocks are rendered into only newly visible code, and the blocks which are already visible, stay there and does not rerender.</p>
+<p>If a file is already analyzed, rendering blocks takes about 0.02 seconds with default Blockman settings. So, rendering is not a big issue, but analyzing is quite heavy work. Here are some test cases of some programming languages:</p>
+
+```
+Yaml file:
+    analyze: 0.70 seconds (10,000 lines), 0.06 seconds (1,000 lines)
+    
+Dart file:
+    analyze: 0.90 seconds (10,000 lines), 0.09 seconds (1,000 lines)
+
+CSharp file:
+    analyze: 1.40 seconds (10,000 lines), 0.15 seconds (1,000 lines)
+
+TSX file:
+    analyze: 1.60 seconds (10,000 lines), 0.17 seconds (1,000 lines)
+    
+JavaScript file:
+    analyze: 2.70 seconds (10,000 lines), 0.28 seconds (1,000 lines)
+
+Python file:
+   analyze: 10.70 seconds (10,000 lines), 0.86 seconds (1,000 lines)
+```
+
+<p>So, currently I'm trying to find more optimized ways to analyze files, especially for Python langauge.</p>
 
 <br />
 
