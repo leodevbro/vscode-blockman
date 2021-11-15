@@ -4,6 +4,10 @@ All notable changes to the "blockman" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.3.3] - 2021-11-15
+
+-   Updated optimization notes in README.
+
 ## [1.3.2] - 2021-11-11
 
 -   For now, borders support gradients and also "transparent" value,
