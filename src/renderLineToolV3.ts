@@ -134,7 +134,7 @@ export const renderSingleLineBoxV3 = ({
         // zIndex = -3;
     }
 
-    const borderColorNewVarToSupportGraient = borderColorToBeTransparent;
+    const borderColorNewVarToSupportGradient = borderColorToBeTransparent;
     borderColorToBeTransparent = "transparent";
 
     // const boxLeftEdgeFixedShift = boxLeftEdge - borderSize;
@@ -288,7 +288,7 @@ export const renderSingleLineBoxV3 = ({
         "background: " +
         backgroundCSS +
         " padding-box, " +
-        borderColorNewVarToSupportGraient +
+        borderColorNewVarToSupportGradient +
         "border-box;";
 
     // kkk += 1;
