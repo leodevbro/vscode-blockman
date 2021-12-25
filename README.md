@@ -214,6 +214,7 @@ Press F1 and find "Blockman Toggle Try Support Double Width Chars (e.g. Chinese)
     "blockman.n32BlackListOfFileFormats": "plaintext, markdown, ", // Disable blockman for certain file formats, e.g. plaintext, markdown, css, less, scss, html, json, jsonc, typescriptreact, typescript, javascriptreact, javascript, python, go, dart, php, c, csharp, cpp, java.
 
     // Advanced Coloring:
+    // Video instruction: https://youtu.be/UsET6-kPu90
     // '!' means disabled.
     // Advanced coloring string, if enabled, will override basic coloring settings.
 
