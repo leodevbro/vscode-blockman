@@ -154,6 +154,7 @@ If you use <strong>double width</strong> characters like these Chinese character
 
 ```
 Press F1 and find "Blockman Toggle Enable/Disable"
+Press F1 and find "Blockman Toggle Keep Off State After Restarting VSCode"
 Press F1 and find "Blockman Select Focused" (Select text inside focused block)
 Press F1 and find "Blockman Toggle Freeze/Unfreeze Focus"
 Press F1 and find "Blockman Toggle Try Support Double Width Chars (e.g. Chinese)"
@@ -172,9 +173,9 @@ Press F1 and find "Blockman Toggle Try Support Double Width Chars (e.g. Chinese)
     // ...
     "blockman.n03MaxDepth": 12, // -1 is no blocks, 0 is ground block, 1 is first depth blocks, 2 is second depth blocks
     "blockman.n04ColorComboPreset": "Classic Dark 1 (Gradients)", // This does not change VSCode theme. Choose preset combo of colors. Corresponding colors are overridden by custom colors (if not empty string). Also This setting can be overriden by the next 3 combo settings
-    "blockman.n04Sub01ColorComboPresetForDarkTheme": "None", // Color combo to apply when current theme kind is Dark.
-    "blockman.n04Sub02ColorComboPresetForLightTheme": "None", // Color combo to apply when current theme kind is Light.
-    "blockman.n04Sub03ColorComboPresetForHighContrastTheme": "None", // Color combo to apply when current theme kind is High Contrast.
+    "blockman.n04Sub01ColorComboPresetForDarkTheme": "none", // Color combo to apply when current theme kind is Dark.
+    "blockman.n04Sub02ColorComboPresetForLightTheme": "none", // Color combo to apply when current theme kind is Light.
+    "blockman.n04Sub03ColorComboPresetForHighContrastTheme": "none", // Color combo to apply when current theme kind is High Contrast.
 
     "blockman.n05CustomColorOfDepth0": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background.
 
@@ -210,7 +211,39 @@ Press F1 and find "Blockman Toggle Try Support Double Width Chars (e.g. Chinese)
     "blockman.n30TimeToWaitBeforeRerenderAfterLastScrollEvent": 0.1, // (Seconds). For optimization: enter more time for slow computers. Less than 0.05 is NOT recommended even for fast computers.
     "blockman.n31RenderIncrementBeforeAndAfterVisibleRange": 22, // Less is faster because less blocks will be rendered outside the viewport but scrolling may become less comfortable. If less than 1 (e.g. -5), the blocks will render in limited area.
 
-    "blockman.n32BlackListOfFileFormats": "plaintext, markdown, " // Disable blockman for certain file formats, e.g. plaintext, markdown, css, less, scss, html, json, jsonc, typescriptreact, typescript, javascriptreact, javascript, python, go, dart, php, c, csharp, cpp, java.
+    "blockman.n32BlackListOfFileFormats": "plaintext, markdown, ", // Disable blockman for certain file formats, e.g. plaintext, markdown, css, less, scss, html, json, jsonc, typescriptreact, typescript, javascriptreact, javascript, python, go, dart, php, c, csharp, cpp, java.
+
+    // Advanced Coloring:
+    // '!' means disabled.
+    // Advanced coloring string, if enabled, will override basic coloring settings.
+
+    // Right side: sequence of colors/gradients.
+
+    // Left side:
+    // --- FIRST number relates priority,
+    // --- SECOND number relates zero-based index of first item of first loop, So it splits the sequence into what should not be looped and what should be looped,
+    // --- THIRD number relates loop part reversion (0: original, 1: reversed), FOURTH number relates looping strategy (0: all the continuation items to be 'neutral', 'neutral' means it will be overriden by any other setting, 1: Only the last item will be looped. Yes, it will ignore the SECOND option number (split index), 2: loop as forward, 3: loop as pair of forward and backward).
+
+    // 'neutral' color means it will be overriden by any other coloring setting.
+    // 'basic' color means it will set a color from basic color settings.
+
+    // 'transparent' and partially transparent colors work fine for borders, but backgrounds have some problems with such values,
+    // so, if you type 'transparent' on background, it will be the color of VSCode editor backgound.
+
+    "blockman.n33A01B1FromDepth0ToInwardForAllBorders": "!10,0,0,0; red > green > blue",
+    "blockman.n33A01B2FromDepth0ToInwardForAllBackgrounds": "!10,1,0,3; hsl(235, 30%, 7%) > hsl(0, 0%, 7.1%) > hsl(0, 0%, 9.5%) > hsl(0, 0%, 11.15%) > hsl(0, 0%, 12.8%)",
+
+    "blockman.n33A02B1FromFocusToOutwardForAllBorders": "!20,0,0,0; red > green > blue",
+    "blockman.n33A02B2FromFocusToOutwardForAllBackgrounds": "!20,0,0,0; red > green > blue",
+
+    "blockman.n33A03B1FromDepth0ToInwardForFocusTreeBorders": "!30,1,0,2; linear-gradient(to right, hsl(251, 22%, 25%), hsl(292, 20%, 18%)) > linear-gradient(to right, hsl(20, 50%, 30%), hsl(250, 30%, 30%))",
+    "blockman.n33A03B2FromDepth0ToInwardForFocusTreeBackgrounds": "!30,0,0,0; red > green > blue",
+
+    "blockman.n33A04B1FromFocusToOutwardForFocusTreeBorders": "40,0,0,0; basic",
+    "blockman.n33A04B2FromFocusToOutwardForFocusTreeBackgrounds": "40,0,0,0; basic",
+
+    "blockman.n33A05B1FromFocusToInwardForAllBorders": "!50,0,0,0; red > green > blue",
+    "blockman.n33A05B2FromFocusToInwardForAllBackgrounds": "!50,0,0,0; red > green > blue"
 }
 ```
 
@@ -304,7 +337,7 @@ like: ა, ბ, გ, დ, ე, ვ, ზ, თ, ი, კ, ლ, მ, ნ, ო, პ,
 ```
 Yaml file:
     analyze: 0.70 seconds (10,000 lines), 0.06 seconds (1,000 lines)
-    
+
 Dart file:
     analyze: 0.90 seconds (10,000 lines), 0.09 seconds (1,000 lines)
 
@@ -313,7 +346,7 @@ CSharp file:
 
 TSX file:
     analyze: 1.60 seconds (10,000 lines), 0.17 seconds (1,000 lines)
-    
+
 JavaScript file:
     analyze: 2.70 seconds (10,000 lines), 0.28 seconds (1,000 lines)
 

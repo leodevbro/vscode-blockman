@@ -14,7 +14,7 @@ import EventEmitter = require("events");
 
 import {
     applyAllBlockmanSettings,
-    makeGradientNotation,
+    AdvancedColoringFields,
 } from "./settingsManager";
 import { colorCombos } from "./colors";
 import {
@@ -30,6 +30,8 @@ import {
 const iiGlobal = "blockman_data_iicounter";
 const iiGlobal2 = "blockman_data_iicounter2";
 const iiGlobal3 = "blockman_data_iicounter3";
+const iiGlobal4OnOffAR = "blockman_data_onOffStateAfterRestart";
+const iiGlobal5OnOff = "blockman_data_onOffState";
 
 let isMac = false;
 let osChecked = false;
@@ -137,6 +139,19 @@ export const glo = {
 
         focusedBlock: bigVars.currColorCombo.focusedBlock,
         borderOfFocusedBlock: bigVars.currColorCombo.borderOfFocusedBlock,
+
+        advanced: {
+            forBorders: [] as {
+                priority: number;
+                sequence: string[];
+                kind: AdvancedColoringFields;
+            }[],
+            forBackgrounds: [] as {
+                priority: number;
+                sequence: string[];
+                kind: AdvancedColoringFields;
+            }[],
+        },
     },
 
     colorDecoratorsInStyles: true,
@@ -236,6 +251,8 @@ export interface IEditorInfo {
         curr: IFocusBlock | null;
         prev: IFocusBlock | null;
     };
+    focusTreePath: number[] | null; // number is the indexInDepth for each depth from depth0 to focus
+    innersFromFocus: (number[] | null)[] | null; // number is the indexInDepth for each depth from depth0 to focus [excl] as null and from focus [incl] to maxDepth as number[]
     timerForDo: any;
     renderingInfoForFullFile: IFullRender | undefined;
     // focusedBlock: { depth: number; index: number } | null;
@@ -356,6 +373,8 @@ export const updateAllControlledEditors = ({
                 prev: null,
             },
             timerForDo: null,
+            focusTreePath: null,
+            innersFromFocus: null, // not from focus but from d0 nulls and then number[] from focus
             renderingInfoForFullFile: undefined,
 
             monoText: "",
@@ -606,9 +625,6 @@ export function activate(context: ExtensionContext) {
     updateBlockmanLineHeightAndLetterSpacing();
     // adjustVscodeUserConfig();
     setColorDecoratorsBool();
-    if (glo.isOn) {
-        setUserwideIndentGuides(false);
-    }
 
     bracketManager = new DocumentDecorationManager();
     vscode.extensions.onDidChange(() => restart());
@@ -622,6 +638,13 @@ export function activate(context: ExtensionContext) {
         const iicounter = st.get(iiGlobal);
         const iicounter2 = st.get(iiGlobal2);
         const iicounter3 = st.get(iiGlobal3);
+        
+        const onOffStateAfterRestart = st.get(iiGlobal4OnOffAR);
+        const onOffState = st.get(iiGlobal5OnOff);
+        if (onOffState === "off" && onOffStateAfterRestart === "off") {
+            glo.isOn = false;
+            st.update(iiGlobal5OnOff, glo.isOn ? "on" : "off");
+        }
         // console.log(iicounter);
 
         if (iicounter === undefined) {
@@ -677,6 +700,10 @@ export function activate(context: ExtensionContext) {
         }
     }
 
+    if (glo.isOn) {
+        setUserwideIndentGuides(false);
+    }
+
     // setLightColorComboIfLightTheme(); // not on every activation
     applyAllBlockmanSettings();
 
@@ -703,6 +730,8 @@ export function activate(context: ExtensionContext) {
         }),
 
         vscode.commands.registerCommand("blockman.toggleEnableDisable", () => {
+            const st = stateHolder.myState;
+
             if (glo.isOn) {
                 glo.isOn = false;
                 // context.globalState.update("blockman_data_on", false);
@@ -723,6 +752,37 @@ export function activate(context: ExtensionContext) {
                 setUserwideIndentGuides(false);
 
                 updateAllControlledEditors({ alsoStillVisibleAndHist: true });
+            }
+            if (st) {
+                st.update(iiGlobal5OnOff, glo.isOn ? "on" : "off");
+            }
+        }),
+
+        vscode.commands.registerCommand("blockman.toggleKeepOff", () => {
+            const st = stateHolder.myState;
+            if (st) {
+                const onOffStateAfterRestart = st.get(iiGlobal4OnOffAR);
+                let newAROnOffState =
+                    onOffStateAfterRestart === "off" ? "on" : "off";
+
+                st.update(iiGlobal4OnOffAR, newAROnOffState);
+
+                if (newAROnOffState === "off") {
+                    vscode.window.showInformationMessage(
+                        `If you disable Blockman, it will still be disabled after restarting VSCode.`,
+                        { modal: false },
+                    );
+                } else {
+                    vscode.window.showInformationMessage(
+                        `If you disable Blockman, it will be enabled after restarting VSCode`,
+                        { modal: false },
+                    );
+                }
+            } else {
+                vscode.window.showInformationMessage(
+                    `Something's wrong, context.globalState is falsy.`,
+                    { modal: false },
+                );
             }
         }),
 

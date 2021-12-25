@@ -31,6 +31,9 @@ export const renderSingleLineBoxV4 = ({
 
     firstVisibleChar,
     lastVisibleChar,
+    inputBorderColor,
+    inputBackgroundColor,
+    borderSize,
 }: ISingleLineBox): void => {
     // const doc = editorInfo.editorRef.document;
     const firstLineOfMiddles = firstVisibleChar.lineZero + 2;
@@ -61,10 +64,11 @@ export const renderSingleLineBoxV4 = ({
         return;
     }
 
-    let borderSize = glo.borderSize;
     const borderRadius = glo.borderRadius;
 
-    let borderColorToBeTransparent: string = glo.coloring.border;
+    let borderColorToBeTransparent: string = inputBorderColor;
+    borderColorToBeTransparent = "transparent"; // IMPORTANT
+
     let zIndex = -1000 + depth * 10;
 
     let borderCss: string;
@@ -72,80 +76,6 @@ export const renderSingleLineBoxV4 = ({
     let top = 0;
     let specificHeight = boxHeight;
 
-    let backgroundColor: string = "linear-gradient(to right, black, black)"; // in final state it always must be linear gradient
-
-    switch (depth) {
-        case 0:
-            backgroundColor = glo.coloring.onEachDepth[0];
-            borderColorToBeTransparent = glo.coloring.borderOfDepth0;
-            // zIndex = -100 + 10;
-            break;
-
-        case 1:
-            backgroundColor = glo.coloring.onEachDepth[1];
-            break;
-        case 2:
-            backgroundColor = glo.coloring.onEachDepth[2];
-            console.log(glo.coloring.onEachDepth[2]);
-            break;
-        case 3:
-            backgroundColor = glo.coloring.onEachDepth[3];
-            break;
-        case 4:
-            backgroundColor = glo.coloring.onEachDepth[4];
-            break;
-        case 5:
-            backgroundColor = glo.coloring.onEachDepth[5];
-            break;
-
-        case 6:
-            backgroundColor = glo.coloring.onEachDepth[6];
-            break;
-        case 7:
-            backgroundColor = glo.coloring.onEachDepth[7];
-            break;
-        case 8:
-            backgroundColor = glo.coloring.onEachDepth[8];
-            break;
-        case 9:
-            backgroundColor = glo.coloring.onEachDepth[9];
-            break;
-        case 10:
-            backgroundColor = glo.coloring.onEachDepth[10];
-            break;
-
-        default:
-            backgroundColor = glo.coloring.onEachDepth[10];
-    }
-
-    if (glo.coloring.advancedOnEachDepthForBackgrounds[depth]) {
-        backgroundColor = glo.coloring.advancedOnEachDepthForBackgrounds[depth]; //  TODO
-    }
-
-    if (glo.coloring.advancedOnEachDepthForBorders[depth]) {
-        borderColorToBeTransparent =
-            glo.coloring.advancedOnEachDepthForBorders[depth];
-    }
-
-    if (glo.enableFocus && isFocusedBlock) {
-        // backgroundCSS = "rgb(21, 5, 64)";
-        // backgroundCSS = "rgb(13, 2, 41)";
-        // backgroundCSS = "rgb(27, 12, 48)";
-
-        if (!glo.coloring.focusedBlock.includes("same")) {
-            backgroundColor = glo.coloring.focusedBlock;
-            // backgroundCSS = "rgba(154, 10, 80, 0)";
-        }
-        if (!glo.coloring.borderOfFocusedBlock.includes("same")) {
-            borderColorToBeTransparent = glo.coloring.borderOfFocusedBlock;
-        }
-
-        borderSize = 2;
-        // zIndex = -3;
-    }
-
-    const borderColorNewVarToSupportGradient = borderColorToBeTransparent;
-
     //
     //
     //
@@ -153,8 +83,6 @@ export const renderSingleLineBoxV4 = ({
     //
     //
     //
-
-    borderColorToBeTransparent = "transparent"; // IMPORTANT
 
     // const boxLeftEdgeFixedShift = boxLeftEdge - borderSize;
 
@@ -305,9 +233,9 @@ export const renderSingleLineBoxV4 = ({
     const leftInc = isAtVeryLeft ? 2 : 0;
     const backgroundAndBorder =
         "background: " +
-        backgroundColor +
+        inputBackgroundColor +
         " padding-box, " +
-        borderColorNewVarToSupportGradient +
+        inputBorderColor +
         "border-box;";
 
     // kkk += 1;

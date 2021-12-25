@@ -474,7 +474,11 @@ const findSubLevelRangesInRange = (
     rStart: number,
     rEnd: number,
 ) => {
-    let subLevelRanges: { s: number; e: number }[] = [];
+    let subLevelRanges: {
+        s: number;
+        e: number;
+        outerIndexInOuterLevel: number | null;
+    }[] = [];
 
     let thisStart = -1;
     let thisEnd = -1;
@@ -488,7 +492,11 @@ const findSubLevelRangesInRange = (
             thisEnd = findEndIndicatorIndexAsPlace(allIndicators, p);
 
             if (thisEnd >= 0 && thisStart >= 0) {
-                subLevelRanges.push({ s: thisStart, e: thisEnd });
+                subLevelRanges.push({
+                    s: thisStart,
+                    e: thisEnd,
+                    outerIndexInOuterLevel: null,
+                });
             }
         }
     }
@@ -498,29 +506,46 @@ const findSubLevelRangesInRange = (
 export const findArrayOfNLevelsWithArrayOfBlocksInside = (
     allIndicators: IPositionEachZero[],
     maxDepth: number,
-) => {
+): {
+    s: number;
+    e: number;
+    outerIndexInOuterLevel: number | null;
+}[][] => {
     if (maxDepth <= -1) {
         return [];
     }
-    let arrayOfNLevelsWithArrayOfBlocksInside: { s: number; e: number }[][] = [
-        findSubLevelRangesInRange(allIndicators, 0, allIndicators.length),
-    ];
+    let arrayOfNLevelsWithArrayOfBlocksInside: {
+        s: number;
+        e: number;
+        outerIndexInOuterLevel: number | null;
+    }[][] = [findSubLevelRangesInRange(allIndicators, 0, allIndicators.length)];
 
     for (let i = 1; i <= maxDepth; i += 1) {
-        let prevLevelArr: { s: number; e: number }[] =
-            arrayOfNLevelsWithArrayOfBlocksInside[i - 1];
+        const outerLevel = i - 1;
+        let prevLevelArr: {
+            s: number;
+            e: number;
+            outerIndexInOuterLevel: number | null;
+        }[] = arrayOfNLevelsWithArrayOfBlocksInside[outerLevel];
 
         if (prevLevelArr) {
-            let newLevelArr: any = [];
+            let newLevelArr: {
+                s: number;
+                e: number;
+                outerIndexInOuterLevel: number | null;
+            }[] = [];
             for (let j = 0; j < prevLevelArr.length; j += 1) {
-                let nextR = findSubLevelRangesInRange(
+                let innerRanges = findSubLevelRangesInRange(
                     allIndicators,
                     prevLevelArr[j].s + 1,
                     prevLevelArr[j].e,
                 );
-                if (nextR && nextR.length > 0) {
+                innerRanges.forEach((item) => {
+                    item.outerIndexInOuterLevel = j;
+                });
+                if (innerRanges && innerRanges.length > 0) {
                     // newLevelArr.push(nextR);
-                    newLevelArr = [...newLevelArr, ...nextR];
+                    newLevelArr = [...newLevelArr, ...innerRanges];
                 }
             }
             if (newLevelArr.length > 0) {
@@ -732,6 +757,7 @@ export interface IFullRender {
     masterLevels: {
         s: number;
         e: number;
+        outerIndexInOuterLevel: number | null;
     }[][];
     allit: IPositionEachZero[];
     macroInfoOfFile: {
@@ -894,6 +920,7 @@ export const getFullFileStats = async ({
           masterLevels: {
               s: number;
               e: number;
+              outerIndexInOuterLevel: number | null;
           }[][];
           allit: IPositionEachZero[];
           macroInfoOfFile: {

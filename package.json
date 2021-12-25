@@ -3,7 +3,7 @@
     "displayName": "Blockman - Highlight Nested Code Blocks",
     "publisher": "leodevbro",
     "description": "Mark/Highlight code blocks",
-    "version": "1.3.3",
+    "version": "1.4.0",
     "engines": {
         "vscode": "^1.56.1"
     },
@@ -53,6 +53,10 @@
             {
                 "command": "blockman.toggleEnableDisable",
                 "title": "Blockman Toggle Enable/Disable"
+            },
+            {
+                "command": "blockman.toggleKeepOff",
+                "title": "Blockman Toggle Keep Off State After Restarting VSCode"
             },
             {
                 "command": "blockman.toggleFreezeFocus",
@@ -154,9 +158,9 @@
                 },
                 "blockman.n04Sub01ColorComboPresetForDarkTheme": {
                     "type": "string",
-                    "default": "None",
+                    "default": "none",
                     "enum": [
-                        "None",
+                        "none",
                         "Classic Dark 1 (Gradients)",
                         "Classic Dark 1 (Super gradients)",
                         "Classic Dark 1 (Solid colors)",
@@ -193,7 +197,7 @@
                     "type": "string",
                     "default": "Classic Light (Gradients)",
                     "enum": [
-                        "None",
+                        "none",
                         "Classic Dark 1 (Gradients)",
                         "Classic Dark 1 (Super gradients)",
                         "Classic Dark 1 (Solid colors)",
@@ -228,9 +232,9 @@
                 },
                 "blockman.n04Sub03ColorComboPresetForHighContrastTheme": {
                     "type": "string",
-                    "default": "None",
+                    "default": "none",
                     "enum": [
-                        "None",
+                        "none",
                         "Classic Dark 1 (Gradients)",
                         "Classic Dark 1 (Super gradients)",
                         "Classic Dark 1 (Solid colors)",
@@ -427,6 +431,57 @@
                     "type": "string",
                     "default": "plaintext, markdown, ",
                     "description": "Disable blockman for certain file formats, e.g. plaintext, markdown, css, less, scss, html, json, jsonc, typescriptreact, typescript, javascriptreact, javascript, python, go, dart, php, c, csharp, cpp, java.",
+                    "scope": "window"
+                },
+                "blockman.n33A01B1FromDepth0ToInwardForAllBorders": {
+                    "type": "string",
+                    "default": "!10,0,0,0; red > green > blue",
+                    "description": "Advanced Coloring: '!' means disabled. Advanced coloring string, if enabled, will override basic coloring settings. Right side: sequence of colors/gradients. Left side: FIRST number relates priority, SECOND number relates zero-based index of first item of first loop, So it splits the sequence into what should not be looped and what should be looped, THIRD number relates loop part reversion (0: original, 1: reversed), FOURTH number relates looping strategy (0: all the continuation items to be 'neutral', 'neutral' means it will be overriden by any other setting, 1: Only the last item will be looped. Yes, it will ignore the SECOND option number (split index), 2: loop as forward, 3: loop as pair of forward and backward). 'basic' color means it will set a color from basic color settings.",
+                    "scope": "window"
+                },
+                "blockman.n33A01B2FromDepth0ToInwardForAllBackgrounds": {
+                    "type": "string",
+                    "default": "!10,1,0,3; hsl(235, 30%, 7%) > hsl(0, 0%, 7.1%) > hsl(0, 0%, 9.5%) > hsl(0, 0%, 11.15%) > hsl(0, 0%, 12.8%)",
+                    "scope": "window"
+                },
+                "blockman.n33A02B1FromFocusToOutwardForAllBorders": {
+                    "type": "string",
+                    "default": "!20,0,0,0; red > green > blue",
+                    "scope": "window"
+                },
+                "blockman.n33A02B2FromFocusToOutwardForAllBackgrounds": {
+                    "type": "string",
+                    "default": "!20,0,0,0; red > green > blue",
+                    "scope": "window"
+                },
+                "blockman.n33A03B1FromDepth0ToInwardForFocusTreeBorders": {
+                    "type": "string",
+                    "default": "!30,1,0,2; linear-gradient(to right, hsl(251, 22%, 25%), hsl(292, 20%, 18%)) > linear-gradient(to right, hsl(20, 50%, 30%), hsl(250, 30%, 30%))",
+                    "scope": "window"
+                },
+                "blockman.n33A03B2FromDepth0ToInwardForFocusTreeBackgrounds": {
+                    "type": "string",
+                    "default": "!30,0,0,0; red > green > blue",
+                    "scope": "window"
+                },
+                "blockman.n33A04B1FromFocusToOutwardForFocusTreeBorders": {
+                    "type": "string",
+                    "default": "40,0,0,0; basic",
+                    "scope": "window"
+                },
+                "blockman.n33A04B2FromFocusToOutwardForFocusTreeBackgrounds": {
+                    "type": "string",
+                    "default": "40,0,0,0; basic",
+                    "scope": "window"
+                },
+                "blockman.n33A05B1FromFocusToInwardForAllBorders": {
+                    "type": "string",
+                    "default": "!50,0,0,0; red > green > blue",
+                    "scope": "window"
+                },
+                "blockman.n33A05B2FromFocusToInwardForAllBackgrounds": {
+                    "type": "string",
+                    "default": "!50,0,0,0; red > green > blue",
                     "scope": "window"
                 }
             }

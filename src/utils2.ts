@@ -341,6 +341,115 @@ export const selectFocusedBlock = () => {
     }
 };
 
+const generateInDepthIndexesOfEachDepthFromFocus = (
+    editorInfo: IEditorInfo,
+): (number[] | null)[] | null => {
+    // return type is (number[] | null)[] because number is the indexInDepth for each depth
+    // all "null"s from depth0 to focus (excluded)
+    // and all "number[]"s from Focus to inside
+
+    const currFocusBlock = editorInfo.focusDuo.curr;
+    if (!currFocusBlock) {
+        return null;
+    }
+
+    const levels = editorInfo.renderingInfoForFullFile?.masterLevels;
+
+    let my2dPath: number[][] = [[currFocusBlock.indexInTheDepth]];
+
+    if (!levels) {
+        return null;
+    }
+
+    const superLevels = [[], ...levels];
+
+    for (let i = currFocusBlock.depth + 1; i <= glo.maxDepth + 3; i += 1) {
+        const last1dInMyPath: number[] = my2dPath[my2dPath.length - 1];
+
+        if (superLevels[i] && superLevels[i].length) {
+            const nextInnerIndexes: number[] = superLevels[i]
+                .map((x, i) => {
+                    return {
+                        currI: i,
+                        outerI: x.outerIndexInOuterLevel,
+                    };
+                })
+                .filter((y) => {
+                    const outer = y.outerI;
+                    if (
+                        typeof outer === "number" &&
+                        last1dInMyPath.includes(outer)
+                    ) {
+                        return true;
+                    }
+                    return false;
+                })
+                .map((x) => x.currI);
+
+            if (nextInnerIndexes.length) {
+                my2dPath.push(nextInnerIndexes);
+            } else {
+                break;
+            }
+        } else {
+            break;
+        }
+    }
+
+    // if (currFocusBlock.depth + 1 !== my2dPath.length + 1) {
+    //     return null;
+    // }
+
+    const starter: null[] = new Array(currFocusBlock.depth).fill(null); // not +1 because focus level is excluded
+
+    const finalThing: (number[] | null)[] = [...starter, ...my2dPath];
+    // return [0, ...myPath];
+    return finalThing;
+};
+
+const generateFocusTreePath = (editorInfo: IEditorInfo): number[] | null => {
+    // return type is number[] because number is the indexInDepth for each depth from depth0 to Focus
+
+    const currFocusBlock = editorInfo.focusDuo.curr;
+    if (!currFocusBlock) {
+        return null;
+    }
+
+    const levels = editorInfo.renderingInfoForFullFile?.masterLevels;
+
+    let myPath: number[] = [currFocusBlock.indexInTheDepth]; // reversed
+
+    if (!levels) {
+        return null;
+    }
+
+    const superLevels = [[], ...levels];
+
+    // console.log("exla iwyeba curr outer", levels, currFocusBlock);
+
+    for (let i = currFocusBlock.depth; i >= -3; i -= 1) {
+        const firstInMyPath = myPath[0];
+
+        if (superLevels[i] && superLevels[i][firstInMyPath]) {
+            const nextOuterIndex =
+                superLevels[i][firstInMyPath].outerIndexInOuterLevel;
+            if (typeof nextOuterIndex === "number") {
+                myPath.unshift(nextOuterIndex);
+            } else {
+                break;
+            }
+        } else {
+            break;
+        }
+    }
+
+    if (currFocusBlock.depth + 1 !== myPath.length + 1) {
+        return null;
+    }
+
+    return [0, ...myPath];
+};
+
 export const updateFocusInfo = (editorInfo: IEditorInfo) => {
     if (editorInfo.focusDuo.currIsFreezed) {
         return;
@@ -467,7 +576,13 @@ export const updateFocusInfo = (editorInfo: IEditorInfo) => {
             indexInTheDepth: candidate.blockInd,
         };
 
-        // console.log("currrrrrrrr", editorInfo.focusDuo.curr);
+        editorInfo.focusTreePath = generateFocusTreePath(editorInfo);
+        editorInfo.innersFromFocus =
+            generateInDepthIndexesOfEachDepthFromFocus(editorInfo);
+
+        // console.log("currrrrrrrr", editorInfo.innersFromFocus);
+        // console.log(editorInfo.renderingInfoForFullFile?.masterLevels);
+        // console.log(editorInfo.renderingInfoForFullFile?.allit);
     }
 };
 

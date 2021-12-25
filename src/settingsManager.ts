@@ -3,23 +3,31 @@ import { ColorThemeKind, workspace } from "vscode";
 import { colorCombos, IColorCombo } from "./colors";
 import { glo } from "./extension";
 
-export const makeGradientNotation = (
-    possiblySolidColor: string,
+// Possible color values are almost (Please see the notes below) all CSS color/gradient values.
+// ---- 'transparent' (or any rgba/hsla... value with partial transparency) - as itself or as inside gradient, works fine for borders, but for backgrounds, transparency is problematic, so 'transparent' will be the color of editor background.
+// ---- 'none' is the same as 'transparent', but 'none' works only as itself, not as inside gradient.
+// ---- 'neutral' (or undefined, null, false, '', ) means it can be overriden by any other setting. If nothing overrides it, then it should be transparent (Or editor background).
+
+export const editorBackgroundFormula = "var(--vscode-editor-background)";
+
+export const makeInnerKitchenNotation = (
+    possiblyLegitColor: any, // it may be gradient
     tempTransparent?: "back",
 ): string => {
     // !!! IMPORTANT !!!
-    // New rendering function uses background with
-    // content-box and padding-box values.
+    // In order to be able to use gradient in borders,
+    // new rendering function uses background property with
+    // padding-box (for background) and border-box (for border) values.
 
-    // CSS background with content-box and padding-box values
-    // does not work if content-box value is solid color.
+    // CSS background with padding-box and border-box values
+    // does not work if any of them is solid color.
 
-    // for example, this works fine for solid red:
+    // for example, this works fine:
 
     /*
     background: 
         linear-gradient(red, red) padding-box,
-        green border-box;
+        linear-gradient(green, green) border-box;
     */
 
     // but this does not work:
@@ -31,28 +39,240 @@ export const makeGradientNotation = (
     */
 
     // So, instead of sending solid color, maybe we should always
-    // send it as linear-gradient notiation for padding-box (background) value.
+    // convert it as linear-gradient notation.
 
-    const trimmedAndLowed = possiblySolidColor.trim().toLowerCase();
-
-    if (trimmedAndLowed === "") {
-        return trimmedAndLowed;
+    if (typeof possiblyLegitColor !== "string") {
+        return "neutral";
     }
 
-    if (["none"].includes(trimmedAndLowed)) {
+    const trimmed = possiblyLegitColor.trim();
+
+    if (trimmed === "" || trimmed === "neutral") {
+        return "neutral";
+    }
+
+    if (["none", "transparent"].includes(trimmed)) {
         if (tempTransparent === "back") {
-            const currBack = "var(--vscode-editor-background)";
-            return `linear-gradient(to right, ${currBack}, ${currBack})`;
+            return `linear-gradient(to right, ${editorBackgroundFormula}, ${editorBackgroundFormula})`;
         } else {
             return `linear-gradient(to right, ${"transparent"}, ${"transparent"})`;
         }
     }
 
-    if (trimmedAndLowed.indexOf("gradient") !== -1) {
-        return possiblySolidColor;
-    } else {
-        return `linear-gradient(to right, ${possiblySolidColor}, ${possiblySolidColor})`;
+    if (trimmed.includes(`url(`)) {
+        return trimmed;
     }
+
+    if (trimmed.includes("gradient")) {
+        return trimmed;
+    } else {
+        return `linear-gradient(to right, ${trimmed}, ${trimmed})`;
+    }
+};
+
+export enum AdvancedColoringFields {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    fromD0ToInward_All = "fromD0ToInward_All",
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    fromD0ToInward_FocusTree = "fromD0ToInward_FocusTree",
+
+    //
+    //
+
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    fromFocusToOutward_FocusTree = "fromFocusToOutward_FocusTree",
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    fromFocusToOutward_All = "fromFocusToOutward_All",
+
+    //
+    //
+
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    fromFocusToInward_All = "fromFocusToInward_All",
+}
+
+export interface IOneChainOfColors {
+    priority: number;
+    sequence: string[];
+}
+
+export interface IAdvancedColoringChain {
+    borders: IOneChainOfColors | undefined;
+    backgrounds: IOneChainOfColors | undefined;
+}
+
+export const defaultsForAdvancedColoringOptions = {
+    [AdvancedColoringFields.fromD0ToInward_All]: [10, 0, 1, 1],
+    [AdvancedColoringFields.fromFocusToOutward_All]: [20, 0, 0, 1],
+
+    [AdvancedColoringFields.fromD0ToInward_FocusTree]: [30, 0, 1, 1],
+
+    [AdvancedColoringFields.fromFocusToOutward_FocusTree]: [40, 0, 1, 1],
+
+    [AdvancedColoringFields.fromFocusToInward_All]: [50, 0, 0, 1],
+};
+
+const generateOneChainOfColorsForEachDepth = (
+    myString: any, // e.g. '50,0,0,0; hsl(0, 0%, 100%, 0.25)>red>blue'
+    // where first number relates priority
+
+    // Second number relates zero-based index of first item of first loop, So it splits what should be looped from what should not be looped.
+
+    // third number relates loop part reversion:
+    //---- 0: original,
+    //---- 1: reversed,
+
+    // fourth number relates looping strategy:
+    //---- 0: all the continuation items to be 'neutral', 'neutral' means it will be overriden by any other setting.
+    //---- 1: Only the last item will be looped. Yes, it will ignore the second option;
+    //---- 2: loop as forward,
+    //---- 3: loop as pair of forward and backward,
+
+    // type "!" to disable the sequence, like this: '!50,0,0,0; hsl(0, 0%, 100%, 0.25)>red>blue'
+
+    // kind: keyof typeof defaultsForAdvancedColoringOptions, // maybe not needed
+    tempTransparent?: "back",
+): { priority: number; sequence: string[] } | undefined => {
+    if (typeof myString !== "string") {
+        return undefined;
+    }
+    let tr = myString.trim();
+    if (!tr || tr[0] === "!") {
+        return undefined;
+    }
+    const trL = tr.length;
+    if (tr[trL - 1] === ">") {
+        tr = tr.slice(0, trL - 1);
+    }
+
+    const optionsAndColorsAsTwoStrings = tr.split(";").map((x) => x.trim());
+
+    const optionsSequenceRaw = optionsAndColorsAsTwoStrings[0]
+        .split(",")
+        .map((x) => x.trim());
+
+    if (
+        optionsSequenceRaw.length !== 4 ||
+        optionsSequenceRaw.some((x) => x === "")
+    ) {
+        return undefined;
+    }
+
+    const optionsSequence = optionsSequenceRaw.map((x) => Number(x));
+
+    for (let i = 0; i < optionsSequence.length; i += 1) {
+        if (i === 0) {
+            const prio = optionsSequence[i];
+            if (Number.isNaN(prio)) {
+                return undefined;
+            }
+            continue;
+        } else if (!Number.isInteger(optionsSequence[i])) {
+            return undefined;
+        }
+    }
+
+    const priority = optionsSequence[0];
+    let loopStartIndex = optionsSequence[1];
+    const reverseLoop = optionsSequence[2];
+    const loopingStrategy = optionsSequence[3];
+
+    // ------------
+
+    const coloringSequence = optionsAndColorsAsTwoStrings[1]
+        .split(">")
+        .map((x) => makeInnerKitchenNotation(x.trim(), tempTransparent));
+
+    if (
+        coloringSequence.length === 0 ||
+        coloringSequence.some((x) => x === "")
+    ) {
+        return undefined;
+    }
+
+    if ([0, 1].includes(loopingStrategy)) {
+        loopStartIndex = coloringSequence.length - 1;
+    }
+
+    if (
+        priority < -1000000 ||
+        priority > 1000000 ||
+        reverseLoop < 0 ||
+        reverseLoop > 1 ||
+        loopingStrategy < 0 ||
+        loopingStrategy > 3 ||
+        loopStartIndex < 0 ||
+        loopStartIndex > coloringSequence.length - 1
+    ) {
+        return undefined;
+    }
+
+    // ..........................
+
+    // Now we have optionsSequence and coloringSequence
+
+    // ============
+    // ===================
+
+    const nonLoopPart = coloringSequence.slice(0, loopStartIndex);
+
+    const loopPart = coloringSequence.slice(
+        loopStartIndex,
+        coloringSequence.length,
+    );
+
+    const reversedOrNotLoopPart =
+        reverseLoop === 0 ? [...loopPart] : [...loopPart].reverse();
+
+    const loopLen = reversedOrNotLoopPart.length;
+
+    const legitSequence = [...nonLoopPart, ...reversedOrNotLoopPart];
+
+    const leLen = legitSequence.length;
+
+    const lengthOfDepths = glo.maxDepth + 2; // because glo.maxDepth is as minus 1
+
+    if (lengthOfDepths < 1) {
+        return undefined;
+    }
+
+    const finalArrayOfColors: string[] = [];
+
+    if (loopingStrategy === 0) {
+        // the rest are neutral
+        finalArrayOfColors.push(...legitSequence);
+        // the rest will be undefined, so they will be neutral
+    } else if (loopingStrategy === 1) {
+        //1: the rest are last item
+        finalArrayOfColors.push(...legitSequence);
+        const lastItem = legitSequence[leLen - 1];
+        for (let i = leLen; i <= lengthOfDepths - 1; i += 1) {
+            finalArrayOfColors.push(lastItem);
+        }
+    } else if (loopingStrategy === 2) {
+        // 2: loop as forward
+        finalArrayOfColors.push(...nonLoopPart);
+        while (finalArrayOfColors.length < lengthOfDepths) {
+            finalArrayOfColors.push(...[...reversedOrNotLoopPart]);
+        }
+        finalArrayOfColors.length = lengthOfDepths;
+    } else if (loopingStrategy === 3) {
+        //3: loop as pair of forward and backward
+        finalArrayOfColors.push(...nonLoopPart);
+
+        const inner = reversedOrNotLoopPart.slice(1, loopLen - 1);
+        const innerRev = [...inner].reverse();
+
+        const head = reversedOrNotLoopPart[0];
+        const tail = reversedOrNotLoopPart[loopLen - 1];
+
+        while (finalArrayOfColors.length < lengthOfDepths) {
+            finalArrayOfColors.push(head, ...inner, tail, ...innerRev);
+        }
+        finalArrayOfColors.length = lengthOfDepths;
+    }
+
+    return { priority, sequence: finalArrayOfColors };
 };
 
 const chooseColorCombo = (
@@ -64,7 +284,7 @@ const chooseColorCombo = (
     const currVscodeThemeKind = vscode.window.activeColorTheme.kind;
 
     const isTruthy = (combo?: string) => {
-        if (combo && combo !== "None") {
+        if (combo && combo.toLowerCase() !== "none") {
             return true;
         } else {
             return false;
@@ -384,21 +604,149 @@ export const applyAllBlockmanSettings = () => {
 
     // ! IMPORTANT
 
-    glo.coloring.border = makeGradientNotation(glo.coloring.border);
-    glo.coloring.borderOfDepth0 = makeGradientNotation(
+    glo.coloring.border = makeInnerKitchenNotation(glo.coloring.border);
+    glo.coloring.borderOfDepth0 = makeInnerKitchenNotation(
         glo.coloring.borderOfDepth0,
     );
-    glo.coloring.borderOfFocusedBlock = makeGradientNotation(
+    glo.coloring.borderOfFocusedBlock = makeInnerKitchenNotation(
         glo.coloring.borderOfFocusedBlock,
     );
 
-    glo.coloring.focusedBlock = makeGradientNotation(
+    glo.coloring.focusedBlock = makeInnerKitchenNotation(
         glo.coloring.focusedBlock,
         "back",
     );
     glo.coloring.onEachDepth = glo.coloring.onEachDepth.map((color) =>
-        makeGradientNotation(color, "back"),
+        makeInnerKitchenNotation(color, "back"),
     );
 
     // console.log(">>>>>>>>>>>>>", glo.coloring.focusedBlock);
+
+    const adCoFromDepth0ToInwardForAllBorders: string | undefined = bc.get(
+        "n33A01B1FromDepth0ToInwardForAllBorders",
+    );
+    const adCoFromDepth0ToInwardForAllBackgrounds: string | undefined = bc.get(
+        "n33A01B2FromDepth0ToInwardForAllBackgrounds",
+    );
+    // --------------------
+    const adCoFromFocusToOutwardForAllBorders: string | undefined = bc.get(
+        "n33A02B1FromFocusToOutwardForAllBorders",
+    );
+    const adCoFromFocusToOutwardForAllBackgrounds: string | undefined = bc.get(
+        "n33A02B2FromFocusToOutwardForAllBackgrounds",
+    );
+    // --------------------
+    const adCoFromDepth0ToInwardForFocusTreeBorders: string | undefined =
+        bc.get("n33A03B1FromDepth0ToInwardForFocusTreeBorders");
+    const adCoFromDepth0ToInwardForFocusTreeBackgrounds: string | undefined =
+        bc.get("n33A03B2FromDepth0ToInwardForFocusTreeBackgrounds");
+    // --------------------
+    const adCoFromFocusToOutwardForFocusTreeBorders: string | undefined =
+        bc.get("n33A04B1FromFocusToOutwardForFocusTreeBorders");
+    const adCoFromFocusToOutwardForFocusTreeBackgrounds: string | undefined =
+        bc.get("n33A04B2FromFocusToOutwardForFocusTreeBackgrounds");
+    // --------------------
+    const adCoFromFocusToInwardForAllBorders: string | undefined = bc.get(
+        "n33A05B1FromFocusToInwardForAllBorders",
+    );
+    const adCoFromFocusToInwardForAllBackgrounds: string | undefined = bc.get(
+        "n33A05B2FromFocusToInwardForAllBackgrounds",
+    );
+    // =======================
+    // =======================
+
+    // -----
+
+    const advancedColoringSettingsOfBorders = [
+        {
+            val: adCoFromDepth0ToInwardForAllBorders,
+            kind: AdvancedColoringFields.fromD0ToInward_All,
+        },
+
+        {
+            val: adCoFromFocusToOutwardForAllBorders,
+            kind: AdvancedColoringFields.fromFocusToOutward_All,
+        },
+
+        {
+            val: adCoFromDepth0ToInwardForFocusTreeBorders,
+            kind: AdvancedColoringFields.fromD0ToInward_FocusTree,
+        },
+
+        {
+            val: adCoFromFocusToOutwardForFocusTreeBorders,
+            kind: AdvancedColoringFields.fromFocusToOutward_FocusTree,
+        },
+
+        {
+            val: adCoFromFocusToInwardForAllBorders,
+            kind: AdvancedColoringFields.fromFocusToInward_All,
+        },
+    ];
+
+    const advancedColoringSettingsOfBackgrounds = [
+        {
+            val: adCoFromDepth0ToInwardForAllBackgrounds,
+            kind: AdvancedColoringFields.fromD0ToInward_All,
+        },
+
+        {
+            val: adCoFromFocusToOutwardForAllBackgrounds,
+            kind: AdvancedColoringFields.fromFocusToOutward_All,
+        },
+
+        {
+            val: adCoFromDepth0ToInwardForFocusTreeBackgrounds,
+            kind: AdvancedColoringFields.fromD0ToInward_FocusTree,
+        },
+
+        {
+            val: adCoFromFocusToOutwardForFocusTreeBackgrounds,
+            kind: AdvancedColoringFields.fromFocusToOutward_FocusTree,
+        },
+
+        {
+            val: adCoFromFocusToInwardForAllBackgrounds,
+            kind: AdvancedColoringFields.fromFocusToInward_All,
+        },
+    ];
+
+    const processAC = (
+        arr: {
+            val: string | undefined;
+            kind: AdvancedColoringFields;
+        }[],
+        tempTransparent?: "back",
+    ): {
+        priority: number;
+        sequence: string[];
+        kind: AdvancedColoringFields;
+    }[] => {
+        return arr
+            .map((x) => ({
+                kind: x.kind,
+                val: generateOneChainOfColorsForEachDepth(
+                    x.val,
+                    tempTransparent,
+                ),
+            }))
+            .filter((x) => !!x.val)
+            .map((x) => ({
+                priority: x.val!.priority,
+                sequence: x.val!.sequence,
+                kind: x.kind,
+            }))
+            .sort((a, b) => b.priority - a.priority); // descending order
+    };
+
+    glo.coloring.advanced.forBorders = processAC(
+        advancedColoringSettingsOfBorders,
+    );
+
+    glo.coloring.advanced.forBackgrounds = processAC(
+        advancedColoringSettingsOfBackgrounds,
+        "back",
+    );
+
+    // ..........
 };
