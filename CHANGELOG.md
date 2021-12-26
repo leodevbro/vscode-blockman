@@ -4,7 +4,11 @@ All notable changes to the "blockman" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [1.4.0] - 2021-12-20
+## [1.4.1] - 2021-12-26
+
+-   Fixed z-index mistake
+
+## [1.4.0] - 2021-12-25
 
 -   Added advanced coloring settings (N33 A01, N33 A02, ... N33 A05)
 -   Added new quick command "Blockman Toggle Keep Off State After Restarting VSCode"

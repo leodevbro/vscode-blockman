@@ -69,7 +69,7 @@ export const renderSingleLineBoxV4 = ({
     let borderColorToBeTransparent: string = inputBorderColor;
     borderColorToBeTransparent = "transparent"; // IMPORTANT
 
-    let zIndex = -1000 + depth * 10;
+    let zIndex = -10000 + depth * 10;
 
     let borderCss: string;
     let borderRadiusCss: string;
@@ -297,7 +297,7 @@ export const renderSingleLineBoxV4 = ({
                                       bottom: ${b}px;
                                       height: ${0}px;
                                       position: absolute;
-                                      z-index: ${zIndex + 300};
+                                      z-index: ${zIndex + 2};
                                       
                                       left: calc((${optimalLeftOfRangePx} * (1ch + ${
                             glo.letterSpacing
@@ -357,7 +357,7 @@ export const renderSingleLineBoxV4 = ({
                                       top: ${t}px;
                                       height: ${0}px;
                                       position: absolute;
-                                      z-index: ${zIndex + 300};
+                                      z-index: ${zIndex + 2};
                                       
                                       left: calc((${boxRightEdge} * (1ch + ${
                             glo.letterSpacing
