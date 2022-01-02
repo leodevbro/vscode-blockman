@@ -106,6 +106,8 @@ const bigVars = {
 
 export const glo = {
     isOn: true,
+    nominalLineHeight: 1,
+    currZoomLevel: 0, // zero means original, 1 means plus 10%, 2 means plus 20%........
     eachCharFrameHeight: 1, // (px) no more needed, so before we remove it, it will be just 1,
     eachCharFrameWidth: 1, // (px) no more needed, so before we remove it, it will be just 1,
     letterSpacing: 0, // (px)
@@ -160,6 +162,10 @@ export const glo = {
     // maxHistoryOfParsedTabs: 7,
 };
 
+const calcLineHeight = (): number => {
+    return glo.nominalLineHeight * (1 + glo.currZoomLevel * 0.1);
+};
+
 const updateBlockmanLineHeightAndLetterSpacing = () => {
     /**
      * Determined from empirical observations.
@@ -180,7 +186,8 @@ const updateBlockmanLineHeightAndLetterSpacing = () => {
         editorLineHeight = editorLineHeight * editorFontSize;
     }
 
-    glo.eachCharFrameHeight = editorLineHeight;
+    glo.nominalLineHeight = editorLineHeight;
+    glo.eachCharFrameHeight = calcLineHeight();
 
     // now letter spacing:
 
@@ -613,6 +620,9 @@ let settingsChangeTimout: NodeJS.Timeout | undefined;
 
 export function activate(context: ExtensionContext) {
     stateHolder.myState = context.globalState;
+
+    workspace.getConfiguration("blockman").update("n01LineHeight", 0, 1); // TODO: later
+
     // const onOff: boolean | undefined =
     //     context.globalState.get("blockman_data_on");
     // if (onOff !== undefined) {
@@ -638,7 +648,7 @@ export function activate(context: ExtensionContext) {
         const iicounter = st.get(iiGlobal);
         const iicounter2 = st.get(iiGlobal2);
         const iicounter3 = st.get(iiGlobal3);
-        
+
         const onOffStateAfterRestart = st.get(iiGlobal4OnOffAR);
         const onOffState = st.get(iiGlobal5OnOff);
         if (onOffState === "off" && onOffStateAfterRestart === "off") {
@@ -788,6 +798,16 @@ export function activate(context: ExtensionContext) {
 
         vscode.commands.registerCommand("blockman.printLeak", () => {
             console.log(notYetDisposedDecsObject.decs);
+        }),
+        vscode.commands.registerCommand("blockman.zoomLineHeight", () => {
+            glo.currZoomLevel += 1;
+            glo.eachCharFrameHeight = calcLineHeight();
+            updateAllControlledEditors({ alsoStillVisibleAndHist: true });
+        }),
+        vscode.commands.registerCommand("blockman.unzoomLineHeight", () => {
+            glo.currZoomLevel -= 1;
+            glo.eachCharFrameHeight = calcLineHeight();
+            updateAllControlledEditors({ alsoStillVisibleAndHist: true });
         }),
 
         vscode.commands.registerCommand(

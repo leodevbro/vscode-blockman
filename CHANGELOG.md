@@ -4,6 +4,10 @@ All notable changes to the "blockman" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.4.2] - 2022-01-02
+
+-   Added quick commands ('Blockman Zoom Line Height' and 'Blockman Unzoom Line Height') to adjust line height with zoom levels
+
 ## [1.4.1] - 2021-12-26
 
 -   Fixed z-index mistake
