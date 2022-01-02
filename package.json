@@ -3,7 +3,7 @@
     "displayName": "Blockman - Highlight Nested Code Blocks",
     "publisher": "leodevbro",
     "description": "Mark/Highlight code blocks",
-    "version": "1.4.2",
+    "version": "1.4.5",
     "engines": {
         "vscode": "^1.56.1"
     },
@@ -67,14 +67,6 @@
                 "title": "Blockman Select Focused Text"
             },
             {
-                "command": "blockman.zoomLineHeight",
-                "title": "Blockman Zoom Line Height"
-            },
-            {
-                "command": "blockman.unzoomLineHeight",
-                "title": "Blockman Unzoom Line Height"
-            },
-            {
                 "command": "blockman.printLeak",
                 "title": "Blockman Leakage (For Dev)"
             },
@@ -89,7 +81,7 @@
                 "blockman.n01LineHeight": {
                     "type": "number",
                     "default": 0,
-                    "description": "0 means neutral, so it will be overridden by automatic calculation",
+                    "description": "Not needed anymore, maybe will be removed soon. 0 means neutral.",
                     "scope": "window"
                 },
                 "blockman.n02EachCharFrameWidth": {

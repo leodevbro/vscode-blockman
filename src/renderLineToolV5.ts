@@ -74,7 +74,8 @@ export const renderSingleLineBoxV5 = ({
     let borderCss: string;
     let borderRadiusCss: string;
     let top = 0;
-    let specificHeight = boxHeight;
+    // let specificHeight = boxHeight; // DEPRECATED specificHeight
+    let heightDelta = 0;
 
     //
     //
@@ -96,15 +97,18 @@ export const renderSingleLineBoxV5 = ({
         `;
         borderRadiusCss = `${borderRadius}px ${borderRadius}px 0px 0px`;
         top += 2 - borderSize;
-        specificHeight -= isFirstFromBottomToUp ? 2 : 0;
+        // specificHeight -= isFirstFromBottomToUp ? 2 : 0;
 
         if (isFirstFromBottomToUp) {
+            // specificHeight -= 2; // DEPRECATED specificHeight
+            heightDelta -= 2;
             if (firstLineHasVisibleChar) {
                 // top += 2; // 0
                 // specificHeight -= 2; // boxHeight
             } else {
                 // top = 0 + 2; // 0
-                specificHeight -= 2; // boxHeight
+                // specificHeight -= 2; // DEPRECATED specificHeight
+                heightDelta -= 2;
             }
         }
 
@@ -126,11 +130,13 @@ export const renderSingleLineBoxV5 = ({
         if (isfirstFromTopToDown) {
             // return;
             top += 2;
-            specificHeight -= 2;
+            // specificHeight -= 2; // DEPRECATED specificHeight
+            heightDelta -= 2;
             // backgroundCSS = "red";
         }
         if (isFirstFromBottomToUp) {
-            specificHeight -= 2;
+            // specificHeight -= 2; // DEPRECATED specificHeight
+            heightDelta -= 2;
         }
     } else if (lineBlockType === "closing") {
         // console.log("isfirstFromTopToDown:", isfirstFromTopToDown);
@@ -154,10 +160,12 @@ export const renderSingleLineBoxV5 = ({
         if (isfirstFromTopToDown) {
             if (lastLineHasVisibleChar) {
                 top += 2; // 0
-                specificHeight -= 2; // boxHeight
+                // specificHeight -= 2; // DEPRECATED specificHeight
+                heightDelta -= 2;
             } else {
                 top = 0 + 2; // 0
-                specificHeight -= 4; // boxHeight
+                // specificHeight -= 4; // DEPRECATED specificHeight
+                heightDelta -= 4;
             }
         }
     } else {
@@ -170,7 +178,8 @@ export const renderSingleLineBoxV5 = ({
         `;
         borderRadiusCss = `${borderRadius}px ${borderRadius}px ${borderRadius}px ${borderRadius}px;`;
         top -= borderSize - 2;
-        specificHeight -= 4;
+        // specificHeight -= 4; // DEPRECATED specificHeight
+        heightDelta -= 4;
     }
 
     const singleRange = new vscode.Range(lineZero, 0, lineZero, 0); // column must be ZERO! IMPORTANT! otherwise may be dimmer when text is dimmer
@@ -192,6 +201,8 @@ export const renderSingleLineBoxV5 = ({
 
     if (lineZero === 0) {
         top += 1;
+        heightDelta -= 1;
+        // specificHeight -= 1; // DEPRECATED specificHeight
     }
 
     // =======================
@@ -257,7 +268,7 @@ export const renderSingleLineBoxV5 = ({
                               } * (1ch + ${
                 glo.letterSpacing
             }px)) - ${leftInc}px);
-                              height: ${specificHeight}px;
+                              height: calc(100% + ${heightDelta}px);
                               position: absolute;
                               z-index: ${zIndex};
                               top: ${top}px;

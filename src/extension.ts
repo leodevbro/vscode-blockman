@@ -799,16 +799,16 @@ export function activate(context: ExtensionContext) {
         vscode.commands.registerCommand("blockman.printLeak", () => {
             console.log(notYetDisposedDecsObject.decs);
         }),
-        vscode.commands.registerCommand("blockman.zoomLineHeight", () => {
-            glo.currZoomLevel += 1;
-            glo.eachCharFrameHeight = calcLineHeight();
-            updateAllControlledEditors({ alsoStillVisibleAndHist: true });
-        }),
-        vscode.commands.registerCommand("blockman.unzoomLineHeight", () => {
-            glo.currZoomLevel -= 1;
-            glo.eachCharFrameHeight = calcLineHeight();
-            updateAllControlledEditors({ alsoStillVisibleAndHist: true });
-        }),
+        // vscode.commands.registerCommand("blockman.zoomLineHeight", () => {
+        //     glo.currZoomLevel += 1;
+        //     glo.eachCharFrameHeight = calcLineHeight();
+        //     updateAllControlledEditors({ alsoStillVisibleAndHist: true });
+        // }),
+        // vscode.commands.registerCommand("blockman.unzoomLineHeight", () => {
+        //     glo.currZoomLevel -= 1;
+        //     glo.eachCharFrameHeight = calcLineHeight();
+        //     updateAllControlledEditors({ alsoStillVisibleAndHist: true });
+        // }),
 
         vscode.commands.registerCommand(
             "blockman.toggleTrySupportDoubleWidthChars",
