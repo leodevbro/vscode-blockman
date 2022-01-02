@@ -9,6 +9,7 @@ import { renderSingleLineBoxV1 } from "./renderLineToolV1";
 import { renderSingleLineBoxV2 } from "./renderLineToolV2";
 import { renderSingleLineBoxV3 } from "./renderLineToolV3";
 import { renderSingleLineBoxV4 } from "./renderLineToolV4";
+import { renderSingleLineBoxV5 } from "./renderLineToolV5";
 import {
     AdvancedColoringFields,
     editorBackgroundFormula,
@@ -393,8 +394,8 @@ export const renderSingleBlock = ({
             currLineZero >= firstLineOfMiddles &&
             currLineZero <= lastLineOfMiddles;
 
-        // renderSingleLineBoxV3(singleRangeRendArg);
-        renderSingleLineBoxV4(singleRangeRendArg);
+        // renderSingleLineBoxV4(singleRangeRendArg);
+        renderSingleLineBoxV5(singleRangeRendArg);
         if (isMid) {
             currLineZero = lastLineOfMiddles;
         }
