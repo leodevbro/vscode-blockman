@@ -3,7 +3,7 @@
     "displayName": "Blockman - Highlight Nested Code Blocks",
     "publisher": "leodevbro",
     "description": "Mark/Highlight code blocks",
-    "version": "1.4.5",
+    "version": "1.4.6",
     "engines": {
         "vscode": "^1.56.1"
     },
@@ -65,6 +65,10 @@
             {
                 "command": "blockman.selectFocused",
                 "title": "Blockman Select Focused Text"
+            },
+            {
+                "command": "blockman.toggleDisableAutomaticShowHideIndentGuides",
+                "title": "Blockman Toggle Disable/Enable Automatic Showing/Hiding Indent Guides"
             },
             {
                 "command": "blockman.printLeak",

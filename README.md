@@ -157,6 +157,7 @@ Press F1 and find "Blockman Toggle Enable/Disable"
 Press F1 and find "Blockman Toggle Keep Off State After Restarting VSCode"
 Press F1 and find "Blockman Select Focused" (Select text inside focused block)
 Press F1 and find "Blockman Toggle Freeze/Unfreeze Focus"
+Press F1 and find "Blockman Toggle Disable/Enable Automatic Showing/Hiding Indent Guides"
 Press F1 and find "Blockman Toggle Try Support Double Width Chars (e.g. Chinese)"
 ```
 

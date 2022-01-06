@@ -32,6 +32,8 @@ const iiGlobal2 = "blockman_data_iicounter2";
 const iiGlobal3 = "blockman_data_iicounter3";
 const iiGlobal4OnOffAR = "blockman_data_onOffStateAfterRestart";
 const iiGlobal5OnOff = "blockman_data_onOffState";
+const iiGlobal6AutoShowHideIndentGuides =
+    "blockman_data_autoShowHideIndentGuides";
 
 let isMac = false;
 let osChecked = false;
@@ -490,6 +492,17 @@ const setColorDecoratorsBool = () => {
 };
 
 const setUserwideIndentGuides = (myBool: boolean) => {
+    const st = stateHolder.myState;
+    if (st) {
+        const autoShowHideIndentGuides = st.get(
+            iiGlobal6AutoShowHideIndentGuides,
+        );
+
+        if (autoShowHideIndentGuides === "off") {
+            return;
+        }
+    }
+
     const indent1 = (boo: boolean) => {
         try {
             // old API
@@ -795,6 +808,39 @@ export function activate(context: ExtensionContext) {
                 );
             }
         }),
+
+        vscode.commands.registerCommand(
+            "blockman.toggleDisableAutomaticShowHideIndentGuides",
+            () => {
+                const st = stateHolder.myState;
+                if (st) {
+                    const autoShowHideIndentGuides = st.get(
+                        iiGlobal6AutoShowHideIndentGuides,
+                    );
+                    let newVal =
+                        autoShowHideIndentGuides === "off" ? "on" : "off";
+
+                    st.update(iiGlobal6AutoShowHideIndentGuides, newVal);
+
+                    if (newVal === "off") {
+                        vscode.window.showInformationMessage(
+                            `OK, Blockman will NOT change anything about indent guides.`,
+                            { modal: false },
+                        );
+                    } else {
+                        vscode.window.showInformationMessage(
+                            `Cool, Blockman will automatically show/hide indent guides.`,
+                            { modal: false },
+                        );
+                    }
+                } else {
+                    vscode.window.showInformationMessage(
+                        `Something's wrong, context.globalState is falsy.`,
+                        { modal: false },
+                    );
+                }
+            },
+        ),
 
         vscode.commands.registerCommand("blockman.printLeak", () => {
             console.log(notYetDisposedDecsObject.decs);
