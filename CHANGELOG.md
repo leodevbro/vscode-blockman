@@ -4,6 +4,10 @@ All notable changes to the "blockman" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.4.7] - 2022-01-09
+
+-   Updated donation info
+
 ## [1.4.6] - 2022-01-07
 
 -   Added new quick command "Blockman Toggle Disable/Enable Automatic Showing/Hiding Indent Guides"

@@ -5,7 +5,9 @@
 
 <p><strong><a href="#donation">Donation</a></strong> is really appreciated. Blockman is a hard work of many months. My name is <a href="https://leodevbro.github.io">Levan Katsadze (ლევან კაცაძე)</a>, 1995-03-03, from Tbilisi, <a href="https://en.wikipedia.org/wiki/Georgia_(country)">Georgia (Not USA)</a>.</p>
 
-<a href="https://www.buymeacoffee.com/leodevbro" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+<a style="float: left; margin-right: 10px;" href="https://www.buymeacoffee.com/leodevbro" target="_blank"><img src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/still-image/donation/buy-me-a-coffee.svg" alt="Buy Me A Coffee" style="height: 73px !important; width: auto !important;" /></a>
+
+<a style="margin-right: 10px;" href="https://ko-fi.com/leodevbro" target="_blank"><img src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/still-image/donation/ko-fi.svg" alt="ko-fi" style="height: 73px !important; width: auto !important;" /></a>
 
 <br />
 <br />
@@ -381,9 +383,8 @@ Python file:
 <br />
 
 <h1 id="donation">Donation</h1>
-<p><strong>Buy Me A Coffee (With PayPal):</strong> <a href="https://www.buymeacoffee.com/leodevbro">https://www.buymeacoffee.com/leodevbro</a></p>
-<p><strong>Bitcoin:</strong> bc1qfc068aq6lhrl58l6cf4wk7nsjy44gnk23uwl2y</p>
-<p><strong>Etherium:</strong> 0xFDE2574549aB7b2d57C7c1beef6d15FB2416E811</p>
-  
+<p><strong>Buy Me A Coffee:</strong> <a href="https://www.buymeacoffee.com/leodevbro">https://www.buymeacoffee.com/leodevbro</a></p>
+<p><strong>Ko-fi:</strong> <a href="https://ko-fi.com/leodevbro">https://ko-fi.com/leodevbro</a></p>
+
 <p><strong>Bank account (USD):</strong> GE08TB7774936615100013 (TBCBGE22)</p>
 <p><strong>Bank account (GEL/Lari):</strong> GE18TB7774936515100011 (TBCBGE22)</p>
