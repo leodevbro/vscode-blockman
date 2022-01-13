@@ -227,7 +227,8 @@ Press F1 and find "Blockman Toggle Try Support Double Width Chars (e.g. Chinese)
     // Left side:
     // --- FIRST number relates priority,
     // --- SECOND number relates zero-based index of first item of first loop, So it splits the sequence into what should not be looped and what should be looped,
-    // --- THIRD number relates loop part reversion (0: original, 1: reversed), FOURTH number relates looping strategy (0: all the continuation items to be 'neutral', 'neutral' means it will be overriden by any other setting, 1: Only the last item will be looped. Yes, it will ignore the SECOND option number (split index), 2: loop as forward, 3: loop as pair of forward and backward).
+    // --- THIRD number relates loop part reversion (0: original, 1: reversed),
+    // --- FOURTH number relates looping strategy (0: all the continuation items to be 'neutral', 'neutral' means it will be overriden by any other setting, 1: Only the last item will be looped. Yes, it will ignore the SECOND option number (split index), 2: loop as forward, 3: loop as pair of forward and backward).
 
     // 'neutral' color means it will be overriden by any other coloring setting.
     // 'basic' color means it will set a color from basic color settings.

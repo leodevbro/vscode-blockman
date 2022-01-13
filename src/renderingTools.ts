@@ -5,11 +5,12 @@ import {
     TyInLineInDepthInQueueInfo,
     TyDepthDecInfo,
 } from "./extension";
-import { renderSingleLineBoxV1 } from "./renderLineToolV1";
-import { renderSingleLineBoxV2 } from "./renderLineToolV2";
-import { renderSingleLineBoxV3 } from "./renderLineToolV3";
-import { renderSingleLineBoxV4 } from "./renderLineToolV4";
+// import { renderSingleLineBoxV1 } from "./renderLineToolV1";
+// import { renderSingleLineBoxV2 } from "./renderLineToolV2";
+// import { renderSingleLineBoxV3 } from "./renderLineToolV3";
+// import { renderSingleLineBoxV4 } from "./renderLineToolV4";
 import { renderSingleLineBoxV5 } from "./renderLineToolV5";
+// import { renderSingleLineBoxV5SvgExperiment } from "./renderLineToolV5SvgExperiment";
 import {
     AdvancedColoringFields,
     editorBackgroundFormula,
@@ -396,6 +397,7 @@ export const renderSingleBlock = ({
 
         // renderSingleLineBoxV4(singleRangeRendArg);
         renderSingleLineBoxV5(singleRangeRendArg);
+        // renderSingleLineBoxV5SvgExperiment(singleRangeRendArg);
         if (isMid) {
             currLineZero = lastLineOfMiddles;
         }

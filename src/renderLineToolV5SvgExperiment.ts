@@ -26,7 +26,7 @@ function encodeSVG(data: string) {
 console.log("ცვლილება 007");
 // let kkk = 0;
 // new renderer function
-export const renderSingleLineBoxV5 = ({
+export const renderSingleLineBoxV5SvgExperiment = ({
     editorInfo,
     depth,
     inDepthBlockIndex,
@@ -283,8 +283,8 @@ export const renderSingleLineBoxV5 = ({
 
     // prettier-ignore
     pBody = `
-    <svg fill="none" viewBox="0 0 5000 5000" width="5000" height="5000" xmlns="http://www.w3.org/2000/svg">
-        <foreignObject width="100%" height="100%">
+    <svg fill="none" viewBox="5000 5000" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <foreignObject width="5000" height="5000">
             <div xmlns="http://www.w3.org/1999/xhtml">
                 <style>
                     .container {
