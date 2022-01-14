@@ -56,6 +56,7 @@ export interface ISingleLineBox {
     inputBorderColor: string;
     inputBackgroundColor: string;
     borderSize: number;
+    currCountOfDepths: number;
 }
 
 export const renderSingleBlock = ({
@@ -73,6 +74,7 @@ export const renderSingleBlock = ({
     lang,
     isFocusedBlock,
     absRangeEndPos,
+    currCountOfDepths,
 }: IBlockRender) => {
     if (!firstVisibleChar || firstVisibleChar.lineZero < 0) {
         return;
@@ -382,6 +384,7 @@ export const renderSingleBlock = ({
             inputBorderColor,
             inputBackgroundColor,
             borderSize,
+            currCountOfDepths,
         };
 
         // renderSingleLineBoxV1(singleRangeRendArg); // old renderer function

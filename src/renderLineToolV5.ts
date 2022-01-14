@@ -3,6 +3,21 @@ import { glo, TyInLineInDepthInQueueInfo, TyDepthDecInfo } from "./extension";
 import { ISingleLineBox } from "./renderingTools";
 import { notYetDisposedDecsObject } from "./utils2";
 
+const hasNonWhiteCloserAfterLastCharTillNewLine = (
+    txt: string,
+    lastCharIndex: number,
+) => {
+    for (let i = lastCharIndex + 1; i < txt.length; i += 1) {
+        const currCh = txt[i];
+        if (currCh === "\n") {
+            return false;
+        } else if (![" ", "\t"].includes(currCh)) {
+            return true;
+        }
+    }
+    return false;
+};
+
 console.log("ცვლილება 007");
 // let kkk = 0;
 // new renderer function
@@ -34,7 +49,70 @@ export const renderSingleLineBoxV5 = ({
     inputBorderColor,
     inputBackgroundColor,
     borderSize,
+    currCountOfDepths,
 }: ISingleLineBox): void => {
+    /*
+    const pleaseExpand = true;
+    let isExpandableToRight = false;
+
+    const globalIndexOfThisLineStarter =
+        editorInfo.textLinesMap[lastVisibleChar.lineZero];
+
+    if (lineBlockType === "onlyLine") {
+        // inputBackgroundColor = "linear-gradient(to right, red, blue)";
+        if (
+            hasNonWhiteCloserAfterLastCharTillNewLine(
+                editorInfo.monoText,
+                globalIndexOfThisLineStarter + lastVisibleChar.inLineIndexZero,
+            )
+        ) {
+            // do nothing
+        } else {
+            optimalRightOfRangePx = !currCountOfDepths
+                ? 104
+                : 104 + (currCountOfDepths - 1 - depth);
+            boxRightEdge = !currCountOfDepths
+                ? 104
+                : 104 + (currCountOfDepths - 1 - depth);
+        }
+    } else {
+        optimalRightOfRangePx = !currCountOfDepths
+            ? 104
+            : 104 + (currCountOfDepths - 1 - depth);
+
+        if (lineZero !== lastVisibleChar.lineZero) {
+            // optimalRightOfRangePx = 104;
+            boxRightEdge = !currCountOfDepths
+                ? 104
+                : 104 + (currCountOfDepths - 1 - depth);
+        } else {
+            // lastLineHasVisibleChar
+            // inputBackgroundColor = "linear-gradient(to right, red, blue)";
+            if (!lastLineHasVisibleChar) {
+                // optimalRightOfRangePx = 104;
+                boxRightEdge = !currCountOfDepths
+                    ? 104
+                    : 104 + (currCountOfDepths - 1 - depth);
+            } else if (
+                hasNonWhiteCloserAfterLastCharTillNewLine(
+                    editorInfo.monoText,
+                    globalIndexOfThisLineStarter +
+                        lastVisibleChar.inLineIndexZero,
+                )
+            ) {
+                // bracket based
+                // optimalRightOfRangePx = 104;
+            } else {
+                // indentation based
+                // optimalRightOfRangePx = 104;
+                boxRightEdge = !currCountOfDepths
+                    ? 104
+                    : 104 + (currCountOfDepths - 1 - depth);
+            }
+        }
+    }
+    */
+
     // const doc = editorInfo.editorRef.document;
     const firstLineOfMiddles = firstVisibleChar.lineZero + 2;
     const lastLineOfMiddles = lastVisibleChar.lineZero - 2;
@@ -253,30 +331,25 @@ export const renderSingleLineBoxV5 = ({
     // console.log(kkk);
     // return;
 
+    // prettier-ignore
     const lineDecoration = vscode.window.createTextEditorDecorationType({
         before: {
             // rangeBehavior: 1,
 
             contentText: ``,
             textDecoration: `;box-sizing: content-box !important;
-                              ${borderCss}
-                              
-                              border-radius: ${borderRadiusCss};
+                ${borderCss}
+                
+                border-radius: ${borderRadiusCss};
 
-                              width: calc((${
-                                  boxRightEdge - boxLeftEdge
-                              } * (1ch + ${
-                glo.letterSpacing
-            }px)) - ${leftInc}px);
-                              height: calc(100% + ${heightDelta}px);
-                              position: absolute;
-                              z-index: ${zIndex};
-                              top: ${top}px;
-                              left: calc((${boxLeftEdge} * (1ch + ${
-                glo.letterSpacing
-            }px)) + ${leftInc - borderSize}px);
-                              ${backgroundAndBorder}
-                              `,
+                width: calc((${boxRightEdge - boxLeftEdge} * (1ch + ${glo.letterSpacing}px)) - ${leftInc}px);
+                height: calc(100% + ${heightDelta}px);
+                position: absolute;
+                z-index: ${zIndex};
+                top: ${top}px;
+                left: calc((${boxLeftEdge} * (1ch + ${glo.letterSpacing}px)) + ${leftInc - borderSize}px);
+                ${backgroundAndBorder}
+            `,
             // padding: 100px;
         },
     } as vscode.DecorationRenderOptions);
@@ -294,28 +367,25 @@ export const renderSingleLineBoxV5 = ({
         const width = boxLeftEdge - optimalLeftOfRangePx;
 
         if (width > 0) {
+            // prettier-ignore
             const leftLineOfOpening =
                 vscode.window.createTextEditorDecorationType({
                     before: {
                         // rangeBehavior: 1,
                         contentText: ``,
                         textDecoration: `;box-sizing: content-box !important;
-                                      border-bottom: ${borderSize}px solid ${borderColorToBeTransparent};
-     
-                                      width: calc((${width} * (1ch + ${
-                            glo.letterSpacing
-                        }px)) - ${leftInc - 1}px);
-                                      bottom: ${b}px;
-                                      height: ${0}px;
-                                      position: absolute;
-                                      z-index: ${zIndex + 2};
-                                      
-                                      left: calc((${optimalLeftOfRangePx} * (1ch + ${
-                            glo.letterSpacing
-                        }px)) -
-                                          ${borderSize - leftInc}px);
-                                          ${backgroundAndBorder}
-                                      `,
+                            border-bottom: ${borderSize}px solid ${borderColorToBeTransparent};
+
+                            width: calc((${width} * (1ch + ${glo.letterSpacing}px)) - ${leftInc - 1}px);
+                            bottom: ${b}px;
+                            height: ${0}px;
+                            position: absolute;
+                            z-index: ${zIndex + 2};
+                            
+                            left: calc((${optimalLeftOfRangePx} * (1ch + ${glo.letterSpacing}px)) -
+                            ${borderSize - leftInc}px);
+                            ${backgroundAndBorder}
+                        `,
                         // padding: 100px;
                     },
                 } as vscode.DecorationRenderOptions);
@@ -352,29 +422,24 @@ export const renderSingleLineBoxV5 = ({
         const width = optimalRightOfRangePx - boxRightEdge;
 
         if (width > 0) {
+            // prettier-ignore
             const rightLineOfClosing =
                 vscode.window.createTextEditorDecorationType({
                     before: {
                         // rangeBehavior: 1,
                         contentText: ``,
                         textDecoration: `;box-sizing: content-box !important;
-                                      border-top: ${borderSize}px solid ${borderColorToBeTransparent};
-     
-                                      width: calc((${
-                                          optimalRightOfRangePx - boxRightEdge
-                                      } * (1ch + ${glo.letterSpacing}px)) - ${
-                            leftInc - borderSize
-                        }px);
-                                      top: ${t}px;
-                                      height: ${0}px;
-                                      position: absolute;
-                                      z-index: ${zIndex + 2};
-                                      
-                                      left: calc((${boxRightEdge} * (1ch + ${
-                            glo.letterSpacing
-                        }px)) + ${leftInc}px);
-                        ${backgroundAndBorder}
-                                      `,
+                            border-top: ${borderSize}px solid ${borderColorToBeTransparent};
+
+                            width: calc((${optimalRightOfRangePx - boxRightEdge} * (1ch + ${glo.letterSpacing}px)) - ${leftInc - borderSize}px);
+                            top: ${t}px;
+                            height: ${0}px;
+                            position: absolute;
+                            z-index: ${zIndex + 2};
+                            
+                            left: calc((${boxRightEdge} * (1ch + ${glo.letterSpacing}px)) + ${leftInc}px);
+                            ${backgroundAndBorder}
+                        `,
                         // padding: 100px;
                     },
                 } as vscode.DecorationRenderOptions);

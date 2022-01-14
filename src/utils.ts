@@ -583,6 +583,7 @@ export interface IBlockRender {
     lang: string;
     isFocusedBlock: boolean;
     absRangeEndPos?: IPositionEachZero;
+    currCountOfDepths: number;
 }
 
 export interface IOneRange {
@@ -790,6 +791,9 @@ export const renderLevels = (
         return;
     }
 
+    const currCountOfDepths =
+        editorInfo.renderingInfoForFullFile?.masterLevels.length || 0;
+
     if (renderingInfo.fileRightMost >= 0) {
         const backgroundCSS = glo.coloring.onEachDepth[0];
         const borderColor = glo.coloring.borderOfDepth0;
@@ -817,6 +821,7 @@ export const renderLevels = (
                 editorInfo,
                 lang,
                 isFocusedBlock: false,
+                currCountOfDepths,
             });
         }
     }
@@ -891,6 +896,7 @@ export const renderLevels = (
                     lang,
                     isFocusedBlock,
                     absRangeEndPos,
+                    currCountOfDepths,
                 } as IBlockRender);
             } catch (err) {
                 console.log(err);
