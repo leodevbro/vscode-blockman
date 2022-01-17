@@ -332,6 +332,12 @@ export const renderSingleLineBoxV5 = ({
     // return;
 
     // prettier-ignore
+    const leftCalcOfMain = `calc((${boxLeftEdge} * (1ch + ${glo.letterSpacing}px)) + ${leftInc - borderSize}px)`;
+
+    // prettier-ignore
+    const originalWidthCalc = `calc((${boxRightEdge - boxLeftEdge} * (1ch + ${glo.letterSpacing}px)) - ${leftInc}px)`;
+
+    // prettier-ignore
     const lineDecoration = vscode.window.createTextEditorDecorationType({
         before: {
             // rangeBehavior: 1,
@@ -342,12 +348,12 @@ export const renderSingleLineBoxV5 = ({
                 
                 border-radius: ${borderRadiusCss};
 
-                width: calc((${boxRightEdge - boxLeftEdge} * (1ch + ${glo.letterSpacing}px)) - ${leftInc}px);
+                width: ${originalWidthCalc};
                 height: calc(100% + ${heightDelta}px);
                 position: absolute;
                 z-index: ${zIndex};
                 top: ${top}px;
-                left: calc((${boxLeftEdge} * (1ch + ${glo.letterSpacing}px)) + ${leftInc - borderSize}px);
+                left: ${leftCalcOfMain};
                 ${backgroundAndBorder}
             `,
             // padding: 100px;
@@ -368,6 +374,11 @@ export const renderSingleLineBoxV5 = ({
 
         if (width > 0) {
             // prettier-ignore
+            const leftCalcOfOpHelp = `calc((${optimalLeftOfRangePx} * (1ch + ${glo.letterSpacing}px)) - ${borderSize - leftInc}px)`;
+            // prettier-ignore
+            const originalWidthCalcOfOpHelp = `calc((${width} * (1ch + ${glo.letterSpacing}px)) - ${leftInc - 1}px)`;
+
+            // prettier-ignore
             const leftLineOfOpening =
                 vscode.window.createTextEditorDecorationType({
                     before: {
@@ -376,14 +387,13 @@ export const renderSingleLineBoxV5 = ({
                         textDecoration: `;box-sizing: content-box !important;
                             border-bottom: ${borderSize}px solid ${borderColorToBeTransparent};
 
-                            width: calc((${width} * (1ch + ${glo.letterSpacing}px)) - ${leftInc - 1}px);
+                            width: ${originalWidthCalcOfOpHelp};
                             bottom: ${b}px;
                             height: ${0}px;
                             position: absolute;
                             z-index: ${zIndex + 2};
                             
-                            left: calc((${optimalLeftOfRangePx} * (1ch + ${glo.letterSpacing}px)) -
-                            ${borderSize - leftInc}px);
+                            left: ${leftCalcOfOpHelp};
                             ${backgroundAndBorder}
                         `,
                         // padding: 100px;
@@ -423,6 +433,11 @@ export const renderSingleLineBoxV5 = ({
 
         if (width > 0) {
             // prettier-ignore
+            const leftCalcOfClHelp = `calc((${boxRightEdge} * (1ch + ${glo.letterSpacing}px)) + ${leftInc}px)`;
+            // prettier-ignore
+            const originalWidthCalcOfClHelp = `calc((${optimalRightOfRangePx - boxRightEdge} * (1ch + ${glo.letterSpacing}px)) - ${leftInc - borderSize}px)`;
+
+            // prettier-ignore
             const rightLineOfClosing =
                 vscode.window.createTextEditorDecorationType({
                     before: {
@@ -431,13 +446,13 @@ export const renderSingleLineBoxV5 = ({
                         textDecoration: `;box-sizing: content-box !important;
                             border-top: ${borderSize}px solid ${borderColorToBeTransparent};
 
-                            width: calc((${optimalRightOfRangePx - boxRightEdge} * (1ch + ${glo.letterSpacing}px)) - ${leftInc - borderSize}px);
+                            width: ${originalWidthCalcOfClHelp};
                             top: ${t}px;
                             height: ${0}px;
                             position: absolute;
                             z-index: ${zIndex + 2};
                             
-                            left: calc((${boxRightEdge} * (1ch + ${glo.letterSpacing}px)) + ${leftInc}px);
+                            left: ${leftCalcOfClHelp};
                             ${backgroundAndBorder}
                         `,
                         // padding: 100px;
