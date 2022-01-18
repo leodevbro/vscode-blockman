@@ -1,7 +1,11 @@
 import * as vscode from "vscode";
 import { ColorThemeKind, workspace } from "vscode";
 import { colorCombos, IColorCombo } from "./colors";
-import { glo } from "./extension";
+import {
+    glo,
+    optionsForRightEdgeBaseOfBlocks,
+    TyRightEdgeBase,
+} from "./extension";
 
 // Possible color values are almost (Please see the notes below) all CSS color/gradient values.
 // ---- 'transparent' (or any rgba/hsla... value with partial transparency) - as itself or as inside gradient, works fine for borders, but for backgrounds, transparency is problematic, so 'transparent' will be the color of editor background.
@@ -371,6 +375,46 @@ export const applyAllBlockmanSettings = () => {
             (combo) => combo.name === chosenColorCombo,
         );
     }
+
+    // start moding---------
+    // n04Sub04RightSideBaseOfBlocks
+    // n04Sub05MinDistanceBetweenRightSideEdges
+    // n04Sub06AdditionalPaddingRight
+    const fetchedRightSideBaseOfBlocks: string | undefined = bc.get(
+        "n04Sub04RightSideBaseOfBlocks",
+    );
+    const fetchedMinDistanceBetweenRightSideEdges: number | undefined = bc.get(
+        "n04Sub05MinDistanceBetweenRightSideEdges",
+    );
+    const fetchedAdditionalPaddingRight: number | undefined = bc.get(
+        "n04Sub06AdditionalPaddingRight",
+    );
+
+    if (typeof fetchedRightSideBaseOfBlocks === "string") {
+        const myEntries = Object.entries(optionsForRightEdgeBaseOfBlocks) as [
+            TyRightEdgeBase,
+            string,
+        ][];
+
+        for (const [key, value] of myEntries) {
+            if (fetchedRightSideBaseOfBlocks === value) {
+                glo.edgeExpanding.rightSideBaseOfBlocks = key;
+                break;
+            }
+        }
+    }
+
+    if (typeof fetchedMinDistanceBetweenRightSideEdges === "number") {
+        glo.edgeExpanding.minDistanceBetweenRightSideEdges =
+            fetchedMinDistanceBetweenRightSideEdges;
+    }
+
+    if (typeof fetchedAdditionalPaddingRight === "number") {
+        glo.edgeExpanding.additionalPaddingRight =
+            fetchedAdditionalPaddingRight;
+    }
+
+    // end --------------
 
     const customColorOfDepth0: string | undefined = bc.get(
         "n05CustomColorOfDepth0",

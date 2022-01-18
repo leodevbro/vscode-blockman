@@ -106,12 +106,20 @@ const bigVars = {
     currColorCombo: classicDark1Combo,
 };
 
+export type TyRightEdgeBase = "innerC" | "vpC" | "fileC";
+
+export const optionsForRightEdgeBaseOfBlocks = {
+    innerC: "Rightmost Edge Of Inner Content",
+    vpC: "Rightmost Edge Of Viewport",
+    fileC: "Rightmost Edge Of File Content",
+};
+
 export const glo = {
     isOn: true,
     nominalLineHeight: 1,
     currZoomLevel: 0, // zero means original, 1 means plus 10%, 2 means plus 20%........
-    eachCharFrameHeight: 1, // (px) no more needed, so before we remove it, it will be just 1,
-    eachCharFrameWidth: 1, // (px) no more needed, so before we remove it, it will be just 1,
+    eachCharFrameHeight: 1, // (px) no more needed, so before we remove it, it will be just 1, well it means, the connected px values are now char values
+    eachCharFrameWidth: 1, // (px) no more needed, so before we remove it, it will be just 1, well it means, the connected px values are now char values
     letterSpacing: 0, // (px)
 
     maxDepth: 9, // (as minus one) -2 -> no blocks, -1 -> ground block, 0 -> first depth blocks, and so on...
@@ -134,6 +142,16 @@ export const glo = {
 
     borderSize: 1,
     borderRadius: 5,
+
+    edgeExpanding: {
+        rightSideBaseOfBlocks: "innerC",
+        minDistanceBetweenRightSideEdges: 0,
+        additionalPaddingRight: 0,
+    } as {
+        rightSideBaseOfBlocks: TyRightEdgeBase;
+        minDistanceBetweenRightSideEdges: number;
+        additionalPaddingRight: number;
+    },
 
     coloring: {
         onEachDepth: bigVars.currColorCombo.onEachDepth,

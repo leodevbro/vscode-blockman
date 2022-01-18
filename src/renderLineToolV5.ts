@@ -51,10 +51,56 @@ export const renderSingleLineBoxV5 = ({
     borderSize,
     currCountOfDepths,
 }: ISingleLineBox): void => {
-    /*
-    const pleaseExpand = true;
-    let isExpandableToRight = false;
+    let isExpandableToRightAsMain = false;
+    let isExpandableToRightAsClHelp = false;
+    const eE = glo.edgeExpanding;
+    if (
+        eE.rightSideBaseOfBlocks !== "innerC" ||
+        eE.additionalPaddingRight !== 0 ||
+        eE.minDistanceBetweenRightSideEdges !== 0
+    ) {
+        const globalIndexOfThisLineStarter =
+            editorInfo.textLinesMap[lastVisibleChar.lineZero];
 
+        if (lineBlockType === "onlyLine") {
+            if (
+                hasNonWhiteCloserAfterLastCharTillNewLine(
+                    editorInfo.monoText,
+                    globalIndexOfThisLineStarter +
+                        lastVisibleChar.inLineIndexZero,
+                )
+            ) {
+                // do nothing
+            } else {
+                // indentation based
+                isExpandableToRightAsMain = true;
+            }
+        } else {
+            if (lineZero !== lastVisibleChar.lineZero) {
+                // it is not last line
+                isExpandableToRightAsMain = true;
+            } else {
+                // it is last line
+                if (!lastLineHasVisibleChar) {
+                    isExpandableToRightAsMain = true;
+                } else if (
+                    hasNonWhiteCloserAfterLastCharTillNewLine(
+                        editorInfo.monoText,
+                        globalIndexOfThisLineStarter +
+                            lastVisibleChar.inLineIndexZero,
+                    )
+                ) {
+                    // bracket based
+                    isExpandableToRightAsClHelp = true;
+                } else {
+                    // indentation based
+                    isExpandableToRightAsMain = true;
+                }
+            }
+        }
+    }
+
+    /*
     const globalIndexOfThisLineStarter =
         editorInfo.textLinesMap[lastVisibleChar.lineZero];
 
@@ -330,12 +376,31 @@ export const renderSingleLineBoxV5 = ({
     // kkk += 1;
     // console.log(kkk);
     // return;
+    let finalWidthCalcOfMain = "";
 
     // prettier-ignore
     const leftCalcOfMain = `calc((${boxLeftEdge} * (1ch + ${glo.letterSpacing}px)) + ${leftInc - borderSize}px)`;
 
     // prettier-ignore
     const originalWidthCalc = `calc((${boxRightEdge - boxLeftEdge} * (1ch + ${glo.letterSpacing}px)) - ${leftInc}px)`;
+
+    finalWidthCalcOfMain = originalWidthCalc;
+    if (isExpandableToRightAsMain) {
+        if (eE.rightSideBaseOfBlocks === "innerC") {
+            // prettier-ignore
+            finalWidthCalcOfMain = `calc((${boxRightEdge - boxLeftEdge} * (1ch + ${glo.letterSpacing}px)) - ${leftInc}px + ${(currCountOfDepths - 0 - depth) * eE.minDistanceBetweenRightSideEdges}px + ${eE.additionalPaddingRight}px)`;
+        } else if (eE.rightSideBaseOfBlocks === "vpC") {
+            // prettier-ignore
+            finalWidthCalcOfMain = `calc((${boxLeftEdge} * (1ch + ${glo.letterSpacing}px)) + ${leftInc - borderSize}px + 150%)`;
+        } else if (eE.rightSideBaseOfBlocks === "fileC") {
+            const fileCWidth =
+                editorInfo.renderingInfoForFullFile?.fileRightMost;
+            if (fileCWidth) {
+                // prettier-ignore
+                finalWidthCalcOfMain = `calc((${1 + fileCWidth - boxLeftEdge} * (1ch + ${glo.letterSpacing}px)) - ${leftInc}px + ${(currCountOfDepths - 0 - depth) * eE.minDistanceBetweenRightSideEdges}px + ${eE.additionalPaddingRight}px)`;
+            }
+        }
+    }
 
     // prettier-ignore
     const lineDecoration = vscode.window.createTextEditorDecorationType({
@@ -348,7 +413,7 @@ export const renderSingleLineBoxV5 = ({
                 
                 border-radius: ${borderRadiusCss};
 
-                width: ${originalWidthCalc};
+                width: ${finalWidthCalcOfMain};
                 height: calc(100% + ${heightDelta}px);
                 position: absolute;
                 z-index: ${zIndex};
@@ -432,10 +497,29 @@ export const renderSingleLineBoxV5 = ({
         const width = optimalRightOfRangePx - boxRightEdge;
 
         if (width > 0) {
+            let finalWidthCalcOfClHelp = "";
             // prettier-ignore
             const leftCalcOfClHelp = `calc((${boxRightEdge} * (1ch + ${glo.letterSpacing}px)) + ${leftInc}px)`;
             // prettier-ignore
             const originalWidthCalcOfClHelp = `calc((${optimalRightOfRangePx - boxRightEdge} * (1ch + ${glo.letterSpacing}px)) - ${leftInc - borderSize}px)`;
+
+            finalWidthCalcOfClHelp = originalWidthCalcOfClHelp;
+            if (isExpandableToRightAsClHelp) {
+                if (eE.rightSideBaseOfBlocks === "innerC") {
+                    // prettier-ignore
+                    finalWidthCalcOfClHelp = `calc((${optimalRightOfRangePx - boxRightEdge} * (1ch + ${glo.letterSpacing}px)) - ${leftInc - borderSize}px + ${(currCountOfDepths - 0 - depth) * eE.minDistanceBetweenRightSideEdges}px + ${eE.additionalPaddingRight}px)`;
+                } else if (eE.rightSideBaseOfBlocks === "vpC") {
+                    // prettier-ignore
+                    finalWidthCalcOfClHelp = `calc((${optimalRightOfRangePx - boxRightEdge} * (1ch + ${glo.letterSpacing}px)) - ${leftInc - borderSize}px + 150%)`;
+                } else if (eE.rightSideBaseOfBlocks === "fileC") {
+                    const fileCWidth =
+                        editorInfo.renderingInfoForFullFile?.fileRightMost;
+                    if (fileCWidth) {
+                        // prettier-ignore
+                        finalWidthCalcOfClHelp = `calc((${1 + fileCWidth - boxRightEdge} * (1ch + ${glo.letterSpacing}px)) - ${leftInc - borderSize}px + ${(currCountOfDepths - 0 - depth) * eE.minDistanceBetweenRightSideEdges}px + ${eE.additionalPaddingRight}px)`;
+                    }
+                }
+            }
 
             // prettier-ignore
             const rightLineOfClosing =
@@ -446,7 +530,7 @@ export const renderSingleLineBoxV5 = ({
                         textDecoration: `;box-sizing: content-box !important;
                             border-top: ${borderSize}px solid ${borderColorToBeTransparent};
 
-                            width: ${originalWidthCalcOfClHelp};
+                            width: ${finalWidthCalcOfClHelp};
                             top: ${t}px;
                             height: ${0}px;
                             position: absolute;

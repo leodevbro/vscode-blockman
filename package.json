@@ -3,7 +3,7 @@
     "displayName": "Blockman - Highlight Nested Code Blocks",
     "publisher": "leodevbro",
     "description": "Mark/Highlight code blocks",
-    "version": "1.4.7",
+    "version": "1.5.0",
     "engines": {
         "vscode": "^1.56.1"
     },
@@ -270,6 +270,29 @@
                     ],
                     "description": "Color combo to apply when current theme kind is High Contrast.",
                     "scope": "window"
+                },
+                "blockman.n04Sub04RightSideBaseOfBlocks": {
+                    "type": "string",
+                    "default": "Rightmost Edge Of Inner Content",
+                    "enum": [
+                        "Rightmost Edge Of Inner Content",
+                        "Rightmost Edge Of Viewport",
+                        "Rightmost Edge Of File Content"
+                    ],
+                    "scope": "window",
+                    "description": "Because some people like super expanded blocks."
+                },
+                "blockman.n04Sub05MinDistanceBetweenRightSideEdges": {
+                    "type": "number",
+                    "default": 0,
+                    "scope": "window",
+                    "description": "CSS pixels. 4 is probably good. Keep in mind that for some devices, CSS pixel is larger/smaller than physical pixel."
+                },
+                "blockman.n04Sub06AdditionalPaddingRight": {
+                    "type": "number",
+                    "default": 0,
+                    "scope": "window",
+                    "description": "CSS pixels. Keep in mind that for some devices, CSS pixel is larger/smaller than physical pixel."
                 },
                 "blockman.n05CustomColorOfDepth0": {
                     "type": "string",

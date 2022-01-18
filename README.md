@@ -181,6 +181,10 @@ Press F1 and find "Blockman Toggle Try Support Double Width Chars (e.g. Chinese)
     "blockman.n04Sub02ColorComboPresetForLightTheme": "none", // Color combo to apply when current theme kind is Light.
     "blockman.n04Sub03ColorComboPresetForHighContrastTheme": "none", // Color combo to apply when current theme kind is High Contrast.
 
+    "blockman.n04Sub04RightSideBaseOfBlocks": "Rightmost Edge Of Inner Content", // or "Rightmost Edge Of Viewport" or "Rightmost Edge Of File Content"
+    "blockman.n04Sub05MinDistanceBetweenRightSideEdges": 0, // CSS pixels. 4 is probably good. Keep in mind that for some devices, CSS pixel is larger/smaller than physical pixel.
+    "blockman.n04Sub06AdditionalPaddingRight": 0, // CSS pixels. Keep in mind that for some devices, CSS pixel is larger/smaller than physical pixel.
+
     "blockman.n05CustomColorOfDepth0": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background.
 
     "blockman.n06CustomColorOfDepth1": "", // Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background.

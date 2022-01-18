@@ -4,6 +4,12 @@ All notable changes to the "blockman" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.5.0] - 2022-01-18
+
+-   Added 3 settings: n04Sub04, n04Sub05 and n04Sub06. These settings are about right side padding.
+        User now can define min distance between right side edges,
+        also user now can define additional right side padding, and also right side base strategy.
+
 ## [1.4.7] - 2022-01-09
 
 -   Updated donation info
