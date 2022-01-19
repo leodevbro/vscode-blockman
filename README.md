@@ -112,7 +112,7 @@ If you use <strong>double width</strong> characters like these Chinese character
 
 <p align="center">You can choose right side padding strategies</p>
 <p align="center"><img
-  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/settings/right-side-padding-strategies-gif.gif"
+  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/settings/right-side-padding-strategies-2-gif.gif"
   alt="alt text testing"
 /></p>
   
