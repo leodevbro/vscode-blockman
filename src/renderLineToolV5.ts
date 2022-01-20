@@ -496,7 +496,8 @@ export const renderSingleLineBoxV5 = ({
         const leftInc = isAtVeryLeft ? 2 : 0;
         const width = optimalRightOfRangePx - boxRightEdge;
 
-        if (width > 0) {
+        // if (width > 0) {
+        if (width > 0 || isExpandableToRightAsClHelp) {
             let finalWidthCalcOfClHelp = "";
             // prettier-ignore
             const leftCalcOfClHelp = `calc((${boxRightEdge} * (1ch + ${glo.letterSpacing}px)) + ${leftInc}px)`;
