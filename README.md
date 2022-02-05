@@ -69,7 +69,18 @@
   src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/still-image/infograph/super-gradients-demo.png"
   alt="super gradients color combos in Blockman"
 /></p>
-  
+
+<br />
+
+<p align="center"><strong>You can hide backgrounds and keep only borders.</strong></p>
+<p align="center"><strong>Go to Blockman settings, find "<code>N33 A01 B2</code>" and type "<code>45,0,0,2; none</code>".</strong></p>
+<p align="center"><img
+  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/still-image/infograph/only-borders.png"
+  alt="only borders instruction in Blockman"
+/></p>
+
+<br />
+
 <p>Supported programming languages:</p>
 <p><strong>Non-indentation based languages:</strong> JavaScript, JSX, TypeScript, TSX, C, C#, C++, Java, PHP, R, Go (Golang), Dart, Rust, Swift, PowerShell, SQL, HTML, CSS, LESS, SCSS and more...</p>
 <p><strong>Indentation based languages:</strong> currently Python and Yaml.</p>

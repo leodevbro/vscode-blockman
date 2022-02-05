@@ -4,6 +4,11 @@ All notable changes to the "blockman" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.5.4] - 2022-02-05
+
+-   Added "border-only" instrucion in README
+-   Minor improvements
+
 ## [1.5.0] - 2022-01-18
 
 -   Added 3 settings: n04Sub04, n04Sub05 and n04Sub06. These settings are about right side padding.
