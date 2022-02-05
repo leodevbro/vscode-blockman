@@ -521,6 +521,7 @@ const setUserwideIndentGuides = (myBool: boolean) => {
         }
     }
 
+    /*
     const indent1 = (boo: boolean) => {
         try {
             // old API
@@ -531,6 +532,7 @@ const setUserwideIndentGuides = (myBool: boolean) => {
             //
         }
     };
+    */
 
     const indent2 = (boo: boolean) => {
         try {
@@ -552,7 +554,7 @@ const setUserwideIndentGuides = (myBool: boolean) => {
         }
     };
 
-    indent1(myBool);
+    // indent1(myBool); // DEPRECATED, because "editor.renderIndentGuides" is old API
     indent2(myBool);
     indent3(myBool);
 
@@ -568,11 +570,12 @@ interface IConfigOfVscode {
     editorWordWrap?: "on" | "off"; // "editor.wordWrap"
     diffEditorWordWrap?: "on" | "off"; // "diffEditor.wordWrap"
     // markdownEditorWordWrap?: string; // "[markdown]_editor.wordWrap"
-    renderIndentGuides?: boolean; // "editor.renderIndentGuides" - old API of indent guides
+    // renderIndentGuides?: boolean; // "editor.renderIndentGuides" - old API of indent guides
     guidesIndentation: boolean; // "editor.guides.indentation" - new API of indent guides
     guidesBracketPairs: boolean; // "editor.guides.bracketPairs" - // new advanced indent guides
     // highlightActiveIndentGuide?: boolean; // "editor.highlightActiveIndentGuide"
-    [key: string]: string | boolean | undefined;
+
+    // [key: string]: string | boolean | undefined;
 }
 
 // for archive
@@ -587,7 +590,7 @@ const configOfVscodeWithBlockman: IConfigOfVscode = {
     lineHighlightBorder: "#9fced11f",
     editorWordWrap: "off",
     diffEditorWordWrap: "off",
-    renderIndentGuides: false,
+    // renderIndentGuides: false, // for old API of indent guides
     guidesIndentation: false,
     guidesBracketPairs: false,
 };
@@ -630,8 +633,8 @@ const setUserwideConfigOfVscode = (userwideConfig: IConfigOfVscode) => {
     //     1,
     // );
 
-    if (userwideConfig.renderIndentGuides !== undefined) {
-        setUserwideIndentGuides(userwideConfig.guidesBracketPairs);
+    if (userwideConfig.guidesIndentation !== undefined) {
+        setUserwideIndentGuides(userwideConfig.guidesIndentation);
     }
 };
 

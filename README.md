@@ -24,8 +24,7 @@
 {
     // ...
     "editor.inlayHints.enabled": false,
-    "editor.renderIndentGuides": false, // old API for indent guides
-    "editor.guides.indentation": false, // new API for indent guides
+    "editor.guides.indentation": false, // new API for indent guides. The old one is: "editor.renderIndentGuides": false,
     "editor.guides.bracketPairs": false, // new advanced indent guides (This does not turn off editor.bracketPairColorization)
     "editor.wordWrap": "off",
     "diffEditor.wordWrap": "off",

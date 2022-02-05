@@ -49,7 +49,7 @@ export const renderSingleLineBoxV5 = ({
     inputBorderColor,
     inputBackgroundColor,
     borderSize,
-    currCountOfDepths,
+    currMaxDepthIndex,
 }: ISingleLineBox): void => {
     let isExpandableToRightAsMain = false;
     let isExpandableToRightAsClHelp = false;
@@ -114,31 +114,31 @@ export const renderSingleLineBoxV5 = ({
         ) {
             // do nothing
         } else {
-            optimalRightOfRangePx = !currCountOfDepths
+            optimalRightOfRangePx = !currMaxDepthIndex
                 ? 104
-                : 104 + (currCountOfDepths - 1 - depth);
-            boxRightEdge = !currCountOfDepths
+                : 104 + (currMaxDepthIndex - 1 - depth);
+            boxRightEdge = !currMaxDepthIndex
                 ? 104
-                : 104 + (currCountOfDepths - 1 - depth);
+                : 104 + (currMaxDepthIndex - 1 - depth);
         }
     } else {
-        optimalRightOfRangePx = !currCountOfDepths
+        optimalRightOfRangePx = !currMaxDepthIndex
             ? 104
-            : 104 + (currCountOfDepths - 1 - depth);
+            : 104 + (currMaxDepthIndex - 1 - depth);
 
         if (lineZero !== lastVisibleChar.lineZero) {
             // optimalRightOfRangePx = 104;
-            boxRightEdge = !currCountOfDepths
+            boxRightEdge = !currMaxDepthIndex
                 ? 104
-                : 104 + (currCountOfDepths - 1 - depth);
+                : 104 + (currMaxDepthIndex - 1 - depth);
         } else {
             // lastLineHasVisibleChar
             // inputBackgroundColor = "linear-gradient(to right, red, blue)";
             if (!lastLineHasVisibleChar) {
                 // optimalRightOfRangePx = 104;
-                boxRightEdge = !currCountOfDepths
+                boxRightEdge = !currMaxDepthIndex
                     ? 104
-                    : 104 + (currCountOfDepths - 1 - depth);
+                    : 104 + (currMaxDepthIndex - 1 - depth);
             } else if (
                 hasNonWhiteCloserAfterLastCharTillNewLine(
                     editorInfo.monoText,
@@ -151,9 +151,9 @@ export const renderSingleLineBoxV5 = ({
             } else {
                 // indentation based
                 // optimalRightOfRangePx = 104;
-                boxRightEdge = !currCountOfDepths
+                boxRightEdge = !currMaxDepthIndex
                     ? 104
-                    : 104 + (currCountOfDepths - 1 - depth);
+                    : 104 + (currMaxDepthIndex - 1 - depth);
             }
         }
     }
@@ -388,7 +388,7 @@ export const renderSingleLineBoxV5 = ({
     if (isExpandableToRightAsMain) {
         if (eE.rightSideBaseOfBlocks === "innerC") {
             // prettier-ignore
-            finalWidthCalcOfMain = `calc((${boxRightEdge - boxLeftEdge} * (1ch + ${glo.letterSpacing}px)) - ${leftInc}px + ${(currCountOfDepths - 0 - depth) * eE.minDistanceBetweenRightSideEdges}px + ${eE.additionalPaddingRight}px)`;
+            finalWidthCalcOfMain = `calc((${boxRightEdge - boxLeftEdge} * (1ch + ${glo.letterSpacing}px)) - ${leftInc}px + ${(currMaxDepthIndex - depth) * eE.minDistanceBetweenRightSideEdges}px + ${eE.additionalPaddingRight}px)`;
         } else if (eE.rightSideBaseOfBlocks === "vpC") {
             // prettier-ignore
             finalWidthCalcOfMain = `calc((${boxLeftEdge} * (1ch + ${glo.letterSpacing}px)) + ${leftInc - borderSize}px + 150%)`;
@@ -397,7 +397,7 @@ export const renderSingleLineBoxV5 = ({
                 editorInfo.renderingInfoForFullFile?.fileRightMost;
             if (fileCWidth) {
                 // prettier-ignore
-                finalWidthCalcOfMain = `calc((${1 + fileCWidth - boxLeftEdge} * (1ch + ${glo.letterSpacing}px)) - ${leftInc}px + ${(currCountOfDepths - 0 - depth) * eE.minDistanceBetweenRightSideEdges}px + ${eE.additionalPaddingRight}px)`;
+                finalWidthCalcOfMain = `calc((${1 + fileCWidth - boxLeftEdge} * (1ch + ${glo.letterSpacing}px)) - ${leftInc}px + ${(currMaxDepthIndex - depth) * eE.minDistanceBetweenRightSideEdges}px + ${eE.additionalPaddingRight}px)`;
             }
         }
     }
@@ -508,7 +508,7 @@ export const renderSingleLineBoxV5 = ({
             if (isExpandableToRightAsClHelp) {
                 if (eE.rightSideBaseOfBlocks === "innerC") {
                     // prettier-ignore
-                    finalWidthCalcOfClHelp = `calc((${optimalRightOfRangePx - boxRightEdge} * (1ch + ${glo.letterSpacing}px)) - ${leftInc - borderSize}px + ${(currCountOfDepths - 0 - depth) * eE.minDistanceBetweenRightSideEdges}px + ${eE.additionalPaddingRight}px)`;
+                    finalWidthCalcOfClHelp = `calc((${optimalRightOfRangePx - boxRightEdge} * (1ch + ${glo.letterSpacing}px)) - ${leftInc - borderSize}px + ${(currMaxDepthIndex - depth) * eE.minDistanceBetweenRightSideEdges}px + ${eE.additionalPaddingRight}px)`;
                 } else if (eE.rightSideBaseOfBlocks === "vpC") {
                     // prettier-ignore
                     finalWidthCalcOfClHelp = `calc((${optimalRightOfRangePx - boxRightEdge} * (1ch + ${glo.letterSpacing}px)) - ${leftInc - borderSize}px + 150%)`;
@@ -517,7 +517,7 @@ export const renderSingleLineBoxV5 = ({
                         editorInfo.renderingInfoForFullFile?.fileRightMost;
                     if (fileCWidth) {
                         // prettier-ignore
-                        finalWidthCalcOfClHelp = `calc((${1 + fileCWidth - boxRightEdge} * (1ch + ${glo.letterSpacing}px)) - ${leftInc - borderSize}px + ${(currCountOfDepths - 0 - depth) * eE.minDistanceBetweenRightSideEdges}px + ${eE.additionalPaddingRight}px)`;
+                        finalWidthCalcOfClHelp = `calc((${1 + fileCWidth - boxRightEdge} * (1ch + ${glo.letterSpacing}px)) - ${leftInc - borderSize}px + ${(currMaxDepthIndex - depth) * eE.minDistanceBetweenRightSideEdges}px + ${eE.additionalPaddingRight}px)`;
                     }
                 }
             }
