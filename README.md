@@ -92,7 +92,7 @@
 <p align="center"><strong>How to do it? Go to Blockman settings, find "<code>N33 A03 B1</code>" and delete "<code>!</code>".</strong></p>
 <p align="center"><strong>"<code>!</code>" (exclamation mark) means the option is disabled.</strong></p>
 <p align="center"><img
-  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/highlight-all-parents-of-focused.gif"
+  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/highlight-all-parents-of-focused-block.gif"
   alt="only borders instruction in Blockman"
 /></p>
 <p align="center"><strong>Also you can type other colors and other propagation logic with your taste. See the instructions of advanced coloring.</strong></p>
