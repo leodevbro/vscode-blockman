@@ -3,7 +3,7 @@
     "displayName": "Blockman - Highlight Nested Code Blocks",
     "publisher": "leodevbro",
     "description": "Mark/Highlight code blocks",
-    "version": "1.5.4",
+    "version": "1.5.5",
     "engines": {
         "vscode": "^1.56.1"
     },
@@ -390,7 +390,7 @@
                 },
                 "blockman.n21BorderRadius": {
                     "type": "number",
-                    "default": 5,
+                    "default": 6,
                     "description": "Border radius of each block",
                     "scope": "window"
                 },
@@ -483,7 +483,7 @@
                 },
                 "blockman.n33A03B1FromDepth0ToInwardForFocusTreeBorders": {
                     "type": "string",
-                    "default": "!30,1,0,2; linear-gradient(to right, hsl(251, 22%, 25%), hsl(292, 20%, 18%)) > linear-gradient(to right, hsl(20, 50%, 30%), hsl(250, 30%, 30%))",
+                    "default": "!30,1,0,2; neutral > linear-gradient(to right, rgb(144, 54, 8), rgb(48, 36, 116))",
                     "scope": "window"
                 },
                 "blockman.n33A03B2FromDepth0ToInwardForFocusTreeBackgrounds": {

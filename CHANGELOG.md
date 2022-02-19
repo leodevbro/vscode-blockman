@@ -4,6 +4,11 @@ All notable changes to the "blockman" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.5.5] - 2022-02-19
+
+-   Changed default border-radius from 5px to 6px.
+-   updated README
+
 ## [1.5.4] - 2022-02-05
 
 -   Added "border-only" instrucion in README

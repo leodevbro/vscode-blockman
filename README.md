@@ -16,7 +16,7 @@
 <br />
 <br />
 
-<p><strong>For better experience:</strong> Blockman <strong>WILL CHANGE</strong> these 8 items in VSCode settings (only one-time at the installation event). You can change them again when you want. These 8 settings are very non-vital, so maybe you don't even need to backup them first.</p>
+<p><strong>For better experience:</strong> Blockman <strong>WILL CHANGE</strong> these 7 items in VSCode settings (only one-time at the installation event). You can change them again when you want. These 7 settings are very non-vital, so maybe you don't even need to backup them first.</p>
 
 ```jsonc
 // settings.json (User/Global config, not Workspace config)
@@ -25,7 +25,7 @@
     // ...
     "editor.inlayHints.enabled": false,
     "editor.guides.indentation": false, // new API for indent guides. The old one is: "editor.renderIndentGuides": false,
-    "editor.guides.bracketPairs": false, // new advanced indent guides (This does not turn off editor.bracketPairColorization)
+    "editor.guides.bracketPairs": false, // advanced indent guides (But only for brackets) (This does not turn off editor.bracketPairColorization)
     "editor.wordWrap": "off",
     "diffEditor.wordWrap": "off",
 
@@ -79,6 +79,26 @@
   alt="only borders instruction in Blockman"
 /></p>
 
+<br />
+
+<p align="center"><strong>You can highlight all the parents of the focused block.</strong></p>
+<p align="center"><img
+  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/still-image/infograph/highlight-all-parents-of-focused.png"
+  alt="only borders instruction in Blockman"
+/></p>
+
+<br />
+
+<p align="center"><strong>How to do it? Go to Blockman settings, find "<code>N33 A03 B1</code>" and delete "<code>!</code>".</strong></p>
+<p align="center"><strong>"<code>!</code>" (exclamation mark) means the option is disabled.</strong></p>
+<p align="center"><img
+  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/highlight-all-parents-of-focused.gif"
+  alt="only borders instruction in Blockman"
+/></p>
+<p align="center"><strong>Also you can type other colors and other propagation logic with your taste. See the instructions of advanced coloring.</strong></p>
+
+<br />
+<br />
 <br />
 
 <p>Supported programming languages:</p>
@@ -194,7 +214,7 @@ Press F1 and find "Blockman Toggle Try Support Double Width Chars (e.g. Chinese)
 
 // Each item is with default value
 {
-    // ...
+    // n01 and n02 are deprecated.
     "blockman.n03MaxDepth": 12, // -1 is no blocks, 0 is ground block, 1 is first depth blocks, 2 is second depth blocks
     "blockman.n04ColorComboPreset": "Classic Dark 1 (Gradients)", // This does not change VSCode theme. Choose preset combo of colors. Corresponding colors are overridden by custom colors (if not empty string). Also This setting can be overriden by the next 3 combo settings
     "blockman.n04Sub01ColorComboPresetForDarkTheme": "none", // Color combo to apply when current theme kind is Dark.
@@ -225,7 +245,7 @@ Press F1 and find "Blockman Toggle Try Support Double Width Chars (e.g. Chinese)
     "blockman.n19CustomColorOfBlockBorder": "",
     "blockman.n20CustomColorOfDepth0Border": "",
 
-    "blockman.n21BorderRadius": 5,
+    "blockman.n21BorderRadius": 6,
     "blockman.n22AnalyzeCurlyBrackets": true, // Render blocks inside curly brackets {}, keep in mind: the parser/tokenizer will ignore brackets inside comments, inside strings and inside some other areas.
     "blockman.n23AnalyzeSquareBrackets": false, // Render blocks inside square brackets [], keep in mind: the parser/tokenizer will ignore brackets inside comments, inside strings and inside some other areas.
     "blockman.n24AnalyzeRoundBrackets": false, // Render blocks inside Round brackets (), keep in mind: the parser/tokenizer will ignore brackets inside comments, inside strings and inside some other areas.
@@ -243,6 +263,8 @@ Press F1 and find "Blockman Toggle Try Support Double Width Chars (e.g. Chinese)
 
     // Advanced Coloring:
     // Video instruction: https://youtu.be/UsET6-kPu90
+
+    // Textual instruction:
     // '!' means disabled.
     // Advanced coloring string, if enabled, will override basic coloring settings.
 
