@@ -4,6 +4,10 @@ All notable changes to the "blockman" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.5.6] - 2022-02-21
+
+-   Added double-width chars for generally used Korean characters
+
 ## [1.5.5] - 2022-02-19
 
 -   Changed default border-radius from 5px to 6px.
