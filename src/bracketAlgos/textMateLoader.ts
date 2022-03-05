@@ -7,6 +7,11 @@ import { getRegexForBrackets } from "./bracketUtil";
 import * as JSON5 from "json5";
 import LanguageConfig from "./languageConfig";
 
+// const theAll = vscode.extensions.all;
+// console.log("theAll:");
+// console.log(theAll);
+// console.log("theAllend");
+
 export class TextMateLoader {
     public readonly scopeNameToLanguage = new Map<string, string>();
     private readonly scopeNameToPath = new Map<string, string>();
