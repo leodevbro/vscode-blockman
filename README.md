@@ -38,6 +38,8 @@
 ```
 
 <br />
+<br />
+<br />
 
 <p align="center"><img
   src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/still-image/icon-prod/blockman-icon-128---png.png"
@@ -55,7 +57,7 @@
   alt="alt text testing"
 /></p>
   
-<p>Animated PNG:</p>
+<p align="center">Animated PNG:</p>
 <p align="center"><img
   src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/main-demo---c2-apng.png"
   alt="alt text testing"
@@ -101,13 +103,9 @@
 <br />
 <br />
 
-<p>Supported programming languages:</p>
+<h3>Supported programming languages:</h3>
 <p><strong>Non-indentation based languages:</strong> JavaScript, JSX, TypeScript, TSX, C, C#, C++, Java, PHP, R, Go (Golang), Dart, Rust, Swift, PowerShell, SQL, HTML, CSS, LESS, SCSS and more...</p>
 <p><strong>Indentation based languages:</strong> currently Python and Yaml.</p>
-
-<br />
-
-If you use <strong>double width</strong> characters like these Chinese characters: `字符串最大字符串最`, then you may want to run the experimental command to support such characters. Press `F1` and type the command name: `Blockman Toggle Try Support Double Width Chars`.
 
 <br />
   
@@ -117,6 +115,14 @@ If you use <strong>double width</strong> characters like these Chinese character
   src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/video/python-demo---c2-apng.png"
   alt="alt text testing"
 /></p>
+
+<br />
+
+If you use <strong>double width</strong> characters, then you may want to run the experimental command to support such characters. Press `F1` and type the command name: `Blockman Toggle Try Support Double Width Chars`.
+
+Such as,
+- Chinese characters (汉字): ex. `字符串最大字符串最`
+- Korean characters (한글): ex. `한글 텍스트`
 
 <br />
 
