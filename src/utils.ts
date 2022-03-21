@@ -25,6 +25,7 @@ import {
 } from "./utils2";
 import { doubleWidthCharsReg } from "./helpers/regex-main";
 import { yamlFn } from "./yamlAlgos/yaml-algo";
+import { sqlFn } from "./sqlAlgos/sqlLexer";
 
 export interface IPositionEachZero {
     char?: string;
@@ -1250,6 +1251,7 @@ export const getFullFileStats = async ({
 
     let pythonBlocks: IPositionEachZero[] = [];
     let yamlBlocks: IPositionEachZero[] = [];
+    let sqlBlocks: IPositionEachZero[] = [];
 
     // console.log("lang:::::", lang);
 
@@ -1263,6 +1265,8 @@ export const getFullFileStats = async ({
         } else if (["yaml", "dockercompose"].includes(lang)) {
             // txt = txt.replace(/\/\//g, `  `); // cool to ignore "//"
             yamlBlocks = yamlFn(txt, editorInfo);
+        } else if (lang === 'sql') {
+            sqlBlocks = sqlFn(txt, editorInfo)
         }
     }
 
@@ -1303,6 +1307,7 @@ export const getFullFileStats = async ({
         ...tagsIt,
         ...pythonBlocks,
         ...yamlBlocks,
+        ...sqlBlocks,
     ].sort((a, b) => a.globalIndexZero - b.globalIndexZero);
 
     // console.log("allit:", allit);
