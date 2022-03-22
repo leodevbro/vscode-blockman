@@ -4,6 +4,10 @@ All notable changes to the "blockman" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.5.7] - 2022-03-22
+
+-   Added support for SQL begin/end blocks. Big thanks to zelixir.
+
 ## [1.5.6] - 2022-02-21
 
 -   Added double-width chars for generally used Korean characters
