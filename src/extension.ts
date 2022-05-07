@@ -813,12 +813,12 @@ export function activate(context: ExtensionContext) {
 
                 if (newAROnOffState === "off") {
                     vscode.window.showInformationMessage(
-                        `If you disable Blockman, it will still be disabled after restarting VSCode.`,
+                        `If you disable Blockman, it will still be disabled after restarting VS Code.`,
                         { modal: false },
                     );
                 } else {
                     vscode.window.showInformationMessage(
-                        `If you disable Blockman, it will be enabled after restarting VSCode`,
+                        `If you disable Blockman, it will be enabled after restarting VS Code`,
                         { modal: false },
                     );
                 }
@@ -942,7 +942,7 @@ export function activate(context: ExtensionContext) {
                     clearTimeout(settingsChangeTimout);
                 }
                 settingsChangeTimout = setTimeout(() => {
-                    applyAllBlockmanSettings(); // setTimeout is important because VSCode needs certain amount of time to update latest changes of settings.
+                    applyAllBlockmanSettings(); // setTimeout is important because VS Code needs certain amount of time to update latest changes of settings.
                     updateAllControlledEditors({
                         alsoStillVisibleAndHist: true,
                     });

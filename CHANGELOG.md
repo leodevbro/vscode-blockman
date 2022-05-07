@@ -4,6 +4,10 @@ All notable changes to the "blockman" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.5.8] - 2022-05-07
+
+-   Minor correction of README
+
 ## [1.5.7] - 2022-03-22
 
 -   Added support for SQL begin/end blocks. Big thanks to zelixir.
@@ -52,7 +56,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [1.4.0] - 2021-12-25
 
 -   Added advanced coloring settings (N33 A01, N33 A02, ... N33 A05)
--   Added new quick command "Blockman Toggle Keep Off State After Restarting VSCode"
+-   Added new quick command "Blockman Toggle Keep Off State After Restarting VS Code"
 
 ## [1.3.3] - 2021-11-15
 
@@ -82,7 +86,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [1.2.15] - 2021-10-23
 
--   Adapted to the indent guides API change of the vscode update
+-   Adapted to the indent guides API change of the VS Code update
 
 ## [1.2.11] - 2021-09-25
 
@@ -95,7 +99,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [1.2.9] - 2021-09-25
 
--   Fixed line height issue (The issue was caused by VSCode update)
+-   Fixed line height issue (The issue was caused by VS Code update)
 -   Added command: press F1 and find 'Blockman Select Focused' (selects the text inside focused block)
 -   Added command: press F1 and find 'Blockman Toggle Freeze/Unfreeze Focus'
 

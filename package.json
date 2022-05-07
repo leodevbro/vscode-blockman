@@ -3,7 +3,7 @@
     "displayName": "Blockman - Highlight Nested Code Blocks",
     "publisher": "leodevbro",
     "description": "Mark/Highlight code blocks",
-    "version": "1.5.7",
+    "version": "1.5.8",
     "engines": {
         "vscode": "^1.56.1"
     },
@@ -13,7 +13,6 @@
     },
     "icon": "demo-media/still-image/icon-prod/blockman-icon-128---png.png",
     "categories": [
-        "Other",
         "Visualization"
     ],
     "extensionKind": [
@@ -56,7 +55,7 @@
             },
             {
                 "command": "blockman.toggleKeepOff",
-                "title": "Blockman Toggle Keep Off State After Restarting VSCode"
+                "title": "Blockman Toggle Keep Off State After Restarting VS Code"
             },
             {
                 "command": "blockman.toggleFreezeFocus",
@@ -157,7 +156,7 @@
                         "Pale Pink (Gradients)",
                         "Pale Pink (Solid colors)"
                     ],
-                    "description": "This does not change VSCode theme. Choose preset combo of colors. Corresponding colors are overridden by custom colors (if not empty string). Also This setting can be overriden by the next 3 combo settings",
+                    "description": "This does not change VS Code theme. Choose preset combo of colors. Corresponding colors are overridden by custom colors (if not empty string). Also This setting can be overriden by the next 3 combo settings",
                     "scope": "window"
                 },
                 "blockman.n04Sub01ColorComboPresetForDarkTheme": {

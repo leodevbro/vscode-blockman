@@ -1241,7 +1241,7 @@ export const getFullFileStats = async ({
             // foundbrackets = [];
             // editorInfo.needToAnalyzeFile = true;
             // updateRender({ editorInfo });
-            return;
+            // return; // ::-:
         }
     }
 
@@ -1266,7 +1266,7 @@ export const getFullFileStats = async ({
             // txt = txt.replace(/\/\//g, `  `); // cool to ignore "//"
             yamlBlocks = yamlFn(txt, editorInfo);
         } else if (lang === 'sql') {
-            sqlBlocks = sqlFn(txt, editorInfo)
+            sqlBlocks = sqlFn(txt, editorInfo);
         }
     }
 

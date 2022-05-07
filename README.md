@@ -16,11 +16,11 @@
 <br />
 <br />
 
-<p><strong>For better experience:</strong> Blockman <strong>WILL CHANGE</strong> these 7 items in VSCode settings (only one-time at the installation event). You can change them again when you want. These 7 settings are very non-vital, so maybe you don't even need to backup them first.</p>
+<p><strong>For better experience:</strong> Blockman <strong>WILL CHANGE</strong> these 7 items in VS Code settings (only one-time at the installation event). You can change them again when you want. These 7 settings are very non-vital, so maybe you don't even need to backup them first.</p>
 
 ```jsonc
 // settings.json (User/Global config, not Workspace config)
-// To open this file in VSCode, press F1, type 'settings json' and choose 'Preferences: Open Settings (JSON)'
+// To open this file in VS Code, press F1, type 'settings json' and choose 'Preferences: Open Settings (JSON)'
 {
     // ...
     "editor.inlayHints.enabled": false,
@@ -43,11 +43,11 @@
 
 <p align="center"><img
   src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/still-image/icon-prod/blockman-icon-128---png.png"
-  alt="VSCode Blockman Icon"
+  alt="VS Code Blockman Icon"
   width="128px"
 /></p>
 <h3 align="center" style="color: hsl(262, 90%, 45%);"><strong>Blockman</strong></h3>
-<p align="center">VSCode Extension For Nested Block Highlighting</p>
+<p align="center">VS Code Extension For Nested Block Highlighting</p>
 
 <p align="center"><em>You can toggle enable/disable: Press F1 and then type "blockman toggle".</em></p>
 <p align="center"><em>Also You can go to Blockman settings and set Black List Of File Formats to disable Blockman for certain files.</em></p>
@@ -68,8 +68,12 @@
 <p align="center"><strong>Added NEW color combos as "Super gradients".</strong></p>
 <p align="center"><strong>Blockman now supports gradients for both: borders and backgrounds.</strong></p>
 <p align="center"><img
-  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/still-image/infograph/super-gradients-demo.png"
+  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/still-image/infograph/super-gradients-demo-0.png"
   alt="super gradients color combos in Blockman"
+/></p>
+<p align="center"><img
+  src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/still-image/infograph/super-gradients-demo.png"
+  alt="super gradients color combos in Blockman for Python"
 /></p>
 
 <br />
@@ -203,7 +207,7 @@ Such as,
 
 ```
 Press F1 and find "Blockman Toggle Enable/Disable"
-Press F1 and find "Blockman Toggle Keep Off State After Restarting VSCode"
+Press F1 and find "Blockman Toggle Keep Off State After Restarting VS Code"
 Press F1 and find "Blockman Select Focused" (Select text inside focused block)
 Press F1 and find "Blockman Toggle Freeze/Unfreeze Focus"
 Press F1 and find "Blockman Toggle Disable/Enable Automatic Showing/Hiding Indent Guides"
@@ -216,13 +220,13 @@ Press F1 and find "Blockman Toggle Try Support Double Width Chars (e.g. Chinese)
 
 ```jsonc
 // settings.json (User/Global config, not Workspace config)
-// To open this file in VSCode, press F1, type 'settings json' and choose 'Preferences: Open Settings (JSON)'
+// To open this file in VS Code, press F1, type 'settings json' and choose 'Preferences: Open Settings (JSON)'
 
 // Each item is with default value
 {
     // n01 and n02 are deprecated.
     "blockman.n03MaxDepth": 12, // -1 is no blocks, 0 is ground block, 1 is first depth blocks, 2 is second depth blocks
-    "blockman.n04ColorComboPreset": "Classic Dark 1 (Gradients)", // This does not change VSCode theme. Choose preset combo of colors. Corresponding colors are overridden by custom colors (if not empty string). Also This setting can be overriden by the next 3 combo settings
+    "blockman.n04ColorComboPreset": "Classic Dark 1 (Gradients)", // This does not change VS Code theme. Choose preset combo of colors. Corresponding colors are overridden by custom colors (if not empty string). Also This setting can be overriden by the next 3 combo settings
     "blockman.n04Sub01ColorComboPresetForDarkTheme": "none", // Color combo to apply when current theme kind is Dark.
     "blockman.n04Sub02ColorComboPresetForLightTheme": "none", // Color combo to apply when current theme kind is Light.
     "blockman.n04Sub03ColorComboPresetForHighContrastTheme": "none", // Color combo to apply when current theme kind is High Contrast.
@@ -286,7 +290,7 @@ Press F1 and find "Blockman Toggle Try Support Double Width Chars (e.g. Chinese)
     // 'basic' color means it will set a color from basic color settings.
 
     // 'transparent' and partially transparent colors work fine for borders, but backgrounds have some problems with such values,
-    // so, if you type 'transparent' on background, it will be the color of VSCode editor backgound.
+    // so, if you type 'transparent' on background, it will be the color of VS Code editor backgound.
 
     "blockman.n33A01B1FromDepth0ToInwardForAllBorders": "!10,0,0,0; red > green > blue",
     "blockman.n33A01B2FromDepth0ToInwardForAllBackgrounds": "!10,1,0,3; hsl(235, 30%, 7%) > hsl(0, 0%, 7.1%) > hsl(0, 0%, 9.5%) > hsl(0, 0%, 11.15%) > hsl(0, 0%, 12.8%)",
@@ -311,7 +315,7 @@ Press F1 and find "Blockman Toggle Try Support Double Width Chars (e.g. Chinese)
   
 <p>1) Each line of code must have less than 3000 characters, otherwise blocks will not be rendered in entire file.</p>
 
-<p>2) Please don't use non-monospace font. Use only monospace font like 'Oxygen Mono', '<a href="https://bpgfonts.wordpress.com/2017/12/21/bpg-2017-dejavu-sansmono/">BPG 2017 DejaVu Sans Mono</a>' or other. Block-rendering is based on equal character-frame-widths, because pixel locations of characters <a href="https://github.com/microsoft/vscode/issues/118994">is not accessible</a> through VSCode API.</p>
+<p>2) Please don't use non-monospace font. Use only monospace font like 'Oxygen Mono', '<a href="https://bpgfonts.wordpress.com/2017/12/21/bpg-2017-dejavu-sansmono/">BPG 2017 DejaVu Sans Mono</a>' or other. Block-rendering is based on equal character-frame-widths, because pixel locations of characters <a href="https://github.com/microsoft/vscode/issues/118994">is not accessible</a> through VS Code API.</p>
 <p align="center"><img
   src="https://raw.githubusercontent.com/leodevbro/vscode-blockman/main/demo-media/still-image/infograph/monospace-font---png.png"
   alt="alt text testing"
@@ -324,7 +328,7 @@ like: ა, ბ, გ, დ, ე, ვ, ზ, თ, ი, კ, ლ, მ, ნ, ო, პ,
 
 <p>3) If you want to use mix of multiple fonts (like in the image above), Please don't use any non-monospace font. Use monospace fonts which have at least almost same width of character. For example: 'Oxygen Mono' and '<a href="https://bpgfonts.wordpress.com/2017/12/21/bpg-2017-dejavu-sansmono/">BPG 2017 DejaVu Sans Mono</a>' have not only equal char frame width by themselves alone, but also almost equal char frame width to each other.</p>
   
-<p><strong>For Georgian (ქართული) language oriented developers:</strong> without multiple font mixing, just <a href="https://bpgfonts.wordpress.com/2017/12/21/bpg-2017-dejavu-sansmono/">BPG 2017 DejaVu Sans Mono</a> as a single font seems fine for me, and maybe you can use it too. I think it is the one and only monospace font which has English and Georgian lowercase letters, as well as <a href="https://www.unicode.org/charts/script/chart_Georgian.html">Georgian CAPITAL (uppercase) letters</a>.</p>
+<p><strong>For Georgian (ქართული) language oriented developers:</strong> without multiple font mixing, just <a href="https://bpgfonts.wordpress.com/2017/12/21/bpg-2017-dejavu-sansmono/">BPG 2017 DejaVu Sans Mono</a> as a single font seems fine for me, and maybe you can use it too. For now, 2022, I think it is the one and only monospace font which has English (both lowercase and UPPERCASE) and Georgian lowercase letters, as well as <a href="https://en.wikipedia.org/wiki/Georgian_scripts#Summary">Georgian UPPERCASE (known as Mtavruli/მთავრული) letters</a>. You can also see the <a href="https://www.unicode.org/charts/script/chart_Georgian.html">Unicode chart of Georgian lowercase and UPPERCASE letters</a>.</p>
 
 <p><strong>For English language oriented developers:</strong> the same statement above goes here.</p>
 
@@ -362,7 +366,7 @@ like: ა, ბ, გ, დ, ე, ვ, ზ, თ, ი, კ, ლ, მ, ნ, ო, პ,
 
 ```jsonc
 // settings.json
-// To open this file (as global config) in VSCode, press F1, type 'settings json' and choose 'Preferences: Open Settings (JSON)'
+// To open this file (as global config) in VS Code, press F1, type 'settings json' and choose 'Preferences: Open Settings (JSON)'
 {
     // ...
     "workbench.colorCustomizations": {
@@ -370,7 +374,7 @@ like: ა, ბ, გ, დ, ე, ვ, ზ, თ, ი, კ, ლ, მ, ნ, ო, პ,
         "editor.lineHighlightBorder": "#9fced11f",
         "editor.lineHighlightBackground": "#1073cf2d",
 
-        // Or for specific vscode themes:
+        // Or for specific VS Code themes:
         "[Default Dark+]": {
             // ...
             // "editor.lineHighlightBorder": "#9fced11f"
