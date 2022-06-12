@@ -40,26 +40,6 @@ export const yamlFn = (
     let myTokens: [number, number][] = [];
     traverse(yamlAst, {
         pre: function (node: any, parent: any, prop: any, idx: number) {
-            // console.log(
-            //     node.type +
-            //         (parent
-            //             ? " from parent " +
-            //               parent.type +
-            //               " via " +
-            //               prop +
-            //               (idx !== undefined ? "[" + idx + "]" : "")
-            //             : "")
-            // );
-
-            // console.log(node.type, node.range);
-
-            // if (!!node.range) {
-            //     const leftNonSpaceIsNlChar = nearestLeftNonSpaceIsNewLineChar(
-            //         newText,
-            //         node.range[1],
-            //     );
-            //     console.log(node.type, node.range, leftNonSpaceIsNlChar);
-            // }
             const range: [number, number] = node.range;
             if (!!range) {
                 const [starter, ender] = range;

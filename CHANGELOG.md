@@ -4,6 +4,10 @@ All notable changes to the "blockman" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.5.9] - 2022-06-12
+
+-   Added Sponsor Button
+
 ## [1.5.8] - 2022-05-07
 
 -   Minor correction of README
