@@ -3,7 +3,7 @@
     "displayName": "Blockman - Highlight Nested Code Blocks",
     "publisher": "leodevbro",
     "description": "Mark/Highlight code blocks",
-    "version": "1.5.9",
+    "version": "1.6.0",
     "engines": {
         "vscode": "^1.56.1"
     },
@@ -549,6 +549,7 @@
         "json5": "^2.2.0",
         "moo": "^0.5.1",
         "os": "^0.1.1",
+        "ruby_parser": "^1.0.2",
         "vscode-uri": "^3.0.2",
         "yaml": "^1.10.2"
     }

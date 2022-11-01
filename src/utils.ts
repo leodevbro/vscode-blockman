@@ -26,6 +26,7 @@ import {
 import { doubleWidthCharsReg } from "./helpers/regex-main";
 import { yamlFn } from "./yamlAlgos/yaml-algo";
 import { sqlFn } from "./sqlAlgos/sqlLexer";
+import { rubyFn } from "./rubyAlgos/theFn";
 
 export interface IPositionEachZero {
     char?: string;
@@ -1253,6 +1254,8 @@ export const getFullFileStats = async ({
     let yamlBlocks: IPositionEachZero[] = [];
     let sqlBlocks: IPositionEachZero[] = [];
 
+    let rubyBlocks: IPositionEachZero[] = [];
+
     // console.log("lang:::::", lang);
 
     if (glo.analyzeIndentDedentTokens && glo.maxDepth >= 0) {
@@ -1265,9 +1268,13 @@ export const getFullFileStats = async ({
         } else if (["yaml", "dockercompose"].includes(lang)) {
             // txt = txt.replace(/\/\//g, `  `); // cool to ignore "//"
             yamlBlocks = yamlFn(txt, editorInfo);
-        } else if (lang === 'sql') {
+        } else if (lang === "sql") {
             sqlBlocks = sqlFn(txt, editorInfo);
         }
+    }
+
+    if (glo.maxDepth >= 0 && lang === "ruby") {
+        rubyBlocks = rubyFn(txt, editorInfo);
     }
 
     let macroInfoOfFile = getMacroInfoOfFile(editorInfo, txt);
@@ -1308,6 +1315,7 @@ export const getFullFileStats = async ({
         ...pythonBlocks,
         ...yamlBlocks,
         ...sqlBlocks,
+        ...rubyBlocks,
     ].sort((a, b) => a.globalIndexZero - b.globalIndexZero);
 
     // console.log("allit:", allit);

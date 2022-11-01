@@ -1,7 +1,6 @@
-import { states } from "moo"
+import { states } from "moo";
 import { IEditorInfo } from "../extension";
 import { IPositionEachZero } from "../utils";
-
 
 let sqlLexer = states({
     main: {
@@ -15,43 +14,45 @@ let sqlLexer = states({
         end: /[eE][nN][dD]/,
         singleLineComment: /--.+/,
         string: { match: /'[^']*'/, lineBreaks: true },
-        ignore: { match: /[a-zA-Z]+|[0-9]+|[^a-zA-Z0-9@'\s]+|\s+|@/, lineBreaks: true },
+        ignore: {
+            match: /[a-zA-Z]+|[0-9]+|[^a-zA-Z0-9@'\s]+|\s+|@/,
+            lineBreaks: true,
+        },
     },
     inComment: {
         closeComment: { match: /(?:[^]*?)(?:\*\/)/, pop: 1 },
     },
-})
-
+});
 
 export const sqlFn = (
     sqlTextInput: string,
     editorInfo: IEditorInfo,
 ): IPositionEachZero[] => {
-    let re: IPositionEachZero[] = []
-    sqlLexer.reset(sqlTextInput)
-    let match = sqlLexer.next()
+    let re: IPositionEachZero[] = [];
+    sqlLexer.reset(sqlTextInput);
+    let match = sqlLexer.next();
     while (match) {
         switch (match.type) {
-            case 'begin':
+            case "begin":
                 re.push({
-                    type: 's',
+                    type: "s",
                     globalIndexZero: match.offset + 4,
                     inLineIndexZero: match.col + 4,
-                    lineZero: match.line
-                })
+                    lineZero: match.line,
+                });
                 break;
-            case 'end':
+            case "end":
                 re.push({
-                    type: 'e',
+                    type: "e",
                     globalIndexZero: match.offset + 0,
                     inLineIndexZero: match.col + 0,
-                    lineZero: match.line
-                })
+                    lineZero: match.line,
+                });
                 break;
             default:
                 break;
         }
-        match = sqlLexer.next()
+        match = sqlLexer.next();
     }
-    return re
-}
+    return re;
+};

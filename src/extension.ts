@@ -767,10 +767,18 @@ export function activate(context: ExtensionContext) {
             console.log(
                 "Hello, I'm Blockman, a visual helper for software developers.",
             );
-            vscode.window.showInformationMessage(
-                `Hello, I'm Blockman, a visual helper for software developers.`,
-                { modal: false },
-            );
+            vscode.window
+                .showInformationMessage(
+                    `Hello, I'm Blockman, a visual helper for software developers.`,
+                    { modal: false },
+                    "opt1",
+                    "opt2",
+                    "opt3",
+                    "opt4",
+                )
+                .then((x) => {
+                    console.log("x--->", x);
+                });
         }),
 
         vscode.commands.registerCommand("blockman.toggleEnableDisable", () => {

@@ -4,6 +4,10 @@ All notable changes to the "blockman" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.6.0] - 2022-11-01
+
+-   Added Support for Ruby langauge
+
 ## [1.5.9] - 2022-06-12
 
 -   Added Sponsor Button

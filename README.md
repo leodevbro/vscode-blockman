@@ -108,7 +108,7 @@
 <br />
 
 <h3>Supported programming languages:</h3>
-<p><strong>Non-indentation based languages:</strong> JavaScript, JSX, TypeScript, TSX, C, C#, C++, Java, PHP, R, Go (Golang), Dart, Rust, Swift, PowerShell, SQL, HTML, CSS, LESS, SCSS and more...</p>
+<p><strong>Non-indentation based languages:</strong> JavaScript, JSX, TypeScript, TSX, C, C#, C++, Java, Ruby, PHP, R, Go (Golang), Dart, Rust, Swift, PowerShell, SQL, HTML, CSS, LESS, SCSS and more...</p>
 <p><strong>Indentation based languages:</strong> currently Python and Yaml.</p>
 
 <br />
