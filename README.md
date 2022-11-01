@@ -1,7 +1,14 @@
-[![](https://vsmarketplacebadge.apphb.com/version-short/leodevbro.blockman.svg)](https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman)
-[![](https://vsmarketplacebadge.apphb.com/installs-short/leodevbro.blockman.svg)](https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman)
-[![](https://vsmarketplacebadge.apphb.com/downloads-short/leodevbro.blockman.svg)](https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman)
-[![](https://vsmarketplacebadge.apphb.com/rating-short/leodevbro.blockman.svg)](https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman)
+<p align="left">
+  <a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">
+    <img alt="VS Code Marketplace Installs" src="https://img.shields.io/visual-studio-marketplace/i/leodevbro.blockman"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">
+    <img alt="VS Code Marketplace Downloads" src="https://img.shields.io/visual-studio-marketplace/d/leodevbro.blockman"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">
+    <img alt="VS Code Marketplace Version" src="https://img.shields.io/visual-studio-marketplace/v/leodevbro.blockman"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">
+    <img alt="VS Code Marketplace Rating" src="https://img.shields.io/visual-studio-marketplace/r/leodevbro.blockman"></a>
+
+</p>
 
 <p><strong><a href="#donation">Donation</a></strong> is really appreciated. Blockman is a hard work of many months. My name is <a href="https://leodevbro.github.io">Levan Katsadze (ლევან კაცაძე)</a>, 1995-03-03, from Tbilisi, <a href="https://en.wikipedia.org/wiki/Georgia_(country)">Georgia (Not USA)</a>.</p>
 
