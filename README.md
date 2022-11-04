@@ -1,11 +1,11 @@
 <p align="left">
-  <a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">
+  <a href="https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman">
     <img alt="VS Code Marketplace Installs" src="https://img.shields.io/visual-studio-marketplace/i/leodevbro.blockman"></a>
-  <a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">
+  <a href="https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman">
     <img alt="VS Code Marketplace Downloads" src="https://img.shields.io/visual-studio-marketplace/d/leodevbro.blockman"></a>
-  <a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">
+  <a href="https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman">
     <img alt="VS Code Marketplace Version" src="https://img.shields.io/visual-studio-marketplace/v/leodevbro.blockman"></a>
-  <a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">
+  <a href="https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman">
     <img alt="VS Code Marketplace Rating" src="https://img.shields.io/visual-studio-marketplace/r/leodevbro.blockman"></a>
 
 </p>
