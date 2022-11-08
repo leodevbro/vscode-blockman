@@ -1274,8 +1274,11 @@ export const getFullFileStats = async ({
     }
 
     if (glo.maxDepth >= 0 && lang === "ruby") {
+        // console.log("daiwyo rubyyyy");
         rubyBlocks = rubyFn(txt, editorInfo);
     }
+
+    // console.log(JSON.stringify(rubyBlocks, null, 2));
 
     let macroInfoOfFile = getMacroInfoOfFile(editorInfo, txt);
 

@@ -4,6 +4,10 @@ All notable changes to the "blockman" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.6.3] - 2022-11-08
+
+-   Critical bug-fix for Ruby langauge
+
 ## [1.6.0] - 2022-11-01
 
 -   Added Support for Ruby langauge

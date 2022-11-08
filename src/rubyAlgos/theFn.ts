@@ -21,7 +21,13 @@ const json_dfsPre_recurs_ast = (
         const branches = Object.entries(item as tyBranchable);
 
         for (const [branchKey, branchVal] of branches) {
-            if (["body", "if_true"].includes(branchKey)) {
+            if (
+                branchVal &&
+                (["body", "if_true"].includes(branchKey) ||
+                    ("if_false" === branchKey &&
+                        !(branchVal as any).if_false &&
+                        !(branchVal as any).if_true))
+            ) {
                 const begin: number = (branchVal as any).expression_l.begin - 1;
                 const end: number = (branchVal as any).expression_l.end;
 
@@ -33,7 +39,7 @@ const json_dfsPre_recurs_ast = (
 
                 const { lineZero: endLZ, inLineIndexZero: endIIZ } =
                     findLineZeroAndInLineIndexZero({
-                        globalIndexZero: begin,
+                        globalIndexZero: end,
                         editorInfo,
                     });
 
@@ -69,14 +75,34 @@ export const rubyFn = (
     rubyTextInput: string,
     editorInfo: IEditorInfo,
 ): IPositionEachZero[] => {
+    // console.log("aaaa", rubyTextInput.length);
+    // console.log(rubyTextInput);
+    // console.log("bbbbb");
+
+    if (rubyTextInput.trim() === "") {
+        return [];
+    }
+
     const initialAst = rubyParserObj.parse({ rubyString: rubyTextInput });
 
-    const statementsArr = initialAst.statements;
+    // const statementsArr = initialAst.statements; // NO MORE NEEDED
+
+    // console.log("theAST");
+    // console.log(initialAst);
+
+    if (!initialAst) {
+        return [];
+    }
+
+    // console.log("stringified");
+    // console.log(JSON.stringify(initialAst, null, 2));
+
+    initialAst.expression_l = "-"; // IMPORTANT
 
     let mySuperList: IPositionEachZero[] = [];
 
     try {
-        mySuperList = json_dfsPre_recurs_ast(statementsArr, editorInfo);
+        mySuperList = json_dfsPre_recurs_ast(initialAst, editorInfo);
     } catch (err) {
         console.log("error while tokenizing Ruby file");
         console.log(err);
