@@ -1195,7 +1195,21 @@ export const getFullFileStats = async ({
 
         // return;
 
-        let foundbrackets = bracketManager.updateDocument(document, editorInfo);
+        let foundbrackets:
+            | {
+                  char: string;
+                  type: number;
+                  inLineIndexZero: number;
+                  lineZero: number;
+              }[]
+            | undefined = undefined;
+
+        // console.time("braP");
+        if (lang !== "ruby") {
+            foundbrackets = bracketManager.updateDocument(document, editorInfo);
+        }
+        // console.timeEnd("braP");
+        // lang === "ruby"
 
         if (foundbrackets) {
             const allBrackets = foundbrackets.map((x) => {
@@ -1261,7 +1275,9 @@ export const getFullFileStats = async ({
     if (glo.analyzeIndentDedentTokens && glo.maxDepth >= 0) {
         if (lang === "python") {
             // console.log("before py blocks");
+            // console.time("parseP");
             pythonBlocks = pyFn(txt, editorInfo);
+            // console.timeEnd("parseP");
             // console.log("after py blocks");
 
             // txt = txt.replace(/\#/g, ` `); // cool to ignore "#"
@@ -1275,7 +1291,36 @@ export const getFullFileStats = async ({
 
     if (glo.maxDepth >= 0 && lang === "ruby") {
         // console.log("daiwyo rubyyyy");
+        // console.time("parseRuby");
         rubyBlocks = rubyFn(txt, editorInfo);
+        // console.timeEnd("parseRuby");
+
+        if (
+            !glo.analyzeCurlyBrackets ||
+            !glo.analyzeSquareBrackets ||
+            !glo.analyzeRoundBrackets
+        ) {
+            rubyBlocks = rubyBlocks.filter((pos) => {
+                const theChar = editorInfo.monoText[pos.globalIndexZero];
+                // console.log("theChar::", theChar);
+
+                if (!glo.analyzeCurlyBrackets && ["{", "}"].includes(theChar)) {
+                    return false;
+                } else if (
+                    !glo.analyzeSquareBrackets &&
+                    ["[", "]"].includes(theChar)
+                ) {
+                    return false;
+                } else if (
+                    !glo.analyzeRoundBrackets &&
+                    ["(", ")"].includes(theChar)
+                ) {
+                    return false;
+                }
+
+                return true;
+            });
+        }
     }
 
     // console.log(JSON.stringify(rubyBlocks, null, 2));
