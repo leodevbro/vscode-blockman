@@ -623,6 +623,18 @@ export const applyAllBlockmanSettings = () => {
         glo.renderIncBeforeAfterVisRange = Math.floor(
             renderIncrementBeforeAndAfterVisibleRange,
         );
+    } else {
+        vscode.window.showInformationMessage(
+            `The increment number should be between -200 and 200.`,
+            { modal: false },
+            // "opt1",
+            // "opt2",
+            // "opt3",
+            // "opt4",
+        );
+        // .then((x) => {
+        //     console.log("x--->", x);
+        // });
     }
 
     const customBlackListOfFileFormats: string | undefined = bc.get(

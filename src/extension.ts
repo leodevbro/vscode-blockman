@@ -564,7 +564,7 @@ const setUserwideIndentGuides = (myBool: boolean) => {
 };
 
 interface IConfigOfVscode {
-    inlayHints: boolean; // "editor.inlayHints.enabled"
+    inlayHints: "on" | "onUnlessPressed" | "offUnlessPressed" | "off"; // "editor.inlayHints.enabled"
     lineHighlightBackground?: string; // "workbench.colorCustomizations" -> "editor.lineHighlightBackground"
     lineHighlightBorder?: string; // "workbench.colorCustomizations" -> "editor.lineHighlightBorder"
     editorWordWrap?: "on" | "off"; // "editor.wordWrap"
@@ -585,7 +585,7 @@ interface IConfigOfVscode {
 
 // for blockman
 const configOfVscodeWithBlockman: IConfigOfVscode = {
-    inlayHints: false,
+    inlayHints: "off",
     lineHighlightBackground: "#1073cf2d",
     lineHighlightBorder: "#9fced11f",
     editorWordWrap: "off",

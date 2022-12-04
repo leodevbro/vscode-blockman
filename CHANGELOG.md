@@ -129,7 +129,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 -   Yaml language support
 -   Increased char number limit on each line from 500 chars to 3000 chars.
--   At the Blockman installation event -> "editor.inlayHints.enabled": false,
+-   At the Blockman installation event -> "editor.inlayHints.enabled": false (now "off"),
 
 ## [1.0.1] ... [1.2.0]
 

@@ -30,7 +30,7 @@
 // To open this file in VS Code, press F1, type 'settings json' and choose 'Preferences: Open Settings (JSON)'
 {
     // ...
-    "editor.inlayHints.enabled": false,
+    "editor.inlayHints.enabled": "off",
     "editor.guides.indentation": false, // new API for indent guides. The old one is: "editor.renderIndentGuides": false,
     "editor.guides.bracketPairs": false, // advanced indent guides (But only for brackets) (This does not turn off editor.bracketPairColorization)
     "editor.wordWrap": "off",
