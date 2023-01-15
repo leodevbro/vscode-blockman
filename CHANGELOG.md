@@ -4,6 +4,14 @@ All notable changes to the "blockman" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.7.0] - 2023-01-15
+
+-   The F1 command: "Blockman Toggle Enable/Disable" will no longer show/hide indent guides".
+-   New F1 command: "Blockman Toggle Enable/Disable And Force Show/Hide Indent Guides".
+-   No more forced change of VS Code settings at the install event. Now user can decide with a dialog.
+-   Removed F1 command: "Blockman Toggle Disable/Enable Automatic Showing/Hiding Indent Guides"
+-   Removed F1 command: "Blockman Toggle Keep Off State After Restarting VS Code"
+
 ## [1.6.4] - 2022-11-10
 
 -   Major improvement of Ruby langauge support

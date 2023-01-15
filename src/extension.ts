@@ -26,14 +26,17 @@ import {
     selectFocusedBlock,
     updateRender,
 } from "./utils2";
+import { atInstallEventMessage, OptionsAtInstall } from "./specialMessages";
 
 const iiGlobal = "blockman_data_iicounter";
 const iiGlobal2 = "blockman_data_iicounter2";
 const iiGlobal3 = "blockman_data_iicounter3";
-const iiGlobal4OnOffAR = "blockman_data_onOffStateAfterRestart";
+
 const iiGlobal5OnOff = "blockman_data_onOffState";
-const iiGlobal6AutoShowHideIndentGuides =
-    "blockman_data_autoShowHideIndentGuides";
+// const iiGlobal6AutoShowHideIndentGuides =
+//     "blockman_data_autoShowHideIndentGuides";
+const iiGlobal7AtInstallEventUserAcceptedToChangeVSCodeSettings =
+    "blockman_data_atInstallEventUserAcceptedToChangeVSCodeSettings"; // "true" | "false"
 
 let isMac = false;
 let osChecked = false;
@@ -116,6 +119,7 @@ export const optionsForRightEdgeBaseOfBlocks = {
 
 export const glo = {
     isOn: true,
+    atInstallEventUserAcceptedToChangeVSCodeSettings: null as null | boolean,
     nominalLineHeight: 1,
     currZoomLevel: 0, // zero means original, 1 means plus 10%, 2 means plus 20%........
     eachCharFrameHeight: 1, // (px) no more needed, so before we remove it, it will be just 1, well it means, the connected px values are now char values
@@ -510,16 +514,16 @@ const setColorDecoratorsBool = () => {
 };
 
 const setUserwideIndentGuides = (myBool: boolean) => {
-    const st = stateHolder.myState;
-    if (st) {
-        const autoShowHideIndentGuides = st.get(
-            iiGlobal6AutoShowHideIndentGuides,
-        );
+    // const st = stateHolder.myState;
+    // if (st) {
+    //     const autoShowHideIndentGuides = st.get(
+    //         iiGlobal6AutoShowHideIndentGuides,
+    //     );
 
-        if (autoShowHideIndentGuides === "off") {
-            return;
-        }
-    }
+    //     if (autoShowHideIndentGuides === "off") {
+    //         return;
+    //     }
+    // }
 
     /*
     const indent1 = (boo: boolean) => {
@@ -598,6 +602,14 @@ const configOfVscodeWithBlockman: IConfigOfVscode = {
 // let vvvv = vscode.workspace.getConfiguration().get("editor.wordWrap");
 
 const setUserwideConfigOfVscode = (userwideConfig: IConfigOfVscode) => {
+    vscode.workspace
+        .getConfiguration()
+        .update(
+            "editor.inlayHints.enabled",
+            configOfVscodeWithBlockman.inlayHints,
+            1,
+        );
+
     let vscodeColorConfig: any = vscode.workspace
         .getConfiguration("workbench")
         .get("colorCustomizations");
@@ -638,11 +650,6 @@ const setUserwideConfigOfVscode = (userwideConfig: IConfigOfVscode) => {
     }
 };
 
-// maybe not needed anymore
-const importantMessage = () => {
-    vscode.window.showInformationMessage(`blaaaa`, { modal: true });
-};
-
 const softRestart = () => {
     nukeAllDecs();
     nukeJunkDecorations();
@@ -655,16 +662,7 @@ let settingsChangeTimout: NodeJS.Timeout | undefined;
 export function activate(context: ExtensionContext) {
     stateHolder.myState = context.globalState;
 
-    workspace.getConfiguration("blockman").update("n01LineHeight", 0, 1); // TODO: later
-
-    // const onOff: boolean | undefined =
-    //     context.globalState.get("blockman_data_on");
-    // if (onOff !== undefined) {
-    //     glo.isOn = onOff;
-    // } else {
-    //     context.globalState.update("blockman_data_on", true);
-    //     glo.isOn = true;
-    // }
+    // workspace.getConfiguration("blockman").update("n01LineHeight", 0, 1); // TODO: later
 
     updateBlockmanLineHeightAndLetterSpacing();
     // adjustVscodeUserConfig();
@@ -683,19 +681,62 @@ export function activate(context: ExtensionContext) {
         const iicounter2 = st.get(iiGlobal2);
         const iicounter3 = st.get(iiGlobal3);
 
-        const onOffStateAfterRestart = st.get(iiGlobal4OnOffAR);
         const onOffState = st.get(iiGlobal5OnOff);
-        if (onOffState === "off" && onOffStateAfterRestart === "off") {
+        if (onOffState === "off") {
             glo.isOn = false;
-            st.update(iiGlobal5OnOff, glo.isOn ? "on" : "off");
+        } else {
+            glo.isOn = true;
         }
         // console.log(iicounter);
 
+        const userAcceptedToChangeSettingsAtInstallEvent = st.get(
+            iiGlobal7AtInstallEventUserAcceptedToChangeVSCodeSettings,
+        ) as string;
+
+        const uATCSAIE = userAcceptedToChangeSettingsAtInstallEvent;
+
+        if (uATCSAIE === "true") {
+            glo.atInstallEventUserAcceptedToChangeVSCodeSettings = true;
+        } else if (uATCSAIE === "false") {
+            glo.atInstallEventUserAcceptedToChangeVSCodeSettings = false;
+        } else {
+            glo.atInstallEventUserAcceptedToChangeVSCodeSettings = null;
+        }
+
         if (iicounter === undefined) {
-            console.log("first activation 1");
+            console.log("first activation iicounter");
             // collectVSCodeConfigArchive();
-            setUserwideConfigOfVscode(configOfVscodeWithBlockman);
+
             setLightColorComboIfLightTheme();
+
+            vscode.window
+                .showInformationMessage(
+                    atInstallEventMessage,
+                    { modal: true },
+                    OptionsAtInstall.yes,
+                    OptionsAtInstall.no,
+                    // "opt3",
+                    // "opt4",
+                )
+                .then((x) => {
+                    console.log("x--->", x);
+                    if (x === OptionsAtInstall.yes) {
+                        glo.atInstallEventUserAcceptedToChangeVSCodeSettings =
+                            true;
+                        st.update(
+                            iiGlobal7AtInstallEventUserAcceptedToChangeVSCodeSettings,
+                            "true",
+                        );
+                        setUserwideConfigOfVscode(configOfVscodeWithBlockman);
+                    } else {
+                        glo.atInstallEventUserAcceptedToChangeVSCodeSettings =
+                            false;
+                        st.update(
+                            iiGlobal7AtInstallEventUserAcceptedToChangeVSCodeSettings,
+                            "false",
+                        );
+                    }
+                });
 
             st.update(iiGlobal, "1");
             // console.log("iyo undefined, gaxda 1:", st.get(iiGlobal));
@@ -708,14 +749,14 @@ export function activate(context: ExtensionContext) {
         }
 
         if (iicounter2 === undefined) {
-            console.log("first activation 2");
-            vscode.workspace
-                .getConfiguration()
-                .update(
-                    "editor.inlayHints.enabled",
-                    configOfVscodeWithBlockman.inlayHints,
-                    1,
-                );
+            console.log("first activation iicounter2");
+            // vscode.workspace
+            //     .getConfiguration()
+            //     .update(
+            //         "editor.inlayHints.enabled",
+            //         configOfVscodeWithBlockman.inlayHints,
+            //         1,
+            //     );
 
             st.update(iiGlobal2, "1");
         } else if (iicounter2 === "1") {
@@ -726,14 +767,14 @@ export function activate(context: ExtensionContext) {
         }
 
         if (iicounter3 === undefined) {
-            console.log("first activation 3");
-            vscode.workspace
-                .getConfiguration()
-                .update(
-                    "editor.guides.indentation",
-                    configOfVscodeWithBlockman.guidesIndentation,
-                    1,
-                );
+            console.log("first activation iicounter3");
+            // vscode.workspace
+            //     .getConfiguration()
+            //     .update(
+            //         "editor.guides.indentation",
+            //         configOfVscodeWithBlockman.guidesIndentation,
+            //         1,
+            //     );
 
             st.update(iiGlobal3, "1");
         } else if (iicounter3 === "1") {
@@ -745,7 +786,9 @@ export function activate(context: ExtensionContext) {
     }
 
     if (glo.isOn) {
-        setUserwideIndentGuides(false);
+        if (glo.atInstallEventUserAcceptedToChangeVSCodeSettings === true) {
+            // setUserwideIndentGuides(false);
+        }
     }
 
     // setLightColorComboIfLightTheme(); // not on every activation
@@ -786,22 +829,12 @@ export function activate(context: ExtensionContext) {
 
             if (glo.isOn) {
                 glo.isOn = false;
-                // context.globalState.update("blockman_data_on", false);
 
                 nukeAllDecs();
                 nukeJunkDecorations();
                 infosOfControlledEditors = [];
-
-                // setUserwideConfigOfVscode(configOfVscodeBeforeBlockman);
-
-                setUserwideIndentGuides(true);
             } else {
                 glo.isOn = true;
-                // context.globalState.update("blockman_data_on", true);
-
-                // setUserwideConfigOfVscode(configOfVscodeWithBlockman);
-
-                setUserwideIndentGuides(false);
 
                 updateAllControlledEditors({ alsoStillVisibleAndHist: true });
             }
@@ -810,6 +843,35 @@ export function activate(context: ExtensionContext) {
             }
         }),
 
+        vscode.commands.registerCommand(
+            "blockman.toggleEnableDisableAndForceShowHideIndentGuides",
+            () => {
+                const st = stateHolder.myState;
+
+                if (glo.isOn) {
+                    glo.isOn = false;
+
+                    nukeAllDecs();
+                    nukeJunkDecorations();
+                    infosOfControlledEditors = [];
+
+                    setUserwideIndentGuides(true);
+                } else {
+                    glo.isOn = true;
+
+                    setUserwideIndentGuides(false);
+
+                    updateAllControlledEditors({
+                        alsoStillVisibleAndHist: true,
+                    });
+                }
+                if (st) {
+                    st.update(iiGlobal5OnOff, glo.isOn ? "on" : "off");
+                }
+            },
+        ),
+
+        /*
         vscode.commands.registerCommand("blockman.toggleKeepOff", () => {
             const st = stateHolder.myState;
             if (st) {
@@ -837,7 +899,9 @@ export function activate(context: ExtensionContext) {
                 );
             }
         }),
+        */
 
+        /*
         vscode.commands.registerCommand(
             "blockman.toggleDisableAutomaticShowHideIndentGuides",
             () => {
@@ -870,6 +934,7 @@ export function activate(context: ExtensionContext) {
                 }
             },
         ),
+        */
 
         vscode.commands.registerCommand("blockman.printLeak", () => {
             console.log(notYetDisposedDecsObject.decs);

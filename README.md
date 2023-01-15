@@ -23,7 +23,7 @@
 <br />
 <br />
 
-<p><strong>For better experience:</strong> Blockman <strong>WILL CHANGE</strong> these 7 items in VS Code settings (only one-time at the installation event). You can change them again when you want. These 7 settings are very non-vital, so maybe you don't even need to backup them first.</p>
+<p><strong>For better experience:</strong> Blockman will ask you to change these 7 items in VS Code settings (only one-time at the installation event). These 7 settings are very non-vital, so maybe you don't even need to backup them first.</p>
 
 ```jsonc
 // settings.json (User/Global config, not Workspace config)
@@ -214,10 +214,11 @@ Such as,
 
 ```
 Press F1 and find "Blockman Toggle Enable/Disable"
-Press F1 and find "Blockman Toggle Keep Off State After Restarting VS Code"
+Press F1 and find "Blockman Toggle Enable/Disable And Force Show/Hide Indent Guides"
+
 Press F1 and find "Blockman Select Focused" (Select text inside focused block)
 Press F1 and find "Blockman Toggle Freeze/Unfreeze Focus"
-Press F1 and find "Blockman Toggle Disable/Enable Automatic Showing/Hiding Indent Guides"
+
 Press F1 and find "Blockman Toggle Try Support Double Width Chars (e.g. Chinese)"
 ```
 

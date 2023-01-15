@@ -3,7 +3,7 @@
     "displayName": "Blockman - Highlight Nested Code Blocks",
     "publisher": "leodevbro",
     "description": "Mark/Highlight code blocks",
-    "version": "1.6.5",
+    "version": "1.7.0",
     "engines": {
         "vscode": "^1.56.1"
     },
@@ -57,8 +57,8 @@
                 "title": "Blockman Toggle Enable/Disable"
             },
             {
-                "command": "blockman.toggleKeepOff",
-                "title": "Blockman Toggle Keep Off State After Restarting VS Code"
+                "command": "blockman.toggleEnableDisableAndForceShowHideIndentGuides",
+                "title": "Blockman Toggle Enable/Disable And Force Show/Hide Indent Guides"
             },
             {
                 "command": "blockman.toggleFreezeFocus",
@@ -67,10 +67,6 @@
             {
                 "command": "blockman.selectFocused",
                 "title": "Blockman Select Focused Text"
-            },
-            {
-                "command": "blockman.toggleDisableAutomaticShowHideIndentGuides",
-                "title": "Blockman Toggle Disable/Enable Automatic Showing/Hiding Indent Guides"
             },
             {
                 "command": "blockman.printLeak",
