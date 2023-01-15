@@ -703,7 +703,7 @@ export function activate(context: ExtensionContext) {
             glo.atInstallEventUserAcceptedToChangeVSCodeSettings = null;
         }
 
-        if (iicounter === undefined) {
+        if (!["1", "2", "3", "4", "5"].includes(iicounter as any)) {
             console.log("first activation iicounter");
             // collectVSCodeConfigArchive();
 
@@ -748,7 +748,7 @@ export function activate(context: ExtensionContext) {
             // ----
         }
 
-        if (iicounter2 === undefined) {
+        if (!["1", "2", "3", "4", "5"].includes(iicounter2 as any)) {
             console.log("first activation iicounter2");
             // vscode.workspace
             //     .getConfiguration()
@@ -766,7 +766,7 @@ export function activate(context: ExtensionContext) {
             //
         }
 
-        if (iicounter3 === undefined) {
+        if (!["1", "2", "3", "4", "5"].includes(iicounter3 as any)) {
             console.log("first activation iicounter3");
             // vscode.workspace
             //     .getConfiguration()
@@ -981,6 +981,30 @@ export function activate(context: ExtensionContext) {
 
         vscode.commands.registerCommand("blockman.selectFocused", () => {
             selectFocusedBlock();
+        }),
+
+        vscode.commands.registerCommand("blockman.clearStateStorage", () => {
+            const st = stateHolder.myState;
+
+            if (st) {
+                st.update(iiGlobal, "");
+                st.update(iiGlobal2, "");
+                st.update(iiGlobal3, "");
+                st.update(iiGlobal5OnOff, "");
+                st.update(
+                    iiGlobal7AtInstallEventUserAcceptedToChangeVSCodeSettings,
+                    "",
+                );
+
+                vscode.window.showInformationMessage(
+                    `Blockman state storage cleared`,
+                    { modal: false },
+                );
+
+                console.log("Blockman state storage cleared");
+            } else {
+                console.log("State not found");
+            }
         }),
 
         workspace.onDidChangeConfiguration((event) => {

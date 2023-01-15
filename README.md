@@ -213,13 +213,17 @@ Such as,
 <h1 align="center">All Blockman quick commands</h1>
 
 ```
-Press F1 and find "Blockman Toggle Enable/Disable"
-Press F1 and find "Blockman Toggle Enable/Disable And Force Show/Hide Indent Guides"
+Press F1 and find:
 
-Press F1 and find "Blockman Select Focused" (Select text inside focused block)
-Press F1 and find "Blockman Toggle Freeze/Unfreeze Focus"
+>Blockman Toggle Enable/Disable
+>Blockman Toggle Enable/Disable And Force Show/Hide Indent Guides
 
-Press F1 and find "Blockman Toggle Try Support Double Width Chars (e.g. Chinese)"
+>Blockman Select Focused --- Select text inside focused block
+>Blockman Toggle Freeze/Unfreeze Focus
+
+>Blockman Toggle Try Support Double Width Chars (e.g. Chinese)
+
+>Blockman Clear State Storage --- revert back to the first installation state
 ```
 
 <br />
