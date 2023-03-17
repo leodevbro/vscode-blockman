@@ -4,6 +4,11 @@ All notable changes to the "blockman" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.7.2] - 2023-03-17
+
+-   Add remote support when running in VS Code server
+-   Add video intro link in README
+
 ## [1.7.0] - 2023-01-15
 
 -   The F1 command: "Blockman Toggle Enable/Disable" will no longer show/hide indent guides".

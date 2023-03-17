@@ -1387,3 +1387,41 @@ export const getFullFileStats = async ({
         fileTopVisLineZero,
     };
 };
+
+
+// some archive:
+/* 
+setTimeout(async () => {
+        const color = new vscode.ThemeColor("badge.background");
+        console.log("hiiii", color);
+
+        // vscode.window.showQuickPick(['eeerti', 'ooori', 'saami'], {
+        //     title: 'aaba esaa da esss',
+            
+        // });
+
+        // vscode.window.createTreeView
+
+        const hhhh = await vscode.window.showInputBox({
+            placeHolder: 'pleisiii',
+            prompt: 'promptiiiiii ii ii i',
+            title: 'titlii ii ii iii',
+            value: 'valiuuuu',
+            
+        });
+
+        console.log('hhhhjjjjjjjj:', hhhh);
+
+        //Create output channel
+        let orange = vscode.window.createOutputChannel("Prettier2");
+
+        //Write to output.
+        orange.appendLine("I am a banana.");
+
+        setTimeout(() => {
+            
+            orange.appendLine("I am a banana.");
+        }, 7000);
+    }, 7000);
+
+*/

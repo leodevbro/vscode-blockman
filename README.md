@@ -55,6 +55,7 @@
 /></p>
 <h3 align="center" style="color: hsl(262, 90%, 45%);"><strong>Blockman</strong></h3>
 <p align="center">VS Code Extension For Nested Block Highlighting</p>
+<p align="center"><a href="https://www.youtube.com/watch?v=_BedxVCzZ7o">Watch Video Intro</a></p>
 
 <p align="center"><em>You can toggle enable/disable: Press F1 and then type "blockman toggle".</em></p>
 <p align="center"><em>Also You can go to Blockman settings and set Black List Of File Formats to disable Blockman for certain files.</em></p>
