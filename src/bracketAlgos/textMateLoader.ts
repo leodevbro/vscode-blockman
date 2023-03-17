@@ -149,7 +149,8 @@ export class TextMateLoader {
     }
 
     private getNodeModulePath(moduleName: string) {
-        return path.join(vscode.env.appRoot, "node_modules.asar", moduleName);
+        const nodeModulesFolder = vscode.env.uiKind === vscode.UIKind.Desktop ? "node_modules.asar" : "node_modules";
+        return path.join(vscode.env.appRoot, nodeModulesFolder, moduleName);
     }
 
     private getNodeModule(moduleName: string) {
