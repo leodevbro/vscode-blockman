@@ -3,7 +3,7 @@
     "displayName": "Blockman - Highlight Nested Code Blocks",
     "publisher": "leodevbro",
     "description": "Mark/Highlight code blocks",
-    "version": "1.7.2",
+    "version": "1.7.3",
     "engines": {
         "vscode": "^1.56.1"
     },
@@ -511,6 +511,16 @@
                 "blockman.n33A05B2FromFocusToInwardForAllBackgrounds": {
                     "type": "string",
                     "default": "!50,0,0,0; red > green > blue",
+                    "scope": "window"
+                },
+                "blockman.n34A01BorderThicknessOfNonFocusedBlock": {
+                    "type": "number",
+                    "default": 1,
+                    "scope": "window"
+                },
+                "blockman.n34A02BorderThicknessOfFocusedBlock": {
+                    "type": "number",
+                    "default": 2,
                     "scope": "window"
                 }
             }

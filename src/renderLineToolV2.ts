@@ -52,7 +52,7 @@ export const renderSingleLineBoxV2 = ({
         return;
     }
 
-    let borderSize = glo.borderSize;
+    let borderSize = glo.borderThicknessOfNonFocusedBlock;
     const borderRadius = glo.borderRadius;
 
     let borderColorToBeTransparent: string = glo.coloring.border;

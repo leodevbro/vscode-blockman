@@ -63,7 +63,7 @@ export const renderSingleLineBoxV1 = ({
     //     inDepthBlockIndex,
     // );
 
-    let borderSize = glo.borderSize;
+    let borderSize = glo.borderThicknessOfNonFocusedBlock;
     const borderRadius = glo.borderRadius;
     // let borderColor: string = `rgba(152, 108, 255, 1)`;
     // let borderColor: string = `rgba(255, 255, 255, 0.150)`;

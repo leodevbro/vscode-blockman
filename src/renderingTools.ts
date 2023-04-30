@@ -127,7 +127,7 @@ export const renderSingleBlock = ({
             inputBackgroundColor = glo.coloring.onEachDepth[10];
     }
 
-    let borderSize = glo.borderSize;
+    let borderSize = glo.borderThicknessOfNonFocusedBlock;
     if (glo.enableFocus && isFocusedBlock) {
         if (!glo.coloring.focusedBlock.includes("same")) {
             inputBackgroundColor = glo.coloring.focusedBlock;
@@ -136,7 +136,8 @@ export const renderSingleBlock = ({
             inputBorderColor = glo.coloring.borderOfFocusedBlock;
         }
 
-        borderSize = 2;
+        // borderSize = 2;
+        borderSize = glo.borderThicknessOfFocusedBlock;
     }
 
     // kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk

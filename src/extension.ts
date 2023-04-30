@@ -144,7 +144,9 @@ export const glo = {
 
     renderInSingleLineAreas: false,
 
-    borderSize: 1,
+    borderThicknessOfNonFocusedBlock: 1,
+    borderThicknessOfFocusedBlock: 2,
+
     borderRadius: 5,
 
     edgeExpanding: {

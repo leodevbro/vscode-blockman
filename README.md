@@ -318,7 +318,14 @@ Press F1 and find:
     "blockman.n33A04B2FromFocusToOutwardForFocusTreeBackgrounds": "40,0,0,0; basic",
 
     "blockman.n33A05B1FromFocusToInwardForAllBorders": "!50,0,0,0; red > green > blue",
-    "blockman.n33A05B2FromFocusToInwardForAllBackgrounds": "!50,0,0,0; red > green > blue"
+    "blockman.n33A05B2FromFocusToInwardForAllBackgrounds": "!50,0,0,0; red > green > blue",
+
+    //
+    //
+    //
+
+    "blockman.n34A01BorderThicknessOfNonFocusedBlock": 1,
+    "blockman.n34A02BorderThicknessOfFocusedBlock": 2,
 }
 ```
 

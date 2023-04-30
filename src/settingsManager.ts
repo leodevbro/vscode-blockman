@@ -709,6 +709,22 @@ export const applyAllBlockmanSettings = () => {
         "n33A05B2FromFocusToInwardForAllBackgrounds",
     );
     // =======================
+    const newBorderThicknessOfNonFocusedBlock: string | undefined = bc.get(
+        "n34A01BorderThicknessOfNonFocusedBlock",
+    );
+
+    const newBorderThicknessOfFocusedBlock: string | undefined = bc.get(
+        "n34A02BorderThicknessOfFocusedBlock",
+    );
+
+    if (typeof newBorderThicknessOfNonFocusedBlock === "number") {
+        glo.borderThicknessOfNonFocusedBlock =
+            newBorderThicknessOfNonFocusedBlock;
+    }
+
+    if (typeof newBorderThicknessOfFocusedBlock === "number") {
+        glo.borderThicknessOfFocusedBlock = newBorderThicknessOfFocusedBlock;
+    }
     // =======================
 
     // -----
