@@ -326,6 +326,8 @@ Press F1 and find:
 
     "blockman.n34A01BorderThicknessOfNonFocusedBlock": 1,
     "blockman.n34A02BorderThicknessOfFocusedBlock": 2,
+
+    "blockman.n35A01DisableRecommendationDialog": false,
 }
 ```
 

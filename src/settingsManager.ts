@@ -727,6 +727,17 @@ export const applyAllBlockmanSettings = () => {
     }
     // =======================
 
+    const nowDisableRecommendationDialog: boolean | undefined = bc.get("n35A01DisableRecommendationDialog");
+    if (nowDisableRecommendationDialog) {
+        glo.disableRecommendationDialog = true;
+    } else if (nowDisableRecommendationDialog === false) {
+        glo.disableRecommendationDialog = false;
+    }
+
+
+
+    // ==========================
+
     // -----
 
     const advancedColoringSettingsOfBorders = [

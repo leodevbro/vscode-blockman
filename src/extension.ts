@@ -185,6 +185,8 @@ export const glo = {
     colorDecoratorsInStyles: true,
     trySupportDoubleWidthChars: false, // for Chinese characters and possibly others too
     blackListOfFileFormats: ["plaintext", "markdown"],
+
+    disableRecommendationDialog: false,
     // maxHistoryOfParsedTabs: 7,
 };
 
@@ -711,34 +713,40 @@ export function activate(context: ExtensionContext) {
 
             setLightColorComboIfLightTheme();
 
-            vscode.window
-                .showInformationMessage(
-                    atInstallEventMessage,
-                    { modal: true },
-                    OptionsAtInstall.yes,
-                    OptionsAtInstall.no,
-                    // "opt3",
-                    // "opt4",
-                )
-                .then((x) => {
-                    console.log("x--->", x);
-                    if (x === OptionsAtInstall.yes) {
-                        glo.atInstallEventUserAcceptedToChangeVSCodeSettings =
-                            true;
-                        st.update(
-                            iiGlobal7AtInstallEventUserAcceptedToChangeVSCodeSettings,
-                            "true",
-                        );
-                        setUserwideConfigOfVscode(configOfVscodeWithBlockman);
-                    } else {
-                        glo.atInstallEventUserAcceptedToChangeVSCodeSettings =
-                            false;
-                        st.update(
-                            iiGlobal7AtInstallEventUserAcceptedToChangeVSCodeSettings,
-                            "false",
-                        );
-                    }
-                });
+            applyAllBlockmanSettings();
+
+            if (!glo.disableRecommendationDialog) {
+                vscode.window
+                    .showInformationMessage(
+                        atInstallEventMessage,
+                        { modal: true },
+                        OptionsAtInstall.yes,
+                        OptionsAtInstall.no,
+                        // "opt3",
+                        // "opt4",
+                    )
+                    .then((x) => {
+                        console.log("x--->", x);
+                        if (x === OptionsAtInstall.yes) {
+                            glo.atInstallEventUserAcceptedToChangeVSCodeSettings =
+                                true;
+                            st.update(
+                                iiGlobal7AtInstallEventUserAcceptedToChangeVSCodeSettings,
+                                "true",
+                            );
+                            setUserwideConfigOfVscode(
+                                configOfVscodeWithBlockman,
+                            );
+                        } else {
+                            glo.atInstallEventUserAcceptedToChangeVSCodeSettings =
+                                false;
+                            st.update(
+                                iiGlobal7AtInstallEventUserAcceptedToChangeVSCodeSettings,
+                                "false",
+                            );
+                        }
+                    });
+            }
 
             st.update(iiGlobal, "1");
             // console.log("iyo undefined, gaxda 1:", st.get(iiGlobal));

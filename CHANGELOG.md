@@ -4,6 +4,15 @@ All notable changes to the "blockman" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.7.3] - 2023-04-30
+
+-   Add two new settings for border thickness:
+        "blockman.n34A01BorderThicknessOfNonFocusedBlock",
+        "blockman.n34A02BorderThicknessOfFocusedBlock",
+
+-   Add setting for recommendation dialog:
+        "n35A01DisableRecommendationDialog"
+
 ## [1.7.2] - 2023-03-17
 
 -   Add remote support when running in VS Code server

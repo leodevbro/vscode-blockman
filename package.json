@@ -522,6 +522,11 @@
                     "type": "number",
                     "default": 2,
                     "scope": "window"
+                },
+                "blockman.n35A01DisableRecommendationDialog": {
+                    "type": "boolean",
+                    "default": false,
+                    "scope": "window"
                 }
             }
         }
