@@ -958,7 +958,10 @@ export const getFullFileStats = async ({
 
     let txt = document.getText();
 
-    if (getMacroInfoOfFile(editorInfo, txt).entireFileRightMost > 3000) {
+    if (
+        getMacroInfoOfFile(editorInfo, txt).entireFileRightMost >
+        glo.maxCharCountInAnyLine
+    ) {
         return;
     }
 
@@ -1387,7 +1390,6 @@ export const getFullFileStats = async ({
         fileTopVisLineZero,
     };
 };
-
 
 // some archive:
 /* 

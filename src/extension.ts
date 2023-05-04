@@ -188,6 +188,8 @@ export const glo = {
 
     disableRecommendationDialog: false,
     // maxHistoryOfParsedTabs: 7,
+
+    maxCharCountInAnyLine: 3000, // Blockman will not work in a file if the file has at least one line with N (or more) number of chars.
 };
 
 const calcLineHeight = (): number => {

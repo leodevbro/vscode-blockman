@@ -328,6 +328,8 @@ Press F1 and find:
     "blockman.n34A02BorderThicknessOfFocusedBlock": 2,
 
     "blockman.n35A01DisableRecommendationDialog": false,
+
+    "blockman.n36A01MaxCharCountInAnyLine": 3000, // Blockman will not work in a file if the file has at least one line with N (or more) number of chars.
 }
 ```
 
@@ -335,7 +337,7 @@ Press F1 and find:
 
 <h1 align="center">Things to consider</h1>
   
-<p>1) Each line of code must have less than 3000 characters, otherwise blocks will not be rendered in entire file.</p>
+<p>1) Each line of code must have less than 3000 (You can change this number) characters, otherwise blocks will not be rendered in entire file.</p>
 
 <p>2) Please don't use non-monospace font. Use only monospace font like 'Oxygen Mono', '<a href="https://bpgfonts.wordpress.com/2017/12/21/bpg-2017-dejavu-sansmono/">BPG 2017 DejaVu Sans Mono</a>' or other. Block-rendering is based on equal character-frame-widths, because pixel locations of characters <a href="https://github.com/microsoft/vscode/issues/118994">is not accessible</a> through VS Code API.</p>
 <p align="center"><img

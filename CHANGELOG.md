@@ -4,6 +4,12 @@ All notable changes to the "blockman" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.7.4] - 2023-05-04
+
+-   Add settings for max char count limit of any line in any file.
+    "blockman.n36A01MaxCharCountInAnyLine", Default is 3000.
+    Blockman will not work in a file if the file has at least one line with N (or more) number of chars. Default is 3000.
+
 ## [1.7.3] - 2023-04-30
 
 -   Add two new settings for border thickness:
