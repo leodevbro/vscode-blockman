@@ -577,6 +577,15 @@ export const applyAllBlockmanSettings = () => {
     } else if (alsoRenderBlocksInsideSingleLineAreas === false) {
         glo.renderInSingleLineAreas = false;
     }
+
+    const hideBlockOfFocusedSingleLineArea: boolean | undefined = bc.get(
+        "n27B01HideBlockOfFocusedSingleLineArea",
+    );
+    if (hideBlockOfFocusedSingleLineArea) {
+        glo.hideBlockOfFocusedSingleLineArea = true;
+    } else if (hideBlockOfFocusedSingleLineArea === false) {
+        glo.hideBlockOfFocusedSingleLineArea = false;
+    }
     // ==============
     const timeToWaitBeforeRerenderAfterLastChangeEvent: number | undefined =
         bc.get("n28TimeToWaitBeforeRerenderAfterLastChangeEvent");
@@ -724,6 +733,22 @@ export const applyAllBlockmanSettings = () => {
 
     if (typeof newBorderThicknessOfFocusedBlock === "number") {
         glo.borderThicknessOfFocusedBlock = newBorderThicknessOfFocusedBlock;
+    }
+    //
+    const borderStyleOfFocusedBlock: string | undefined = bc.get(
+        "n34A03BorderStyleOfFocusedBlock",
+    );
+
+    if (typeof borderStyleOfFocusedBlock === "string") {
+        glo.borderStyleOfFocusedBlock = borderStyleOfFocusedBlock;
+    }
+
+    const borderStyleOfNonFocusedBlock: string | undefined = bc.get(
+        "n34A04BorderStyleOfNonFocusedBlock",
+    );
+
+    if (typeof borderStyleOfNonFocusedBlock === "string") {
+        glo.borderStyleOfNonFocusedBlock = borderStyleOfNonFocusedBlock;
     }
     // =======================
 

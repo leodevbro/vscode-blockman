@@ -188,6 +188,18 @@ export const renderSingleLineBoxV5 = ({
         return;
     }
 
+    if (isFocusedBlock && glo.hideBlockOfFocusedSingleLineArea) {
+        return;
+    }
+
+    let borderStyle = "solid"; // For future. (Cannot change this yet, because backgroundAndBorder, well the divs don't have real borders)
+
+    if (isFocusedBlock) {
+        borderStyle = glo.borderStyleOfFocusedBlock;
+    } else {
+        borderStyle = glo.borderStyleOfNonFocusedBlock;
+    }
+
     const borderRadius = glo.borderRadius;
 
     let borderColorToBeTransparent: string = inputBorderColor;
@@ -213,9 +225,9 @@ export const renderSingleLineBoxV5 = ({
 
     if (lineBlockType === "opening") {
         borderCss = `
-            border-left: ${borderSize}px solid ${borderColorToBeTransparent};
-            border-top: ${borderSize}px solid ${borderColorToBeTransparent};
-            border-right: ${borderSize}px solid ${borderColorToBeTransparent};
+            border-left: ${borderSize}px ${borderStyle} ${borderColorToBeTransparent};
+            border-top: ${borderSize}px ${borderStyle} ${borderColorToBeTransparent};
+            border-right: ${borderSize}px ${borderStyle} ${borderColorToBeTransparent};
 
             
         `;
@@ -241,8 +253,8 @@ export const renderSingleLineBoxV5 = ({
         //     : undefined;
     } else if (lineBlockType === "middle") {
         borderCss = `
-            border-left: ${borderSize}px solid ${borderColorToBeTransparent};
-            border-right: ${borderSize}px solid ${borderColorToBeTransparent};
+            border-left: ${borderSize}px ${borderStyle} ${borderColorToBeTransparent};
+            border-right: ${borderSize}px ${borderStyle} ${borderColorToBeTransparent};
 
 
            
@@ -265,9 +277,9 @@ export const renderSingleLineBoxV5 = ({
     } else if (lineBlockType === "closing") {
         // console.log("isfirstFromTopToDown:", isfirstFromTopToDown);
         borderCss = `
-            border-left: ${borderSize}px solid ${borderColorToBeTransparent};
-            border-right: ${borderSize}px solid ${borderColorToBeTransparent};
-            border-bottom: ${borderSize}px solid ${borderColorToBeTransparent};
+            border-left: ${borderSize}px ${borderStyle} ${borderColorToBeTransparent};
+            border-right: ${borderSize}px ${borderStyle} ${borderColorToBeTransparent};
+            border-bottom: ${borderSize}px ${borderStyle} ${borderColorToBeTransparent};
 
             
         `;
@@ -295,10 +307,10 @@ export const renderSingleLineBoxV5 = ({
     } else {
         // lineBlockType === "onlyLine"
         borderCss = `
-            border-left: ${borderSize}px solid ${borderColorToBeTransparent};
-            border-right: ${borderSize}px solid ${borderColorToBeTransparent};
-            border-bottom: ${borderSize}px solid ${borderColorToBeTransparent};
-            border-top: ${borderSize}px solid ${borderColorToBeTransparent};
+            border-left: ${borderSize}px ${borderStyle} ${borderColorToBeTransparent};
+            border-right: ${borderSize}px ${borderStyle} ${borderColorToBeTransparent};
+            border-bottom: ${borderSize}px ${borderStyle} ${borderColorToBeTransparent};
+            border-top: ${borderSize}px ${borderStyle} ${borderColorToBeTransparent};
         `;
         borderRadiusCss = `${borderRadius}px ${borderRadius}px ${borderRadius}px ${borderRadius}px;`;
         top -= borderSize - 2;
@@ -450,7 +462,7 @@ export const renderSingleLineBoxV5 = ({
                         // rangeBehavior: 1,
                         contentText: ``,
                         textDecoration: `;box-sizing: content-box !important;
-                            border-bottom: ${borderSize}px solid ${borderColorToBeTransparent};
+                            border-bottom: ${borderSize}px ${borderStyle} ${borderColorToBeTransparent};
 
                             width: ${originalWidthCalcOfOpHelp};
                             bottom: ${b}px;
@@ -529,7 +541,7 @@ export const renderSingleLineBoxV5 = ({
                         // rangeBehavior: 1,
                         contentText: ``,
                         textDecoration: `;box-sizing: content-box !important;
-                            border-top: ${borderSize}px solid ${borderColorToBeTransparent};
+                            border-top: ${borderSize}px ${borderStyle} ${borderColorToBeTransparent};
 
                             width: ${finalWidthCalcOfClHelp};
                             top: ${t}px;

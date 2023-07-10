@@ -143,9 +143,33 @@ export const glo = {
     analyzeIndentDedentTokens: true,
 
     renderInSingleLineAreas: false,
+    hideBlockOfFocusedSingleLineArea: false,
 
     borderThicknessOfNonFocusedBlock: 1,
     borderThicknessOfFocusedBlock: 2,
+
+    // For future. (Cannot change this yet, because backgroundAndBorder, well the divs don't have real borders)
+    borderStyleOfFocusedBlock: "solid",
+    borderStyleOfNonFocusedBlock: "solid",
+
+    /*
+
+    // For future. (Cannot change this yet, because backgroundAndBorder, well the divs don't have real borders)
+
+    "blockman.n34A03BorderStyleOfFocusedBlock": {
+        "type": "string",
+        "default": "solid",
+        "description": "CSS border-style, e.g solid, dotted, dashed, groove",
+        "scope": "window"
+    },
+    "blockman.n34A04BorderStyleOfNonFocusedBlock": {
+        "type": "string",
+        "default": "solid",
+        "description": "CSS border-style, e.g solid, dotted, dashed, groove",
+        "scope": "window"
+    },
+
+    */
 
     borderRadius: 5,
 

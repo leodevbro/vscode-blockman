@@ -133,8 +133,9 @@
 If you use <strong>double width</strong> characters, then you may want to run the experimental command to support such characters. Press `F1` and type the command name: `Blockman Toggle Try Support Double Width Chars`.
 
 Such as,
-- Chinese characters (汉字): ex. `字符串最大字符串最`
-- Korean characters (한글): ex. `한글 텍스트`
+
+-   Chinese characters (汉字): ex. `字符串最大字符串最`
+-   Korean characters (한글): ex. `한글 텍스트`
 
 <br />
 
@@ -275,7 +276,8 @@ Press F1 and find:
     "blockman.n25AnalyzeTags": true, // Render blocks inside HTML/XML/JSX/TSX tags <tag></tag>, keep in mind: the parser/tokenizer will ignore tags inside comments, inside strings and inside some other areas.
 
     "blockman.n26AnalyzeIndentDedentTokens": true, // This option affects only files of indentation based languages like Python. Currently only Python and Yaml are supported for indentation analysis. Keep in mind: the parser/tokenizer will ignore indentations inside comments, inside strings and inside some other areas.
-    "blockman.n27AlsoRenderBlocksInsideSingleLineAreas": false, // {I am a single line area} <p>Me too</p>. Focused single line block will still be rendered even if this setting is off.
+    "blockman.n27AlsoRenderBlocksInsideSingleLineAreas": false, // {I am a single line area} <p>Me too</p>. Focused single line block will still be rendered even if this setting is off. Use n27B01 to hide block of focused single line area.
+    "blockman.n27B01HideBlockOfFocusedSingleLineArea": false, // {I am a single line area} <p>Me too</p>.
 
     "blockman.n28TimeToWaitBeforeRerenderAfterLastChangeEvent": 1.2, // (Seconds). For optimization: enter more time for slow computers. Less than 0.05 is NOT recommended even for fast computers.
     "blockman.n29TimeToWaitBeforeRerenderAfterLastFocusEvent": 0.2, // (Seconds). For optimization: enter more time for slow computers. Less than 0.2 is NOT recommended because double-clicking may become problematic.
@@ -329,7 +331,7 @@ Press F1 and find:
 
     "blockman.n35A01DisableRecommendationDialog": false,
 
-    "blockman.n36A01MaxCharCountInAnyLine": 3000, // Blockman will not work in a file if the file has at least one line with N (or more) number of chars.
+    "blockman.n36A01MaxCharCountInAnyLine": 3000 // Blockman will not work in a file if the file has at least one line with N (or more) number of chars.
 }
 ```
 

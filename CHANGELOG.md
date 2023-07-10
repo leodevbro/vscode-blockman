@@ -4,6 +4,11 @@ All notable changes to the "blockman" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.7.5] - 2023-07-11
+
+-   Add to settings:
+        n27B01 Hide Block Of Focused Single Line Area
+
 ## [1.7.4] - 2023-05-04
 
 -   Add settings for max char count limit of any line in any file.
