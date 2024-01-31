@@ -3,7 +3,7 @@
     "displayName": "Blockman - Highlight Nested Code Blocks",
     "publisher": "leodevbro",
     "description": "Mark/Highlight code blocks",
-    "version": "1.7.5",
+    "version": "1.7.6",
     "engines": {
         "vscode": "^1.56.1"
     },
@@ -465,7 +465,7 @@
                 "blockman.n32BlackListOfFileFormats": {
                     "type": "string",
                     "default": "plaintext, markdown, ",
-                    "description": "Disable blockman for certain file formats, e.g. plaintext, markdown, css, less, scss, html, json, jsonc, typescriptreact, typescript, javascriptreact, javascript, python, go, dart, php, c, csharp, cpp, java.",
+                    "description": "Disable Blockman for certain file formats, e.g. plaintext, markdown, css, less, scss, html, json, jsonc, typescriptreact, typescript, javascriptreact, javascript, python, go, dart, php, c, csharp, cpp, java. \n\nIf the first character is '^' (caret symbol), the list will act as a white list, \nfor example: \n^ typescript, typescriptreact",
                     "scope": "window"
                 },
                 "blockman.n33A01B1FromDepth0ToInwardForAllBorders": {

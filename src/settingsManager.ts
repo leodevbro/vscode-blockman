@@ -660,10 +660,35 @@ export const applyAllBlockmanSettings = () => {
         const stringWithoutSpacesAndTabs = stringWithoutSpaces.replace(/	/g, ``);
 
         if (stringWithoutSpacesAndTabs) {
-            const mySplitArr = stringWithoutSpacesAndTabs.split(",");
-            glo.blackListOfFileFormats = mySplitArr;
+            const possibleWhiteListIndicatorLength = 1;
+            const possibleWhiteListIndicator = stringWithoutSpacesAndTabs.slice(
+                0,
+                possibleWhiteListIndicatorLength,
+            );
+
+            if (possibleWhiteListIndicator === "^") {
+                // now it is a white list, not black list.
+                const theFormatListString = stringWithoutSpacesAndTabs.slice(
+                    possibleWhiteListIndicatorLength,
+                );
+
+                glo.blackListOfFileFormats = {
+                    actsAsWhiteList: true,
+                    formatArr: theFormatListString.split(","),
+                };
+            } else {
+                // it is a black list
+
+                glo.blackListOfFileFormats = {
+                    actsAsWhiteList: false,
+                    formatArr: stringWithoutSpacesAndTabs.split(","),
+                };
+            }
         } else {
-            glo.blackListOfFileFormats = [];
+            glo.blackListOfFileFormats = {
+                actsAsWhiteList: false,
+                formatArr: [],
+            };
         }
     }
 

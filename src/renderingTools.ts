@@ -57,6 +57,7 @@ export interface ISingleLineBox {
     inputBackgroundColor: string;
     borderSize: number;
     currMaxDepthIndex: number;
+    specialLineForCodelens?: boolean;
 }
 
 export const renderSingleBlock = ({
@@ -403,7 +404,23 @@ export const renderSingleBlock = ({
         renderSingleLineBoxV5(singleRangeRendArg);
         // renderSingleLineBoxV5SvgExperiment(singleRangeRendArg);
         if (isMid) {
+            // use specialLineForCodelens
+            for (
+                let lineZz = currLineZero;
+                lineZz <= lastLineOfMiddles;
+                lineZz += 1
+            ) {
+                if (editorInfo.codelensItemsLines.has(lineZz)) {
+                    renderSingleLineBoxV5({
+                        ...singleRangeRendArg,
+                        lineZero: lineZz,
+                        specialLineForCodelens: true,
+                    });
+                }
+            }
             currLineZero = lastLineOfMiddles;
+        } else {
+            //
         }
 
         // }

@@ -50,6 +50,7 @@ export const renderSingleLineBoxV5 = ({
     inputBackgroundColor,
     borderSize,
     currMaxDepthIndex,
+    specialLineForCodelens,
 }: ISingleLineBox): void => {
     let isExpandableToRightAsMain = false;
     let isExpandableToRightAsClHelp = false;
@@ -426,10 +427,14 @@ export const renderSingleLineBoxV5 = ({
                 border-radius: ${borderRadiusCss};
 
                 width: ${finalWidthCalcOfMain};
-                height: calc(100% + ${heightDelta}px);
+                
+                height: ${!specialLineForCodelens ? 
+                    `calc(100% + ${heightDelta}px)` :
+                    `calc((100% * ${glo.ratioOfCodeLensHeightByEditorLineHeight}) + 2px)`
+                };
                 position: absolute;
                 z-index: ${zIndex};
-                top: ${top}px;
+                ${!specialLineForCodelens ? `top: ${top}px` : `bottom: 100%`};
                 left: ${leftCalcOfMain};
                 ${backgroundAndBorder}
             `,
@@ -590,5 +595,8 @@ export const renderSingleLineBoxV5 = ({
         lineZero,
         // doc,
     });
-    editorInfo.editorRef.setDecorations(lineDecoration, arrayOfCurrRanges);
+    editorInfo.editorRef.setDecorations(
+        lineDecoration,
+        !specialLineForCodelens ? arrayOfCurrRanges : [singleRange],
+    );
 };

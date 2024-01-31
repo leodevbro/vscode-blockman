@@ -2,7 +2,7 @@
 const RubyParser = require("ruby_parser");
 import { IEditorInfo } from "../extension";
 import { findLineZeroAndInLineIndexZero, IPositionEachZero } from "../utils";
-import { isPrim, tyBranchable, tyPrim } from "../utils3";
+import { isPrim, TyBranchable, TyPrim } from "../utils3";
 
 const pushStartEndToArr = ({
     arr,
@@ -45,11 +45,11 @@ const pushStartEndToArr = ({
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const json_dfsPre_recurs_ast = (
-    root: tyBranchable,
+    root: TyBranchable,
     editorInfo: IEditorInfo,
 ): IPositionEachZero[] => {
     const recursFn = (
-        item: tyBranchable | tyPrim,
+        item: TyBranchable | TyPrim,
         listInp: IPositionEachZero[],
     ): void => {
         if (isPrim(item)) {
@@ -57,7 +57,7 @@ const json_dfsPre_recurs_ast = (
             return;
         }
 
-        const branches = Object.entries(item as tyBranchable);
+        const branches = Object.entries(item as TyBranchable);
 
         for (const [branchKey, branchVal] of branches) {
             if (branchVal && branchKey) {

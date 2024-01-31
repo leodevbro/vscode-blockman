@@ -284,7 +284,7 @@ Press F1 and find:
     "blockman.n30TimeToWaitBeforeRerenderAfterLastScrollEvent": 0.1, // (Seconds). For optimization: enter more time for slow computers. Less than 0.05 is NOT recommended even for fast computers.
     "blockman.n31RenderIncrementBeforeAndAfterVisibleRange": 22, // Less is faster because less blocks will be rendered outside the viewport but scrolling may become less comfortable. If less than 1 (e.g. -5), the blocks will render in limited area.
 
-    "blockman.n32BlackListOfFileFormats": "plaintext, markdown, ", // Disable blockman for certain file formats, e.g. plaintext, markdown, css, less, scss, html, json, jsonc, typescriptreact, typescript, javascriptreact, javascript, python, go, dart, php, c, csharp, cpp, java.
+    "blockman.n32BlackListOfFileFormats": "plaintext, markdown, ", // Disable Blockman for certain file formats, e.g. plaintext, markdown, css, less, scss, html, json, jsonc, typescriptreact, typescript, javascriptreact, javascript, python, go, dart, php, c, csharp, cpp, java. If the first character is '^' (caret symbol), the list will act as a white list, e.g. '^ typescript, typescriptreact'.
 
     // Advanced Coloring:
     // Video instruction: https://youtu.be/UsET6-kPu90

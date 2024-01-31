@@ -4,6 +4,18 @@ All notable changes to the "blockman" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.7.6] - 2024-02-01
+
+-   Add ability to make black list of file formats act as a white list.
+        Just type '^' (caret symbol) at the left of the list, and it will become a white list.
+        Like this: '^ typescript, typescriptreact'
+
+-   Now Blockman will try to fill spaces caused by codeLens annotations.
+        Well, VS Code has a limitation about rendering the block as an entire block div,
+        So, Blockman renders div boxes for each line, and it creates an illusion of one big div block.
+        But as the codeLens annotations create spaces between lines, it acts as a visual breaker of the nice illusion of big block.
+        So, now, Blockman is trying to find the locations of the codeLens annotations, and then to fill those spaces to unbreak the illusion of a nice big div block.
+
 ## [1.7.5] - 2023-07-11
 
 -   Add to settings:

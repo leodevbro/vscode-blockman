@@ -595,9 +595,15 @@ export interface IUpdateRender {
 export const updateRender = ({ editorInfo, timer, supMode }: IUpdateRender) => {
     if (
         !glo.isOn ||
-        glo.blackListOfFileFormats.includes(
-            editorInfo.editorRef.document.languageId,
-        )
+        (glo.blackListOfFileFormats.actsAsWhiteList !== true
+            ? // act as black list of file formats
+              glo.blackListOfFileFormats.formatArr.includes(
+                  editorInfo.editorRef.document.languageId,
+              )
+            : // act as white list of file formats
+              !glo.blackListOfFileFormats.formatArr.includes(
+                  editorInfo.editorRef.document.languageId,
+              ))
     ) {
         if (editorInfo.decors.length > 0) {
             editorInfo.upToDateLines.upEdge = -1;

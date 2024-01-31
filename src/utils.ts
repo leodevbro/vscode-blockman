@@ -2,10 +2,10 @@ import lexer from "./tagAlgos/tagLexer";
 import { Tag, PartialMatch } from "./tagAlgos/interfaces";
 import config from "./tagAlgos/tagConfigurations";
 
-import * as babelParser from "@babel/parser";
-import babelTraverse from "@babel/traverse";
+// import * as babelParser from "@babel/parser";
+// import babelTraverse from "@babel/traverse";
 
-import { File } from "@babel/types";
+// import { File } from "@babel/types";
 
 import * as vscode from "vscode";
 import {
@@ -18,7 +18,7 @@ import {
 } from "./extension";
 import { renderSingleBlock } from "./renderingTools";
 import { pyFn } from "./pythonAlgos/python-algo";
-import { resolve } from "path";
+// import { resolve } from "path";
 import {
     calculateColumnFromCharIndex,
     colorDecorsToSpacesForFile,
@@ -27,6 +27,10 @@ import { doubleWidthCharsReg } from "./helpers/regex-main";
 import { yamlFn } from "./yamlAlgos/yaml-algo";
 import { sqlFn } from "./sqlAlgos/sqlLexer";
 import { rubyFn } from "./rubyAlgos/theFn";
+import {
+    getEditorCodeLensItemsLinesSet,
+    getEditorColorDecoratorsArr,
+} from "./utils3";
 
 export interface IPositionEachZero {
     char?: string;
@@ -987,10 +991,15 @@ export const getFullFileStats = async ({
     txt = txt + `\n\n\n`; // !!! VERY important for tokenizer of Python and other indentation based languages
 
     if (glo.colorDecoratorsInStyles) {
-        const dataArr: any[] | undefined = await vscode.commands.executeCommand(
-            "vscode.executeDocumentColorProvider",
-            editorInfo.editorRef.document.uri,
+        const nativeColorDecoratorsArr = await getEditorColorDecoratorsArr(
+            editorInfo.editorRef,
         );
+
+        const codelensItemsLinesSet = await getEditorCodeLensItemsLinesSet(
+            editorInfo.editorRef,
+        );
+
+        editorInfo.codelensItemsLines = codelensItemsLinesSet;
 
         generateTextLinesMap(txt, editorInfo);
 
@@ -998,13 +1007,13 @@ export const getFullFileStats = async ({
         // console.log(linesArr);
         // console.log(dataArr);
 
-        if (dataArr && dataArr.length >= 1) {
+        if (nativeColorDecoratorsArr && nativeColorDecoratorsArr.length >= 1) {
             const startingPositions: {
                 cDLineZero: number;
                 cDCharZeroInDoc: number;
                 cDCharZeroInMonoText: number;
                 cDGlobalIndexZeroInMonoText: number;
-            }[] = (dataArr as any[]).map((item) => {
+            }[] = nativeColorDecoratorsArr.map((item) => {
                 return {
                     cDLineZero: item.range.start.line,
                     cDCharZeroInDoc: item.range.start.character,

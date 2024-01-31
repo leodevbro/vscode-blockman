@@ -1,16 +1,9 @@
 import { ExtensionContext, workspace } from "vscode";
 import * as vscode from "vscode";
 
-import {
-    IFullRender,
-    renderLevels,
-    getFullFileStats,
-    tabsIntoSpaces,
-    findLineZeroAndInLineIndexZero,
-} from "./utils";
-import { doubleWidthCharsReg } from "./helpers/regex-main";
+import { IFullRender } from "./utils";
+
 import DocumentDecorationManager from "./bracketAlgos/documentDecorationManager";
-import EventEmitter = require("events");
 
 import {
     applyAllBlockmanSettings,
@@ -27,6 +20,10 @@ import {
     updateRender,
 } from "./utils2";
 import { atInstallEventMessage, OptionsAtInstall } from "./specialMessages";
+import {
+    getEditorLineHeight,
+    getRatioOfCodeLensHeightByEditorLineHeight,
+} from "./utilsGeneral";
 
 const iiGlobal = "blockman_data_iicounter";
 const iiGlobal2 = "blockman_data_iicounter2";
@@ -37,52 +34,6 @@ const iiGlobal5OnOff = "blockman_data_onOffState";
 //     "blockman_data_autoShowHideIndentGuides";
 const iiGlobal7AtInstallEventUserAcceptedToChangeVSCodeSettings =
     "blockman_data_atInstallEventUserAcceptedToChangeVSCodeSettings"; // "true" | "false"
-
-let isMac = false;
-let osChecked = false;
-
-if (!osChecked) {
-    try {
-        // console.log("start of node os check");
-        const os = require("os"); // Comes with node.js
-        const myOS: string = os.type().toLowerCase();
-        const macCheck = myOS === "darwin";
-        if (macCheck === true) {
-            isMac = macCheck;
-        }
-        osChecked = true;
-        // console.log("end of node os check");
-    } catch (err) {
-        console.log(`Maybe error of: require("os")`);
-        console.log(err);
-    }
-}
-
-if (!osChecked) {
-    try {
-        // console.log("start of web os check");
-        // @ts-ignore
-        const macCheck =
-            // @ts-ignore
-            navigator.userAgent.toLowerCase().indexOf("mac") !== -1;
-        console.log("macCheck:", macCheck);
-        if (macCheck === true) {
-            isMac = macCheck;
-        }
-        osChecked = true;
-        // console.log("end of web os check");
-    } catch (err) {
-        console.log(`Maybe error of: window.navigator.userAgent`);
-        console.log(err);
-    }
-}
-
-console.log("isMac is:", isMac);
-console.log("osChecked:", osChecked);
-
-//  const GOLDEN_LINE_HEIGHT_RATIO = platform.isMacintosh ? 1.5 : 1.35;
-const GOLDEN_LINE_HEIGHT_RATIO = isMac ? 1.5 : 1.35;
-const MINIMUM_LINE_HEIGHT = 8;
 
 const stateHolder: {
     myState?: vscode.Memento & {
@@ -121,6 +72,7 @@ export const glo = {
     isOn: true,
     atInstallEventUserAcceptedToChangeVSCodeSettings: null as null | boolean,
     nominalLineHeight: 1,
+    ratioOfCodeLensHeightByEditorLineHeight: 1,
     currZoomLevel: 0, // zero means original, 1 means plus 10%, 2 means plus 20%........
     eachCharFrameHeight: 1, // (px) no more needed, so before we remove it, it will be just 1, well it means, the connected px values are now char values
     eachCharFrameWidth: 1, // (px) no more needed, so before we remove it, it will be just 1, well it means, the connected px values are now char values
@@ -208,7 +160,10 @@ export const glo = {
 
     colorDecoratorsInStyles: true,
     trySupportDoubleWidthChars: false, // for Chinese characters and possibly others too
-    blackListOfFileFormats: ["plaintext", "markdown"],
+    blackListOfFileFormats: {
+        actsAsWhiteList: false,
+        formatArr: ["plaintext", "markdown"],
+    },
 
     disableRecommendationDialog: false,
     // maxHistoryOfParsedTabs: 7,
@@ -217,7 +172,8 @@ export const glo = {
 };
 
 const calcLineHeight = (): number => {
-    return glo.nominalLineHeight * (1 + glo.currZoomLevel * 0.1);
+    // return glo.nominalLineHeight * (1 + glo.currZoomLevel * 0.1);
+    return glo.nominalLineHeight;
 };
 
 const updateBlockmanLineHeightAndLetterSpacing = () => {
@@ -228,20 +184,11 @@ const updateBlockmanLineHeightAndLetterSpacing = () => {
     const editorConfig: any = workspace.getConfiguration("editor");
     // console.log("editorConfig:", editorConfig);
 
-    let editorLineHeight: number = editorConfig.get("lineHeight");
-    const editorFontSize: number = editorConfig.get("fontSize");
-
-    if (editorLineHeight === 0) {
-        // 0 is the default
-        editorLineHeight = Math.round(
-            GOLDEN_LINE_HEIGHT_RATIO * editorFontSize,
-        ); // fontSize is editor.fontSize
-    } else if (editorLineHeight < MINIMUM_LINE_HEIGHT) {
-        editorLineHeight = editorLineHeight * editorFontSize;
-    }
-
-    glo.nominalLineHeight = editorLineHeight;
+    glo.nominalLineHeight = getEditorLineHeight();
     glo.eachCharFrameHeight = calcLineHeight();
+
+    glo.ratioOfCodeLensHeightByEditorLineHeight =
+        getRatioOfCodeLensHeightByEditorLineHeight();
 
     // now letter spacing:
 
@@ -324,6 +271,7 @@ export interface IEditorInfo {
         cDCharZeroInMonoText: number;
         cDGlobalIndexZeroInMonoText: number;
     }[];
+    codelensItemsLines: Set<number>; // zero indexed
 }
 
 // export const maxNumberOfControlledEditors = 5;
@@ -440,6 +388,7 @@ export const updateAllControlledEditors = ({
 
             monoText: "",
             colorDecoratorsArr: [],
+            codelensItemsLines: new Set([]),
         });
     });
 
