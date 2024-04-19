@@ -60,13 +60,13 @@ const bigVars = {
     currColorCombo: classicDark1Combo,
 };
 
-export type TyRightEdgeBase = "innerC" | "vpC" | "fileC";
-
 export const optionsForRightEdgeBaseOfBlocks = {
     innerC: "Rightmost Edge Of Inner Content",
     vpC: "Rightmost Edge Of Viewport",
     fileC: "Rightmost Edge Of File Content",
-};
+} as const;
+
+export type TyRightEdgeBase = keyof typeof optionsForRightEdgeBaseOfBlocks;
 
 export const glo = {
     isOn: true,

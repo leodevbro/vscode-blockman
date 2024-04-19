@@ -404,7 +404,8 @@ export const renderSingleLineBoxV5 = ({
             finalWidthCalcOfMain = `calc((${boxRightEdge - boxLeftEdge} * (1ch + ${glo.letterSpacing}px)) - ${leftInc}px + ${(currMaxDepthIndex - depth) * eE.minDistanceBetweenRightSideEdges}px + ${eE.additionalPaddingRight}px)`;
         } else if (eE.rightSideBaseOfBlocks === "vpC") {
             // prettier-ignore
-            finalWidthCalcOfMain = `calc((${boxLeftEdge} * (1ch + ${glo.letterSpacing}px)) + ${leftInc - borderSize}px + 150%)`;
+            // finalWidthCalcOfMain = `calc((${boxLeftEdge} * (1ch + ${glo.letterSpacing}px)) + ${leftInc - borderSize}px + 150%)`;
+            finalWidthCalcOfMain = `calc(350vw - ((${boxLeftEdge} * (1ch + ${glo.letterSpacing}px)) + ${leftInc - borderSize}px))`;
         } else if (eE.rightSideBaseOfBlocks === "fileC") {
             const fileCWidth =
                 editorInfo.renderingInfoForFullFile?.fileRightMost;
@@ -528,7 +529,8 @@ export const renderSingleLineBoxV5 = ({
                     finalWidthCalcOfClHelp = `calc((${optimalRightOfRangePx - boxRightEdge} * (1ch + ${glo.letterSpacing}px)) - ${leftInc - borderSize}px + ${(currMaxDepthIndex - depth) * eE.minDistanceBetweenRightSideEdges}px + ${eE.additionalPaddingRight}px)`;
                 } else if (eE.rightSideBaseOfBlocks === "vpC") {
                     // prettier-ignore
-                    finalWidthCalcOfClHelp = `calc((${optimalRightOfRangePx - boxRightEdge} * (1ch + ${glo.letterSpacing}px)) - ${leftInc - borderSize}px + 150%)`;
+                    // finalWidthCalcOfClHelp = `calc((${optimalRightOfRangePx - boxRightEdge} * (1ch + ${glo.letterSpacing}px)) - ${leftInc - borderSize}px + 150%)`;
+                    finalWidthCalcOfClHelp = `calc(350vw - ((${boxLeftEdge} * (1ch + ${glo.letterSpacing}px)) + ${leftInc - borderSize}px))`;
                 } else if (eE.rightSideBaseOfBlocks === "fileC") {
                     const fileCWidth =
                         editorInfo.renderingInfoForFullFile?.fileRightMost;
