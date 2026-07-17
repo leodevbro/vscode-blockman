@@ -12,6 +12,11 @@ import LanguageConfig from "./languageConfig";
 // console.log(theAll);
 // console.log("theAllend");
 
+type TLoadedModuleBox = {
+    module: any;
+    path: string;
+};
+
 export class TextMateLoader {
     public readonly scopeNameToLanguage = new Map<string, string>();
     private readonly scopeNameToPath = new Map<string, string>();
@@ -148,27 +153,51 @@ export class TextMateLoader {
         });
     }
 
-    private getNodeModulePath(moduleName: string) {
+    private getNodeModulePath(
+        moduleName: string,
+        nodeModulesFolder: string,
+    ): string {
         // const nodeModulesFolder = vscode.env.uiKind === vscode.UIKind.Desktop ? "node_modules.asar" : "node_modules";
-        const nodeModulesFolder = "node_modules";
+        // const nodeModulesFolder = "node_modules.asar";
         return path.join(vscode.env.appRoot, nodeModulesFolder, moduleName);
     }
 
-    private getNodeModule(moduleName: string) {
-        return require(this.getNodeModulePath(moduleName));
+    private getNodeModule(moduleName: string): TLoadedModuleBox {
+        const candidateDirectories = [
+            "node_modules.asar", // this one is probably always the correct dir now after the 1.129.0 update of VS Code.
+            "node_modules.asar.unpacked",
+            "node_modules",
+            "node_modules.unpacked",
+        ] as const;
+
+        for (const dir of candidateDirectories) {
+            try {
+                const currPath = this.getNodeModulePath(moduleName, dir);
+                const module = require(currPath);
+
+                return {
+                    module,
+                    path: currPath,
+                };
+            } catch (err) {
+                console.log(
+                    `Blockman failed trying to get "${moduleName}" module from "${dir}" directory`,
+                );
+                console.error(err);
+            }
+        }
+
+        throw new Error(`Could not load the module "moduleName"`);
     }
 
     private loadTextMate(): any {
-        return this.getNodeModule("vscode-textmate");
+        return this.getNodeModule("vscode-textmate").module;
     }
 
     private loadOniguruma(): any {
-        const oniguruma = this.getNodeModule("vscode-oniguruma");
-        const wasmPath = path.join(
-            this.getNodeModulePath("vscode-oniguruma"),
-            "release",
-            "onig.wasm",
-        );
+        const onigurumaBox = this.getNodeModule("vscode-oniguruma");
+        const oniguruma = onigurumaBox.module;
+        const wasmPath = path.join(onigurumaBox.path, "release", "onig.wasm");
         const onigurumaWasm = fs.readFileSync(wasmPath).buffer;
         oniguruma.loadWASM(onigurumaWasm);
         return oniguruma;

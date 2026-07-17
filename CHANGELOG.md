@@ -4,6 +4,10 @@ All notable changes to the "blockman" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.7.9] - 2026-07-17
+
+-   Fix extension activation error because of the latest update (1.129.0) changes of VS Code
+
 ## [1.7.8] - 2024-10-04
 
 -   Fix extension activation error because of the latest update (1.94.0) changes of VS Code
