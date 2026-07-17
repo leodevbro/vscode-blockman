@@ -87,13 +87,13 @@
                 "blockman.n01LineHeight": {
                     "type": "number",
                     "default": 0,
-                    "description": "Not needed anymore, maybe will be removed soon. 0 means neutral.",
+                    "description": "Unneeded. (Maybe removed soon.) `0` means neutral.",
                     "scope": "window"
                 },
                 "blockman.n02EachCharFrameWidth": {
                     "type": "number",
                     "default": 4.321,
-                    "description": "Not needed anymore, maybe will be removed soon.",
+                    "description": "Unneeded. (Maybe removed soon.) `0` means neutral.",
                     "scope": "window"
                 },
                 "blockman.n03MaxDepth": {
@@ -123,7 +123,7 @@
                         19,
                         20
                     ],
-                    "description": "-1 is no blocks, 0 is ground block, 1 is first depth blocks, 2 is second depth blocks",
+                    "description": "`-1` is no blocks, `0` is ground block, `1` is first depth blocks, `2` is second depth blocks",
                     "scope": "window"
                 },
                 "blockman.n04ColorComboPreset": {
@@ -159,7 +159,7 @@
                         "Pale Pink (Gradients)",
                         "Pale Pink (Solid colors)"
                     ],
-                    "description": "This does not change VS Code theme. Choose preset combo of colors. Corresponding colors are overridden by custom colors (if not empty string). Also This setting can be overriden by the next 3 combo settings",
+                    "description": "This does not change VSCode theme. Choose preset combo of colors. Corresponding colors are overridden by custom colors (if not empty string).\n(Note: This setting can be overriden by the next 3 combo settings.)",
                     "scope": "window"
                 },
                 "blockman.n04Sub01ColorComboPresetForDarkTheme": {
@@ -196,7 +196,7 @@
                         "Pale Pink (Gradients)",
                         "Pale Pink (Solid colors)"
                     ],
-                    "description": "Color combo to apply when current theme kind is Dark.",
+                    "description": "Color combo to apply when using a Dark theme.",
                     "scope": "window"
                 },
                 "blockman.n04Sub02ColorComboPresetForLightTheme": {
@@ -233,7 +233,7 @@
                         "Pale Pink (Gradients)",
                         "Pale Pink (Solid colors)"
                     ],
-                    "description": "Color combo to apply when current theme kind is Light.",
+                    "description": "Color combo to apply when using a Light theme.",
                     "scope": "window"
                 },
                 "blockman.n04Sub03ColorComboPresetForHighContrastTheme": {
@@ -270,7 +270,7 @@
                         "Pale Pink (Gradients)",
                         "Pale Pink (Solid colors)"
                     ],
-                    "description": "Color combo to apply when current theme kind is High Contrast.",
+                    "description": "Color combo to apply when using a High Contrast theme.",
                     "scope": "window"
                 },
                 "blockman.n04Sub04RightSideBaseOfBlocks": {
@@ -288,96 +288,96 @@
                     "type": "number",
                     "default": 0,
                     "scope": "window",
-                    "description": "CSS pixels. 4 is probably good. Keep in mind that for some devices, CSS pixel is larger/smaller than physical pixel."
+                    "description": "CSS pixels. `4` is probably good.\n(Keep in mind that for some devices, CSS pixels are larger/smaller than physical pixels.)"
                 },
                 "blockman.n04Sub06AdditionalPaddingRight": {
                     "type": "number",
                     "default": 0,
                     "scope": "window",
-                    "description": "CSS pixels. Keep in mind that for some devices, CSS pixel is larger/smaller than physical pixel."
+                    "description": "CSS pixels.\n(Keep in mind that for some devices, CSS pixels are larger/smaller than physical pixels.)"
                 },
                 "blockman.n05CustomColorOfDepth0": {
                     "type": "string",
                     "default": "",
                     "scope": "window",
-                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background."
+                    "description": "Any CSS color (e.g., rgb, rgba, hsl). Type `none` to match the color of the editor background."
                 },
                 "blockman.n06CustomColorOfDepth1": {
                     "type": "string",
                     "default": "",
                     "scope": "window",
-                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background."
+                    "description": "Any CSS color (e.g., rgb, rgba, hsl). Type `none` to match the color of the editor background."
                 },
                 "blockman.n07CustomColorOfDepth2": {
                     "type": "string",
                     "default": "",
                     "scope": "window",
-                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background."
+                    "description": "Any CSS color (e.g., rgb, rgba, hsl). Type `none` to match the color of the editor background."
                 },
                 "blockman.n08CustomColorOfDepth3": {
                     "type": "string",
                     "default": "",
                     "scope": "window",
-                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background."
+                    "description": "Any CSS color (e.g., rgb, rgba, hsl). Type `none` to match the color of the editor background."
                 },
                 "blockman.n09CustomColorOfDepth4": {
                     "type": "string",
                     "default": "",
                     "scope": "window",
-                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background."
+                    "description": "Any CSS color (e.g., rgb, rgba, hsl). Type `none` to match the color of the editor background."
                 },
                 "blockman.n10CustomColorOfDepth5": {
                     "type": "string",
                     "default": "",
                     "scope": "window",
-                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background."
+                    "description": "Any CSS color (e.g., rgb, rgba, hsl). Type `none` to match the color of the editor background."
                 },
                 "blockman.n11CustomColorOfDepth6": {
                     "type": "string",
                     "default": "",
                     "scope": "window",
-                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background."
+                    "description": "Any CSS color (e.g., rgb, rgba, hsl). Type `none` to match the color of the editor background."
                 },
                 "blockman.n12CustomColorOfDepth7": {
                     "type": "string",
                     "default": "",
                     "scope": "window",
-                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background."
+                    "description": "Any CSS color (e.g., rgb, rgba, hsl). Type `none` to match the color of the editor background."
                 },
                 "blockman.n13CustomColorOfDepth8": {
                     "type": "string",
                     "default": "",
                     "scope": "window",
-                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background."
+                    "description": "Any CSS color (e.g., rgb, rgba, hsl). Type `none` to match the color of the editor background."
                 },
                 "blockman.n14CustomColorOfDepth9": {
                     "type": "string",
                     "default": "",
                     "scope": "window",
-                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background."
+                    "description": "Any CSS color (e.g., rgb, rgba, hsl). Type `none` to match the color of the editor background."
                 },
                 "blockman.n15CustomColorOfDepth10": {
                     "type": "string",
                     "default": "",
                     "scope": "window",
-                    "description": "Any CSS color, e.g. rgb, rgba, hsl. Type 'none' for same color as editor background."
+                    "description": "Any CSS color (e.g., rgb, rgba, hsl). Type `none` to match the color of the editor background."
                 },
                 "blockman.n16EnableFocus": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Highlight block differently if caret is inside it",
+                    "description": "Highlight blocks differently when the caret is inside it.",
                     "scope": "window"
                 },
                 "blockman.n17CustomColorOfFocusedBlock": {
                     "type": "string",
                     "default": "",
-                    "description": "Requires 'Enable Focus' to be true/enabled. Type 'same' if you want it to be same color as if not focused.",
+                    "description": "Requires 'Enable Focus' to be true/enabled. Type `same` if you want the same color as when not focused.",
                     "scope": "window"
                 },
                 "blockman.n18CustomColorOfFocusedBlockBorder": {
                     "type": "string",
                     "default": "",
-                    "description": "Requires 'Enable Focus' to be true/enabled. Type 'same' if you want it to be same color as if not focused.",
+                    "description": "Requires 'Enable Focus' to be true/enabled. Type `same` if you want the same color as when not focused.",
                     "scope": "window"
                 },
                 "blockman.n19CustomColorOfBlockBorder": {
@@ -399,37 +399,37 @@
                 "blockman.n22AnalyzeCurlyBrackets": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Render blocks inside curly brackets {}, keep in mind: the parser/tokenizer will ignore brackets inside comments, inside strings and inside some other areas",
+                    "description": "Render blocks inside curly brackets `{}`.\n(Note: the parser/tokenizer will ignore brackets inside comments, inside strings, and inside some other areas.)",
                     "scope": "window"
                 },
                 "blockman.n23AnalyzeSquareBrackets": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Render blocks inside square brackets [], keep in mind: the parser/tokenizer will ignore brackets inside comments, inside strings and inside some other areas",
+                    "description": "Render blocks inside square brackets `[]`.\n(Note: the parser/tokenizer will ignore brackets inside comments, inside strings, and inside some other areas.)",
                     "scope": "window"
                 },
                 "blockman.n24AnalyzeRoundBrackets": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Render blocks inside Round brackets (), keep in mind: the parser/tokenizer will ignore brackets inside comments, inside strings and inside some other areas",
+                    "description": "Render blocks inside round brackets `()`.\n(Note: the parser/tokenizer will ignore brackets inside comments, inside strings, and inside some other areas.)",
                     "scope": "window"
                 },
                 "blockman.n25AnalyzeTags": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Render blocks inside HTML/XML/JSX/TSX tags <tag></tag>, keep in mind: the parser/tokenizer will ignore tags inside comments, inside strings and inside some other areas",
+                    "description": "Render blocks inside HTML/XML/JSX/TSX tags `<tag></tag>`\n(Note: the parser/tokenizer will ignore tags inside comments, inside strings, and inside some other areas.)",
                     "scope": "window"
                 },
                 "blockman.n26AnalyzeIndentDedentTokens": {
                     "type": "boolean",
                     "default": true,
-                    "description": "This option affects only files of indentation based languages like Python. Currently only Python and Yaml are supported for indentation analysis. Keep in mind: the parser/tokenizer will ignore indentations inside comments, inside strings and inside some other areas",
+                    "description": "This option affects only files of indentation-based languages like Python.Currently, only Python and YAML are supported for indentation analysis.\n(Note: the parser/tokenizer will ignore indentations inside comments, inside strings, and inside some other areas.)",
                     "scope": "window"
                 },
                 "blockman.n27AlsoRenderBlocksInsideSingleLineAreas": {
                     "type": "boolean",
                     "default": false,
-                    "description": "{I am a single line area} <p>Me too</p>. Focused single line block will still be rendered even if this setting is off. Use n27B01 to hide block of focused single line area.",
+                    "description": "{I am a single line area} <p>Me too</p>. Focused single line block will still be rendered even if this setting is off.\nUse n27B01 to hide block of focused single line area.",
                     "scope": "window"
                 },
                 "blockman.n27B01HideBlockOfFocusedSingleLineArea": {
@@ -441,37 +441,37 @@
                 "blockman.n28TimeToWaitBeforeRerenderAfterLastChangeEvent": {
                     "type": "number",
                     "default": 1.2,
-                    "description": "(Seconds). For optimization: enter more time for slow computers. Less than 0.05 is NOT recommended even for fast computers.",
+                    "description": "(Seconds). For optimization: Enter more time for slow computers. Less than `0.05` is NOT recommended, even for fast computers.",
                     "scope": "window"
                 },
                 "blockman.n29TimeToWaitBeforeRerenderAfterLastFocusEvent": {
                     "type": "number",
                     "default": 0.2,
-                    "description": "(Seconds). For optimization: enter more time for slow computers. Less than 0.2 is NOT recommended because double-clicking may become problematic.",
+                    "description": "(Seconds). For optimization: Enter more time for slow computers. Less than `0.2` is NOT recommended, because it can negatively impact double-clicking.",
                     "scope": "window"
                 },
                 "blockman.n30TimeToWaitBeforeRerenderAfterLastScrollEvent": {
                     "type": "number",
                     "default": 0.1,
-                    "description": "(Seconds). For optimization: enter more time for slow computers. Less than 0.05 is NOT recommended even for fast computers.",
+                    "description": "(seconds) For optimization: Enter more time for slow computers. Less than `0.05` is NOT recommended, even for fast computers.",
                     "scope": "window"
                 },
                 "blockman.n31RenderIncrementBeforeAndAfterVisibleRange": {
                     "type": "number",
                     "default": 20,
-                    "description": "Less is faster because less blocks will be rendered outside the viewport but scrolling may become less comfortable. If less than 1 (e.g. -5), the blocks will render in limited area.",
+                    "description": "Less is faster, because fewer blocks will be rendered outside the viewport, but scrolling may be negatively impacted.\nIf less than `1` (e.g., `-5`), the blocks will render in limited area.",
                     "scope": "window"
                 },
                 "blockman.n32BlackListOfFileFormats": {
                     "type": "string",
                     "default": "plaintext, markdown, ",
-                    "description": "Disable Blockman for certain file formats, e.g. plaintext, markdown, css, less, scss, html, json, jsonc, typescriptreact, typescript, javascriptreact, javascript, python, go, dart, php, c, csharp, cpp, java. \n\nIf the first character is '^' (caret symbol), the list will act as a white list, \nfor example: \n^ typescript, typescriptreact",
+                    "description": "Disable Blockman for certain file formats (e.g., plaintext, markdown, css, less, scss, html, json, jsonc, typescriptreact, typescript, javascriptreact, javascript, python, go, dart, php, c, csharp, cpp, java). \n\nIf the first character is `^` (caret symbol), the list will act as a white list (\nExample: \n`^ typescript, typescriptreact`)",
                     "scope": "window"
                 },
                 "blockman.n33A01B1FromDepth0ToInwardForAllBorders": {
                     "type": "string",
                     "default": "!10,0,0,0; red > green > blue",
-                    "description": "Advanced Coloring: '!' means disabled. Advanced coloring string, if enabled, will override basic coloring settings. Right side: sequence of colors/gradients. Left side: FIRST number relates priority, SECOND number relates zero-based index of first item of first loop, So it splits the sequence into what should not be looped and what should be looped, THIRD number relates loop part reversion (0: original, 1: reversed), FOURTH number relates looping strategy (0: all the continuation items to be 'neutral', 'neutral' means it will be overriden by any other setting, 1: Only the last item will be looped. Yes, it will ignore the SECOND option number (split index), 2: loop as forward, 3: loop as pair of forward and backward). 'basic' color means it will set a color from basic color settings.",
+                    "markdownDescription": "Advanced Coloring string. `!` means disabled. If enabled, this will override basic coloring settings.\n\nRight side: sequence of colors/gradients. Use `basic` instead of a color to use the colors from basic color settings.\n\nLeft side:\n\n * FIRST number is priority\n * SECOND number is the zero-based index of first item of first loop (so, this splits the sequence into what _is_ and _is not_ looped)\n * THIRD number toggles loop part reversal (`0`: original, `1`: reversed)\n * FOURTH number is looping strategy, as follows:\n ** `0`: Sets all continuation items to be `neutral`, where `neutral` means it will be overriden by any other setting\n ** `1`: Only the last item will be looped (yes, it will ignore the SECOND option number (split index))\n ** `2`: loop as forward\n ** `3`: loop as pair of forward and backward",
                     "scope": "window"
                 },
                 "blockman.n33A01B2FromDepth0ToInwardForAllBackgrounds": {
@@ -536,7 +536,7 @@
                 },
                 "blockman.n36A01MaxCharCountInAnyLine": {
                     "type": "number",
-                    "description": "Blockman will not work in a file if the file has at least one line with N (or more) number of chars.",
+                    "description": "Blockman will not work on files that have any lines longer than this number of characters.",
                     "default": 3000,
                     "scope": "window"
                 }
